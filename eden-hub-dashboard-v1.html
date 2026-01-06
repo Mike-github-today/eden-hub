@@ -724,12 +724,27 @@
             transform: translateY(0);
         }
 
+        .bottom-sheet-handle-area {
+            padding: 12px 0;
+            cursor: grab;
+            touch-action: none;
+        }
+
+        .bottom-sheet-handle-area:active {
+            cursor: grabbing;
+        }
+
         .bottom-sheet-handle {
             width: 40px;
             height: 4px;
             background-color: var(--eden-border);
             border-radius: 2px;
-            margin: 12px auto;
+            margin: 0 auto;
+            transition: background-color var(--transition-smooth);
+        }
+
+        .bottom-sheet-handle-area:hover .bottom-sheet-handle {
+            background-color: var(--eden-text-secondary);
         }
 
         /* ============================================
@@ -1210,7 +1225,9 @@
         <!-- Bottom Sheet (Mobile) -->
         <div class="bottom-sheet-overlay" id="bottomSheetOverlay" onclick="closePanel()"></div>
         <div class="bottom-sheet" id="bottomSheet">
-            <div class="bottom-sheet-handle"></div>
+            <div class="bottom-sheet-handle-area" id="bottomSheetHandleArea">
+                <div class="bottom-sheet-handle"></div>
+            </div>
             <header class="panel-header">
                 <div class="panel-header-info">
                     <div class="panel-avatar" id="mobileAvatar">SJ</div>
@@ -1463,7 +1480,10 @@
             updatePanelContent(selectedAssociate);
 
             if (isMobile) {
-                document.getElementById('bottomSheet').classList.add('open');
+                const bottomSheet = document.getElementById('bottomSheet');
+                bottomSheet.style.transition = 'transform var(--transition-smooth)';
+                bottomSheet.style.transform = 'translateY(0)';
+                bottomSheet.classList.add('open');
                 document.getElementById('bottomSheetOverlay').classList.add('open');
                 document.body.style.overflow = 'hidden';
             } else {
@@ -1474,7 +1494,10 @@
 
         function closePanel() {
             if (isMobile) {
-                document.getElementById('bottomSheet').classList.remove('open');
+                const bottomSheet = document.getElementById('bottomSheet');
+                bottomSheet.style.transition = 'transform var(--transition-smooth)';
+                bottomSheet.style.transform = 'translateY(100%)';
+                bottomSheet.classList.remove('open');
                 document.getElementById('bottomSheetOverlay').classList.remove('open');
                 document.body.style.overflow = '';
             } else {
@@ -1575,6 +1598,107 @@
         }
 
         // ============================================
+        // BOTTOM SHEET SWIPE HANDLING
+        // ============================================
+
+        let touchStartY = 0;
+        let touchCurrentY = 0;
+        let isDragging = false;
+
+        function initBottomSheetSwipe() {
+            const handleArea = document.getElementById('bottomSheetHandleArea');
+            const bottomSheet = document.getElementById('bottomSheet');
+
+            if (!handleArea) return;
+
+            // Touch events
+            handleArea.addEventListener('touchstart', handleTouchStart, { passive: true });
+            handleArea.addEventListener('touchmove', handleTouchMove, { passive: false });
+            handleArea.addEventListener('touchend', handleTouchEnd);
+
+            // Mouse events (for desktop testing)
+            handleArea.addEventListener('mousedown', handleMouseDown);
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
+        }
+
+        function handleTouchStart(e) {
+            touchStartY = e.touches[0].clientY;
+            isDragging = true;
+            document.getElementById('bottomSheet').style.transition = 'none';
+        }
+
+        function handleTouchMove(e) {
+            if (!isDragging) return;
+            touchCurrentY = e.touches[0].clientY;
+            const deltaY = touchCurrentY - touchStartY;
+
+            // Only allow dragging down
+            if (deltaY > 0) {
+                e.preventDefault();
+                document.getElementById('bottomSheet').style.transform = `translateY(${deltaY}px)`;
+            }
+        }
+
+        function handleTouchEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+
+            const bottomSheet = document.getElementById('bottomSheet');
+            bottomSheet.style.transition = 'transform var(--transition-smooth)';
+
+            const deltaY = touchCurrentY - touchStartY;
+
+            // If dragged more than 100px down, close the panel
+            if (deltaY > 100) {
+                closePanel();
+            } else {
+                // Snap back
+                bottomSheet.style.transform = 'translateY(0)';
+            }
+
+            touchStartY = 0;
+            touchCurrentY = 0;
+        }
+
+        // Mouse event handlers (for desktop testing)
+        function handleMouseDown(e) {
+            touchStartY = e.clientY;
+            isDragging = true;
+            document.getElementById('bottomSheet').style.transition = 'none';
+            e.preventDefault();
+        }
+
+        function handleMouseMove(e) {
+            if (!isDragging) return;
+            touchCurrentY = e.clientY;
+            const deltaY = touchCurrentY - touchStartY;
+
+            if (deltaY > 0) {
+                document.getElementById('bottomSheet').style.transform = `translateY(${deltaY}px)`;
+            }
+        }
+
+        function handleMouseUp() {
+            if (!isDragging) return;
+            isDragging = false;
+
+            const bottomSheet = document.getElementById('bottomSheet');
+            bottomSheet.style.transition = 'transform var(--transition-smooth)';
+
+            const deltaY = touchCurrentY - touchStartY;
+
+            if (deltaY > 100) {
+                closePanel();
+            } else {
+                bottomSheet.style.transform = 'translateY(0)';
+            }
+
+            touchStartY = 0;
+            touchCurrentY = 0;
+        }
+
+        // ============================================
         // INITIALIZATION
         // ============================================
 
@@ -1582,6 +1706,7 @@
             renderCards();
             initTabs();
             initNavigation();
+            initBottomSheetSwipe();
 
             window.addEventListener('resize', handleResize);
         });
