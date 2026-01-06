@@ -397,13 +397,14 @@
         .tab-nav {
             display: flex;
             border-bottom: 1px solid var(--eden-border);
-            padding: 0 24px;
-            overflow-x: auto;
+            padding: 0 16px;
+            overflow-x: hidden;
+            flex-wrap: nowrap;
         }
 
         .tab-btn {
-            padding: 14px 16px;
-            font-size: 13px;
+            padding: 12px 10px;
+            font-size: 12px;
             font-weight: 500;
             color: var(--eden-text-secondary);
             background: none;
@@ -412,6 +413,8 @@
             white-space: nowrap;
             position: relative;
             transition: color var(--transition-smooth);
+            flex-shrink: 1;
+            min-width: 0;
         }
 
         .tab-btn:hover {
@@ -430,6 +433,16 @@
             right: 0;
             height: 2px;
             background-color: var(--eden-green);
+        }
+
+        /* Hide scrollbar on tab navigation */
+        .tab-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-nav {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
         /* Tab Content */
@@ -724,12 +737,27 @@
             transform: translateY(0);
         }
 
+        .bottom-sheet-handle-area {
+            padding: 12px 0;
+            cursor: grab;
+            touch-action: none;
+        }
+
+        .bottom-sheet-handle-area:active {
+            cursor: grabbing;
+        }
+
         .bottom-sheet-handle {
             width: 40px;
             height: 4px;
             background-color: var(--eden-border);
             border-radius: 2px;
-            margin: 12px auto;
+            margin: 0 auto;
+            transition: background-color var(--transition-smooth);
+        }
+
+        .bottom-sheet-handle-area:hover .bottom-sheet-handle {
+            background-color: var(--eden-text-secondary);
         }
 
         /* ============================================
@@ -843,6 +871,437 @@
             }
         }
 
+        /* ============================================
+           DASHBOARD SUMMARY CARDS
+           ============================================ */
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .summary-card {
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            transition: all var(--transition-smooth);
+        }
+
+        .summary-card.clickable {
+            cursor: pointer;
+        }
+
+        .summary-card.clickable:hover {
+            border-color: var(--eden-green);
+            box-shadow: 0 4px 12px rgba(45, 95, 77, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .summary-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-standard);
+            background-color: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            color: var(--eden-green);
+        }
+
+        .summary-card-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 1.5;
+        }
+
+        .summary-card-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--eden-text);
+            margin-bottom: 4px;
+        }
+
+        .summary-card-label {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        .summary-card-action {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--eden-green);
+        }
+
+        .summary-card-action svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* View containers */
+        .view-container {
+            display: none;
+        }
+
+        .view-container.active {
+            display: block;
+            animation: fadeIn 300ms ease-out;
+        }
+
+        /* Action items list */
+        .action-list {
+            margin-top: 8px;
+        }
+
+        .action-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            font-size: 13px;
+            color: var(--eden-text);
+            border-bottom: 1px solid var(--eden-border);
+        }
+
+        .action-item:last-child {
+            border-bottom: none;
+        }
+
+        .action-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .action-dot.amber {
+            background-color: var(--alert-amber);
+        }
+
+        .action-dot.rose {
+            background-color: var(--alert-rose);
+        }
+
+        /* ============================================
+           PIPELINE STRIP (Horizontal)
+           ============================================ */
+
+        .pipeline-strip {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            flex-wrap: wrap;
+        }
+
+        .pipeline-stage {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 10px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            white-space: nowrap;
+            background-color: var(--eden-mint);
+            color: var(--eden-text-secondary);
+            border: 1px solid transparent;
+        }
+
+        .pipeline-stage:hover {
+            background-color: var(--eden-green-light);
+            color: var(--eden-text);
+        }
+
+        .pipeline-stage.active {
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .pipeline-stage .count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 5px;
+            border-radius: 9px;
+            font-size: 10px;
+            font-weight: 600;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .pipeline-stage:not(.active) .count {
+            background-color: var(--eden-border);
+            color: var(--eden-text-secondary);
+        }
+
+        /* Mobile: Slightly larger pills for better touch targets */
+        @media (max-width: 768px) {
+            .pipeline-stage {
+                padding: 8px 12px;
+                font-size: 13px;
+                gap: 5px;
+            }
+
+            .pipeline-stage .count {
+                min-width: 20px;
+                height: 20px;
+                font-size: 11px;
+            }
+
+            .pipeline-strip {
+                gap: 8px;
+                margin-bottom: 16px;
+            }
+        }
+
+        /* ============================================
+           CLIENT MINI-CARDS
+           ============================================ */
+
+        .client-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .client-mini-card {
+            background-color: var(--eden-mint);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            padding: 14px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .client-mini-card:hover {
+            border-color: var(--eden-green);
+            background-color: var(--pure-white);
+        }
+
+        .client-mini-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .client-mini-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--eden-green);
+            flex-shrink: 0;
+        }
+
+        .client-mini-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .client-mini-id {
+            font-size: 11px;
+            color: var(--eden-text-secondary);
+            font-family: monospace;
+        }
+
+        .client-mini-stage {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .client-mini-stage.awaiting {
+            background-color: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .client-mini-stage.pending {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .client-mini-stage.active {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .client-mini-stage.ending {
+            background-color: #FEE2E2;
+            color: #991B1B;
+        }
+
+        /* ============================================
+           CLIENT DETAIL PANEL (Stacked)
+           ============================================ */
+
+        .client-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: var(--side-panel-width);
+            height: 100vh;
+            background-color: var(--pure-white);
+            border-left: 1px solid var(--eden-border);
+            transform: translateX(100%);
+            transition: transform var(--transition-smooth);
+            z-index: 250; /* Higher than associate panel (200) */
+            display: flex;
+            flex-direction: column;
+            box-shadow: -4px 0 20px rgba(26, 51, 41, 0.15);
+        }
+
+        .client-panel.open {
+            transform: translateX(0);
+        }
+
+        .client-panel .panel-header {
+            background-color: var(--eden-green-light);
+        }
+
+        /* Vertical Pipeline (Editable) */
+        .vertical-pipeline {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--eden-border);
+            background-color: var(--eden-mint);
+        }
+
+        .vertical-pipeline-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--eden-text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .vertical-pipeline-stages {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .vertical-stage {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: var(--radius-standard);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+        }
+
+        .vertical-stage:hover {
+            border-color: var(--eden-green);
+        }
+
+        .vertical-stage.current {
+            background-color: var(--eden-green);
+            border-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .vertical-stage-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid currentColor;
+            flex-shrink: 0;
+        }
+
+        .vertical-stage.current .vertical-stage-dot {
+            background-color: var(--pure-white);
+            border-color: var(--pure-white);
+        }
+
+        .vertical-stage-name {
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .vertical-stage.awaiting .vertical-stage-dot { border-color: #3B82F6; }
+        .vertical-stage.pending .vertical-stage-dot { border-color: #F59E0B; }
+        .vertical-stage.active .vertical-stage-dot { border-color: var(--eden-green); }
+        .vertical-stage.ending .vertical-stage-dot { border-color: #EF4444; }
+
+        /* Back button in client panel */
+        .panel-back-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            margin-right: auto;
+            background: none;
+            border: none;
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+            cursor: pointer;
+            transition: color var(--transition-smooth);
+        }
+
+        .panel-back-btn:hover {
+            color: var(--eden-text);
+        }
+
+        .panel-back-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Mobile Client Bottom Sheet */
+        .client-bottom-sheet {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: var(--bottom-sheet-height);
+            background-color: var(--pure-white);
+            border-top-left-radius: 16px;
+            border-top-right-radius: 16px;
+            transform: translateY(100%);
+            transition: transform var(--transition-smooth);
+            z-index: 350; /* Higher than associate bottom sheet (300) */
+            display: none;
+            flex-direction: column;
+            box-shadow: 0 -4px 20px rgba(26, 51, 41, 0.15);
+        }
+
+        .client-bottom-sheet.open {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .client-panel {
+                display: none;
+            }
+
+            .client-bottom-sheet {
+                display: flex;
+            }
+        }
+
         /* Empty State */
         .empty-state {
             text-align: center;
@@ -910,6 +1369,15 @@
 
             <nav class="nav-section">
                 <div class="nav-label">Command Centre</div>
+                <a href="#" class="nav-item active" data-view="dashboard" onclick="showView('dashboard')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
                 <a href="#" class="nav-item" data-view="action-centre">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"/>
@@ -922,7 +1390,7 @@
 
             <nav class="nav-section">
                 <div class="nav-label">Directory</div>
-                <a href="#" class="nav-item active" data-view="associates">
+                <a href="#" class="nav-item" data-view="associates" onclick="showView('associates')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                         <circle cx="9" cy="7" r="4"/>
@@ -978,14 +1446,118 @@
 
         <!-- Main Content -->
         <main class="main-content" id="mainContent">
-            <header class="page-header">
-                <h1 class="page-title">Associates</h1>
-                <p class="page-subtitle">7 associates across the practice</p>
-            </header>
+            <!-- Dashboard View -->
+            <div class="view-container active" id="dashboardView">
+                <header class="page-header">
+                    <h1 class="page-title">Dashboard</h1>
+                    <p class="page-subtitle">Eden Relationships overview</p>
+                </header>
 
-            <!-- ID Card Grid -->
-            <div class="card-grid" id="cardGrid">
-                <!-- Cards will be rendered by JavaScript -->
+                <div class="dashboard-grid">
+                    <!-- Revenue Card -->
+                    <div class="summary-card">
+                        <div class="summary-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <div class="summary-card-value">£24,680</div>
+                        <div class="summary-card-label">Revenue (MTD)</div>
+                    </div>
+
+                    <!-- Clients Card -->
+                    <div class="summary-card">
+                        <div class="summary-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <div class="summary-card-value">74</div>
+                        <div class="summary-card-label">Active Clients</div>
+                    </div>
+
+                    <!-- Associates Card (Clickable) -->
+                    <div class="summary-card clickable" onclick="showView('associates')">
+                        <div class="summary-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <div class="summary-card-value">7</div>
+                        <div class="summary-card-label">Associates</div>
+                        <div class="summary-card-action">
+                            View all
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Actions Card -->
+                    <div class="summary-card">
+                        <div class="summary-card-icon" style="background-color: #FEF3C7;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#92400E" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="8" x2="12" y2="12"/>
+                                <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                        </div>
+                        <div class="summary-card-value">3</div>
+                        <div class="summary-card-label">Pending Actions</div>
+                        <div class="action-list">
+                            <div class="action-item">
+                                <span class="action-dot amber"></span>
+                                Insurance renewal (Fatima)
+                            </div>
+                            <div class="action-item">
+                                <span class="action-dot amber"></span>
+                                Contract pending (Amara)
+                            </div>
+                            <div class="action-item">
+                                <span class="action-dot rose"></span>
+                                Overdue invoice #1042
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Calendar Card -->
+                    <div class="summary-card">
+                        <div class="summary-card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                        </div>
+                        <div class="summary-card-value">12</div>
+                        <div class="summary-card-label">Sessions Today</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Associates View -->
+            <div class="view-container" id="associatesView">
+                <header class="page-header">
+                    <button class="back-btn" onclick="showView('dashboard')" style="display: inline-flex; align-items: center; gap: 8px; background: none; border: none; color: var(--eden-text-secondary); font-size: 14px; cursor: pointer; margin-bottom: 12px; padding: 0;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"/>
+                        </svg>
+                        Back to Dashboard
+                    </button>
+                    <h1 class="page-title">Associates</h1>
+                    <p class="page-subtitle">7 associates across the practice</p>
+                </header>
+
+                <!-- ID Card Grid -->
+                <div class="card-grid" id="cardGrid">
+                    <!-- Cards will be rendered by JavaScript -->
+                </div>
             </div>
         </main>
 
@@ -1009,7 +1581,8 @@
 
             <!-- Tab Navigation -->
             <nav class="tab-nav">
-                <button class="tab-btn active" data-tab="contact">Contact</button>
+                <button class="tab-btn active" data-tab="clients">Clients</button>
+                <button class="tab-btn" data-tab="contact">Contact</button>
                 <button class="tab-btn" data-tab="sessions">Sessions</button>
                 <button class="tab-btn" data-tab="contracts">Contracts</button>
                 <button class="tab-btn" data-tab="finance">Finance</button>
@@ -1019,7 +1592,7 @@
             <!-- Tab Content -->
             <div class="tab-content" id="tabContent">
                 <!-- Contact Tab -->
-                <div class="tab-panel active" data-panel="contact" id="contactPanel">
+                <div class="tab-panel" data-panel="contact" id="contactPanel">
                     <div class="info-group">
                         <div class="section-title">Contact Details</div>
                         <div class="info-row">
@@ -1204,13 +1777,42 @@
                         <div class="message-date">2 weeks ago</div>
                     </div>
                 </div>
+
+                <!-- Clients Tab -->
+                <div class="tab-panel active" data-panel="clients" id="clientsPanel">
+                    <!-- Pipeline Strip -->
+                    <div class="pipeline-strip" id="pipelineStrip">
+                        <button class="pipeline-stage active" data-stage="all" onclick="filterClients('all')">
+                            All <span class="count" id="countAll">12</span>
+                        </button>
+                        <button class="pipeline-stage" data-stage="awaiting" onclick="filterClients('awaiting')">
+                            Awaiting <span class="count" id="countAwaiting">2</span>
+                        </button>
+                        <button class="pipeline-stage" data-stage="pending" onclick="filterClients('pending')">
+                            Pending <span class="count" id="countPending">3</span>
+                        </button>
+                        <button class="pipeline-stage" data-stage="active" onclick="filterClients('active')">
+                            Active <span class="count" id="countActive">6</span>
+                        </button>
+                        <button class="pipeline-stage" data-stage="ending" onclick="filterClients('ending')">
+                            Ending <span class="count" id="countEnding">1</span>
+                        </button>
+                    </div>
+
+                    <!-- Client Mini Cards -->
+                    <div class="client-mini-grid" id="clientMiniGrid">
+                        <!-- Rendered by JavaScript -->
+                    </div>
+                </div>
             </div>
         </aside>
 
         <!-- Bottom Sheet (Mobile) -->
         <div class="bottom-sheet-overlay" id="bottomSheetOverlay" onclick="closePanel()"></div>
         <div class="bottom-sheet" id="bottomSheet">
-            <div class="bottom-sheet-handle"></div>
+            <div class="bottom-sheet-handle-area" id="bottomSheetHandleArea">
+                <div class="bottom-sheet-handle"></div>
+            </div>
             <header class="panel-header">
                 <div class="panel-header-info">
                     <div class="panel-avatar" id="mobileAvatar">SJ</div>
@@ -1229,7 +1831,8 @@
 
             <!-- Tab Navigation (Mobile) -->
             <nav class="tab-nav" id="mobileTabNav">
-                <button class="tab-btn active" data-tab="contact">Contact</button>
+                <button class="tab-btn active" data-tab="clients">Clients</button>
+                <button class="tab-btn" data-tab="contact">Contact</button>
                 <button class="tab-btn" data-tab="sessions">Sessions</button>
                 <button class="tab-btn" data-tab="contracts">Contracts</button>
                 <button class="tab-btn" data-tab="finance">Finance</button>
@@ -1239,6 +1842,252 @@
             <!-- Tab Content (Mobile) -->
             <div class="tab-content" id="mobileTabContent">
                 <!-- Content cloned from desktop -->
+            </div>
+        </div>
+
+        <!-- Client Detail Panel (Desktop - Stacked) -->
+        <aside class="client-panel" id="clientPanel">
+            <header class="panel-header">
+                <button class="panel-back-btn" onclick="closeClientPanel()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                    Back to Associate
+                </button>
+                <button class="close-btn" onclick="closeClientPanel()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </header>
+
+            <!-- Client Info Header -->
+            <div style="padding: 16px 24px; border-bottom: 1px solid var(--eden-border); display: flex; align-items: center; gap: 12px;">
+                <div class="panel-avatar" id="clientPanelAvatar">JW</div>
+                <div>
+                    <div class="panel-name" id="clientPanelName">James & Emma Wilson</div>
+                    <div class="panel-ucid" id="clientPanelUcid">CLIENT-2501</div>
+                </div>
+            </div>
+
+            <!-- Vertical Pipeline -->
+            <div class="vertical-pipeline">
+                <div class="vertical-pipeline-label">Client Stage</div>
+                <div class="vertical-pipeline-stages" id="clientPipelineStages">
+                    <div class="vertical-stage awaiting" data-stage="awaiting" onclick="updateClientStage('awaiting')">
+                        <div class="vertical-stage-dot"></div>
+                        <span class="vertical-stage-name">Awaiting</span>
+                    </div>
+                    <div class="vertical-stage pending" data-stage="pending" onclick="updateClientStage('pending')">
+                        <div class="vertical-stage-dot"></div>
+                        <span class="vertical-stage-name">Pending</span>
+                    </div>
+                    <div class="vertical-stage active current" data-stage="active" onclick="updateClientStage('active')">
+                        <div class="vertical-stage-dot"></div>
+                        <span class="vertical-stage-name">Active</span>
+                    </div>
+                    <div class="vertical-stage ending" data-stage="ending" onclick="updateClientStage('ending')">
+                        <div class="vertical-stage-dot"></div>
+                        <span class="vertical-stage-name">Ending</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Navigation -->
+            <nav class="tab-nav">
+                <button class="tab-btn active" data-tab="client-contact">Contact</button>
+                <button class="tab-btn" data-tab="client-sessions">Sessions</button>
+                <button class="tab-btn" data-tab="client-contracts">Contracts</button>
+                <button class="tab-btn" data-tab="client-finance">Finance</button>
+                <button class="tab-btn" data-tab="client-inbox">Inbox</button>
+            </nav>
+
+            <!-- Tab Content -->
+            <div class="tab-content" id="clientTabContent">
+                <!-- Contact Tab -->
+                <div class="tab-panel active" data-panel="client-contact">
+                    <div class="info-group">
+                        <div class="section-title">Contact Details</div>
+                        <div class="info-row">
+                            <span class="info-label">Email</span>
+                            <span class="info-value" id="clientEmail">james.wilson@email.com</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Phone</span>
+                            <span class="info-value" id="clientPhone">07700 800111</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Address</span>
+                            <span class="info-value" id="clientAddress">London, SW1</span>
+                        </div>
+                    </div>
+                    <div class="info-group">
+                        <div class="section-title">Therapy Details</div>
+                        <div class="info-row">
+                            <span class="info-label">Type</span>
+                            <span class="info-value" id="clientType">Couples</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Started</span>
+                            <span class="info-value" id="clientStarted">March 2024</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Associate</span>
+                            <span class="info-value" id="clientAssociate">Sarah Johnson</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sessions Tab -->
+                <div class="tab-panel" data-panel="client-sessions">
+                    <div class="section-title">Upcoming Sessions</div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot upcoming"></div>
+                            <div class="timeline-date">Tomorrow, 10:00 AM</div>
+                            <div class="timeline-content">Session #24 with Sarah Johnson</div>
+                        </div>
+                    </div>
+                    <div class="section-title" style="margin-top: 24px;">Session History</div>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot past"></div>
+                            <div class="timeline-date">Last Tuesday, 10:00 AM</div>
+                            <div class="timeline-content">Session #23 - Completed</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot past"></div>
+                            <div class="timeline-date">2 weeks ago</div>
+                            <div class="timeline-content">Session #22 - Completed</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contracts Tab -->
+                <div class="tab-panel" data-panel="client-contracts">
+                    <div class="section-title">Agreements</div>
+                    <div class="contract-card">
+                        <div class="contract-header">
+                            <span class="contract-title">Therapy Agreement</span>
+                            <span class="contract-status signed">Signed</span>
+                        </div>
+                        <div class="contract-date">Signed 10 March 2024</div>
+                    </div>
+                    <div class="contract-card">
+                        <div class="contract-header">
+                            <span class="contract-title">GDPR Consent</span>
+                            <span class="contract-status signed">Signed</span>
+                        </div>
+                        <div class="contract-date">Signed 10 March 2024</div>
+                    </div>
+                </div>
+
+                <!-- Finance Tab -->
+                <div class="tab-panel" data-panel="client-finance">
+                    <div class="finance-stat-grid">
+                        <div class="finance-stat">
+                            <div class="finance-stat-value" id="clientTotalSpent">£2,400</div>
+                            <div class="finance-stat-label">Total Spent</div>
+                        </div>
+                        <div class="finance-stat">
+                            <div class="finance-stat-value" id="clientCredits">2</div>
+                            <div class="finance-stat-label">Session Credits</div>
+                        </div>
+                    </div>
+                    <div class="section-title">Payment History</div>
+                    <div class="info-row">
+                        <span class="info-label">Last Payment</span>
+                        <span class="info-value">£100 - 3 days ago</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Payment Method</span>
+                        <span class="info-value">Stripe (Visa ****4242)</span>
+                    </div>
+                </div>
+
+                <!-- Inbox Tab -->
+                <div class="tab-panel" data-panel="client-inbox">
+                    <div class="section-title">Messages</div>
+                    <div class="message-item">
+                        <div class="message-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-subject">Session Confirmation</div>
+                            <div class="message-preview">Your session tomorrow at 10:00 AM is confirmed...</div>
+                        </div>
+                        <div class="message-date">Yesterday</div>
+                    </div>
+                    <div class="message-item">
+                        <div class="message-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-subject">Payment Receipt</div>
+                            <div class="message-preview">Thank you for your payment of £100...</div>
+                        </div>
+                        <div class="message-date">3 days ago</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Client Bottom Sheet (Mobile - Stacked) -->
+        <div class="client-bottom-sheet" id="clientBottomSheet">
+            <div class="bottom-sheet-handle-area" id="clientBottomSheetHandle">
+                <div class="bottom-sheet-handle"></div>
+            </div>
+            <header class="panel-header" style="background-color: var(--eden-green-light);">
+                <button class="panel-back-btn" onclick="closeClientPanel()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                    Back
+                </button>
+                <button class="close-btn" onclick="closeClientPanel()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </header>
+
+            <!-- Client Info Header (Mobile) -->
+            <div style="padding: 12px 24px; border-bottom: 1px solid var(--eden-border); display: flex; align-items: center; gap: 12px;">
+                <div class="panel-avatar" id="mobileClientAvatar">JW</div>
+                <div>
+                    <div class="panel-name" id="mobileClientName">James & Emma Wilson</div>
+                    <div class="panel-ucid" id="mobileClientUcid">CLIENT-2501</div>
+                </div>
+            </div>
+
+            <!-- Vertical Pipeline (Mobile) -->
+            <div class="vertical-pipeline" id="mobileClientPipeline">
+                <div class="vertical-pipeline-label">Client Stage</div>
+                <div class="vertical-pipeline-stages" id="mobileClientPipelineStages">
+                    <!-- Cloned from desktop -->
+                </div>
+            </div>
+
+            <!-- Tab Navigation (Mobile) -->
+            <nav class="tab-nav" id="clientMobileTabNav">
+                <button class="tab-btn active" data-tab="client-contact">Contact</button>
+                <button class="tab-btn" data-tab="client-sessions">Sessions</button>
+                <button class="tab-btn" data-tab="client-contracts">Contracts</button>
+                <button class="tab-btn" data-tab="client-finance">Finance</button>
+                <button class="tab-btn" data-tab="client-inbox">Inbox</button>
+            </nav>
+
+            <!-- Tab Content (Mobile) -->
+            <div class="tab-content" id="clientMobileTabContent">
+                <!-- Cloned from desktop -->
             </div>
         </div>
     </div>
@@ -1377,12 +2226,73 @@
             }
         ];
 
+        // Mock client data (assigned to associates)
+        const clients = [
+            // Sarah Johnson's clients (ASSOC-2401)
+            { id: 'CLIENT-2501', name: 'James & Emma Wilson', initials: 'JW', stage: 'active', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2502', name: 'David Miller', initials: 'DM', stage: 'active', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2503', name: 'Sophie Taylor', initials: 'ST', stage: 'active', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2504', name: 'Mark & Lisa Harris', initials: 'MH', stage: 'active', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2505', name: 'Rachel Green', initials: 'RG', stage: 'pending', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2506', name: 'Tom Bennett', initials: 'TB', stage: 'awaiting', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2507', name: 'Nina Patel', initials: 'NP', stage: 'active', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2508', name: 'Chris & Amy Brown', initials: 'CB', stage: 'ending', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2509', name: 'Laura Martinez', initials: 'LM', stage: 'active', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2510', name: 'Daniel Kim', initials: 'DK', stage: 'pending', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2511', name: 'Fiona Wright', initials: 'FW', stage: 'pending', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2512', name: 'Gary & Helen Price', initials: 'GP', stage: 'awaiting', associateId: 'ASSOC-2401' },
+            // David Okonkwo's clients (ASSOC-2402)
+            { id: 'CLIENT-2513', name: 'Michael Chen', initials: 'MC', stage: 'active', associateId: 'ASSOC-2402' },
+            { id: 'CLIENT-2514', name: 'Sarah Adams', initials: 'SA', stage: 'active', associateId: 'ASSOC-2402' },
+            { id: 'CLIENT-2515', name: 'Kevin & Jane Moore', initials: 'KM', stage: 'pending', associateId: 'ASSOC-2402' },
+            // Add more for other associates as needed...
+            { id: 'CLIENT-2516', name: 'Emma Stone', initials: 'ES', stage: 'active', associateId: 'ASSOC-2403' },
+            { id: 'CLIENT-2517', name: 'Robert Lee', initials: 'RL', stage: 'awaiting', associateId: 'ASSOC-2403' },
+            { id: 'CLIENT-2518', name: 'Julia Roberts', initials: 'JR', stage: 'active', associateId: 'ASSOC-2404' },
+            { id: 'CLIENT-2519', name: 'Peter Parker', initials: 'PP', stage: 'pending', associateId: 'ASSOC-2405' },
+            { id: 'CLIENT-2520', name: 'Diana Prince', initials: 'DP', stage: 'active', associateId: 'ASSOC-2406' },
+        ];
+
         // ============================================
         // STATE
         // ============================================
 
         let selectedAssociate = null;
+        let selectedClient = null;
         let isMobile = window.innerWidth <= 768;
+        let currentView = 'dashboard';
+        let currentPipelineFilter = 'all';
+
+        // ============================================
+        // VIEW NAVIGATION
+        // ============================================
+
+        function showView(viewName) {
+            currentView = viewName;
+
+            // Update view containers
+            document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active'));
+            const targetView = document.getElementById(viewName + 'View');
+            if (targetView) {
+                targetView.classList.add('active');
+            }
+
+            // Update nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                if (item.dataset.view === viewName) {
+                    item.classList.add('active');
+                }
+            });
+
+            // Close sidebar on mobile
+            if (isMobile) {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebarOverlay');
+                sidebar.classList.remove('open');
+                overlay.classList.remove('open');
+            }
+        }
 
         // ============================================
         // RENDER FUNCTIONS
@@ -1419,6 +2329,235 @@
             `).join('');
         }
 
+        function getAssociateClients(associateId) {
+            return clients.filter(c => c.associateId === associateId);
+        }
+
+        function renderClientMiniCards(associateId, filter = 'all') {
+            const associateClients = getAssociateClients(associateId);
+            const filteredClients = filter === 'all'
+                ? associateClients
+                : associateClients.filter(c => c.stage === filter);
+
+            const grid = document.getElementById('clientMiniGrid');
+            if (!grid) return;
+
+            if (filteredClients.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <div class="empty-state-title">No clients in this stage</div>
+                        <div class="empty-state-text">Select a different filter to see clients</div>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filteredClients.map(client => `
+                <div class="client-mini-card" onclick="openClientPanel('${client.id}')">
+                    <div class="client-mini-header">
+                        <div class="client-mini-avatar">${client.initials}</div>
+                        <div>
+                            <div class="client-mini-name">${client.name}</div>
+                            <div class="client-mini-id">${client.id}</div>
+                        </div>
+                    </div>
+                    <span class="client-mini-stage ${client.stage}">${client.stage.charAt(0).toUpperCase() + client.stage.slice(1)}</span>
+                </div>
+            `).join('');
+        }
+
+        function updatePipelineCounts(associateId) {
+            const associateClients = getAssociateClients(associateId);
+
+            const counts = {
+                all: associateClients.length,
+                awaiting: associateClients.filter(c => c.stage === 'awaiting').length,
+                pending: associateClients.filter(c => c.stage === 'pending').length,
+                active: associateClients.filter(c => c.stage === 'active').length,
+                ending: associateClients.filter(c => c.stage === 'ending').length
+            };
+
+            // Update count badges
+            const countAll = document.getElementById('countAll');
+            const countAwaiting = document.getElementById('countAwaiting');
+            const countPending = document.getElementById('countPending');
+            const countActive = document.getElementById('countActive');
+            const countEnding = document.getElementById('countEnding');
+
+            if (countAll) countAll.textContent = counts.all;
+            if (countAwaiting) countAwaiting.textContent = counts.awaiting;
+            if (countPending) countPending.textContent = counts.pending;
+            if (countActive) countActive.textContent = counts.active;
+            if (countEnding) countEnding.textContent = counts.ending;
+        }
+
+        function filterClients(stage) {
+            currentPipelineFilter = stage;
+
+            // Update active state on pipeline buttons
+            document.querySelectorAll('.pipeline-stage').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.stage === stage) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Re-render client cards with filter
+            if (selectedAssociate) {
+                renderClientMiniCards(selectedAssociate.id, stage);
+            }
+        }
+
+        // ============================================
+        // CLIENT PANEL FUNCTIONS
+        // ============================================
+
+        function openClientPanel(clientId) {
+            selectedClient = clients.find(c => c.id === clientId);
+            if (!selectedClient) return;
+
+            // Find the associate for this client
+            const clientAssociate = associates.find(a => a.id === selectedClient.associateId);
+
+            // Update client panel content
+            updateClientPanelContent(selectedClient, clientAssociate);
+
+            if (isMobile) {
+                const clientSheet = document.getElementById('clientBottomSheet');
+                clientSheet.style.transition = 'transform var(--transition-smooth)';
+                clientSheet.style.transform = 'translateY(0)';
+                clientSheet.classList.add('open');
+            } else {
+                document.getElementById('clientPanel').classList.add('open');
+            }
+        }
+
+        function closeClientPanel() {
+            selectedClient = null;
+
+            if (isMobile) {
+                const clientSheet = document.getElementById('clientBottomSheet');
+                clientSheet.style.transition = 'transform var(--transition-smooth)';
+                clientSheet.style.transform = 'translateY(100%)';
+                clientSheet.classList.remove('open');
+            } else {
+                document.getElementById('clientPanel').classList.remove('open');
+            }
+
+            // Reset client tabs to contact
+            document.querySelectorAll('#clientPanel .tab-btn, #clientBottomSheet .tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.tab === 'client-contact') btn.classList.add('active');
+            });
+            document.querySelectorAll('#clientPanel .tab-panel, #clientBottomSheet .tab-panel').forEach(panel => {
+                panel.classList.remove('active');
+                if (panel.dataset.panel === 'client-contact') panel.classList.add('active');
+            });
+        }
+
+        function updateClientPanelContent(client, associate) {
+            // Desktop panel
+            document.getElementById('clientPanelAvatar').textContent = client.initials;
+            document.getElementById('clientPanelName').textContent = client.name;
+            document.getElementById('clientPanelUcid').textContent = client.id;
+
+            // Mobile panel
+            document.getElementById('mobileClientAvatar').textContent = client.initials;
+            document.getElementById('mobileClientName').textContent = client.name;
+            document.getElementById('mobileClientUcid').textContent = client.id;
+
+            // Update associate name in contact tab
+            const associateName = associate ? associate.name : 'Unknown';
+            document.getElementById('clientAssociate').textContent = associateName;
+
+            // Update pipeline stages
+            updateClientPipelineUI(client.stage);
+
+            // Clone content to mobile
+            const desktopPipeline = document.getElementById('clientPipelineStages').innerHTML;
+            document.getElementById('mobileClientPipelineStages').innerHTML = desktopPipeline;
+
+            const desktopContent = document.getElementById('clientTabContent').innerHTML;
+            document.getElementById('clientMobileTabContent').innerHTML = desktopContent;
+
+            // Attach tab listeners for client panel
+            initClientPanelTabs();
+        }
+
+        function updateClientPipelineUI(currentStage) {
+            document.querySelectorAll('#clientPipelineStages .vertical-stage').forEach(stage => {
+                stage.classList.remove('current');
+                if (stage.dataset.stage === currentStage) {
+                    stage.classList.add('current');
+                }
+            });
+        }
+
+        function updateClientStage(newStage) {
+            if (!selectedClient) return;
+
+            // Update the client's stage in mock data
+            const clientIndex = clients.findIndex(c => c.id === selectedClient.id);
+            if (clientIndex !== -1) {
+                clients[clientIndex].stage = newStage;
+                selectedClient.stage = newStage;
+            }
+
+            // Update UI
+            updateClientPipelineUI(newStage);
+
+            // Update mobile pipeline too
+            document.querySelectorAll('#mobileClientPipelineStages .vertical-stage').forEach(stage => {
+                stage.classList.remove('current');
+                if (stage.dataset.stage === newStage) {
+                    stage.classList.add('current');
+                }
+            });
+
+            // Re-render the client mini cards in associate panel to reflect change
+            if (selectedAssociate) {
+                updatePipelineCounts(selectedAssociate.id);
+                renderClientMiniCards(selectedAssociate.id, currentPipelineFilter);
+
+                // Also update mobile content
+                const desktopContent = document.getElementById('tabContent').innerHTML;
+                document.getElementById('mobileTabContent').innerHTML = desktopContent;
+            }
+        }
+
+        function initClientPanelTabs() {
+            // Desktop client panel tabs
+            document.querySelectorAll('#clientPanel .tab-btn').forEach(btn => {
+                btn.onclick = function() {
+                    const tabName = this.dataset.tab;
+                    document.querySelectorAll('#clientPanel .tab-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    document.querySelectorAll('#clientPanel .tab-panel').forEach(p => p.classList.remove('active'));
+                    const targetPanel = document.querySelector(`#clientPanel [data-panel="${tabName}"]`);
+                    if (targetPanel) targetPanel.classList.add('active');
+                };
+            });
+
+            // Mobile client panel tabs
+            document.querySelectorAll('#clientBottomSheet .tab-btn').forEach(btn => {
+                btn.onclick = function() {
+                    const tabName = this.dataset.tab;
+                    document.querySelectorAll('#clientBottomSheet .tab-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    document.querySelectorAll('#clientMobileTabContent .tab-panel').forEach(p => p.classList.remove('active'));
+                    const targetPanel = document.querySelector(`#clientMobileTabContent [data-panel="${tabName}"]`);
+                    if (targetPanel) targetPanel.classList.add('active');
+                };
+            });
+
+            // Mobile pipeline stage clicks
+            document.querySelectorAll('#mobileClientPipelineStages .vertical-stage').forEach(stage => {
+                stage.onclick = function() {
+                    updateClientStage(this.dataset.stage);
+                };
+            });
+        }
+
         function updatePanelContent(associate) {
             // Desktop panel
             document.getElementById('panelAvatar').textContent = associate.initials;
@@ -1444,6 +2583,17 @@
             document.getElementById('totalEarnings').textContent = associate.totalEarnings;
             document.getElementById('pendingPayout').textContent = associate.pendingPayout;
 
+            // Render client mini cards and update pipeline counts
+            currentPipelineFilter = 'all'; // Reset filter when switching associates
+            updatePipelineCounts(associate.id);
+            renderClientMiniCards(associate.id, 'all');
+
+            // Reset pipeline buttons to 'all'
+            document.querySelectorAll('.pipeline-stage').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.stage === 'all') btn.classList.add('active');
+            });
+
             // Clone content to mobile
             const desktopContent = document.getElementById('tabContent').innerHTML;
             document.getElementById('mobileTabContent').innerHTML = desktopContent;
@@ -1463,7 +2613,10 @@
             updatePanelContent(selectedAssociate);
 
             if (isMobile) {
-                document.getElementById('bottomSheet').classList.add('open');
+                const bottomSheet = document.getElementById('bottomSheet');
+                bottomSheet.style.transition = 'transform var(--transition-smooth)';
+                bottomSheet.style.transform = 'translateY(0)';
+                bottomSheet.classList.add('open');
                 document.getElementById('bottomSheetOverlay').classList.add('open');
                 document.body.style.overflow = 'hidden';
             } else {
@@ -1474,7 +2627,10 @@
 
         function closePanel() {
             if (isMobile) {
-                document.getElementById('bottomSheet').classList.remove('open');
+                const bottomSheet = document.getElementById('bottomSheet');
+                bottomSheet.style.transition = 'transform var(--transition-smooth)';
+                bottomSheet.style.transform = 'translateY(100%)';
+                bottomSheet.classList.remove('open');
                 document.getElementById('bottomSheetOverlay').classList.remove('open');
                 document.body.style.overflow = '';
             } else {
@@ -1482,14 +2638,14 @@
                 document.getElementById('mainContent').classList.remove('panel-open');
             }
 
-            // Reset tabs
+            // Reset tabs to Clients (default)
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.dataset.tab === 'contact') btn.classList.add('active');
+                if (btn.dataset.tab === 'clients') btn.classList.add('active');
             });
             document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.classList.remove('active');
-                if (panel.dataset.panel === 'contact') panel.classList.add('active');
+                if (panel.dataset.panel === 'clients') panel.classList.add('active');
             });
         }
 
@@ -1546,16 +2702,10 @@
         // ============================================
 
         function initNavigation() {
+            // Prevent default on all nav links
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
-                    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-                    this.classList.add('active');
-
-                    // Close sidebar on mobile after selection
-                    if (isMobile) {
-                        toggleSidebar();
-                    }
                 });
             });
         }
@@ -1575,6 +2725,107 @@
         }
 
         // ============================================
+        // BOTTOM SHEET SWIPE HANDLING
+        // ============================================
+
+        let touchStartY = 0;
+        let touchCurrentY = 0;
+        let isDragging = false;
+
+        function initBottomSheetSwipe() {
+            const handleArea = document.getElementById('bottomSheetHandleArea');
+            const bottomSheet = document.getElementById('bottomSheet');
+
+            if (!handleArea) return;
+
+            // Touch events
+            handleArea.addEventListener('touchstart', handleTouchStart, { passive: true });
+            handleArea.addEventListener('touchmove', handleTouchMove, { passive: false });
+            handleArea.addEventListener('touchend', handleTouchEnd);
+
+            // Mouse events (for desktop testing)
+            handleArea.addEventListener('mousedown', handleMouseDown);
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
+        }
+
+        function handleTouchStart(e) {
+            touchStartY = e.touches[0].clientY;
+            isDragging = true;
+            document.getElementById('bottomSheet').style.transition = 'none';
+        }
+
+        function handleTouchMove(e) {
+            if (!isDragging) return;
+            touchCurrentY = e.touches[0].clientY;
+            const deltaY = touchCurrentY - touchStartY;
+
+            // Only allow dragging down
+            if (deltaY > 0) {
+                e.preventDefault();
+                document.getElementById('bottomSheet').style.transform = `translateY(${deltaY}px)`;
+            }
+        }
+
+        function handleTouchEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+
+            const bottomSheet = document.getElementById('bottomSheet');
+            bottomSheet.style.transition = 'transform var(--transition-smooth)';
+
+            const deltaY = touchCurrentY - touchStartY;
+
+            // If dragged more than 100px down, close the panel
+            if (deltaY > 100) {
+                closePanel();
+            } else {
+                // Snap back
+                bottomSheet.style.transform = 'translateY(0)';
+            }
+
+            touchStartY = 0;
+            touchCurrentY = 0;
+        }
+
+        // Mouse event handlers (for desktop testing)
+        function handleMouseDown(e) {
+            touchStartY = e.clientY;
+            isDragging = true;
+            document.getElementById('bottomSheet').style.transition = 'none';
+            e.preventDefault();
+        }
+
+        function handleMouseMove(e) {
+            if (!isDragging) return;
+            touchCurrentY = e.clientY;
+            const deltaY = touchCurrentY - touchStartY;
+
+            if (deltaY > 0) {
+                document.getElementById('bottomSheet').style.transform = `translateY(${deltaY}px)`;
+            }
+        }
+
+        function handleMouseUp() {
+            if (!isDragging) return;
+            isDragging = false;
+
+            const bottomSheet = document.getElementById('bottomSheet');
+            bottomSheet.style.transition = 'transform var(--transition-smooth)';
+
+            const deltaY = touchCurrentY - touchStartY;
+
+            if (deltaY > 100) {
+                closePanel();
+            } else {
+                bottomSheet.style.transform = 'translateY(0)';
+            }
+
+            touchStartY = 0;
+            touchCurrentY = 0;
+        }
+
+        // ============================================
         // INITIALIZATION
         // ============================================
 
@@ -1582,6 +2833,7 @@
             renderCards();
             initTabs();
             initNavigation();
+            initBottomSheetSwipe();
 
             window.addEventListener('resize', handleResize);
         });
