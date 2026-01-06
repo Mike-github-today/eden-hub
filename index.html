@@ -397,13 +397,14 @@
         .tab-nav {
             display: flex;
             border-bottom: 1px solid var(--eden-border);
-            padding: 0 24px;
-            overflow-x: auto;
+            padding: 0 16px;
+            overflow-x: hidden;
+            flex-wrap: nowrap;
         }
 
         .tab-btn {
-            padding: 14px 16px;
-            font-size: 13px;
+            padding: 12px 10px;
+            font-size: 12px;
             font-weight: 500;
             color: var(--eden-text-secondary);
             background: none;
@@ -412,6 +413,8 @@
             white-space: nowrap;
             position: relative;
             transition: color var(--transition-smooth);
+            flex-shrink: 1;
+            min-width: 0;
         }
 
         .tab-btn:hover {
@@ -430,6 +433,16 @@
             right: 0;
             height: 2px;
             background-color: var(--eden-green);
+        }
+
+        /* Hide scrollbar on tab navigation */
+        .tab-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-nav {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
         /* Tab Content */
@@ -982,19 +995,20 @@
 
         .pipeline-strip {
             display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
+            gap: 6px;
+            margin-bottom: 16px;
             overflow-x: auto;
             padding-bottom: 4px;
+            flex-wrap: wrap;
         }
 
         .pipeline-stage {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 8px 14px;
-            border-radius: 20px;
-            font-size: 13px;
+            gap: 4px;
+            padding: 6px 10px;
+            border-radius: 16px;
+            font-size: 12px;
             font-weight: 500;
             cursor: pointer;
             transition: all var(--transition-smooth);
@@ -1018,11 +1032,11 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-width: 20px;
-            height: 20px;
-            padding: 0 6px;
-            border-radius: 10px;
-            font-size: 11px;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 5px;
+            border-radius: 9px;
+            font-size: 10px;
             font-weight: 600;
             background-color: rgba(255, 255, 255, 0.2);
         }
@@ -1030,6 +1044,26 @@
         .pipeline-stage:not(.active) .count {
             background-color: var(--eden-border);
             color: var(--eden-text-secondary);
+        }
+
+        /* Mobile: Slightly larger pills for better touch targets */
+        @media (max-width: 768px) {
+            .pipeline-stage {
+                padding: 8px 12px;
+                font-size: 13px;
+                gap: 5px;
+            }
+
+            .pipeline-stage .count {
+                min-width: 20px;
+                height: 20px;
+                font-size: 11px;
+            }
+
+            .pipeline-strip {
+                gap: 8px;
+                margin-bottom: 16px;
+            }
         }
 
         /* ============================================
@@ -1547,18 +1581,18 @@
 
             <!-- Tab Navigation -->
             <nav class="tab-nav">
-                <button class="tab-btn active" data-tab="contact">Contact</button>
+                <button class="tab-btn active" data-tab="clients">Clients</button>
+                <button class="tab-btn" data-tab="contact">Contact</button>
                 <button class="tab-btn" data-tab="sessions">Sessions</button>
                 <button class="tab-btn" data-tab="contracts">Contracts</button>
                 <button class="tab-btn" data-tab="finance">Finance</button>
                 <button class="tab-btn" data-tab="inbox">Inbox</button>
-                <button class="tab-btn" data-tab="clients">Clients</button>
             </nav>
 
             <!-- Tab Content -->
             <div class="tab-content" id="tabContent">
                 <!-- Contact Tab -->
-                <div class="tab-panel active" data-panel="contact" id="contactPanel">
+                <div class="tab-panel" data-panel="contact" id="contactPanel">
                     <div class="info-group">
                         <div class="section-title">Contact Details</div>
                         <div class="info-row">
@@ -1745,7 +1779,7 @@
                 </div>
 
                 <!-- Clients Tab -->
-                <div class="tab-panel" data-panel="clients" id="clientsPanel">
+                <div class="tab-panel active" data-panel="clients" id="clientsPanel">
                     <!-- Pipeline Strip -->
                     <div class="pipeline-strip" id="pipelineStrip">
                         <button class="pipeline-stage active" data-stage="all" onclick="filterClients('all')">
@@ -1797,12 +1831,12 @@
 
             <!-- Tab Navigation (Mobile) -->
             <nav class="tab-nav" id="mobileTabNav">
-                <button class="tab-btn active" data-tab="contact">Contact</button>
+                <button class="tab-btn active" data-tab="clients">Clients</button>
+                <button class="tab-btn" data-tab="contact">Contact</button>
                 <button class="tab-btn" data-tab="sessions">Sessions</button>
                 <button class="tab-btn" data-tab="contracts">Contracts</button>
                 <button class="tab-btn" data-tab="finance">Finance</button>
                 <button class="tab-btn" data-tab="inbox">Inbox</button>
-                <button class="tab-btn" data-tab="clients">Clients</button>
             </nav>
 
             <!-- Tab Content (Mobile) -->
@@ -2604,14 +2638,14 @@
                 document.getElementById('mainContent').classList.remove('panel-open');
             }
 
-            // Reset tabs
+            // Reset tabs to Clients (default)
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.dataset.tab === 'contact') btn.classList.add('active');
+                if (btn.dataset.tab === 'clients') btn.classList.add('active');
             });
             document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.classList.remove('active');
-                if (panel.dataset.panel === 'contact') panel.classList.add('active');
+                if (panel.dataset.panel === 'clients') panel.classList.add('active');
             });
         }
 
