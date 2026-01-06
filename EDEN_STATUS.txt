@@ -1,0 +1,80 @@
+================================================================================
+EDEN HUB — PROJECT STATUS
+================================================================================
+Last Updated: 6 January 2026
+Session: Fresh Start — Repository Foundation
+
+================================================================================
+CURRENT STATE
+================================================================================
+Repository: Eden Hub (NEW — replacing eden-admin-portal)
+Phase: 0 — Foundation Setup
+Status: Specification complete, ready to create first prototype
+
+================================================================================
+WHAT WAS DECIDED THIS SESSION
+================================================================================
+1. Abandoned previous "eden-admin-portal" GitHub repository
+2. Starting fresh with new "Eden Hub" repository
+3. Building methodically through web-based Claude sessions (not Claude Code)
+4. Created master EDEN_HUB_FOUNDATION.md specification document
+5. Established all design decisions, architecture, and roadmap
+
+================================================================================
+FOUNDATION DOCUMENT CREATED
+================================================================================
+File: EDEN_HUB_FOUNDATION.md
+Contains:
+- Design philosophy (Stewardship, Primary Clients, Silent Admin)
+- Eden Calm palette (White #FFFFFF, Mint #F4F7F6, Green #2D5F4D)
+- UCID data architecture (TYPE-YYSEQ format)
+- Portal structure (6 modules, 5-tab ID cards)
+- Financial Vitality Hub specification (5 modules)
+- Friction Feed system (exception-only display)
+- Authentication strategy (Squarespace + Make.com)
+- Technical stack (React + Tailwind + shadcn/ui for production)
+- 8-week implementation roadmap
+- Glossary of Eden terms
+
+================================================================================
+KEY ARCHITECTURE DECISIONS (CONFIRMED)
+================================================================================
+1. Associates = Primary Clients (not employees)
+2. Friction Feed shows only exceptions, not dashboards
+3. Maps-style drill-down: Bottom Sheet (mobile) / Side Panel (desktop)
+4. True Cash as lead financial metric
+5. UCID as primary key across all tables
+6. Single-file HTML prototypes first, then migrate to React
+7. Eden Calm palette — NO GREY anywhere
+8. 69/31 revenue split (associate/Eden)
+9. Soft enforcement — warnings, not blocks
+
+================================================================================
+NEXT STEPS
+================================================================================
+1. Create GitHub repository: "eden-hub"
+2. Build first HTML prototype: eden-hub-v1.html
+   - Eden Calm styling
+   - Outlined leaf logo
+   - Adaptive layout (responsive breakpoints)
+   - ID Card grid (mock data)
+   - 5-tab detail panels
+   - Friction Feed placeholder
+
+================================================================================
+FILES TO DOWNLOAD
+================================================================================
+1. EDEN_HUB_FOUNDATION.md — Master specification (keep in OneDrive)
+2. EDEN_STATUS.txt — This file (upload at start of next session)
+
+================================================================================
+CONTEXT FOR NEXT SESSION
+================================================================================
+Upload these files:
+1. EDEN_STATUS.txt (this file)
+2. EDEN_HUB_FOUNDATION.md (for reference)
+
+Tell Claude:
+"Starting Eden Hub Phase 1 — build the first HTML prototype"
+
+================================================================================
