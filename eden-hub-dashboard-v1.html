@@ -976,6 +976,147 @@
             background-color: var(--alert-rose);
         }
 
+        /* ============================================
+           PIPELINE STRIP (Horizontal)
+           ============================================ */
+
+        .pipeline-strip {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .pipeline-stage {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            white-space: nowrap;
+            background-color: var(--eden-mint);
+            color: var(--eden-text-secondary);
+            border: 1px solid transparent;
+        }
+
+        .pipeline-stage:hover {
+            background-color: var(--eden-green-light);
+            color: var(--eden-text);
+        }
+
+        .pipeline-stage.active {
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .pipeline-stage .count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 6px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .pipeline-stage:not(.active) .count {
+            background-color: var(--eden-border);
+            color: var(--eden-text-secondary);
+        }
+
+        /* ============================================
+           CLIENT MINI-CARDS
+           ============================================ */
+
+        .client-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .client-mini-card {
+            background-color: var(--eden-mint);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            padding: 14px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .client-mini-card:hover {
+            border-color: var(--eden-green);
+            background-color: var(--pure-white);
+        }
+
+        .client-mini-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .client-mini-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--eden-green);
+            flex-shrink: 0;
+        }
+
+        .client-mini-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .client-mini-id {
+            font-size: 11px;
+            color: var(--eden-text-secondary);
+            font-family: monospace;
+        }
+
+        .client-mini-stage {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .client-mini-stage.awaiting {
+            background-color: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .client-mini-stage.pending {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .client-mini-stage.active {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .client-mini-stage.ending {
+            background-color: #FEE2E2;
+            color: #991B1B;
+        }
+
         /* Empty State */
         .empty-state {
             text-align: center;
@@ -1260,6 +1401,7 @@
                 <button class="tab-btn" data-tab="contracts">Contracts</button>
                 <button class="tab-btn" data-tab="finance">Finance</button>
                 <button class="tab-btn" data-tab="inbox">Inbox</button>
+                <button class="tab-btn" data-tab="clients">Clients</button>
             </nav>
 
             <!-- Tab Content -->
@@ -1450,6 +1592,33 @@
                         <div class="message-date">2 weeks ago</div>
                     </div>
                 </div>
+
+                <!-- Clients Tab -->
+                <div class="tab-panel" data-panel="clients" id="clientsPanel">
+                    <!-- Pipeline Strip -->
+                    <div class="pipeline-strip" id="pipelineStrip">
+                        <button class="pipeline-stage active" data-stage="all" onclick="filterClients('all')">
+                            All <span class="count" id="countAll">12</span>
+                        </button>
+                        <button class="pipeline-stage" data-stage="awaiting" onclick="filterClients('awaiting')">
+                            Awaiting <span class="count" id="countAwaiting">2</span>
+                        </button>
+                        <button class="pipeline-stage" data-stage="pending" onclick="filterClients('pending')">
+                            Pending <span class="count" id="countPending">3</span>
+                        </button>
+                        <button class="pipeline-stage" data-stage="active" onclick="filterClients('active')">
+                            Active <span class="count" id="countActive">6</span>
+                        </button>
+                        <button class="pipeline-stage" data-stage="ending" onclick="filterClients('ending')">
+                            Ending <span class="count" id="countEnding">1</span>
+                        </button>
+                    </div>
+
+                    <!-- Client Mini Cards -->
+                    <div class="client-mini-grid" id="clientMiniGrid">
+                        <!-- Rendered by JavaScript -->
+                    </div>
+                </div>
             </div>
         </aside>
 
@@ -1482,6 +1651,7 @@
                 <button class="tab-btn" data-tab="contracts">Contracts</button>
                 <button class="tab-btn" data-tab="finance">Finance</button>
                 <button class="tab-btn" data-tab="inbox">Inbox</button>
+                <button class="tab-btn" data-tab="clients">Clients</button>
             </nav>
 
             <!-- Tab Content (Mobile) -->
@@ -1625,6 +1795,33 @@
             }
         ];
 
+        // Mock client data (assigned to associates)
+        const clients = [
+            // Sarah Johnson's clients (ASSOC-2401)
+            { id: 'CLIENT-2501', name: 'James & Emma Wilson', initials: 'JW', stage: 'active', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2502', name: 'David Miller', initials: 'DM', stage: 'active', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2503', name: 'Sophie Taylor', initials: 'ST', stage: 'active', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2504', name: 'Mark & Lisa Harris', initials: 'MH', stage: 'active', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2505', name: 'Rachel Green', initials: 'RG', stage: 'pending', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2506', name: 'Tom Bennett', initials: 'TB', stage: 'awaiting', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2507', name: 'Nina Patel', initials: 'NP', stage: 'active', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2508', name: 'Chris & Amy Brown', initials: 'CB', stage: 'ending', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2509', name: 'Laura Martinez', initials: 'LM', stage: 'active', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2510', name: 'Daniel Kim', initials: 'DK', stage: 'pending', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2511', name: 'Fiona Wright', initials: 'FW', stage: 'pending', associateId: 'ASSOC-2401' },
+            { id: 'CLIENT-2512', name: 'Gary & Helen Price', initials: 'GP', stage: 'awaiting', associateId: 'ASSOC-2401' },
+            // David Okonkwo's clients (ASSOC-2402)
+            { id: 'CLIENT-2513', name: 'Michael Chen', initials: 'MC', stage: 'active', associateId: 'ASSOC-2402' },
+            { id: 'CLIENT-2514', name: 'Sarah Adams', initials: 'SA', stage: 'active', associateId: 'ASSOC-2402' },
+            { id: 'CLIENT-2515', name: 'Kevin & Jane Moore', initials: 'KM', stage: 'pending', associateId: 'ASSOC-2402' },
+            // Add more for other associates as needed...
+            { id: 'CLIENT-2516', name: 'Emma Stone', initials: 'ES', stage: 'active', associateId: 'ASSOC-2403' },
+            { id: 'CLIENT-2517', name: 'Robert Lee', initials: 'RL', stage: 'awaiting', associateId: 'ASSOC-2403' },
+            { id: 'CLIENT-2518', name: 'Julia Roberts', initials: 'JR', stage: 'active', associateId: 'ASSOC-2404' },
+            { id: 'CLIENT-2519', name: 'Peter Parker', initials: 'PP', stage: 'pending', associateId: 'ASSOC-2405' },
+            { id: 'CLIENT-2520', name: 'Diana Prince', initials: 'DP', stage: 'active', associateId: 'ASSOC-2406' },
+        ];
+
         // ============================================
         // STATE
         // ============================================
@@ -1632,6 +1829,7 @@
         let selectedAssociate = null;
         let isMobile = window.innerWidth <= 768;
         let currentView = 'dashboard';
+        let currentPipelineFilter = 'all';
 
         // ============================================
         // VIEW NAVIGATION
@@ -1699,6 +1897,91 @@
             `).join('');
         }
 
+        function getAssociateClients(associateId) {
+            return clients.filter(c => c.associateId === associateId);
+        }
+
+        function renderClientMiniCards(associateId, filter = 'all') {
+            const associateClients = getAssociateClients(associateId);
+            const filteredClients = filter === 'all'
+                ? associateClients
+                : associateClients.filter(c => c.stage === filter);
+
+            const grid = document.getElementById('clientMiniGrid');
+            if (!grid) return;
+
+            if (filteredClients.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <div class="empty-state-title">No clients in this stage</div>
+                        <div class="empty-state-text">Select a different filter to see clients</div>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filteredClients.map(client => `
+                <div class="client-mini-card" onclick="openClientPanel('${client.id}')">
+                    <div class="client-mini-header">
+                        <div class="client-mini-avatar">${client.initials}</div>
+                        <div>
+                            <div class="client-mini-name">${client.name}</div>
+                            <div class="client-mini-id">${client.id}</div>
+                        </div>
+                    </div>
+                    <span class="client-mini-stage ${client.stage}">${client.stage.charAt(0).toUpperCase() + client.stage.slice(1)}</span>
+                </div>
+            `).join('');
+        }
+
+        function updatePipelineCounts(associateId) {
+            const associateClients = getAssociateClients(associateId);
+
+            const counts = {
+                all: associateClients.length,
+                awaiting: associateClients.filter(c => c.stage === 'awaiting').length,
+                pending: associateClients.filter(c => c.stage === 'pending').length,
+                active: associateClients.filter(c => c.stage === 'active').length,
+                ending: associateClients.filter(c => c.stage === 'ending').length
+            };
+
+            // Update count badges
+            const countAll = document.getElementById('countAll');
+            const countAwaiting = document.getElementById('countAwaiting');
+            const countPending = document.getElementById('countPending');
+            const countActive = document.getElementById('countActive');
+            const countEnding = document.getElementById('countEnding');
+
+            if (countAll) countAll.textContent = counts.all;
+            if (countAwaiting) countAwaiting.textContent = counts.awaiting;
+            if (countPending) countPending.textContent = counts.pending;
+            if (countActive) countActive.textContent = counts.active;
+            if (countEnding) countEnding.textContent = counts.ending;
+        }
+
+        function filterClients(stage) {
+            currentPipelineFilter = stage;
+
+            // Update active state on pipeline buttons
+            document.querySelectorAll('.pipeline-stage').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.stage === stage) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Re-render client cards with filter
+            if (selectedAssociate) {
+                renderClientMiniCards(selectedAssociate.id, stage);
+            }
+        }
+
+        // Placeholder for client panel (will be implemented in Chunk 4)
+        function openClientPanel(clientId) {
+            console.log('Open client panel for:', clientId);
+            // Will be implemented in Chunk 4: Client Detail Panel + Stacking
+        }
+
         function updatePanelContent(associate) {
             // Desktop panel
             document.getElementById('panelAvatar').textContent = associate.initials;
@@ -1723,6 +2006,17 @@
             // Finance
             document.getElementById('totalEarnings').textContent = associate.totalEarnings;
             document.getElementById('pendingPayout').textContent = associate.pendingPayout;
+
+            // Render client mini cards and update pipeline counts
+            currentPipelineFilter = 'all'; // Reset filter when switching associates
+            updatePipelineCounts(associate.id);
+            renderClientMiniCards(associate.id, 'all');
+
+            // Reset pipeline buttons to 'all'
+            document.querySelectorAll('.pipeline-stage').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.stage === 'all') btn.classList.add('active');
+            });
 
             // Clone content to mobile
             const desktopContent = document.getElementById('tabContent').innerHTML;
