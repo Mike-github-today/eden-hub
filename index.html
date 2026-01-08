@@ -2173,6 +2173,255 @@
             line-height: 1.5;
         }
 
+        /* Post-VAT Mode Styles */
+        .combined-tax-hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 24px 0;
+            flex-wrap: wrap;
+        }
+
+        .tax-hero-item {
+            text-align: center;
+            padding: 16px 24px;
+            background-color: var(--eden-mint);
+            border-radius: var(--radius-standard);
+        }
+
+        .tax-hero-item.total {
+            background-color: var(--eden-green);
+        }
+
+        .tax-hero-item.total .tax-hero-value,
+        .tax-hero-item.total .tax-hero-label {
+            color: var(--pure-white);
+        }
+
+        .tax-hero-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .tax-hero-label {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            margin-top: 4px;
+        }
+
+        .tax-hero-plus,
+        .tax-hero-equals {
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--eden-text-secondary);
+        }
+
+        .vat-rate-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .vat-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .vat-stat {
+            text-align: center;
+            padding: 16px;
+            border-radius: var(--radius-standard);
+        }
+
+        .vat-stat.collected {
+            background-color: var(--eden-green-light);
+        }
+
+        .vat-stat.reclaimable {
+            background-color: #DBEAFE;
+        }
+
+        .vat-stat.owed {
+            background-color: #FEF3C7;
+        }
+
+        .vat-stat-icon {
+            margin-bottom: 8px;
+        }
+
+        .vat-stat.collected .vat-stat-icon {
+            color: var(--eden-green);
+        }
+
+        .vat-stat.reclaimable .vat-stat-icon {
+            color: #3B82F6;
+        }
+
+        .vat-stat.owed .vat-stat-icon {
+            color: #F59E0B;
+        }
+
+        .vat-stat-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .vat-stat-label {
+            font-size: 11px;
+            color: var(--eden-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* Quarterly Schedule */
+        .quarterly-schedule {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quarter-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            transition: all var(--transition-smooth);
+        }
+
+        .quarter-item.completed {
+            background-color: var(--eden-green-light);
+            border-color: var(--eden-green);
+        }
+
+        .quarter-item.current {
+            background-color: #FEF3C7;
+            border-color: #F59E0B;
+        }
+
+        .quarter-item.future {
+            opacity: 0.6;
+        }
+
+        .quarter-marker {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quarter-item.completed .quarter-marker {
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .quarter-item.current .quarter-marker {
+            background-color: #F59E0B;
+        }
+
+        .quarter-item.future .quarter-marker {
+            background-color: var(--eden-border);
+        }
+
+        .quarter-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--pure-white);
+        }
+
+        .quarter-details {
+            flex: 1;
+        }
+
+        .quarter-period {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .quarter-due {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            margin-top: 2px;
+        }
+
+        .quarter-amount {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--eden-text);
+            text-align: right;
+            min-width: 80px;
+        }
+
+        .quarter-status {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            min-width: 90px;
+            text-align: center;
+        }
+
+        .quarter-status.paid {
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .quarter-status.upcoming {
+            background-color: #F59E0B;
+            color: var(--pure-white);
+        }
+
+        .quarter-status.future {
+            background-color: var(--eden-border);
+            color: var(--eden-text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .vat-summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .combined-tax-hero {
+                flex-direction: column;
+            }
+
+            .tax-hero-plus,
+            .tax-hero-equals {
+                transform: rotate(90deg);
+            }
+
+            .quarter-item {
+                flex-wrap: wrap;
+            }
+
+            .quarter-amount {
+                order: 3;
+                width: 100%;
+                text-align: left;
+                margin-top: 8px;
+            }
+
+            .quarter-status {
+                order: 4;
+            }
+        }
+
         /* ============================================
            SCHEDULE / CALENDAR
            ============================================ */
@@ -4011,7 +4260,181 @@
 
                     <!-- Post-VAT Content (Hidden by default) -->
                     <div id="postVatContent" style="display: none;">
-                        <!-- Will be populated in Chunk 4 -->
+                        <!-- Combined Tax Overview -->
+                        <div class="wealth-card">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">Combined Tax Overview</span>
+                            </div>
+                            <div class="combined-tax-hero">
+                                <div class="tax-hero-item">
+                                    <div class="tax-hero-value">£6,324</div>
+                                    <div class="tax-hero-label">Income Tax + NI</div>
+                                </div>
+                                <div class="tax-hero-plus">+</div>
+                                <div class="tax-hero-item">
+                                    <div class="tax-hero-value">£4,752</div>
+                                    <div class="tax-hero-label">VAT Owed</div>
+                                </div>
+                                <div class="tax-hero-equals">=</div>
+                                <div class="tax-hero-item total">
+                                    <div class="tax-hero-value">£11,076</div>
+                                    <div class="tax-hero-label">Total Tax Liability</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- VAT Summary Card -->
+                        <div class="wealth-card">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">VAT Summary</span>
+                                <span class="vat-rate-badge">20% Standard Rate</span>
+                            </div>
+
+                            <div class="vat-summary-grid">
+                                <div class="vat-stat collected">
+                                    <div class="vat-stat-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                                            <polyline points="17 6 23 6 23 12"/>
+                                        </svg>
+                                    </div>
+                                    <div class="vat-stat-value">£6,752</div>
+                                    <div class="vat-stat-label">VAT Collected</div>
+                                </div>
+                                <div class="vat-stat reclaimable">
+                                    <div class="vat-stat-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/>
+                                            <polyline points="17 18 23 18 23 12"/>
+                                        </svg>
+                                    </div>
+                                    <div class="vat-stat-value">−£2,000</div>
+                                    <div class="vat-stat-label">VAT Reclaimable</div>
+                                </div>
+                                <div class="vat-stat owed">
+                                    <div class="vat-stat-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <line x1="12" y1="1" x2="12" y2="23"/>
+                                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                        </svg>
+                                    </div>
+                                    <div class="vat-stat-value">£4,752</div>
+                                    <div class="vat-stat-label">VAT to Pay</div>
+                                </div>
+                            </div>
+
+                            <div class="vat-breakdown">
+                                <div class="section-title" style="margin-top: 20px;">VAT Breakdown</div>
+                                <div class="info-row">
+                                    <span class="info-label">Output VAT (on sales)</span>
+                                    <span class="info-value">£6,752</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Input VAT (on purchases)</span>
+                                    <span class="info-value negative">−£2,000</span>
+                                </div>
+                                <div class="info-row total">
+                                    <span class="info-label">Net VAT Payable</span>
+                                    <span class="info-value">£4,752</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quarterly Payment Schedule -->
+                        <div class="wealth-card">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">Quarterly Payment Schedule</span>
+                            </div>
+
+                            <div class="quarterly-schedule">
+                                <div class="quarter-item completed">
+                                    <div class="quarter-marker">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                    </div>
+                                    <div class="quarter-details">
+                                        <div class="quarter-period">Q1: Apr - Jun 2025</div>
+                                        <div class="quarter-due">Due: 7 Aug 2025</div>
+                                    </div>
+                                    <div class="quarter-amount">£1,420</div>
+                                    <div class="quarter-status paid">Paid</div>
+                                </div>
+
+                                <div class="quarter-item completed">
+                                    <div class="quarter-marker">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                    </div>
+                                    <div class="quarter-details">
+                                        <div class="quarter-period">Q2: Jul - Sep 2025</div>
+                                        <div class="quarter-due">Due: 7 Nov 2025</div>
+                                    </div>
+                                    <div class="quarter-amount">£1,580</div>
+                                    <div class="quarter-status paid">Paid</div>
+                                </div>
+
+                                <div class="quarter-item current">
+                                    <div class="quarter-marker">
+                                        <div class="quarter-dot"></div>
+                                    </div>
+                                    <div class="quarter-details">
+                                        <div class="quarter-period">Q3: Oct - Dec 2025</div>
+                                        <div class="quarter-due">Due: 7 Feb 2026</div>
+                                    </div>
+                                    <div class="quarter-amount">£1,752</div>
+                                    <div class="quarter-status upcoming">Due in 30 days</div>
+                                </div>
+
+                                <div class="quarter-item future">
+                                    <div class="quarter-marker">
+                                        <div class="quarter-dot"></div>
+                                    </div>
+                                    <div class="quarter-details">
+                                        <div class="quarter-period">Q4: Jan - Mar 2026</div>
+                                        <div class="quarter-due">Due: 7 May 2026</div>
+                                    </div>
+                                    <div class="quarter-amount">Est. £1,800</div>
+                                    <div class="quarter-status future">Future</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- VAT Registration Info -->
+                        <div class="wealth-card">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">VAT Registration Status</span>
+                            </div>
+
+                            <div class="vat-reg-info">
+                                <div class="info-row">
+                                    <span class="info-label">VAT Number</span>
+                                    <span class="info-value">GB 123 4567 89</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Registration Date</span>
+                                    <span class="info-value">1 April 2025</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">VAT Scheme</span>
+                                    <span class="info-value">Standard Accounting</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Filing Frequency</span>
+                                    <span class="info-value">Quarterly</span>
+                                </div>
+                            </div>
+
+                            <div class="tax-note" style="margin-top: 16px;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="12" y1="16" x2="12" y2="12"/>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                </svg>
+                                <span>VAT threshold is £90,000. Your current turnover: £40,512</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
