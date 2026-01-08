@@ -3743,6 +3743,232 @@
             }
         }
 
+        /* Contracts View */
+        .contracts-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .contract-stat-card {
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .contract-stat-value {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--eden-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .contract-stat-value.active {
+            color: var(--eden-green);
+        }
+
+        .contract-stat-value.pending {
+            color: var(--alert-amber);
+        }
+
+        .contract-stat-value.expired {
+            color: var(--alert-rose);
+        }
+
+        .contract-stat-label {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        .contracts-filter {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .contracts-filter-btn {
+            padding: 8px 16px;
+            border-radius: 100px;
+            border: 1px solid var(--eden-border);
+            background-color: var(--pure-white);
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .contracts-filter-btn:hover {
+            border-color: var(--eden-green);
+            color: var(--eden-green);
+        }
+
+        .contracts-filter-btn.active {
+            background-color: var(--eden-green);
+            border-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .contracts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 20px;
+        }
+
+        .contract-card {
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 20px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .contract-card:hover {
+            border-color: var(--eden-green);
+            box-shadow: 0 4px 12px rgba(45, 95, 77, 0.1);
+        }
+
+        .contract-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .contract-associate-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contract-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-standard);
+            background-color: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--eden-green);
+            font-size: 16px;
+        }
+
+        .contract-associate-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--eden-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .contract-associate-role {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        .contract-status-badge {
+            padding: 4px 10px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .contract-status-badge.active {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .contract-status-badge.pending {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .contract-status-badge.expired {
+            background-color: #FCE7E7;
+            color: #B91C1C;
+        }
+
+        .contract-card-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .contract-detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .contract-detail-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--eden-text-secondary);
+        }
+
+        .contract-detail-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--eden-text-primary);
+        }
+
+        .contract-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid var(--eden-border);
+        }
+
+        .contract-renewal-info {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .contract-renewal-info.warning {
+            color: var(--alert-amber);
+        }
+
+        .contract-renewal-info.urgent {
+            color: var(--alert-rose);
+        }
+
+        .contract-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: var(--radius-standard);
+            border: none;
+            background-color: var(--eden-surface);
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .contract-action-btn:hover {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        @media (max-width: 768px) {
+            .contracts-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contracts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Add Session Button & Modal */
         .schedule-header {
             display: flex;
@@ -4338,6 +4564,16 @@
                     </svg>
                     <span>Clients</span>
                 </a>
+                <a href="#" class="nav-item" data-view="contracts" onclick="showView('contracts')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                    <span>Contracts</span>
+                </a>
             </nav>
 
             <nav class="nav-section">
@@ -4598,6 +4834,47 @@
                 <!-- All Clients Grid -->
                 <div class="card-grid" id="allClientsGrid">
                     <!-- Client cards will be rendered by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Contracts View -->
+            <div class="view-container" id="contractsView">
+                <header class="page-header">
+                    <h1 class="page-title">Contracts</h1>
+                    <p class="page-subtitle">Associate agreements and documentation</p>
+                </header>
+
+                <!-- Stats Cards -->
+                <div class="contracts-stats" id="contractsStats">
+                    <div class="contract-stat-card">
+                        <div class="contract-stat-value" id="totalContractsCount">6</div>
+                        <div class="contract-stat-label">Total Contracts</div>
+                    </div>
+                    <div class="contract-stat-card">
+                        <div class="contract-stat-value active" id="activeContractsCount">4</div>
+                        <div class="contract-stat-label">Active</div>
+                    </div>
+                    <div class="contract-stat-card">
+                        <div class="contract-stat-value pending" id="pendingContractsCount">1</div>
+                        <div class="contract-stat-label">Pending Signature</div>
+                    </div>
+                    <div class="contract-stat-card">
+                        <div class="contract-stat-value expired" id="expiredContractsCount">1</div>
+                        <div class="contract-stat-label">Expiring Soon</div>
+                    </div>
+                </div>
+
+                <!-- Filter Tabs -->
+                <div class="contracts-filter" id="contractsFilter">
+                    <button class="contracts-filter-btn active" data-filter="all" onclick="filterContracts('all')">All</button>
+                    <button class="contracts-filter-btn" data-filter="active" onclick="filterContracts('active')">Active</button>
+                    <button class="contracts-filter-btn" data-filter="pending" onclick="filterContracts('pending')">Pending</button>
+                    <button class="contracts-filter-btn" data-filter="expired" onclick="filterContracts('expired')">Expiring</button>
+                </div>
+
+                <!-- Contracts Grid -->
+                <div class="contracts-grid" id="contractsGrid">
+                    <!-- Contract cards will be rendered by JavaScript -->
                 </div>
             </div>
 
@@ -7619,6 +7896,233 @@
         document.head.appendChild(toastStyle);
 
         // ============================================
+        // CONTRACTS VIEW FUNCTIONS
+        // ============================================
+
+        const contracts = [
+            {
+                id: 'CON-001',
+                associateId: 'ASSOC-2401',
+                associateName: 'Sarah Johnson',
+                role: 'Counsellor',
+                status: 'active',
+                type: 'Associate Agreement',
+                startDate: '1 Jan 2024',
+                endDate: '31 Dec 2025',
+                feeSplit: '70/30',
+                lastUpdated: '1 Jan 2024',
+                daysUntilRenewal: 358
+            },
+            {
+                id: 'CON-002',
+                associateId: 'ASSOC-2402',
+                associateName: 'David Okonkwo',
+                role: 'Psychotherapist',
+                status: 'active',
+                type: 'Associate Agreement',
+                startDate: '15 Mar 2024',
+                endDate: '14 Mar 2026',
+                feeSplit: '65/35',
+                lastUpdated: '15 Mar 2024',
+                daysUntilRenewal: 431
+            },
+            {
+                id: 'CON-003',
+                associateId: 'ASSOC-2403',
+                associateName: 'Fatima Okafor',
+                role: 'Counsellor',
+                status: 'expired',
+                type: 'Associate Agreement',
+                startDate: '1 Feb 2024',
+                endDate: '31 Jan 2026',
+                feeSplit: '70/30',
+                lastUpdated: '1 Feb 2024',
+                daysUntilRenewal: 23
+            },
+            {
+                id: 'CON-004',
+                associateId: 'ASSOC-2404',
+                associateName: 'Amara Mensah',
+                role: 'Clinical Psychologist',
+                status: 'pending',
+                type: 'Associate Agreement',
+                startDate: '1 Feb 2026',
+                endDate: '31 Jan 2028',
+                feeSplit: '60/40',
+                lastUpdated: '5 Jan 2026',
+                daysUntilRenewal: null
+            },
+            {
+                id: 'CON-005',
+                associateId: 'ASSOC-2405',
+                associateName: 'James Chen',
+                role: 'Counsellor',
+                status: 'active',
+                type: 'Associate Agreement',
+                startDate: '1 Jun 2024',
+                endDate: '31 May 2026',
+                feeSplit: '70/30',
+                lastUpdated: '1 Jun 2024',
+                daysUntilRenewal: 143
+            },
+            {
+                id: 'CON-006',
+                associateId: 'ASSOC-2406',
+                associateName: 'Emma Williams',
+                role: 'Psychotherapist',
+                status: 'active',
+                type: 'Associate Agreement',
+                startDate: '1 Sep 2024',
+                endDate: '31 Aug 2026',
+                feeSplit: '65/35',
+                lastUpdated: '1 Sep 2024',
+                daysUntilRenewal: 235
+            }
+        ];
+
+        let contractsFilter = 'all';
+
+        function renderContractsGrid(filter = 'all') {
+            const grid = document.getElementById('contractsGrid');
+            if (!grid) return;
+
+            contractsFilter = filter;
+
+            // Update filter buttons
+            document.querySelectorAll('.contracts-filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === filter);
+            });
+
+            // Filter contracts
+            let filteredContracts = contracts;
+            if (filter !== 'all') {
+                filteredContracts = contracts.filter(c => c.status === filter);
+            }
+
+            // Update stats
+            updateContractStats();
+
+            if (filteredContracts.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--eden-text-secondary)" stroke-width="1.5" style="margin-bottom: 16px;">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                        </svg>
+                        <p style="color: var(--eden-text-secondary);">No contracts match this filter</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filteredContracts.map(contract => {
+                const initials = contract.associateName.split(' ').map(n => n[0]).join('');
+                const renewalClass = getRenewalClass(contract);
+                const renewalText = getRenewalText(contract);
+
+                return `
+                    <div class="contract-card" onclick="openContractDetail('${contract.id}')">
+                        <div class="contract-card-header">
+                            <div class="contract-associate-info">
+                                <div class="contract-avatar">${initials}</div>
+                                <div>
+                                    <div class="contract-associate-name">${contract.associateName}</div>
+                                    <div class="contract-associate-role">${contract.role}</div>
+                                </div>
+                            </div>
+                            <span class="contract-status-badge ${contract.status}">${getStatusLabel(contract.status)}</span>
+                        </div>
+                        <div class="contract-card-details">
+                            <div class="contract-detail-item">
+                                <span class="contract-detail-label">Contract Type</span>
+                                <span class="contract-detail-value">${contract.type}</span>
+                            </div>
+                            <div class="contract-detail-item">
+                                <span class="contract-detail-label">Fee Split</span>
+                                <span class="contract-detail-value">${contract.feeSplit}</span>
+                            </div>
+                            <div class="contract-detail-item">
+                                <span class="contract-detail-label">Start Date</span>
+                                <span class="contract-detail-value">${contract.startDate}</span>
+                            </div>
+                            <div class="contract-detail-item">
+                                <span class="contract-detail-label">End Date</span>
+                                <span class="contract-detail-value">${contract.endDate}</span>
+                            </div>
+                        </div>
+                        <div class="contract-card-footer">
+                            <span class="contract-renewal-info ${renewalClass}">${renewalText}</span>
+                            <button class="contract-action-btn" onclick="event.stopPropagation(); viewContractPDF('${contract.id}')">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                </svg>
+                                View PDF
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateContractStats() {
+            const total = contracts.length;
+            const active = contracts.filter(c => c.status === 'active').length;
+            const pending = contracts.filter(c => c.status === 'pending').length;
+            const expiring = contracts.filter(c => c.status === 'expired' || (c.daysUntilRenewal !== null && c.daysUntilRenewal <= 30)).length;
+
+            document.getElementById('totalContractsCount').textContent = total;
+            document.getElementById('activeContractsCount').textContent = active;
+            document.getElementById('pendingContractsCount').textContent = pending;
+            document.getElementById('expiredContractsCount').textContent = expiring;
+        }
+
+        function getStatusLabel(status) {
+            const labels = {
+                'active': 'Active',
+                'pending': 'Pending',
+                'expired': 'Expiring'
+            };
+            return labels[status] || status;
+        }
+
+        function getRenewalClass(contract) {
+            if (contract.status === 'pending') return '';
+            if (contract.daysUntilRenewal === null) return '';
+            if (contract.daysUntilRenewal <= 14) return 'urgent';
+            if (contract.daysUntilRenewal <= 30) return 'warning';
+            return '';
+        }
+
+        function getRenewalText(contract) {
+            if (contract.status === 'pending') return 'Awaiting signature';
+            if (contract.daysUntilRenewal === null) return '';
+            if (contract.daysUntilRenewal <= 0) return 'Expired';
+            if (contract.daysUntilRenewal === 1) return 'Renews tomorrow';
+            if (contract.daysUntilRenewal <= 30) return `Renews in ${contract.daysUntilRenewal} days`;
+            return `Renews ${contract.endDate}`;
+        }
+
+        function filterContracts(filter) {
+            renderContractsGrid(filter);
+        }
+
+        function openContractDetail(contractId) {
+            // This will be implemented in Chunk 5
+            const contract = contracts.find(c => c.id === contractId);
+            if (contract) {
+                alert(`Contract details for ${contract.associateName} (${contract.id})\n\nThis will open a detailed view in Chunk 5.`);
+            }
+        }
+
+        function viewContractPDF(contractId) {
+            const contract = contracts.find(c => c.id === contractId);
+            if (contract) {
+                showToast(`Opening PDF for ${contract.associateName}'s contract`);
+            }
+        }
+
+        // ============================================
         // ALL CLIENTS VIEW FUNCTIONS
         // ============================================
 
@@ -8325,6 +8829,7 @@
             // Initialize new views
             renderFrictionFeed();
             renderAllClientsGrid();
+            renderContractsGrid();
             renderCalendar();
             renderCpdActivities();
 
