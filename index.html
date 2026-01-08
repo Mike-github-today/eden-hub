@@ -2423,6 +2423,230 @@
         }
 
         /* ============================================
+           PAYOUT COCKPIT
+           ============================================ */
+
+        .payout-count-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .payout-summary-row {
+            display: flex;
+            gap: 24px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--eden-border);
+        }
+
+        .payout-summary-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .payout-summary-value {
+            display: block;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .payout-summary-label {
+            display: block;
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            margin-top: 4px;
+        }
+
+        .payout-filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .payout-filter-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--eden-border);
+            background-color: var(--pure-white);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--eden-text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .payout-filter-btn:hover {
+            border-color: var(--eden-green);
+            color: var(--eden-green);
+        }
+
+        .payout-filter-btn.active {
+            background-color: var(--eden-green);
+            border-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .filter-count {
+            margin-left: 4px;
+            opacity: 0.8;
+        }
+
+        .payout-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .payout-card {
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 16px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .payout-card:hover {
+            border-color: var(--eden-green);
+            box-shadow: 0 4px 12px rgba(45, 95, 77, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .payout-card.overdue {
+            border-left: 4px solid var(--alert-rose);
+        }
+
+        .payout-card.pending {
+            border-left: 4px solid var(--alert-amber);
+        }
+
+        .payout-card.paid {
+            border-left: 4px solid var(--eden-green);
+            opacity: 0.8;
+        }
+
+        .payout-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .payout-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-green);
+            flex-shrink: 0;
+        }
+
+        .payout-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .payout-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .payout-id {
+            font-size: 11px;
+            color: var(--eden-text-secondary);
+            font-family: monospace;
+        }
+
+        .payout-status {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .payout-status.overdue {
+            background-color: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .payout-status.pending {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .payout-status.paid {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .payout-card-body {
+            padding: 8px 0;
+        }
+
+        .payout-amount {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 4px;
+        }
+
+        .payout-details {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .payout-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: var(--eden-text-secondary);
+        }
+
+        .payout-card-footer {
+            padding-top: 12px;
+            border-top: 1px solid var(--eden-border);
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        .overdue-warning {
+            color: var(--alert-rose);
+            font-weight: 500;
+        }
+
+        .due-soon {
+            color: var(--alert-amber);
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .payout-summary-row {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .payout-cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============================================
            SCHEDULE / CALENDAR
            ============================================ */
 
@@ -4440,7 +4664,203 @@
 
                 <!-- Payout Cockpit View -->
                 <div class="wealth-view" id="payoutsView">
-                    <!-- Content will be added in Chunks 5-6 -->
+                    <!-- Payout Overview Content -->
+                    <div id="payoutOverviewContent">
+                        <!-- Pending Payouts Hero -->
+                        <div class="wealth-card payout-hero">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">Pending Payouts</span>
+                                <span class="payout-count-badge">2 pending</span>
+                            </div>
+                            <div class="wealth-hero-value">£2,890</div>
+                            <div class="wealth-hero-label">Total owed to associates this month</div>
+
+                            <div class="payout-summary-row">
+                                <div class="payout-summary-item">
+                                    <span class="payout-summary-value">£1,420</span>
+                                    <span class="payout-summary-label">Due this week</span>
+                                </div>
+                                <div class="payout-summary-item">
+                                    <span class="payout-summary-value">£1,470</span>
+                                    <span class="payout-summary-label">Due later</span>
+                                </div>
+                                <div class="payout-summary-item">
+                                    <span class="payout-summary-value">£4,230</span>
+                                    <span class="payout-summary-label">Paid this month</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Filter Tabs -->
+                        <div class="payout-filters">
+                            <button class="payout-filter-btn active" data-filter="all" onclick="filterPayouts('all')">
+                                All <span class="filter-count">7</span>
+                            </button>
+                            <button class="payout-filter-btn" data-filter="pending" onclick="filterPayouts('pending')">
+                                Pending <span class="filter-count">2</span>
+                            </button>
+                            <button class="payout-filter-btn" data-filter="overdue" onclick="filterPayouts('overdue')">
+                                Overdue <span class="filter-count">1</span>
+                            </button>
+                            <button class="payout-filter-btn" data-filter="paid" onclick="filterPayouts('paid')">
+                                Paid <span class="filter-count">4</span>
+                            </button>
+                        </div>
+
+                        <!-- Associate Payout Cards Grid -->
+                        <div class="payout-cards-grid" id="payoutCardsGrid">
+                            <!-- Overdue Card -->
+                            <div class="payout-card overdue" data-status="overdue" onclick="openPayoutDetail('sarah-chen')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">SC</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name">Sarah Chen</div>
+                                        <div class="payout-id">EDEN-A002</div>
+                                    </div>
+                                    <span class="payout-status overdue">Overdue</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£890</div>
+                                    <div class="payout-details">
+                                        <span>12 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Due 3 Jan</span>
+                                    </div>
+                                </div>
+                                <div class="payout-card-footer">
+                                    <span class="overdue-warning">5 days overdue</span>
+                                </div>
+                            </div>
+
+                            <!-- Pending Card 1 -->
+                            <div class="payout-card pending" data-status="pending" onclick="openPayoutDetail('james-wilson')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">JW</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name">James Wilson</div>
+                                        <div class="payout-id">EDEN-A003</div>
+                                    </div>
+                                    <span class="payout-status pending">Pending</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£1,420</div>
+                                    <div class="payout-details">
+                                        <span>18 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Due 10 Jan</span>
+                                    </div>
+                                </div>
+                                <div class="payout-card-footer">
+                                    <span class="due-soon">Due in 2 days</span>
+                                </div>
+                            </div>
+
+                            <!-- Pending Card 2 -->
+                            <div class="payout-card pending" data-status="pending" onclick="openPayoutDetail('emma-thompson')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">ET</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name">Emma Thompson</div>
+                                        <div class="payout-id">EDEN-A004</div>
+                                    </div>
+                                    <span class="payout-status pending">Pending</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£580</div>
+                                    <div class="payout-details">
+                                        <span>8 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Due 15 Jan</span>
+                                    </div>
+                                </div>
+                                <div class="payout-card-footer">
+                                    <span>Due in 7 days</span>
+                                </div>
+                            </div>
+
+                            <!-- Paid Cards -->
+                            <div class="payout-card paid" data-status="paid" onclick="openPayoutDetail('michael-brown')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">MB</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name">Michael Brown</div>
+                                        <div class="payout-id">EDEN-A005</div>
+                                    </div>
+                                    <span class="payout-status paid">Paid</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£1,250</div>
+                                    <div class="payout-details">
+                                        <span>16 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Paid 5 Jan</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payout-card paid" data-status="paid" onclick="openPayoutDetail('lisa-patel')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">LP</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name">Lisa Patel</div>
+                                        <div class="payout-id">EDEN-A006</div>
+                                    </div>
+                                    <span class="payout-status paid">Paid</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£980</div>
+                                    <div class="payout-details">
+                                        <span>14 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Paid 5 Jan</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payout-card paid" data-status="paid" onclick="openPayoutDetail('david-kim')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">DK</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name">David Kim</div>
+                                        <div class="payout-id">EDEN-A007</div>
+                                    </div>
+                                    <span class="payout-status paid">Paid</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£1,100</div>
+                                    <div class="payout-details">
+                                        <span>15 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Paid 3 Jan</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payout-card paid" data-status="paid" onclick="openPayoutDetail('rachel-green')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">RG</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name">Rachel Green</div>
+                                        <div class="payout-id">EDEN-A001</div>
+                                    </div>
+                                    <span class="payout-status paid">Paid</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£900</div>
+                                    <div class="payout-details">
+                                        <span>12 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Paid 2 Jan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payout Detail Content (Hidden by default) -->
+                    <div id="payoutDetailContent" style="display: none;">
+                        <!-- Will be populated in Chunk 6 -->
+                    </div>
                 </div>
 
                 <!-- Wealth Lab View -->
@@ -5613,6 +6033,39 @@
                 postContent.style.display = 'none';
                 preContent.style.display = 'block';
             }
+        }
+
+        // ============================================
+        // PAYOUT COCKPIT FUNCTIONS
+        // ============================================
+
+        let currentPayoutFilter = 'all';
+
+        function filterPayouts(filter) {
+            currentPayoutFilter = filter;
+
+            // Update active button
+            document.querySelectorAll('.payout-filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === filter) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Filter cards
+            document.querySelectorAll('.payout-card').forEach(card => {
+                const status = card.dataset.status;
+                if (filter === 'all' || status === filter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openPayoutDetail(associateId) {
+            // Placeholder - will be implemented in Chunk 6
+            console.log('Opening payout detail for:', associateId);
         }
 
         // ============================================
