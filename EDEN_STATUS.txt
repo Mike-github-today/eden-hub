@@ -2,48 +2,47 @@
 EDEN HUB — PROJECT STATUS
 ================================================================================
 Last Updated: 8 January 2026
-Session: Phase 1 Chunks 5-10 Complete
+Session: Phase 2 Chunks 1-4 Complete
 
 ================================================================================
 CURRENT STATE
 ================================================================================
 Repository: Eden Hub
-Phase: 1 — Foundation (COMPLETE)
-Status: All Phase 1 views implemented and functional
+Phase: 2 — Financial Vitality Hub (IN PROGRESS)
+Status: Chunks 1-4 complete, awaiting approval for chunks 5-8
 
 ================================================================================
 WHAT WAS COMPLETED THIS SESSION
 ================================================================================
-Chunks 5-10 implemented:
+Phase 2 Chunks 1-4 implemented:
 
-1. ACTION CENTRE VIEW (Friction Feed)
-   - Amber/Rose/Blue alert level styling
-   - Mock friction items (insurance renewal, contracts, invoices)
-   - "All Clear" state when no pending actions
+1. WEALTH MODULE PANEL INFRASTRUCTURE
+   - Full-screen slide-in panel for module views
+   - Back button navigation to Earnings
+   - Shared CSS for wealth cards, stats grids, toggles, bar charts
+   - View containers for all 4 modules
 
-2. CLIENTS VIEW (Standalone Directory)
-   - All clients across practice displayed
-   - Pipeline filter (All/Awaiting/Pending/Active/Ending)
-   - Click-through to associate panel for client details
+2. CASH DENSITY (3-Month Projection)
+   - Hero card with projected cash total
+   - Month stats grid (Jan/Feb/Mar)
+   - Bar chart visualization with actual vs projected
+   - Safe threshold indicator line at £10k
+   - Detailed monthly breakdown cards with income/expenses
 
-3. EARNINGS VIEW (Finance Gateway)
-   - True Cash hero card with breakdown
-   - Wealth Hub module cards (Cash Density, Tax Intel, Payouts, Wealth Lab)
-   - Pre-VAT badge on Tax Intelligence
+3. TAX INTELLIGENCE (Pre-VAT Mode)
+   - VAT mode toggle switch
+   - Tax reserve hero card with progress meter
+   - Health badges (healthy/warning/danger)
+   - Income summary with source breakdown
+   - Tax liability calculation (Personal Allowance, Basic Rate, NI)
+   - Reserve health status card
 
-4. SCHEDULE VIEW (Calendar)
-   - Interactive monthly calendar with navigation
-   - Session indicators on days
-   - Today's sessions list
-
-5. CPD VIEW
-   - Progress ring showing 24/30 hours completed
-   - Category breakdown cards
-   - Recent activities list
-
-6. SUPPORT VIEW
-   - Quick links grid (Handbook, Booking, Contact, FAQs)
-   - Emergency contacts section
+4. TAX INTELLIGENCE (Post-VAT Mode)
+   - Combined tax overview (Income Tax + VAT = Total)
+   - VAT summary with collected/reclaimable/owed
+   - Quarterly payment schedule timeline
+   - VAT registration info card
+   - Responsive mobile styles
 
 ================================================================================
 CUMULATIVE PROGRESS
@@ -60,32 +59,30 @@ Phase 1 Chunks Completed:
 - [x] Chunk 9: CPD View
 - [x] Chunk 10: Support View
 
-================================================================================
-PHASE 1 DELIVERABLES (COMPLETE)
-================================================================================
-- [x] Eden Calm styling (no grey, mint/green palette)
-- [x] Outlined leaf logo
-- [x] Adaptive layout (responsive breakpoints)
-- [x] ID Card grid (7 associates with mock data)
-- [x] 5-tab detail panels (Contact, Sessions, Contracts, Finance, Inbox)
-- [x] Nested client mini-cards with pipeline stages
-- [x] Side Panel (desktop) / Bottom Sheet (mobile)
-- [x] Full navigation across all 7 modules
+Phase 2 Chunks Completed:
+- [x] Chunk 1: Wealth Module Panel Infrastructure
+- [x] Chunk 2: Cash Density - 3-Month Projection
+- [x] Chunk 3: Tax Intelligence - Pre-VAT Mode
+- [x] Chunk 4: Tax Intelligence - Post-VAT Mode
+- [ ] Chunk 5: Payout Cockpit - Overview Grid
+- [ ] Chunk 6: Payout Cockpit - Associate Detail
+- [ ] Chunk 7: Wealth Lab - Simulator UI
+- [ ] Chunk 8: Wealth Lab - Calculation Logic
 
 ================================================================================
-NEXT PHASE (Phase 2)
+NEXT STEPS (Awaiting Approval)
 ================================================================================
-Financial Vitality Hub detailed modules:
-- Cash Density 3-month projection
-- Tax Intelligence (Pre-VAT and Post-VAT modes)
-- Payout Cockpit with individual associate cards
-- Wealth Lab Simulator
+Phase 2 Chunks 5-8:
+- Payout Cockpit overview with pending payouts summary
+- Associate payout detail cards with payment history
+- Wealth Lab simulator UI with input controls
+- Wealth Lab calculation logic with projections
 
 ================================================================================
 BRANCH STATUS
 ================================================================================
-Current branch: claude/implement-portal-chunks-lCENP
+Current branch: claude/continue-phase-1-chunks-nUQuy
 Changes pushed: Yes
-PR required to merge to main
+Commits this session: 4
 
 ================================================================================
