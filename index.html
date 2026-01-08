@@ -3458,6 +3458,291 @@
             }
         }
 
+        /* Resolution Drawer */
+        .resolution-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 440px;
+            max-width: 100%;
+            background-color: var(--pure-white);
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+            z-index: 260;
+            transform: translateX(100%);
+            transition: transform var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .resolution-drawer.open {
+            transform: translateX(0);
+        }
+
+        .resolution-drawer-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--eden-border);
+        }
+
+        .resolution-drawer-header.amber {
+            background: linear-gradient(135deg, #FEF3C7 0%, var(--pure-white) 100%);
+        }
+
+        .resolution-drawer-header.rose {
+            background: linear-gradient(135deg, #FCE7E7 0%, var(--pure-white) 100%);
+        }
+
+        .resolution-drawer-header.blue {
+            background: linear-gradient(135deg, #E0F2FE 0%, var(--pure-white) 100%);
+        }
+
+        .resolution-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border: none;
+            background: transparent;
+            color: var(--eden-text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 16px;
+            border-radius: var(--radius-standard);
+            transition: all var(--transition-smooth);
+        }
+
+        .resolution-back:hover {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .resolution-type-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .resolution-type-badge.amber {
+            background-color: var(--alert-amber);
+            color: #92400E;
+        }
+
+        .resolution-type-badge.rose {
+            background-color: var(--alert-rose);
+            color: #B91C1C;
+        }
+
+        .resolution-type-badge.blue {
+            background-color: var(--alert-blue);
+            color: #1E40AF;
+        }
+
+        .resolution-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--eden-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .resolution-description {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+            line-height: 1.5;
+        }
+
+        .resolution-drawer-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px 20px;
+        }
+
+        .resolution-section {
+            margin-bottom: 28px;
+        }
+
+        .resolution-section-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--eden-text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .resolution-info-card {
+            background-color: var(--eden-surface);
+            border-radius: var(--radius-standard);
+            padding: 16px;
+        }
+
+        .resolution-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--eden-border);
+        }
+
+        .resolution-info-row:last-child {
+            border-bottom: none;
+        }
+
+        .resolution-info-label {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        .resolution-info-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--eden-text-primary);
+        }
+
+        .resolution-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .resolution-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 16px;
+            border-radius: var(--radius-standard);
+            border: 1px solid var(--eden-border);
+            background-color: var(--pure-white);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            text-align: left;
+        }
+
+        .resolution-action-btn:hover {
+            border-color: var(--eden-green);
+            background-color: var(--eden-green-light);
+        }
+
+        .resolution-action-btn.primary {
+            border-color: var(--eden-green);
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .resolution-action-btn.primary:hover {
+            background-color: var(--eden-green-hover);
+        }
+
+        .resolution-action-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-standard);
+            background-color: var(--eden-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .resolution-action-btn.primary .resolution-action-icon {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .resolution-action-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .resolution-action-text {
+            flex: 1;
+        }
+
+        .resolution-action-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .resolution-action-btn.primary .resolution-action-title {
+            color: var(--pure-white);
+        }
+
+        .resolution-action-desc {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .resolution-action-btn.primary .resolution-action-desc {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .resolution-drawer-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--eden-border);
+            background-color: var(--eden-surface);
+        }
+
+        .resolution-footer-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .resolution-snooze-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: var(--radius-standard);
+            border: 1px solid var(--eden-border);
+            background-color: var(--pure-white);
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .resolution-snooze-btn:hover {
+            border-color: var(--eden-green);
+            color: var(--eden-green);
+        }
+
+        .resolution-resolve-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: var(--radius-standard);
+            border: none;
+            background-color: var(--eden-green);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--pure-white);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .resolution-resolve-btn:hover {
+            background-color: var(--eden-green-hover);
+        }
+
+        @media (max-width: 768px) {
+            .resolution-drawer {
+                width: 100%;
+            }
+        }
+
         /* Add Session Button & Modal */
         .schedule-header {
             display: flex;
@@ -4227,6 +4512,60 @@
                     </div>
                     <h2 class="all-clear-title">All Clear!</h2>
                     <p class="all-clear-text">No pending actions. Everything is running smoothly.</p>
+                </div>
+
+                <!-- Resolution Drawer -->
+                <div class="resolution-drawer" id="resolutionDrawer">
+                    <div class="resolution-drawer-header" id="resolutionHeader">
+                        <button class="resolution-back" onclick="closeResolutionDrawer()">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <polyline points="15 18 9 12 15 6"/>
+                            </svg>
+                            Back to Action Centre
+                        </button>
+                        <div class="resolution-type-badge" id="resolutionBadge">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="8" x2="12" y2="12"/>
+                                <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                            <span id="resolutionBadgeText">Action Required</span>
+                        </div>
+                        <h3 class="resolution-title" id="resolutionTitle">Item Title</h3>
+                        <p class="resolution-description" id="resolutionDescription">Item description goes here</p>
+                    </div>
+                    <div class="resolution-drawer-content">
+                        <div class="resolution-section">
+                            <div class="resolution-section-title">Details</div>
+                            <div class="resolution-info-card" id="resolutionDetails">
+                                <!-- Details will be populated dynamically -->
+                            </div>
+                        </div>
+
+                        <div class="resolution-section">
+                            <div class="resolution-section-title">Available Actions</div>
+                            <div class="resolution-actions" id="resolutionActions">
+                                <!-- Actions will be populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="resolution-drawer-footer">
+                        <div class="resolution-footer-actions">
+                            <button class="resolution-snooze-btn" onclick="snoozeItem()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                                Snooze 7 Days
+                            </button>
+                            <button class="resolution-resolve-btn" onclick="markAsResolved()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                Mark Resolved
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -7007,7 +7346,7 @@
             allClear.style.display = 'none';
 
             feed.innerHTML = frictionItems.map(item => `
-                <div class="friction-item ${item.type}">
+                <div class="friction-item ${item.type}" onclick="openResolutionDrawer('${item.id}')">
                     <div class="friction-icon ${item.type}">
                         ${getFrictionIcon(item.icon)}
                     </div>
@@ -7021,7 +7360,7 @@
                             ${item.amount ? `<span>Amount: ${item.amount}</span>` : ''}
                         </div>
                     </div>
-                    <button class="friction-action">${item.action}</button>
+                    <button class="friction-action" onclick="event.stopPropagation(); openResolutionDrawer('${item.id}')">${item.action}</button>
                 </div>
             `).join('');
         }
@@ -7035,6 +7374,249 @@
             };
             return icons[iconName] || icons['alert-circle'];
         }
+
+        // Resolution Drawer State
+        let currentResolutionItem = null;
+
+        function openResolutionDrawer(itemId) {
+            const item = frictionItems.find(i => i.id === itemId);
+            if (!item) return;
+
+            currentResolutionItem = item;
+
+            const drawer = document.getElementById('resolutionDrawer');
+            const header = document.getElementById('resolutionHeader');
+            const badge = document.getElementById('resolutionBadge');
+            const badgeText = document.getElementById('resolutionBadgeText');
+            const title = document.getElementById('resolutionTitle');
+            const description = document.getElementById('resolutionDescription');
+            const details = document.getElementById('resolutionDetails');
+            const actions = document.getElementById('resolutionActions');
+
+            // Set header color
+            header.className = `resolution-drawer-header ${item.type}`;
+            badge.className = `resolution-type-badge ${item.type}`;
+
+            // Set badge text based on type
+            const typeLabels = {
+                'amber': 'Attention Needed',
+                'rose': 'Urgent',
+                'blue': 'Info'
+            };
+            badgeText.textContent = typeLabels[item.type] || 'Action Required';
+
+            // Set title and description
+            title.textContent = item.title;
+            description.textContent = item.description;
+
+            // Build details card
+            let detailsHtml = '';
+            if (item.associate) {
+                detailsHtml += `
+                    <div class="resolution-info-row">
+                        <span class="resolution-info-label">Associate</span>
+                        <span class="resolution-info-value">${item.associate}</span>
+                    </div>`;
+            }
+            if (item.client) {
+                detailsHtml += `
+                    <div class="resolution-info-row">
+                        <span class="resolution-info-label">Client</span>
+                        <span class="resolution-info-value">${item.client}</span>
+                    </div>`;
+            }
+            if (item.dueDate) {
+                detailsHtml += `
+                    <div class="resolution-info-row">
+                        <span class="resolution-info-label">Due Date</span>
+                        <span class="resolution-info-value">${item.dueDate}</span>
+                    </div>`;
+            }
+            if (item.amount) {
+                detailsHtml += `
+                    <div class="resolution-info-row">
+                        <span class="resolution-info-label">Amount</span>
+                        <span class="resolution-info-value">${item.amount}</span>
+                    </div>`;
+            }
+            detailsHtml += `
+                <div class="resolution-info-row">
+                    <span class="resolution-info-label">Reference</span>
+                    <span class="resolution-info-value">${item.id}</span>
+                </div>`;
+            details.innerHTML = detailsHtml;
+
+            // Build action buttons based on item type
+            actions.innerHTML = getResolutionActions(item);
+
+            // Open drawer
+            drawer.classList.add('open');
+        }
+
+        function getResolutionActions(item) {
+            const actionConfigs = {
+                'Send Reminder': {
+                    primary: { icon: 'send', title: 'Send Email Reminder', desc: 'Send an automated reminder email' },
+                    secondary: [
+                        { icon: 'phone', title: 'Call Associate', desc: 'Log a phone call reminder' },
+                        { icon: 'message', title: 'Send SMS', desc: 'Send a text message reminder' }
+                    ]
+                },
+                'Resend Contract': {
+                    primary: { icon: 'file-text', title: 'Resend Contract', desc: 'Email the contract for e-signature' },
+                    secondary: [
+                        { icon: 'download', title: 'Download PDF', desc: 'Download contract for manual signing' },
+                        { icon: 'phone', title: 'Call Associate', desc: 'Discuss contract over the phone' }
+                    ]
+                },
+                'View Invoice': {
+                    primary: { icon: 'credit-card', title: 'Send Payment Reminder', desc: 'Email invoice with payment link' },
+                    secondary: [
+                        { icon: 'file-text', title: 'View Invoice', desc: 'Open invoice in detail view' },
+                        { icon: 'phone', title: 'Call Client', desc: 'Follow up on payment by phone' }
+                    ]
+                }
+            };
+
+            const config = actionConfigs[item.action] || {
+                primary: { icon: 'check', title: item.action, desc: 'Complete this action' },
+                secondary: []
+            };
+
+            let html = `
+                <button class="resolution-action-btn primary" onclick="performAction('${item.action}')">
+                    <div class="resolution-action-icon">
+                        ${getActionIcon(config.primary.icon)}
+                    </div>
+                    <div class="resolution-action-text">
+                        <div class="resolution-action-title">${config.primary.title}</div>
+                        <div class="resolution-action-desc">${config.primary.desc}</div>
+                    </div>
+                </button>`;
+
+            config.secondary.forEach(action => {
+                html += `
+                    <button class="resolution-action-btn" onclick="performAction('${action.title}')">
+                        <div class="resolution-action-icon">
+                            ${getActionIcon(action.icon)}
+                        </div>
+                        <div class="resolution-action-text">
+                            <div class="resolution-action-title">${action.title}</div>
+                            <div class="resolution-action-desc">${action.desc}</div>
+                        </div>
+                    </button>`;
+            });
+
+            return html;
+        }
+
+        function getActionIcon(iconName) {
+            const icons = {
+                'send': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>',
+                'phone': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+                'message': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+                'file-text': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+                'download': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>',
+                'credit-card': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>',
+                'check': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>'
+            };
+            return icons[iconName] || icons['check'];
+        }
+
+        function performAction(actionName) {
+            if (!currentResolutionItem) return;
+
+            // Show feedback
+            alert(`Action "${actionName}" triggered for ${currentResolutionItem.id}`);
+
+            // In a real app, this would trigger an API call
+            // For now, we just close the drawer and mark as resolved
+        }
+
+        function closeResolutionDrawer() {
+            const drawer = document.getElementById('resolutionDrawer');
+            drawer.classList.remove('open');
+            currentResolutionItem = null;
+        }
+
+        function snoozeItem() {
+            if (!currentResolutionItem) return;
+
+            // Remove item from array
+            const index = frictionItems.findIndex(i => i.id === currentResolutionItem.id);
+            if (index > -1) {
+                frictionItems.splice(index, 1);
+            }
+
+            // Close drawer
+            closeResolutionDrawer();
+
+            // Re-render the feed
+            renderFrictionFeed();
+
+            // Show feedback
+            showToast('Snoozed for 7 days');
+        }
+
+        function markAsResolved() {
+            if (!currentResolutionItem) return;
+
+            // Remove item from array
+            const index = frictionItems.findIndex(i => i.id === currentResolutionItem.id);
+            if (index > -1) {
+                frictionItems.splice(index, 1);
+            }
+
+            // Close drawer
+            closeResolutionDrawer();
+
+            // Re-render the feed
+            renderFrictionFeed();
+
+            // Show feedback
+            showToast('Marked as resolved');
+        }
+
+        function showToast(message) {
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 24px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: var(--eden-green);
+                color: white;
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 500;
+                z-index: 1000;
+                animation: slideUp 0.3s ease;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            // Remove after 2 seconds
+            setTimeout(() => {
+                toast.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 2000);
+        }
+
+        // Add toast animations to head
+        const toastStyle = document.createElement('style');
+        toastStyle.textContent = `
+            @keyframes slideUp {
+                from { transform: translate(-50%, 20px); opacity: 0; }
+                to { transform: translate(-50%, 0); opacity: 1; }
+            }
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(toastStyle);
 
         // ============================================
         // ALL CLIENTS VIEW FUNCTIONS
