@@ -6804,6 +6804,91 @@
         }
 
         // ============================================
+        // WEALTH LAB SIMULATOR FUNCTIONS
+        // ============================================
+
+        const simulatorDefaults = {
+            sessions: 25,
+            rate: 75,
+            split: 40,
+            overheads: 800,
+            taxRate: 25
+        };
+
+        function formatCurrency(value) {
+            return '£' + value.toLocaleString('en-GB', { maximumFractionDigits: 0 });
+        }
+
+        function updateSimulator() {
+            // Get input values
+            const sessions = parseInt(document.getElementById('sessionsSlider').value);
+            const rate = parseInt(document.getElementById('rateSlider').value);
+            const split = parseInt(document.getElementById('splitSlider').value);
+            const overheads = parseInt(document.getElementById('overheadsSlider').value);
+            const taxRate = parseInt(document.getElementById('taxRateSlider').value);
+
+            // Update displayed values
+            document.getElementById('sessionsValue').textContent = sessions;
+            document.getElementById('rateValue').textContent = formatCurrency(rate);
+            document.getElementById('splitValue').textContent = split + '%';
+            document.getElementById('overheadsValue').textContent = formatCurrency(overheads);
+            document.getElementById('taxRateValue').textContent = taxRate + '%';
+
+            // Calculate monthly values (4.33 weeks per month)
+            const weeksPerMonth = 4.33;
+            const grossRevenue = sessions * rate * weeksPerMonth;
+            const practiceShareAmount = grossRevenue * (split / 100);
+            const netToPractice = grossRevenue - practiceShareAmount;
+            const taxReserveAmount = netToPractice * (taxRate / 100);
+            const trueCash = netToPractice - overheads - taxReserveAmount;
+
+            // Update results display
+            document.getElementById('grossRevenue').textContent = formatCurrency(grossRevenue);
+            document.getElementById('practiceShare').textContent = '−' + formatCurrency(practiceShareAmount);
+            document.getElementById('netToPractice').textContent = formatCurrency(netToPractice);
+            document.getElementById('overheadsResult').textContent = '−' + formatCurrency(overheads);
+            document.getElementById('taxReserveResult').textContent = '−' + formatCurrency(taxReserveAmount);
+            document.getElementById('trueCashResult').textContent = formatCurrency(trueCash);
+
+            // Update hero value
+            document.getElementById('projectedIncome').textContent = formatCurrency(trueCash);
+
+            // Update projections
+            document.getElementById('projection3m').textContent = formatCurrency(trueCash * 3);
+            document.getElementById('projection6m').textContent = formatCurrency(trueCash * 6);
+            document.getElementById('projection12m').textContent = formatCurrency(trueCash * 12);
+
+            // Update dynamic label for practice share
+            const practiceShareLabel = document.querySelector('#practiceShare').closest('.results-row').querySelector('.results-label');
+            if (practiceShareLabel) {
+                practiceShareLabel.textContent = `Practice Share (${split}%)`;
+            }
+
+            // Update dynamic label for tax reserve
+            const taxReserveLabel = document.querySelector('#taxReserveResult').closest('.results-row').querySelector('.results-label');
+            if (taxReserveLabel) {
+                taxReserveLabel.textContent = `Tax Reserve (${taxRate}%)`;
+            }
+        }
+
+        function resetSimulator() {
+            // Reset sliders to defaults
+            document.getElementById('sessionsSlider').value = simulatorDefaults.sessions;
+            document.getElementById('rateSlider').value = simulatorDefaults.rate;
+            document.getElementById('splitSlider').value = simulatorDefaults.split;
+            document.getElementById('overheadsSlider').value = simulatorDefaults.overheads;
+            document.getElementById('taxRateSlider').value = simulatorDefaults.taxRate;
+
+            // Recalculate
+            updateSimulator();
+        }
+
+        function initSimulator() {
+            // Initialize with default values
+            updateSimulator();
+        }
+
+        // ============================================
         // INITIALIZATION
         // ============================================
 
@@ -6818,6 +6903,9 @@
             renderAllClientsGrid();
             renderCalendar();
             renderCpdActivities();
+
+            // Initialize Phase 2 modules
+            initSimulator();
 
             // Handle window resize
             window.addEventListener('resize', handleResize);
