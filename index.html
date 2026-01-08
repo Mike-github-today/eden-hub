@@ -3969,6 +3969,292 @@
             }
         }
 
+        /* Contract Detail Panel */
+        .contract-detail-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 480px;
+            max-width: 100%;
+            background-color: var(--pure-white);
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+            z-index: 260;
+            transform: translateX(100%);
+            transition: transform var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contract-detail-panel.open {
+            transform: translateX(0);
+        }
+
+        .contract-detail-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--eden-border);
+            background-color: var(--eden-mint);
+        }
+
+        .contract-detail-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border: none;
+            background: transparent;
+            color: var(--eden-text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 16px;
+            border-radius: var(--radius-standard);
+            transition: all var(--transition-smooth);
+        }
+
+        .contract-detail-back:hover {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .contract-detail-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .contract-detail-associate {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contract-detail-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-standard);
+            background-color: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--eden-green);
+            font-size: 18px;
+        }
+
+        .contract-detail-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--eden-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .contract-detail-role {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+        }
+
+        .contract-detail-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px 20px;
+        }
+
+        .contract-detail-section {
+            margin-bottom: 28px;
+        }
+
+        .contract-detail-section-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--eden-text-secondary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contract-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .contract-info-item {
+            background-color: var(--eden-surface);
+            border-radius: var(--radius-standard);
+            padding: 14px;
+        }
+
+        .contract-info-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .contract-info-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--eden-text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .contract-info-value {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--eden-text-primary);
+        }
+
+        .contract-timeline {
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .contract-timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background-color: var(--eden-border);
+        }
+
+        .contract-timeline-item {
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .contract-timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .contract-timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -17px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--eden-green);
+            border: 2px solid var(--pure-white);
+        }
+
+        .contract-timeline-date {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            margin-bottom: 2px;
+        }
+
+        .contract-timeline-event {
+            font-size: 14px;
+            color: var(--eden-text-primary);
+        }
+
+        .contract-documents {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contract-document-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background-color: var(--eden-surface);
+            border-radius: var(--radius-standard);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .contract-document-item:hover {
+            background-color: var(--eden-green-light);
+        }
+
+        .contract-document-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-standard);
+            background-color: var(--pure-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--eden-green);
+        }
+
+        .contract-document-info {
+            flex: 1;
+        }
+
+        .contract-document-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--eden-text-primary);
+        }
+
+        .contract-document-meta {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .contract-detail-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--eden-border);
+            background-color: var(--eden-surface);
+        }
+
+        .contract-footer-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .contract-footer-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: var(--radius-standard);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .contract-footer-btn.secondary {
+            border: 1px solid var(--eden-border);
+            background-color: var(--pure-white);
+            color: var(--eden-text-secondary);
+        }
+
+        .contract-footer-btn.secondary:hover {
+            border-color: var(--eden-green);
+            color: var(--eden-green);
+        }
+
+        .contract-footer-btn.primary {
+            border: none;
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .contract-footer-btn.primary:hover {
+            background-color: var(--eden-green-hover);
+        }
+
+        @media (max-width: 768px) {
+            .contract-detail-panel {
+                width: 100%;
+            }
+
+            .contract-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Add Session Button & Modal */
         .schedule-header {
             display: flex;
@@ -4875,6 +5161,86 @@
                 <!-- Contracts Grid -->
                 <div class="contracts-grid" id="contractsGrid">
                     <!-- Contract cards will be rendered by JavaScript -->
+                </div>
+
+                <!-- Contract Detail Panel -->
+                <div class="contract-detail-panel" id="contractDetailPanel">
+                    <div class="contract-detail-header">
+                        <button class="contract-detail-back" onclick="closeContractDetail()">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <polyline points="15 18 9 12 15 6"/>
+                            </svg>
+                            Back to Contracts
+                        </button>
+                        <div class="contract-detail-title-row">
+                            <div class="contract-detail-associate">
+                                <div class="contract-detail-avatar" id="contractDetailAvatar">SJ</div>
+                                <div>
+                                    <div class="contract-detail-name" id="contractDetailName">Sarah Johnson</div>
+                                    <div class="contract-detail-role" id="contractDetailRole">Counsellor</div>
+                                </div>
+                            </div>
+                            <span class="contract-status-badge active" id="contractDetailStatus">Active</span>
+                        </div>
+                    </div>
+                    <div class="contract-detail-content">
+                        <div class="contract-detail-section">
+                            <div class="contract-detail-section-title">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                </svg>
+                                Contract Details
+                            </div>
+                            <div class="contract-info-grid" id="contractInfoGrid">
+                                <!-- Details will be populated dynamically -->
+                            </div>
+                        </div>
+
+                        <div class="contract-detail-section">
+                            <div class="contract-detail-section-title">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                                Contract History
+                            </div>
+                            <div class="contract-timeline" id="contractTimeline">
+                                <!-- Timeline will be populated dynamically -->
+                            </div>
+                        </div>
+
+                        <div class="contract-detail-section">
+                            <div class="contract-detail-section-title">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                </svg>
+                                Documents
+                            </div>
+                            <div class="contract-documents" id="contractDocuments">
+                                <!-- Documents will be populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contract-detail-footer">
+                        <div class="contract-footer-actions">
+                            <button class="contract-footer-btn secondary" onclick="downloadContract()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7 10 12 15 17 10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                                Download
+                            </button>
+                            <button class="contract-footer-btn primary" onclick="renewContract()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                                </svg>
+                                Renew Contract
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -8107,11 +8473,131 @@
             renderContractsGrid(filter);
         }
 
+        let currentContract = null;
+
         function openContractDetail(contractId) {
-            // This will be implemented in Chunk 5
             const contract = contracts.find(c => c.id === contractId);
-            if (contract) {
-                alert(`Contract details for ${contract.associateName} (${contract.id})\n\nThis will open a detailed view in Chunk 5.`);
+            if (!contract) return;
+
+            currentContract = contract;
+
+            // Populate header
+            const initials = contract.associateName.split(' ').map(n => n[0]).join('');
+            document.getElementById('contractDetailAvatar').textContent = initials;
+            document.getElementById('contractDetailName').textContent = contract.associateName;
+            document.getElementById('contractDetailRole').textContent = contract.role;
+
+            const statusBadge = document.getElementById('contractDetailStatus');
+            statusBadge.className = `contract-status-badge ${contract.status}`;
+            statusBadge.textContent = getStatusLabel(contract.status);
+
+            // Populate contract info grid
+            document.getElementById('contractInfoGrid').innerHTML = `
+                <div class="contract-info-item">
+                    <div class="contract-info-label">Contract ID</div>
+                    <div class="contract-info-value">${contract.id}</div>
+                </div>
+                <div class="contract-info-item">
+                    <div class="contract-info-label">Associate ID</div>
+                    <div class="contract-info-value">${contract.associateId}</div>
+                </div>
+                <div class="contract-info-item">
+                    <div class="contract-info-label">Contract Type</div>
+                    <div class="contract-info-value">${contract.type}</div>
+                </div>
+                <div class="contract-info-item">
+                    <div class="contract-info-label">Fee Split</div>
+                    <div class="contract-info-value">${contract.feeSplit}</div>
+                </div>
+                <div class="contract-info-item">
+                    <div class="contract-info-label">Start Date</div>
+                    <div class="contract-info-value">${contract.startDate}</div>
+                </div>
+                <div class="contract-info-item">
+                    <div class="contract-info-label">End Date</div>
+                    <div class="contract-info-value">${contract.endDate}</div>
+                </div>
+                <div class="contract-info-item full-width">
+                    <div class="contract-info-label">Renewal Status</div>
+                    <div class="contract-info-value">${getRenewalText(contract)}</div>
+                </div>
+            `;
+
+            // Populate timeline
+            document.getElementById('contractTimeline').innerHTML = `
+                <div class="contract-timeline-item">
+                    <div class="contract-timeline-date">${contract.lastUpdated}</div>
+                    <div class="contract-timeline-event">Contract ${contract.status === 'pending' ? 'sent for signature' : 'signed and activated'}</div>
+                </div>
+                <div class="contract-timeline-item">
+                    <div class="contract-timeline-date">${contract.startDate}</div>
+                    <div class="contract-timeline-event">Contract period begins</div>
+                </div>
+                <div class="contract-timeline-item">
+                    <div class="contract-timeline-date">${contract.endDate}</div>
+                    <div class="contract-timeline-event">Contract expires</div>
+                </div>
+            `;
+
+            // Populate documents
+            document.getElementById('contractDocuments').innerHTML = `
+                <div class="contract-document-item" onclick="viewContractPDF('${contract.id}')">
+                    <div class="contract-document-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                        </svg>
+                    </div>
+                    <div class="contract-document-info">
+                        <div class="contract-document-name">Associate Agreement</div>
+                        <div class="contract-document-meta">PDF - Signed ${contract.lastUpdated}</div>
+                    </div>
+                </div>
+                <div class="contract-document-item" onclick="showToast('Opening insurance document')">
+                    <div class="contract-document-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <div class="contract-document-info">
+                        <div class="contract-document-name">Insurance Certificate</div>
+                        <div class="contract-document-meta">PDF - Valid until ${contract.endDate}</div>
+                    </div>
+                </div>
+                <div class="contract-document-item" onclick="showToast('Opening DBS certificate')">
+                    <div class="contract-document-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="8.5" cy="7" r="4"/>
+                            <polyline points="17 11 19 13 23 9"/>
+                        </svg>
+                    </div>
+                    <div class="contract-document-info">
+                        <div class="contract-document-name">DBS Certificate</div>
+                        <div class="contract-document-meta">PDF - Enhanced check</div>
+                    </div>
+                </div>
+            `;
+
+            // Open panel
+            document.getElementById('contractDetailPanel').classList.add('open');
+        }
+
+        function closeContractDetail() {
+            document.getElementById('contractDetailPanel').classList.remove('open');
+            currentContract = null;
+        }
+
+        function downloadContract() {
+            if (currentContract) {
+                showToast(`Downloading ${currentContract.associateName}'s contract`);
+            }
+        }
+
+        function renewContract() {
+            if (currentContract) {
+                showToast(`Initiating renewal for ${currentContract.associateName}`);
+                closeContractDetail();
             }
         }
 
