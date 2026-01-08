@@ -1,80 +1,180 @@
 ================================================================================
-EDEN HUB — PROJECT STATUS
+EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
-Last Updated: 6 January 2026
-Session: Fresh Start — Repository Foundation
+Generated: 8 January 2025
+Session: Project Restructure - Documentation Reorganisation
+================================================================================
+
+## WHAT WAS ASKED FOR
+Restructure existing documentation into new folder organisation:
+- Create ADR format for architecture decisions
+- Consolidate specs into EDEN_MASTER.md
+- Create CLAUDE.md for AI auto-read
+- Create PROJECT_CONTEXT.md for human-readable philosophy
+- Add supporting files (CONTRIBUTING, CHANGELOG, .clauderules, .env.example)
+
+## WHAT WAS COMPLETED
+
+### New Files Created
+
+| File | Location | Purpose |
+|------|----------|---------|
+| ADR-001-authentication-strategy.md | docs/decisions/ | Auth architecture from Word doc |
+| EDEN_MASTER.md | root | Comprehensive specification |
+| CLAUDE.md | root | AI session instructions |
+| PROJECT_CONTEXT.md | root | Human-readable philosophy |
+| CONTRIBUTING.md | root | Technical conventions |
+| CHANGELOG.md | root | Version history |
+| .clauderules | root | AI guardrails |
+| .env.example | root | Environment template |
+
+### Source Documents Consolidated
+
+1. **Eden_Portal_Authentication_Strategy_1.docx**
+   - Converted to ADR-001-authentication-strategy.md
+   - Maintained all technical detail
+   - Added ADR format (Context, Decision, Consequences)
+
+2. **EDEN_HUB_DESIGN_SPEC.md** (~5,893 lines)
+   - Key content extracted into EDEN_MASTER.md
+   - Design tokens, pipelines, architecture preserved
+   - Original file can be archived in _archive/
+
+3. **EDEN_STATUS_3.txt**
+   - Progress notes incorporated into CHANGELOG.md
+   - Session continuity maintained
 
 ================================================================================
-CURRENT STATE
+NEW FOLDER STRUCTURE (Ready to Implement)
 ================================================================================
-Repository: Eden Hub (NEW — replacing eden-admin-portal)
-Phase: 0 — Foundation Setup
-Status: Specification complete, ready to create first prototype
+
+```
+Eden Hub Portal/
+│
+├── 📁 _archive/                    ← Old versions go here
+│
+├── 📁 docs/
+│   ├── 📁 decisions/
+│   │   └── ADR-001-authentication-strategy.md  ✓ CREATED
+│   │
+│   ├── 📁 strategy/                ← Move existing strategy docs here
+│   │
+│   └── 📁 specs/                   ← Component specs as needed
+│
+├── 📁 phases/
+│   ├── 📁 phase-1-auth/
+│   ├── 📁 phase-2-friction-feed/
+│   └── 📁 phase-3-wealth-lab/
+│
+├── 📁 src/                         ← Code files
+│
+├── 📁 exports/                     ← Claude outputs
+│
+├── EDEN_MASTER.md                  ✓ CREATED
+├── CLAUDE.md                       ✓ CREATED
+├── PROJECT_CONTEXT.md              ✓ CREATED
+├── CONTRIBUTING.md                 ✓ CREATED
+├── CHANGELOG.md                    ✓ CREATED
+├── .clauderules                    ✓ CREATED
+├── .env.example                    ✓ CREATED
+├── EDEN_STATUS.txt                 ✓ UPDATED (this file)
+└── README.md                       (existing - keep as is)
+```
 
 ================================================================================
-WHAT WAS DECIDED THIS SESSION
+KEY CONTENT PRESERVED
 ================================================================================
-1. Abandoned previous "eden-admin-portal" GitHub repository
-2. Starting fresh with new "Eden Hub" repository
-3. Building methodically through web-based Claude sessions (not Claude Code)
-4. Created master EDEN_HUB_FOUNDATION.md specification document
-5. Established all design decisions, architecture, and roadmap
+
+### Design Tokens (in EDEN_MASTER.md)
+- Full colour palette (eden-forest through eden-whisper)
+- Pipeline stage colours (7-stage client journey)
+- Onboarding stage colours (6-stage associate journey)
+- Document status colours
+- Alert colours (rose/amber/blue)
+- Typography, spacing, radius, shadows
+
+### Pipelines (in EDEN_MASTER.md)
+- 7-stage Client Journey: Inquiry → Ongoing
+- 6-stage Associate Onboarding: Welcome → Active
+- Triage triggers for each stage
+- Document status badges
+- Policy acknowledgement list
+- Data responsibility matrix
+
+### Authentication (in ADR-001)
+- Three-layer security model
+- Token format and lifecycle
+- Airtable schema updates
+- Make.com scenario specifications
+- React component requirements
+- Operational procedures
+
+### Philosophy (in PROJECT_CONTEXT.md)
+- Stewardship principle explained
+- Swiss Clinic aesthetic rationale
+- Friction Feed concept
+- "Support Insights not KPIs" philosophy
+- Success criteria
 
 ================================================================================
-FOUNDATION DOCUMENT CREATED
+WHAT MIKE NEEDS TO DO
 ================================================================================
-File: EDEN_HUB_FOUNDATION.md
-Contains:
-- Design philosophy (Stewardship, Primary Clients, Silent Admin)
-- Eden Calm palette (White #FFFFFF, Mint #F4F7F6, Green #2D5F4D)
-- UCID data architecture (TYPE-YYSEQ format)
-- Portal structure (6 modules, 5-tab ID cards)
-- Financial Vitality Hub specification (5 modules)
-- Friction Feed system (exception-only display)
-- Authentication strategy (Squarespace + Make.com)
-- Technical stack (React + Tailwind + shadcn/ui for production)
-- 8-week implementation roadmap
-- Glossary of Eden terms
+
+1. **Download these files** from Claude exports
+
+2. **Create folder structure** in OneDrive:
+   ```
+   Eden Hub Portal/
+   ├── _archive/
+   ├── docs/decisions/
+   ├── docs/strategy/
+   ├── docs/specs/
+   ├── phases/phase-1-auth/
+   ├── phases/phase-2-friction-feed/
+   ├── phases/phase-3-wealth-lab/
+   ├── src/
+   └── exports/
+   ```
+
+3. **Place files**:
+   - ADR-001-authentication-strategy.md → docs/decisions/
+   - EDEN_MASTER.md → root
+   - CLAUDE.md → root
+   - PROJECT_CONTEXT.md → root
+   - CONTRIBUTING.md → root
+   - CHANGELOG.md → root
+   - .clauderules → root
+   - .env.example → root
+
+4. **Archive old files**:
+   - Move EDEN_HUB_DESIGN_SPEC.md → _archive/
+   - Move Eden_Portal_Authentication_Strategy_1.docx → _archive/
+   - Move old EDEN_STATUS_*.txt files → _archive/
+
+5. **Move strategy docs**:
+   - Any marketing/growth/competitor docs → docs/strategy/
 
 ================================================================================
-KEY ARCHITECTURE DECISIONS (CONFIRMED)
+CONTEXT FOR NEXT CLAUDE CODE SESSION
 ================================================================================
-1. Associates = Primary Clients (not employees)
-2. Friction Feed shows only exceptions, not dashboards
-3. Maps-style drill-down: Bottom Sheet (mobile) / Side Panel (desktop)
-4. True Cash as lead financial metric
-5. UCID as primary key across all tables
-6. Single-file HTML prototypes first, then migrate to React
-7. Eden Calm palette — NO GREY anywhere
-8. 69/31 revenue split (associate/Eden)
-9. Soft enforcement — warnings, not blocks
+
+Start prompt:
+"I've restructured the Eden Hub Portal documentation. 
+Upload: EDEN_MASTER.md, CLAUDE.md, EDEN_STATUS.txt
+The authentication ADR is in docs/decisions/ADR-001-authentication-strategy.md
+
+Ready to start Phase 1: Authentication implementation.
+Work through the ADR to implement the React auth components."
 
 ================================================================================
-NEXT STEPS
+SESSION SUMMARY
 ================================================================================
-1. Create GitHub repository: "eden-hub"
-2. Build first HTML prototype: eden-hub-v1.html
-   - Eden Calm styling
-   - Outlined leaf logo
-   - Adaptive layout (responsive breakpoints)
-   - ID Card grid (mock data)
-   - 5-tab detail panels
-   - Friction Feed placeholder
 
-================================================================================
-FILES TO DOWNLOAD
-================================================================================
-1. EDEN_HUB_FOUNDATION.md — Master specification (keep in OneDrive)
-2. EDEN_STATUS.txt — This file (upload at start of next session)
-
-================================================================================
-CONTEXT FOR NEXT SESSION
-================================================================================
-Upload these files:
-1. EDEN_STATUS.txt (this file)
-2. EDEN_HUB_FOUNDATION.md (for reference)
-
-Tell Claude:
-"Starting Eden Hub Phase 1 — build the first HTML prototype"
+| Metric | Value |
+|--------|-------|
+| Files Created | 8 |
+| Source Docs Processed | 3 |
+| Total Lines Consolidated | ~6,500+ |
+| Time | Single session |
 
 ================================================================================

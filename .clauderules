@@ -1,0 +1,97 @@
+# .clauderules
+
+# Eden Hub Portal - AI Development Guardrails
+
+## IMPLEMENTATION WORKFLOW
+
+When given chunks or tasks:
+- Work through ALL chunks sequentially without stopping
+- Backup before each change (v1 → v2 → v3)
+- Follow the spec exactly
+- Brief confirmation after each chunk (2-3 sentences)
+- Proceed immediately to next chunk
+- Only stop if: error, unclear spec, or design decision needed
+- Do NOT ask "shall I continue?" - always continue
+
+## GIT WORKFLOW
+
+- Push directly to main branch (no feature branches)
+- Commit after completing chunks
+- Message format: "feat: Chunk X - [description]"
+
+## ALWAYS
+
+- Read EDEN_STATUS.txt at session start
+- Use CSS variables from EDEN_MASTER.md, never hardcode colours
+- Create backup copies before editing files (v1 → v2)
+- Use semantic HTML elements
+- Ensure 44px minimum touch targets on mobile
+- Add alt text to all images
+- Test responsive behaviour at 1024px breakpoint
+- Update EDEN_STATUS.txt at session end
+
+## NEVER
+
+- Hardcode colour hex values
+- Use filled icons (Lucide 1.5px stroke only)
+- Add "dashboard theatre" (glowing charts, heat maps, excessive badges)
+- Block users with hard errors (soft enforcement only)
+- Store passwords or secrets in code
+- Overwrite working versions without backup
+- Use KPI language ("targets", "quotas", "performance")
+
+## DESIGN PRINCIPLES
+
+- Associates are Primary Clients, not employees
+- Friction Feed shows exceptions only, not status
+- "All Clear!" is success state
+- Swiss Clinic aesthetic: calm, white, minimal
+- Information on demand, not displayed by default
+- Soft enforcement: amber warnings, not red blocks
+
+## BEFORE IMPLEMENTING
+
+Ask yourself:
+1. Would an associate thank us for this?
+2. Does this reduce friction or add it?
+3. Is this visible only when needed?
+4. Does it feel calm?
+
+## UCID FORMAT
+
+TYPE-YYSEQ
+- Associates: ASC-2401
+- Clients: CLI-2507
+- Sessions: SES-2501
+
+Always monospace font for UCIDs.
+
+## PIPELINE COLOURS
+
+Client Journey (7 stages):
+- Inquiry: #f59e0b (Amber)
+- Engaged: #8b5cf6 (Purple)
+- Matched: #3b82f6 (Blue)
+- Booked: #14b8a6 (Teal)
+- Active: #10b981 (Green)
+- Follow-Up: #f97316 (Coral)
+- Ongoing: #eab308 (Gold)
+
+## ALERT COLOURS
+
+- Rose (#f43f5e): Urgent/errors
+- Amber (#f59e0b): Warnings
+- Blue (#3b82f6): Information
+
+## SESSION PROTOCOL
+
+START:
+1. Read EDEN_STATUS.txt
+2. Request any file uploads
+3. Confirm current phase/chunk
+
+END:
+1. Update EDEN_STATUS.txt
+2. List what was completed
+3. Note blockers or decisions
+4. Remind Mike to download
