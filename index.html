@@ -2792,4 +2792,24 @@
         }
 
         // ============================================
-        // INITIAL
+        // INITIALIZATION
+        // ============================================
+
+        function init() {
+            renderCards();
+            initTabs();
+            initNavigation();
+            initBottomSheetSwipe();
+
+            // Handle window resize
+            window.addEventListener('resize', handleResize);
+
+            // Set initial mobile state
+            isMobile = window.innerWidth <= 768;
+        }
+
+        // Start the application
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
