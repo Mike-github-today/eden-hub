@@ -1292,6 +1292,2205 @@
         .empty-state-text {
             font-size: 14px;
         }
+
+        /* ============================================
+           ACTION CENTRE (FRICTION FEED)
+           ============================================ */
+
+        .friction-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .friction-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .friction-item:hover {
+            border-color: var(--eden-green);
+            box-shadow: 0 4px 12px rgba(45, 95, 77, 0.1);
+        }
+
+        .friction-item.amber {
+            border-left: 4px solid var(--alert-amber);
+        }
+
+        .friction-item.rose {
+            border-left: 4px solid var(--alert-rose);
+        }
+
+        .friction-item.blue {
+            border-left: 4px solid var(--alert-blue);
+        }
+
+        .friction-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-standard);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .friction-icon.amber {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .friction-icon.rose {
+            background-color: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .friction-icon.blue {
+            background-color: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .friction-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke-width: 1.5;
+        }
+
+        .friction-content {
+            flex: 1;
+        }
+
+        .friction-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 4px;
+        }
+
+        .friction-description {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .friction-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .friction-action {
+            margin-left: auto;
+            padding: 8px 16px;
+            border-radius: var(--radius-standard);
+            border: 1px solid var(--eden-border);
+            background-color: var(--pure-white);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--eden-green);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            white-space: nowrap;
+        }
+
+        .friction-action:hover {
+            background-color: var(--eden-green);
+            border-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .all-clear-state {
+            text-align: center;
+            padding: 80px 24px;
+        }
+
+        .all-clear-icon {
+            margin-bottom: 24px;
+        }
+
+        .all-clear-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--eden-green);
+            margin-bottom: 8px;
+        }
+
+        .all-clear-text {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+        }
+
+        /* ============================================
+           EARNINGS / FINANCE GATEWAY
+           ============================================ */
+
+        .gateway-card {
+            background: linear-gradient(135deg, var(--eden-green) 0%, var(--eden-green-hover) 100%);
+            border-radius: var(--radius-card);
+            padding: 32px;
+            color: var(--pure-white);
+            margin-bottom: 32px;
+        }
+
+        .gateway-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .gateway-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-standard);
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gateway-label {
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .gateway-value {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .gateway-subtitle {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 24px;
+        }
+
+        .gateway-breakdown {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-standard);
+            padding: 16px;
+        }
+
+        .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .breakdown-row:last-child {
+            border-bottom: none;
+        }
+
+        .breakdown-label {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .breakdown-value {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .breakdown-value.negative {
+            opacity: 0.8;
+        }
+
+        .wealth-hub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .wealth-module {
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            position: relative;
+        }
+
+        .wealth-module:hover {
+            border-color: var(--eden-green);
+            box-shadow: 0 4px 12px rgba(45, 95, 77, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .wealth-module-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-standard);
+            background-color: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--eden-green);
+            margin-bottom: 16px;
+        }
+
+        .wealth-module-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 4px;
+        }
+
+        .wealth-module-desc {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        .wealth-module-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .wealth-module-alert {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        /* ============================================
+           WEALTH PANEL (Full-screen Module Views)
+           ============================================ */
+
+        .wealth-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--pure-white);
+            z-index: 300;
+            transform: translateX(100%);
+            transition: transform var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .wealth-panel.open {
+            transform: translateX(0);
+        }
+
+        .wealth-panel-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--eden-border);
+            background-color: var(--eden-mint);
+        }
+
+        .wealth-back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: var(--radius-standard);
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            color: var(--eden-text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            transition: all var(--transition-smooth);
+        }
+
+        .wealth-back-btn:hover {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .wealth-back-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .wealth-panel-title {
+            flex: 1;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .wealth-panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px;
+        }
+
+        .wealth-view {
+            display: none;
+            animation: fadeIn 300ms ease-out;
+        }
+
+        .wealth-view.active {
+            display: block;
+        }
+
+        /* Wealth Panel Cards */
+        .wealth-card {
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .wealth-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .wealth-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .wealth-hero-value {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 4px;
+        }
+
+        .wealth-hero-label {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+        }
+
+        /* Wealth Stats Grid */
+        .wealth-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .wealth-stat-card {
+            background-color: var(--eden-mint);
+            border-radius: var(--radius-standard);
+            padding: 16px;
+        }
+
+        .wealth-stat-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 4px;
+        }
+
+        .wealth-stat-label {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Toggle Switch */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toggle-label {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+        }
+
+        .toggle-label.active {
+            color: var(--eden-green);
+            font-weight: 600;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 26px;
+            background-color: var(--eden-border);
+            border-radius: 13px;
+            cursor: pointer;
+            transition: background-color var(--transition-smooth);
+        }
+
+        .toggle-switch.active {
+            background-color: var(--eden-green);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--pure-white);
+            border-radius: 50%;
+            transition: transform var(--transition-smooth);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .toggle-switch.active::after {
+            transform: translateX(22px);
+        }
+
+        /* Bar Chart */
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 16px;
+            height: 200px;
+            padding: 20px 0;
+        }
+
+        .bar-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+
+        .bar-fill {
+            width: 100%;
+            max-width: 60px;
+            background-color: var(--eden-green);
+            border-radius: 4px 4px 0 0;
+            transition: height var(--transition-smooth);
+            position: relative;
+        }
+
+        .bar-fill.projected {
+            background-color: var(--eden-green-light);
+            border: 2px dashed var(--eden-green);
+        }
+
+        .bar-value {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 8px;
+        }
+
+        .bar-label {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        .threshold-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--alert-amber);
+        }
+
+        .threshold-label {
+            position: absolute;
+            right: calc(100% + 8px);
+            top: -8px;
+            font-size: 10px;
+            color: var(--alert-amber);
+            white-space: nowrap;
+        }
+
+        /* Cash Density Specific Styles */
+        .cash-chart-container {
+            position: relative;
+            padding-left: 100px;
+        }
+
+        .cash-threshold-marker {
+            position: absolute;
+            left: 0;
+            right: 0;
+            border-top: 2px dashed var(--alert-amber);
+        }
+
+        .cash-threshold-marker .threshold-text {
+            position: absolute;
+            left: 0;
+            top: -20px;
+            font-size: 11px;
+            color: var(--alert-amber);
+            font-weight: 500;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            padding-top: 16px;
+            border-top: 1px solid var(--eden-border);
+            margin-top: 16px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .legend-color.projected {
+            background-color: var(--eden-green-light);
+            border: 2px dashed var(--eden-green);
+        }
+
+        .legend-text {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        /* Month Breakdown */
+        .month-breakdown {
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .month-breakdown:last-child {
+            margin-bottom: 0;
+        }
+
+        .month-breakdown-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background-color: var(--eden-mint);
+            border-bottom: 1px solid var(--eden-border);
+        }
+
+        .month-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .month-status {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .month-status.current {
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .month-status.projected {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .breakdown-details {
+            padding: 8px 16px;
+        }
+
+        .info-value.positive {
+            color: var(--eden-green);
+        }
+
+        .info-value.negative {
+            color: var(--alert-rose);
+        }
+
+        .info-row.total {
+            border-top: 2px solid var(--eden-border);
+            border-bottom: none;
+            margin-top: 8px;
+            padding-top: 12px;
+            font-weight: 600;
+        }
+
+        .info-row.total .info-label,
+        .info-row.total .info-value {
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        /* Tax Intelligence Styles */
+        .tax-mode-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 8px 0;
+        }
+
+        .tax-mode-description {
+            text-align: center;
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+            margin-top: 8px;
+        }
+
+        .health-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .health-badge.healthy {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .health-badge.warning {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .health-badge.danger {
+            background-color: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .tax-reserve-meter {
+            margin-top: 20px;
+        }
+
+        .reserve-progress {
+            height: 12px;
+            background-color: var(--eden-border);
+            border-radius: 6px;
+            position: relative;
+            overflow: visible;
+        }
+
+        .reserve-fill {
+            height: 100%;
+            background-color: var(--eden-green);
+            border-radius: 6px;
+            transition: width var(--transition-smooth);
+        }
+
+        .reserve-target {
+            position: absolute;
+            top: -4px;
+            width: 4px;
+            height: 20px;
+            background-color: var(--eden-text);
+            border-radius: 2px;
+            transform: translateX(-50%);
+        }
+
+        .reserve-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .reserve-target-label {
+            font-weight: 500;
+            color: var(--eden-text);
+        }
+
+        .tax-income-summary .income-hero {
+            text-align: center;
+            padding: 16px 0;
+        }
+
+        .income-value {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .income-label {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+            margin-top: 4px;
+        }
+
+        .tax-calculation {
+            padding: 16px 0;
+        }
+
+        .tax-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+        }
+
+        .tax-label {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+        }
+
+        .tax-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--eden-text);
+        }
+
+        .tax-value.deduction {
+            color: var(--alert-rose);
+        }
+
+        .tax-divider {
+            height: 1px;
+            background-color: var(--eden-border);
+            margin: 8px 0;
+        }
+
+        .tax-row.total {
+            padding-top: 12px;
+        }
+
+        .tax-row.total .tax-label,
+        .tax-row.total .tax-value {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--eden-text);
+        }
+
+        .tax-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 12px;
+            background-color: var(--eden-mint);
+            border-radius: var(--radius-standard);
+            margin-top: 16px;
+        }
+
+        .tax-note svg {
+            flex-shrink: 0;
+            color: var(--eden-text-secondary);
+        }
+
+        .tax-note span {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            line-height: 1.4;
+        }
+
+        .health-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px;
+        }
+
+        .health-card.healthy {
+            background-color: var(--eden-green-light);
+            border-color: var(--eden-green);
+        }
+
+        .health-card.warning {
+            background-color: #FEF3C7;
+            border-color: #F59E0B;
+        }
+
+        .health-card.danger {
+            background-color: #FEE2E2;
+            border-color: #EF4444;
+        }
+
+        .health-icon {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--pure-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .health-card.healthy .health-icon {
+            color: var(--eden-green);
+        }
+
+        .health-card.warning .health-icon {
+            color: #F59E0B;
+        }
+
+        .health-card.danger .health-icon {
+            color: #EF4444;
+        }
+
+        .health-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 4px;
+        }
+
+        .health-text {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Post-VAT Mode Styles */
+        .combined-tax-hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 24px 0;
+            flex-wrap: wrap;
+        }
+
+        .tax-hero-item {
+            text-align: center;
+            padding: 16px 24px;
+            background-color: var(--eden-mint);
+            border-radius: var(--radius-standard);
+        }
+
+        .tax-hero-item.total {
+            background-color: var(--eden-green);
+        }
+
+        .tax-hero-item.total .tax-hero-value,
+        .tax-hero-item.total .tax-hero-label {
+            color: var(--pure-white);
+        }
+
+        .tax-hero-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .tax-hero-label {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            margin-top: 4px;
+        }
+
+        .tax-hero-plus,
+        .tax-hero-equals {
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--eden-text-secondary);
+        }
+
+        .vat-rate-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .vat-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .vat-stat {
+            text-align: center;
+            padding: 16px;
+            border-radius: var(--radius-standard);
+        }
+
+        .vat-stat.collected {
+            background-color: var(--eden-green-light);
+        }
+
+        .vat-stat.reclaimable {
+            background-color: #DBEAFE;
+        }
+
+        .vat-stat.owed {
+            background-color: #FEF3C7;
+        }
+
+        .vat-stat-icon {
+            margin-bottom: 8px;
+        }
+
+        .vat-stat.collected .vat-stat-icon {
+            color: var(--eden-green);
+        }
+
+        .vat-stat.reclaimable .vat-stat-icon {
+            color: #3B82F6;
+        }
+
+        .vat-stat.owed .vat-stat-icon {
+            color: #F59E0B;
+        }
+
+        .vat-stat-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .vat-stat-label {
+            font-size: 11px;
+            color: var(--eden-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* Quarterly Schedule */
+        .quarterly-schedule {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quarter-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            transition: all var(--transition-smooth);
+        }
+
+        .quarter-item.completed {
+            background-color: var(--eden-green-light);
+            border-color: var(--eden-green);
+        }
+
+        .quarter-item.current {
+            background-color: #FEF3C7;
+            border-color: #F59E0B;
+        }
+
+        .quarter-item.future {
+            opacity: 0.6;
+        }
+
+        .quarter-marker {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quarter-item.completed .quarter-marker {
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .quarter-item.current .quarter-marker {
+            background-color: #F59E0B;
+        }
+
+        .quarter-item.future .quarter-marker {
+            background-color: var(--eden-border);
+        }
+
+        .quarter-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--pure-white);
+        }
+
+        .quarter-details {
+            flex: 1;
+        }
+
+        .quarter-period {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .quarter-due {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            margin-top: 2px;
+        }
+
+        .quarter-amount {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--eden-text);
+            text-align: right;
+            min-width: 80px;
+        }
+
+        .quarter-status {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            min-width: 90px;
+            text-align: center;
+        }
+
+        .quarter-status.paid {
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .quarter-status.upcoming {
+            background-color: #F59E0B;
+            color: var(--pure-white);
+        }
+
+        .quarter-status.future {
+            background-color: var(--eden-border);
+            color: var(--eden-text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .vat-summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .combined-tax-hero {
+                flex-direction: column;
+            }
+
+            .tax-hero-plus,
+            .tax-hero-equals {
+                transform: rotate(90deg);
+            }
+
+            .quarter-item {
+                flex-wrap: wrap;
+            }
+
+            .quarter-amount {
+                order: 3;
+                width: 100%;
+                text-align: left;
+                margin-top: 8px;
+            }
+
+            .quarter-status {
+                order: 4;
+            }
+        }
+
+        /* ============================================
+           PAYOUT COCKPIT
+           ============================================ */
+
+        .payout-count-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .payout-summary-row {
+            display: flex;
+            gap: 24px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--eden-border);
+        }
+
+        .payout-summary-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .payout-summary-value {
+            display: block;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .payout-summary-label {
+            display: block;
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            margin-top: 4px;
+        }
+
+        .payout-filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .payout-filter-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--eden-border);
+            background-color: var(--pure-white);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--eden-text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .payout-filter-btn:hover {
+            border-color: var(--eden-green);
+            color: var(--eden-green);
+        }
+
+        .payout-filter-btn.active {
+            background-color: var(--eden-green);
+            border-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .filter-count {
+            margin-left: 4px;
+            opacity: 0.8;
+        }
+
+        .payout-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .payout-card {
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 16px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .payout-card:hover {
+            border-color: var(--eden-green);
+            box-shadow: 0 4px 12px rgba(45, 95, 77, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .payout-card.overdue {
+            border-left: 4px solid var(--alert-rose);
+        }
+
+        .payout-card.pending {
+            border-left: 4px solid var(--alert-amber);
+        }
+
+        .payout-card.paid {
+            border-left: 4px solid var(--eden-green);
+            opacity: 0.8;
+        }
+
+        .payout-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .payout-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-green);
+            flex-shrink: 0;
+        }
+
+        .payout-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .payout-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .payout-id {
+            font-size: 11px;
+            color: var(--eden-text-secondary);
+            font-family: monospace;
+        }
+
+        .payout-status {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .payout-status.overdue {
+            background-color: #FEE2E2;
+            color: #991B1B;
+        }
+
+        .payout-status.pending {
+            background-color: #FEF3C7;
+            color: #92400E;
+        }
+
+        .payout-status.paid {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .payout-card-body {
+            padding: 8px 0;
+        }
+
+        .payout-amount {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 4px;
+        }
+
+        .payout-details {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .payout-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: var(--eden-text-secondary);
+        }
+
+        .payout-card-footer {
+            padding-top: 12px;
+            border-top: 1px solid var(--eden-border);
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        .overdue-warning {
+            color: var(--alert-rose);
+            font-weight: 500;
+        }
+
+        .due-soon {
+            color: var(--alert-amber);
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .payout-summary-row {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .payout-cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Payout Detail View */
+        .payout-back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: var(--radius-standard);
+            border: none;
+            background-color: transparent;
+            color: var(--eden-text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all var(--transition-smooth);
+        }
+
+        .payout-back-btn:hover {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .payout-detail-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            background-color: var(--eden-mint);
+            border-radius: var(--radius-card);
+            margin-bottom: 24px;
+        }
+
+        .payout-detail-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background-color: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--eden-green);
+        }
+
+        .payout-detail-info {
+            flex: 1;
+        }
+
+        .payout-detail-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin: 0;
+        }
+
+        .payout-detail-id {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            font-family: monospace;
+        }
+
+        .payout-period {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .session-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .session-stat {
+            text-align: center;
+            padding: 16px;
+            background-color: var(--eden-mint);
+            border-radius: var(--radius-standard);
+        }
+
+        .session-stat-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .session-stat-label {
+            font-size: 11px;
+            color: var(--eden-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        .payment-history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .payment-history-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background-color: var(--eden-mint);
+            border-radius: var(--radius-standard);
+        }
+
+        .payment-history-marker {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .payment-history-marker.paid {
+            background-color: var(--eden-green);
+        }
+
+        .payment-history-marker.pending {
+            background-color: var(--alert-amber);
+        }
+
+        .payment-history-details {
+            flex: 1;
+        }
+
+        .payment-history-month {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--eden-text);
+        }
+
+        .payment-history-date {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .payment-history-amount {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .payout-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .payout-action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 24px;
+            border-radius: var(--radius-standard);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            flex: 1;
+        }
+
+        .payout-action-btn.primary {
+            background-color: var(--eden-green);
+            border: none;
+            color: var(--pure-white);
+        }
+
+        .payout-action-btn.primary:hover {
+            background-color: var(--eden-green-hover);
+        }
+
+        .payout-action-btn.secondary {
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            color: var(--eden-text);
+        }
+
+        .payout-action-btn.secondary:hover {
+            border-color: var(--eden-green);
+            color: var(--eden-green);
+        }
+
+        @media (max-width: 768px) {
+            .session-stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .payout-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* ============================================
+           WEALTH LAB SIMULATOR
+           ============================================ */
+
+        .simulator-intro {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .simulator-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background-color: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--eden-green);
+            flex-shrink: 0;
+        }
+
+        .simulator-intro-text h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin: 0 0 4px 0;
+        }
+
+        .simulator-intro-text p {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+            margin: 0;
+        }
+
+        .simulator-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .simulator-inputs,
+        .simulator-results {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .simulator-input-group {
+            margin-bottom: 20px;
+        }
+
+        .simulator-input-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .simulator-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--eden-text);
+        }
+
+        .simulator-value {
+            font-weight: 600;
+            color: var(--eden-green);
+        }
+
+        .simulator-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--eden-border);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .simulator-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--eden-green);
+            cursor: pointer;
+            border: 3px solid var(--pure-white);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: transform var(--transition-smooth);
+        }
+
+        .simulator-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        .simulator-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--eden-green);
+            cursor: pointer;
+            border: 3px solid var(--pure-white);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4px;
+            font-size: 11px;
+            color: var(--eden-text-secondary);
+        }
+
+        .simulator-reset-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: var(--radius-standard);
+            border: 1px solid var(--eden-border);
+            background-color: var(--pure-white);
+            color: var(--eden-text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .simulator-reset-btn:hover {
+            border-color: var(--eden-green);
+            color: var(--eden-green);
+        }
+
+        .results-hero {
+            text-align: center;
+            background-color: var(--eden-green);
+            border-color: var(--eden-green);
+        }
+
+        .results-hero .wealth-card-title {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .results-hero-value {
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--pure-white);
+            margin: 8px 0;
+        }
+
+        .results-hero-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .results-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--eden-border);
+        }
+
+        .results-row:last-child {
+            border-bottom: none;
+        }
+
+        .results-label {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+        }
+
+        .results-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--eden-text);
+        }
+
+        .results-value.negative {
+            color: var(--alert-rose);
+        }
+
+        .results-divider {
+            height: 1px;
+            background-color: var(--eden-border);
+            margin: 8px 0;
+        }
+
+        .results-row.total {
+            padding-top: 12px;
+            border-bottom: none;
+        }
+
+        .results-row.total .results-label,
+        .results-row.total .results-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .projection-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .projection-card {
+            text-align: center;
+            padding: 16px 12px;
+        }
+
+        .projection-period {
+            font-size: 11px;
+            color: var(--eden-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .projection-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        @media (max-width: 768px) {
+            .simulator-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .projection-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .results-hero-value {
+                font-size: 32px;
+            }
+        }
+
+        /* ============================================
+           SCHEDULE / CALENDAR
+           ============================================ */
+
+        .calendar-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .calendar-nav-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-standard);
+            border: 1px solid var(--eden-border);
+            background-color: var(--pure-white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--eden-text-secondary);
+            transition: all var(--transition-smooth);
+        }
+
+        .calendar-nav-btn:hover {
+            background-color: var(--eden-green-light);
+            border-color: var(--eden-green);
+            color: var(--eden-green);
+        }
+
+        .calendar-month {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--eden-text);
+            min-width: 180px;
+            text-align: center;
+        }
+
+        .calendar-container {
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 20px;
+            margin-bottom: 32px;
+        }
+
+        .calendar-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .calendar-day-name {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--eden-text-secondary);
+            padding: 8px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-standard);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            position: relative;
+        }
+
+        .calendar-day:hover {
+            background-color: var(--eden-green-light);
+        }
+
+        .calendar-day.other-month {
+            color: var(--eden-border);
+        }
+
+        .calendar-day.today {
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+            font-weight: 600;
+        }
+
+        .calendar-day.has-sessions::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--eden-green);
+        }
+
+        .calendar-day.today.has-sessions::after {
+            background-color: var(--pure-white);
+        }
+
+        .today-sessions {
+            margin-top: 24px;
+        }
+
+        .session-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .session-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+        }
+
+        .session-time {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-green);
+            min-width: 60px;
+        }
+
+        .session-info {
+            flex: 1;
+        }
+
+        .session-client {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .session-associate {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .session-type {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        /* ============================================
+           CPD VIEW
+           ============================================ */
+
+        .cpd-summary {
+            margin-bottom: 32px;
+        }
+
+        .cpd-progress-card {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 32px;
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+        }
+
+        .cpd-progress-ring {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            flex-shrink: 0;
+        }
+
+        .cpd-progress-ring svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .cpd-progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .cpd-hours {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--eden-green);
+            display: block;
+        }
+
+        .cpd-total {
+            font-size: 11px;
+            color: var(--eden-text-secondary);
+        }
+
+        .cpd-progress-info {
+            flex: 1;
+        }
+
+        .cpd-progress-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 4px;
+        }
+
+        .cpd-progress-subtitle {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+        }
+
+        .cpd-categories {
+            margin-bottom: 32px;
+        }
+
+        .cpd-category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .cpd-category-card {
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .cpd-category-hours {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--eden-green);
+            margin-bottom: 4px;
+        }
+
+        .cpd-category-label {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .cpd-activities {
+            margin-bottom: 24px;
+        }
+
+        .cpd-activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .cpd-activity-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+        }
+
+        .cpd-activity-date {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            min-width: 80px;
+        }
+
+        .cpd-activity-info {
+            flex: 1;
+        }
+
+        .cpd-activity-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .cpd-activity-category {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .cpd-activity-hours {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-green);
+        }
+
+        /* ============================================
+           SUPPORT VIEW
+           ============================================ */
+
+        .support-section {
+            margin-bottom: 32px;
+        }
+
+        .support-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .support-link-card {
+            display: block;
+            padding: 24px;
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            text-decoration: none;
+            transition: all var(--transition-smooth);
+        }
+
+        .support-link-card:hover {
+            border-color: var(--eden-green);
+            box-shadow: 0 4px 12px rgba(45, 95, 77, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .support-link-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-standard);
+            background-color: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--eden-green);
+            margin-bottom: 16px;
+        }
+
+        .support-link-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 4px;
+        }
+
+        .support-link-desc {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        .emergency-contacts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .emergency-contact-card {
+            padding: 20px;
+            background-color: var(--eden-mint);
+            border-radius: var(--radius-standard);
+        }
+
+        .emergency-contact-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 4px;
+        }
+
+        .emergency-contact-detail {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .emergency-contact-phone {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--eden-green);
+        }
+
+        /* Pipeline count styling */
+        .pipeline-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 18px;
+            height: 18px;
+            padding: 0 5px;
+            border-radius: 9px;
+            font-size: 11px;
+            font-weight: 600;
+            background-color: rgba(255, 255, 255, 0.2);
+            margin-left: 4px;
+        }
+
+        .pipeline-stage:not(.active) .pipeline-count {
+            background-color: var(--eden-border);
+            color: var(--eden-text-secondary);
+        }
     </style>
 </head>
 <body>
@@ -1344,7 +3543,7 @@
                     </svg>
                     <span>Dashboard</span>
                 </a>
-                <a href="#" class="nav-item" data-view="action-centre">
+                <a href="#" class="nav-item" data-view="action-centre" onclick="showView('action-centre')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"/>
                         <polyline points="12 6 12 12 16 14"/>
@@ -1365,7 +3564,7 @@
                     </svg>
                     <span>Associates</span>
                 </a>
-                <a href="#" class="nav-item" data-view="clients">
+                <a href="#" class="nav-item" data-view="clients" onclick="showView('clients')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                         <circle cx="12" cy="7" r="4"/>
@@ -1376,14 +3575,14 @@
 
             <nav class="nav-section">
                 <div class="nav-label">Operations</div>
-                <a href="#" class="nav-item" data-view="earnings">
+                <a href="#" class="nav-item" data-view="earnings" onclick="showView('earnings')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="12" y1="1" x2="12" y2="23"/>
                         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                     </svg>
                     <span>Earnings</span>
                 </a>
-                <a href="#" class="nav-item" data-view="schedule">
+                <a href="#" class="nav-item" data-view="schedule" onclick="showView('schedule')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
                         <line x1="16" y1="2" x2="16" y2="6"/>
@@ -1392,14 +3591,14 @@
                     </svg>
                     <span>Schedule</span>
                 </a>
-                <a href="#" class="nav-item" data-view="cpd">
+                <a href="#" class="nav-item" data-view="cpd" onclick="showView('cpd')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
                         <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/>
                     </svg>
                     <span>CPD</span>
                 </a>
-                <a href="#" class="nav-item" data-view="support">
+                <a href="#" class="nav-item" data-view="support" onclick="showView('support')">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"/>
                         <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
@@ -1523,6 +3722,344 @@
                 <!-- ID Card Grid -->
                 <div class="card-grid" id="cardGrid">
                     <!-- Cards will be rendered by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Action Centre View (Friction Feed) -->
+            <div class="view-container" id="action-centreView">
+                <header class="page-header">
+                    <h1 class="page-title">Action Centre</h1>
+                    <p class="page-subtitle">Items requiring your attention</p>
+                </header>
+
+                <div class="friction-feed" id="frictionFeed">
+                    <!-- Friction items will be rendered here -->
+                </div>
+
+                <div class="all-clear-state" id="allClearState" style="display: none;">
+                    <div class="all-clear-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--eden-green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <h2 class="all-clear-title">All Clear!</h2>
+                    <p class="all-clear-text">No pending actions. Everything is running smoothly.</p>
+                </div>
+            </div>
+
+            <!-- Clients View -->
+            <div class="view-container" id="clientsView">
+                <header class="page-header">
+                    <h1 class="page-title">Clients</h1>
+                    <p class="page-subtitle" id="clientsSubtitle">All clients across the practice</p>
+                </header>
+
+                <!-- Client Pipeline Filter -->
+                <div class="pipeline-strip" id="clientsFilter">
+                    <button class="pipeline-stage active" data-stage="all" onclick="filterAllClients('all')">
+                        All <span class="pipeline-count" id="allClientsCount">0</span>
+                    </button>
+                    <button class="pipeline-stage" data-stage="awaiting" onclick="filterAllClients('awaiting')">
+                        Awaiting <span class="pipeline-count" id="awaitingClientsCount">0</span>
+                    </button>
+                    <button class="pipeline-stage" data-stage="pending" onclick="filterAllClients('pending')">
+                        Pending <span class="pipeline-count" id="pendingClientsCount">0</span>
+                    </button>
+                    <button class="pipeline-stage" data-stage="active" onclick="filterAllClients('active')">
+                        Active <span class="pipeline-count" id="activeClientsCount">0</span>
+                    </button>
+                    <button class="pipeline-stage" data-stage="ending" onclick="filterAllClients('ending')">
+                        Ending <span class="pipeline-count" id="endingClientsCount">0</span>
+                    </button>
+                </div>
+
+                <!-- All Clients Grid -->
+                <div class="card-grid" id="allClientsGrid">
+                    <!-- Client cards will be rendered by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Earnings View (Finance Gateway) -->
+            <div class="view-container" id="earningsView">
+                <header class="page-header">
+                    <h1 class="page-title">Earnings</h1>
+                    <p class="page-subtitle">Financial Vitality Hub</p>
+                </header>
+
+                <!-- True Cash Gateway Card -->
+                <div class="gateway-card" id="trueCashCard">
+                    <div class="gateway-header">
+                        <div class="gateway-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <div class="gateway-label">True Cash</div>
+                    </div>
+                    <div class="gateway-value">£18,420</div>
+                    <div class="gateway-subtitle">Available after all obligations</div>
+
+                    <div class="gateway-breakdown">
+                        <div class="breakdown-row">
+                            <span class="breakdown-label">Bank Balance</span>
+                            <span class="breakdown-value">£32,680</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span class="breakdown-label">− Unspent Credits</span>
+                            <span class="breakdown-value negative">£4,200</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span class="breakdown-label">− Payouts Owed</span>
+                            <span class="breakdown-value negative">£2,890</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span class="breakdown-label">− Tax Reserve (25%)</span>
+                            <span class="breakdown-value negative">£7,170</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wealth Hub Modules Grid -->
+                <div class="wealth-hub-grid">
+                    <div class="wealth-module" onclick="openWealthModule('cash-density')">
+                        <div class="wealth-module-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="20" x2="18" y2="10"/>
+                                <line x1="12" y1="20" x2="12" y2="4"/>
+                                <line x1="6" y1="20" x2="6" y2="14"/>
+                            </svg>
+                        </div>
+                        <div class="wealth-module-title">Cash Density</div>
+                        <div class="wealth-module-desc">3-month projection</div>
+                    </div>
+
+                    <div class="wealth-module" onclick="openWealthModule('tax-intel')">
+                        <div class="wealth-module-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div class="wealth-module-title">Tax Intelligence</div>
+                        <div class="wealth-module-desc">VAT tracking</div>
+                        <div class="wealth-module-badge">Pre-VAT</div>
+                    </div>
+
+                    <div class="wealth-module" onclick="openWealthModule('payouts')">
+                        <div class="wealth-module-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <div class="wealth-module-title">Payout Cockpit</div>
+                        <div class="wealth-module-desc">Associate payments</div>
+                        <div class="wealth-module-alert">2 pending</div>
+                    </div>
+
+                    <div class="wealth-module" onclick="openWealthModule('simulator')">
+                        <div class="wealth-module-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                                <polyline points="2 17 12 22 22 17"/>
+                                <polyline points="2 12 12 17 22 12"/>
+                            </svg>
+                        </div>
+                        <div class="wealth-module-title">Wealth Lab</div>
+                        <div class="wealth-module-desc">Planning simulator</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schedule View -->
+            <div class="view-container" id="scheduleView">
+                <header class="page-header">
+                    <h1 class="page-title">Schedule</h1>
+                    <p class="page-subtitle">Session calendar</p>
+                </header>
+
+                <!-- Calendar Navigation -->
+                <div class="calendar-nav">
+                    <button class="calendar-nav-btn" onclick="changeMonth(-1)">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"/>
+                        </svg>
+                    </button>
+                    <h2 class="calendar-month" id="calendarMonth">January 2026</h2>
+                    <button class="calendar-nav-btn" onclick="changeMonth(1)">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Calendar Grid -->
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <div class="calendar-day-name">Mon</div>
+                        <div class="calendar-day-name">Tue</div>
+                        <div class="calendar-day-name">Wed</div>
+                        <div class="calendar-day-name">Thu</div>
+                        <div class="calendar-day-name">Fri</div>
+                        <div class="calendar-day-name">Sat</div>
+                        <div class="calendar-day-name">Sun</div>
+                    </div>
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Calendar days will be rendered by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Today's Sessions -->
+                <div class="today-sessions">
+                    <h3 class="section-title">Today's Sessions</h3>
+                    <div class="session-list" id="todaySessionsList">
+                        <!-- Sessions will be rendered by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- CPD View -->
+            <div class="view-container" id="cpdView">
+                <header class="page-header">
+                    <h1 class="page-title">CPD</h1>
+                    <p class="page-subtitle">Continuing Professional Development</p>
+                </header>
+
+                <!-- CPD Summary -->
+                <div class="cpd-summary">
+                    <div class="cpd-progress-card">
+                        <div class="cpd-progress-ring">
+                            <svg viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="var(--eden-border)" stroke-width="8"/>
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="var(--eden-green)" stroke-width="8"
+                                    stroke-dasharray="283" stroke-dashoffset="70" stroke-linecap="round"
+                                    transform="rotate(-90 50 50)"/>
+                            </svg>
+                            <div class="cpd-progress-text">
+                                <span class="cpd-hours">24</span>
+                                <span class="cpd-total">/ 30 hrs</span>
+                            </div>
+                        </div>
+                        <div class="cpd-progress-info">
+                            <div class="cpd-progress-title">Annual CPD Progress</div>
+                            <div class="cpd-progress-subtitle">6 hours remaining for 2026</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CPD Categories -->
+                <div class="cpd-categories">
+                    <h3 class="section-title">By Category</h3>
+                    <div class="cpd-category-grid">
+                        <div class="cpd-category-card">
+                            <div class="cpd-category-hours">8</div>
+                            <div class="cpd-category-label">Clinical Skills</div>
+                        </div>
+                        <div class="cpd-category-card">
+                            <div class="cpd-category-hours">6</div>
+                            <div class="cpd-category-label">Ethics & Law</div>
+                        </div>
+                        <div class="cpd-category-card">
+                            <div class="cpd-category-hours">5</div>
+                            <div class="cpd-category-label">Supervision</div>
+                        </div>
+                        <div class="cpd-category-card">
+                            <div class="cpd-category-hours">5</div>
+                            <div class="cpd-category-label">Self-Care</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent CPD Activities -->
+                <div class="cpd-activities">
+                    <h3 class="section-title">Recent Activities</h3>
+                    <div class="cpd-activity-list" id="cpdActivityList">
+                        <!-- Activities will be rendered by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support View -->
+            <div class="view-container" id="supportView">
+                <header class="page-header">
+                    <h1 class="page-title">Support</h1>
+                    <p class="page-subtitle">Help and resources</p>
+                </header>
+
+                <!-- Quick Links -->
+                <div class="support-section">
+                    <h3 class="section-title">Quick Links</h3>
+                    <div class="support-links-grid">
+                        <a href="#" class="support-link-card">
+                            <div class="support-link-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                    <polyline points="10 9 9 9 8 9"/>
+                                </svg>
+                            </div>
+                            <div class="support-link-title">Associate Handbook</div>
+                            <div class="support-link-desc">Policies and procedures</div>
+                        </a>
+
+                        <a href="#" class="support-link-card">
+                            <div class="support-link-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                    <line x1="3" y1="9" x2="21" y2="9"/>
+                                    <line x1="9" y1="21" x2="9" y2="9"/>
+                                </svg>
+                            </div>
+                            <div class="support-link-title">Booking System</div>
+                            <div class="support-link-desc">Manage your schedule</div>
+                        </a>
+
+                        <a href="#" class="support-link-card">
+                            <div class="support-link-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                            </div>
+                            <div class="support-link-title">Contact Eden</div>
+                            <div class="support-link-desc">Get in touch with us</div>
+                        </a>
+
+                        <a href="#" class="support-link-card">
+                            <div class="support-link-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                                </svg>
+                            </div>
+                            <div class="support-link-title">FAQs</div>
+                            <div class="support-link-desc">Common questions</div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Emergency Contacts -->
+                <div class="support-section">
+                    <h3 class="section-title">Emergency Contacts</h3>
+                    <div class="emergency-contacts">
+                        <div class="emergency-contact-card">
+                            <div class="emergency-contact-name">Clinical Supervisor</div>
+                            <div class="emergency-contact-detail">Available 9am-5pm weekdays</div>
+                            <div class="emergency-contact-phone">020 7946 0958</div>
+                        </div>
+                        <div class="emergency-contact-card">
+                            <div class="emergency-contact-name">IT Support</div>
+                            <div class="emergency-contact-detail">Technical issues</div>
+                            <div class="emergency-contact-phone">support@edenrelationships.co.uk</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
@@ -2054,6 +4591,1000 @@
             <!-- Tab Content (Mobile) -->
             <div class="tab-content" id="clientMobileTabContent">
                 <!-- Cloned from desktop -->
+            </div>
+        </div>
+
+        <!-- Wealth Module Panel -->
+        <div class="wealth-panel" id="wealthPanel">
+            <header class="wealth-panel-header">
+                <button class="wealth-back-btn" onclick="closeWealthModule()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                    Back to Earnings
+                </button>
+                <h2 class="wealth-panel-title" id="wealthPanelTitle">Module</h2>
+            </header>
+            <div class="wealth-panel-content">
+                <!-- Cash Density View -->
+                <div class="wealth-view" id="cashDensityView">
+                    <!-- Hero Summary -->
+                    <div class="wealth-card">
+                        <div class="wealth-card-header">
+                            <span class="wealth-card-title">3-Month Cash Projection</span>
+                        </div>
+                        <div class="wealth-hero-value">£24,680</div>
+                        <div class="wealth-hero-label">Projected available cash by end of March</div>
+                    </div>
+
+                    <!-- Month Stats Grid -->
+                    <div class="wealth-stats-grid">
+                        <div class="wealth-stat-card">
+                            <div class="wealth-stat-value">£18,420</div>
+                            <div class="wealth-stat-label">January (Current)</div>
+                        </div>
+                        <div class="wealth-stat-card">
+                            <div class="wealth-stat-value">£21,350</div>
+                            <div class="wealth-stat-label">February (Projected)</div>
+                        </div>
+                        <div class="wealth-stat-card">
+                            <div class="wealth-stat-value">£24,680</div>
+                            <div class="wealth-stat-label">March (Projected)</div>
+                        </div>
+                    </div>
+
+                    <!-- Cash Flow Bar Chart -->
+                    <div class="wealth-card">
+                        <div class="wealth-card-header">
+                            <span class="wealth-card-title">Cash Flow Visualization</span>
+                        </div>
+                        <div class="cash-chart-container">
+                            <div class="cash-threshold-marker" style="bottom: 40%;">
+                                <span class="threshold-text">£10k Safe Threshold</span>
+                            </div>
+                            <div class="bar-chart" id="cashDensityChart">
+                                <div class="bar-item">
+                                    <div class="bar-value">£18.4k</div>
+                                    <div class="bar-fill" style="height: 73%;">
+                                        <div class="threshold-line" style="bottom: 54%;"></div>
+                                    </div>
+                                    <div class="bar-label">Jan</div>
+                                </div>
+                                <div class="bar-item">
+                                    <div class="bar-value">£21.4k</div>
+                                    <div class="bar-fill projected" style="height: 85%;"></div>
+                                    <div class="bar-label">Feb</div>
+                                </div>
+                                <div class="bar-item">
+                                    <div class="bar-value">£24.7k</div>
+                                    <div class="bar-fill projected" style="height: 98%;"></div>
+                                    <div class="bar-label">Mar</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-color" style="background-color: var(--eden-green);"></span>
+                                <span class="legend-text">Actual</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color projected"></span>
+                                <span class="legend-text">Projected</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monthly Breakdown Cards -->
+                    <div class="wealth-card">
+                        <div class="wealth-card-header">
+                            <span class="wealth-card-title">Monthly Breakdown</span>
+                        </div>
+
+                        <div class="month-breakdown">
+                            <div class="month-breakdown-header">
+                                <span class="month-name">January 2026</span>
+                                <span class="month-status current">Current Month</span>
+                            </div>
+                            <div class="breakdown-details">
+                                <div class="info-row">
+                                    <span class="info-label">Opening Balance</span>
+                                    <span class="info-value">£32,680</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Expected Income</span>
+                                    <span class="info-value positive">+£8,400</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Payouts Due</span>
+                                    <span class="info-value negative">−£2,890</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Tax Reserve</span>
+                                    <span class="info-value negative">−£7,170</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Operating Costs</span>
+                                    <span class="info-value negative">−£1,200</span>
+                                </div>
+                                <div class="info-row total">
+                                    <span class="info-label">Projected Close</span>
+                                    <span class="info-value">£18,420</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="month-breakdown">
+                            <div class="month-breakdown-header">
+                                <span class="month-name">February 2026</span>
+                                <span class="month-status projected">Projected</span>
+                            </div>
+                            <div class="breakdown-details">
+                                <div class="info-row">
+                                    <span class="info-label">Opening Balance</span>
+                                    <span class="info-value">£18,420</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Expected Income</span>
+                                    <span class="info-value positive">+£9,200</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Payouts Due</span>
+                                    <span class="info-value negative">−£3,120</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Tax Reserve</span>
+                                    <span class="info-value negative">−£2,300</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Operating Costs</span>
+                                    <span class="info-value negative">−£850</span>
+                                </div>
+                                <div class="info-row total">
+                                    <span class="info-label">Projected Close</span>
+                                    <span class="info-value">£21,350</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="month-breakdown">
+                            <div class="month-breakdown-header">
+                                <span class="month-name">March 2026</span>
+                                <span class="month-status projected">Projected</span>
+                            </div>
+                            <div class="breakdown-details">
+                                <div class="info-row">
+                                    <span class="info-label">Opening Balance</span>
+                                    <span class="info-value">£21,350</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Expected Income</span>
+                                    <span class="info-value positive">+£9,800</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Payouts Due</span>
+                                    <span class="info-value negative">−£3,450</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Tax Reserve</span>
+                                    <span class="info-value negative">−£2,450</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Operating Costs</span>
+                                    <span class="info-value negative">−£570</span>
+                                </div>
+                                <div class="info-row total">
+                                    <span class="info-label">Projected Close</span>
+                                    <span class="info-value">£24,680</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tax Intelligence View -->
+                <div class="wealth-view" id="taxIntelView">
+                    <!-- VAT Mode Toggle (Pre-VAT default) -->
+                    <div class="wealth-card">
+                        <div class="tax-mode-toggle">
+                            <span class="toggle-label active" id="preVatLabel">Pre-VAT</span>
+                            <div class="toggle-switch" id="vatToggle" onclick="toggleVatMode()"></div>
+                            <span class="toggle-label" id="postVatLabel">Post-VAT</span>
+                        </div>
+                        <p class="tax-mode-description" id="taxModeDescription">
+                            Showing tax obligations before VAT registration threshold
+                        </p>
+                    </div>
+
+                    <!-- Pre-VAT Content -->
+                    <div id="preVatContent">
+                        <!-- Tax Reserve Hero Card -->
+                        <div class="wealth-card">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">Tax Reserve</span>
+                                <span class="health-badge healthy" id="reserveHealthBadge">On Track</span>
+                            </div>
+                            <div class="wealth-hero-value">£7,170</div>
+                            <div class="wealth-hero-label">Set aside for income tax</div>
+
+                            <div class="tax-reserve-meter">
+                                <div class="reserve-progress">
+                                    <div class="reserve-fill" style="width: 85%;"></div>
+                                    <div class="reserve-target" style="left: 100%;"></div>
+                                </div>
+                                <div class="reserve-labels">
+                                    <span>£0</span>
+                                    <span class="reserve-target-label">Target: £8,440</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Income Summary -->
+                        <div class="wealth-card">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">Income This Tax Year</span>
+                            </div>
+
+                            <div class="tax-income-summary">
+                                <div class="income-hero">
+                                    <div class="income-value">£33,760</div>
+                                    <div class="income-label">Total taxable income (Apr 2025 - present)</div>
+                                </div>
+                            </div>
+
+                            <div class="income-breakdown">
+                                <div class="section-title" style="margin-top: 20px;">Income Sources</div>
+                                <div class="info-row">
+                                    <span class="info-label">Session Fees</span>
+                                    <span class="info-value">£31,200</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Room Rentals</span>
+                                    <span class="info-value">£1,800</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Training Income</span>
+                                    <span class="info-value">£760</span>
+                                </div>
+                                <div class="info-row total">
+                                    <span class="info-label">Total Income</span>
+                                    <span class="info-value">£33,760</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tax Liability Estimate -->
+                        <div class="wealth-card">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">Estimated Tax Liability</span>
+                            </div>
+
+                            <div class="tax-calculation">
+                                <div class="tax-row">
+                                    <span class="tax-label">Gross Income</span>
+                                    <span class="tax-value">£33,760</span>
+                                </div>
+                                <div class="tax-row">
+                                    <span class="tax-label">Personal Allowance</span>
+                                    <span class="tax-value deduction">−£12,570</span>
+                                </div>
+                                <div class="tax-row">
+                                    <span class="tax-label">Taxable Income</span>
+                                    <span class="tax-value">£21,190</span>
+                                </div>
+                                <div class="tax-divider"></div>
+                                <div class="tax-row">
+                                    <span class="tax-label">Basic Rate (20%)</span>
+                                    <span class="tax-value">£4,238</span>
+                                </div>
+                                <div class="tax-row">
+                                    <span class="tax-label">Class 2 NI</span>
+                                    <span class="tax-value">£179</span>
+                                </div>
+                                <div class="tax-row">
+                                    <span class="tax-label">Class 4 NI (9%)</span>
+                                    <span class="tax-value">£1,907</span>
+                                </div>
+                                <div class="tax-divider"></div>
+                                <div class="tax-row total">
+                                    <span class="tax-label">Total Estimated Tax</span>
+                                    <span class="tax-value">£6,324</span>
+                                </div>
+                            </div>
+
+                            <div class="tax-note">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="12" y1="16" x2="12" y2="12"/>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                </svg>
+                                <span>Estimate based on current income. Final liability may vary.</span>
+                            </div>
+                        </div>
+
+                        <!-- Reserve Health Card -->
+                        <div class="wealth-card health-card healthy">
+                            <div class="health-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                            </div>
+                            <div class="health-content">
+                                <div class="health-title">Reserve Health: Good</div>
+                                <div class="health-text">
+                                    Your tax reserve of £7,170 covers 113% of your estimated liability (£6,324).
+                                    You have a buffer of £846.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Post-VAT Content (Hidden by default) -->
+                    <div id="postVatContent" style="display: none;">
+                        <!-- Combined Tax Overview -->
+                        <div class="wealth-card">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">Combined Tax Overview</span>
+                            </div>
+                            <div class="combined-tax-hero">
+                                <div class="tax-hero-item">
+                                    <div class="tax-hero-value">£6,324</div>
+                                    <div class="tax-hero-label">Income Tax + NI</div>
+                                </div>
+                                <div class="tax-hero-plus">+</div>
+                                <div class="tax-hero-item">
+                                    <div class="tax-hero-value">£4,752</div>
+                                    <div class="tax-hero-label">VAT Owed</div>
+                                </div>
+                                <div class="tax-hero-equals">=</div>
+                                <div class="tax-hero-item total">
+                                    <div class="tax-hero-value">£11,076</div>
+                                    <div class="tax-hero-label">Total Tax Liability</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- VAT Summary Card -->
+                        <div class="wealth-card">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">VAT Summary</span>
+                                <span class="vat-rate-badge">20% Standard Rate</span>
+                            </div>
+
+                            <div class="vat-summary-grid">
+                                <div class="vat-stat collected">
+                                    <div class="vat-stat-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                                            <polyline points="17 6 23 6 23 12"/>
+                                        </svg>
+                                    </div>
+                                    <div class="vat-stat-value">£6,752</div>
+                                    <div class="vat-stat-label">VAT Collected</div>
+                                </div>
+                                <div class="vat-stat reclaimable">
+                                    <div class="vat-stat-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/>
+                                            <polyline points="17 18 23 18 23 12"/>
+                                        </svg>
+                                    </div>
+                                    <div class="vat-stat-value">−£2,000</div>
+                                    <div class="vat-stat-label">VAT Reclaimable</div>
+                                </div>
+                                <div class="vat-stat owed">
+                                    <div class="vat-stat-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <line x1="12" y1="1" x2="12" y2="23"/>
+                                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                        </svg>
+                                    </div>
+                                    <div class="vat-stat-value">£4,752</div>
+                                    <div class="vat-stat-label">VAT to Pay</div>
+                                </div>
+                            </div>
+
+                            <div class="vat-breakdown">
+                                <div class="section-title" style="margin-top: 20px;">VAT Breakdown</div>
+                                <div class="info-row">
+                                    <span class="info-label">Output VAT (on sales)</span>
+                                    <span class="info-value">£6,752</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Input VAT (on purchases)</span>
+                                    <span class="info-value negative">−£2,000</span>
+                                </div>
+                                <div class="info-row total">
+                                    <span class="info-label">Net VAT Payable</span>
+                                    <span class="info-value">£4,752</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quarterly Payment Schedule -->
+                        <div class="wealth-card">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">Quarterly Payment Schedule</span>
+                            </div>
+
+                            <div class="quarterly-schedule">
+                                <div class="quarter-item completed">
+                                    <div class="quarter-marker">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                    </div>
+                                    <div class="quarter-details">
+                                        <div class="quarter-period">Q1: Apr - Jun 2025</div>
+                                        <div class="quarter-due">Due: 7 Aug 2025</div>
+                                    </div>
+                                    <div class="quarter-amount">£1,420</div>
+                                    <div class="quarter-status paid">Paid</div>
+                                </div>
+
+                                <div class="quarter-item completed">
+                                    <div class="quarter-marker">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="20 6 9 17 4 12"/>
+                                        </svg>
+                                    </div>
+                                    <div class="quarter-details">
+                                        <div class="quarter-period">Q2: Jul - Sep 2025</div>
+                                        <div class="quarter-due">Due: 7 Nov 2025</div>
+                                    </div>
+                                    <div class="quarter-amount">£1,580</div>
+                                    <div class="quarter-status paid">Paid</div>
+                                </div>
+
+                                <div class="quarter-item current">
+                                    <div class="quarter-marker">
+                                        <div class="quarter-dot"></div>
+                                    </div>
+                                    <div class="quarter-details">
+                                        <div class="quarter-period">Q3: Oct - Dec 2025</div>
+                                        <div class="quarter-due">Due: 7 Feb 2026</div>
+                                    </div>
+                                    <div class="quarter-amount">£1,752</div>
+                                    <div class="quarter-status upcoming">Due in 30 days</div>
+                                </div>
+
+                                <div class="quarter-item future">
+                                    <div class="quarter-marker">
+                                        <div class="quarter-dot"></div>
+                                    </div>
+                                    <div class="quarter-details">
+                                        <div class="quarter-period">Q4: Jan - Mar 2026</div>
+                                        <div class="quarter-due">Due: 7 May 2026</div>
+                                    </div>
+                                    <div class="quarter-amount">Est. £1,800</div>
+                                    <div class="quarter-status future">Future</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- VAT Registration Info -->
+                        <div class="wealth-card">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">VAT Registration Status</span>
+                            </div>
+
+                            <div class="vat-reg-info">
+                                <div class="info-row">
+                                    <span class="info-label">VAT Number</span>
+                                    <span class="info-value">GB 123 4567 89</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Registration Date</span>
+                                    <span class="info-value">1 April 2025</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">VAT Scheme</span>
+                                    <span class="info-value">Standard Accounting</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Filing Frequency</span>
+                                    <span class="info-value">Quarterly</span>
+                                </div>
+                            </div>
+
+                            <div class="tax-note" style="margin-top: 16px;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="12" y1="16" x2="12" y2="12"/>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                </svg>
+                                <span>VAT threshold is £90,000. Your current turnover: £40,512</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payout Cockpit View -->
+                <div class="wealth-view" id="payoutsView">
+                    <!-- Payout Overview Content -->
+                    <div id="payoutOverviewContent">
+                        <!-- Pending Payouts Hero -->
+                        <div class="wealth-card payout-hero">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">Pending Payouts</span>
+                                <span class="payout-count-badge">2 pending</span>
+                            </div>
+                            <div class="wealth-hero-value">£2,890</div>
+                            <div class="wealth-hero-label">Total owed to associates this month</div>
+
+                            <div class="payout-summary-row">
+                                <div class="payout-summary-item">
+                                    <span class="payout-summary-value">£1,420</span>
+                                    <span class="payout-summary-label">Due this week</span>
+                                </div>
+                                <div class="payout-summary-item">
+                                    <span class="payout-summary-value">£1,470</span>
+                                    <span class="payout-summary-label">Due later</span>
+                                </div>
+                                <div class="payout-summary-item">
+                                    <span class="payout-summary-value">£4,230</span>
+                                    <span class="payout-summary-label">Paid this month</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Filter Tabs -->
+                        <div class="payout-filters">
+                            <button class="payout-filter-btn active" data-filter="all" onclick="filterPayouts('all')">
+                                All <span class="filter-count">7</span>
+                            </button>
+                            <button class="payout-filter-btn" data-filter="pending" onclick="filterPayouts('pending')">
+                                Pending <span class="filter-count">2</span>
+                            </button>
+                            <button class="payout-filter-btn" data-filter="overdue" onclick="filterPayouts('overdue')">
+                                Overdue <span class="filter-count">1</span>
+                            </button>
+                            <button class="payout-filter-btn" data-filter="paid" onclick="filterPayouts('paid')">
+                                Paid <span class="filter-count">4</span>
+                            </button>
+                        </div>
+
+                        <!-- Associate Payout Cards Grid -->
+                        <div class="payout-cards-grid" id="payoutCardsGrid">
+                            <!-- Overdue Card -->
+                            <div class="payout-card overdue" data-status="overdue" onclick="openPayoutDetail('sarah-chen')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">SC</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name">Sarah Chen</div>
+                                        <div class="payout-id">EDEN-A002</div>
+                                    </div>
+                                    <span class="payout-status overdue">Overdue</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£890</div>
+                                    <div class="payout-details">
+                                        <span>12 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Due 3 Jan</span>
+                                    </div>
+                                </div>
+                                <div class="payout-card-footer">
+                                    <span class="overdue-warning">5 days overdue</span>
+                                </div>
+                            </div>
+
+                            <!-- Pending Card 1 -->
+                            <div class="payout-card pending" data-status="pending" onclick="openPayoutDetail('james-wilson')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">JW</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name">James Wilson</div>
+                                        <div class="payout-id">EDEN-A003</div>
+                                    </div>
+                                    <span class="payout-status pending">Pending</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£1,420</div>
+                                    <div class="payout-details">
+                                        <span>18 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Due 10 Jan</span>
+                                    </div>
+                                </div>
+                                <div class="payout-card-footer">
+                                    <span class="due-soon">Due in 2 days</span>
+                                </div>
+                            </div>
+
+                            <!-- Pending Card 2 -->
+                            <div class="payout-card pending" data-status="pending" onclick="openPayoutDetail('emma-thompson')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">ET</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name">Emma Thompson</div>
+                                        <div class="payout-id">EDEN-A004</div>
+                                    </div>
+                                    <span class="payout-status pending">Pending</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£580</div>
+                                    <div class="payout-details">
+                                        <span>8 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Due 15 Jan</span>
+                                    </div>
+                                </div>
+                                <div class="payout-card-footer">
+                                    <span>Due in 7 days</span>
+                                </div>
+                            </div>
+
+                            <!-- Paid Cards -->
+                            <div class="payout-card paid" data-status="paid" onclick="openPayoutDetail('michael-brown')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">MB</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name">Michael Brown</div>
+                                        <div class="payout-id">EDEN-A005</div>
+                                    </div>
+                                    <span class="payout-status paid">Paid</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£1,250</div>
+                                    <div class="payout-details">
+                                        <span>16 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Paid 5 Jan</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payout-card paid" data-status="paid" onclick="openPayoutDetail('lisa-patel')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">LP</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name">Lisa Patel</div>
+                                        <div class="payout-id">EDEN-A006</div>
+                                    </div>
+                                    <span class="payout-status paid">Paid</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£980</div>
+                                    <div class="payout-details">
+                                        <span>14 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Paid 5 Jan</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payout-card paid" data-status="paid" onclick="openPayoutDetail('david-kim')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">DK</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name">David Kim</div>
+                                        <div class="payout-id">EDEN-A007</div>
+                                    </div>
+                                    <span class="payout-status paid">Paid</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£1,100</div>
+                                    <div class="payout-details">
+                                        <span>15 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Paid 3 Jan</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payout-card paid" data-status="paid" onclick="openPayoutDetail('rachel-green')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">RG</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name">Rachel Green</div>
+                                        <div class="payout-id">EDEN-A001</div>
+                                    </div>
+                                    <span class="payout-status paid">Paid</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£900</div>
+                                    <div class="payout-details">
+                                        <span>12 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Paid 2 Jan</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payout Detail Content (Hidden by default) -->
+                    <div id="payoutDetailContent" style="display: none;">
+                        <!-- Back Button -->
+                        <button class="payout-back-btn" onclick="closePayoutDetail()">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"/>
+                            </svg>
+                            Back to Payouts
+                        </button>
+
+                        <!-- Associate Header -->
+                        <div class="payout-detail-header" id="payoutDetailHeader">
+                            <div class="payout-detail-avatar" id="detailAvatar">JW</div>
+                            <div class="payout-detail-info">
+                                <h3 class="payout-detail-name" id="detailName">James Wilson</h3>
+                                <span class="payout-detail-id" id="detailId">EDEN-A003</span>
+                            </div>
+                            <span class="payout-status pending" id="detailStatus">Pending</span>
+                        </div>
+
+                        <!-- Payout Amount Card -->
+                        <div class="wealth-card">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">Payout Amount</span>
+                                <span class="payout-period">January 2026</span>
+                            </div>
+                            <div class="wealth-hero-value" id="detailAmount">£1,420</div>
+                            <div class="wealth-hero-label" id="detailDue">Due 10 January 2026</div>
+
+                            <div class="payout-breakdown">
+                                <div class="section-title" style="margin-top: 20px;">Breakdown</div>
+                                <div class="info-row">
+                                    <span class="info-label">Session Fees (18 sessions)</span>
+                                    <span class="info-value">£1,350</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Supervision Bonus</span>
+                                    <span class="info-value positive">+£100</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Room Hire Contribution</span>
+                                    <span class="info-value negative">−£30</span>
+                                </div>
+                                <div class="info-row total">
+                                    <span class="info-label">Net Payout</span>
+                                    <span class="info-value">£1,420</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Session Details -->
+                        <div class="wealth-card">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">Session Details</span>
+                            </div>
+                            <div class="session-stats-grid">
+                                <div class="session-stat">
+                                    <div class="session-stat-value">18</div>
+                                    <div class="session-stat-label">Total Sessions</div>
+                                </div>
+                                <div class="session-stat">
+                                    <div class="session-stat-value">£75</div>
+                                    <div class="session-stat-label">Avg per Session</div>
+                                </div>
+                                <div class="session-stat">
+                                    <div class="session-stat-value">60%</div>
+                                    <div class="session-stat-label">Split Rate</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment History -->
+                        <div class="wealth-card">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">Payment History</span>
+                            </div>
+                            <div class="payment-history-list">
+                                <div class="payment-history-item">
+                                    <div class="payment-history-marker paid"></div>
+                                    <div class="payment-history-details">
+                                        <div class="payment-history-month">December 2025</div>
+                                        <div class="payment-history-date">Paid 5 Jan 2026</div>
+                                    </div>
+                                    <div class="payment-history-amount">£1,280</div>
+                                </div>
+                                <div class="payment-history-item">
+                                    <div class="payment-history-marker paid"></div>
+                                    <div class="payment-history-details">
+                                        <div class="payment-history-month">November 2025</div>
+                                        <div class="payment-history-date">Paid 5 Dec 2025</div>
+                                    </div>
+                                    <div class="payment-history-amount">£1,150</div>
+                                </div>
+                                <div class="payment-history-item">
+                                    <div class="payment-history-marker paid"></div>
+                                    <div class="payment-history-details">
+                                        <div class="payment-history-month">October 2025</div>
+                                        <div class="payment-history-date">Paid 5 Nov 2025</div>
+                                    </div>
+                                    <div class="payment-history-amount">£1,320</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="payout-actions">
+                            <button class="payout-action-btn primary" onclick="markAsPaid()">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                Mark as Paid
+                            </button>
+                            <button class="payout-action-btn secondary">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7 10 12 15 17 10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                                Export PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wealth Lab View -->
+                <div class="wealth-view" id="simulatorView">
+                    <!-- Simulator Header -->
+                    <div class="wealth-card simulator-intro">
+                        <div class="simulator-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                                <polyline points="2 17 12 22 22 17"/>
+                                <polyline points="2 12 12 17 22 12"/>
+                            </svg>
+                        </div>
+                        <div class="simulator-intro-text">
+                            <h3>Financial Scenario Planner</h3>
+                            <p>Adjust the inputs below to see how changes affect your projected earnings</p>
+                        </div>
+                    </div>
+
+                    <div class="simulator-layout">
+                        <!-- Input Panel -->
+                        <div class="simulator-inputs">
+                            <div class="wealth-card">
+                                <div class="wealth-card-header">
+                                    <span class="wealth-card-title">Revenue Assumptions</span>
+                                </div>
+
+                                <div class="simulator-input-group">
+                                    <label class="simulator-label">
+                                        <span>Sessions per Week</span>
+                                        <span class="simulator-value" id="sessionsValue">25</span>
+                                    </label>
+                                    <input type="range" class="simulator-slider" id="sessionsSlider"
+                                           min="10" max="50" value="25" oninput="updateSimulator()">
+                                    <div class="slider-labels">
+                                        <span>10</span>
+                                        <span>50</span>
+                                    </div>
+                                </div>
+
+                                <div class="simulator-input-group">
+                                    <label class="simulator-label">
+                                        <span>Average Session Rate</span>
+                                        <span class="simulator-value" id="rateValue">£75</span>
+                                    </label>
+                                    <input type="range" class="simulator-slider" id="rateSlider"
+                                           min="50" max="150" value="75" step="5" oninput="updateSimulator()">
+                                    <div class="slider-labels">
+                                        <span>£50</span>
+                                        <span>£150</span>
+                                    </div>
+                                </div>
+
+                                <div class="simulator-input-group">
+                                    <label class="simulator-label">
+                                        <span>Practice Split (%)</span>
+                                        <span class="simulator-value" id="splitValue">40%</span>
+                                    </label>
+                                    <input type="range" class="simulator-slider" id="splitSlider"
+                                           min="20" max="60" value="40" step="5" oninput="updateSimulator()">
+                                    <div class="slider-labels">
+                                        <span>20%</span>
+                                        <span>60%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="wealth-card">
+                                <div class="wealth-card-header">
+                                    <span class="wealth-card-title">Expense Adjustments</span>
+                                </div>
+
+                                <div class="simulator-input-group">
+                                    <label class="simulator-label">
+                                        <span>Monthly Overheads</span>
+                                        <span class="simulator-value" id="overheadsValue">£800</span>
+                                    </label>
+                                    <input type="range" class="simulator-slider" id="overheadsSlider"
+                                           min="200" max="2000" value="800" step="100" oninput="updateSimulator()">
+                                    <div class="slider-labels">
+                                        <span>£200</span>
+                                        <span>£2,000</span>
+                                    </div>
+                                </div>
+
+                                <div class="simulator-input-group">
+                                    <label class="simulator-label">
+                                        <span>Tax Reserve Rate</span>
+                                        <span class="simulator-value" id="taxRateValue">25%</span>
+                                    </label>
+                                    <input type="range" class="simulator-slider" id="taxRateSlider"
+                                           min="15" max="40" value="25" oninput="updateSimulator()">
+                                    <div class="slider-labels">
+                                        <span>15%</span>
+                                        <span>40%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="simulator-reset-btn" onclick="resetSimulator()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="1 4 1 10 7 10"/>
+                                    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                                </svg>
+                                Reset to Defaults
+                            </button>
+                        </div>
+
+                        <!-- Results Panel -->
+                        <div class="simulator-results">
+                            <div class="wealth-card results-hero">
+                                <div class="wealth-card-header">
+                                    <span class="wealth-card-title">Projected Monthly Income</span>
+                                </div>
+                                <div class="results-hero-value" id="projectedIncome">£4,500</div>
+                                <div class="results-hero-label">After tax reserve & expenses</div>
+                            </div>
+
+                            <div class="results-breakdown">
+                                <div class="wealth-card">
+                                    <div class="wealth-card-header">
+                                        <span class="wealth-card-title">Monthly Breakdown</span>
+                                    </div>
+                                    <div class="results-row">
+                                        <span class="results-label">Gross Revenue</span>
+                                        <span class="results-value" id="grossRevenue">£8,125</span>
+                                    </div>
+                                    <div class="results-row">
+                                        <span class="results-label">Practice Share (40%)</span>
+                                        <span class="results-value negative" id="practiceShare">−£3,250</span>
+                                    </div>
+                                    <div class="results-row">
+                                        <span class="results-label">Net to Practice</span>
+                                        <span class="results-value" id="netToPractice">£4,875</span>
+                                    </div>
+                                    <div class="results-divider"></div>
+                                    <div class="results-row">
+                                        <span class="results-label">Overheads</span>
+                                        <span class="results-value negative" id="overheadsResult">−£800</span>
+                                    </div>
+                                    <div class="results-row">
+                                        <span class="results-label">Tax Reserve (25%)</span>
+                                        <span class="results-value negative" id="taxReserveResult">−£1,019</span>
+                                    </div>
+                                    <div class="results-divider"></div>
+                                    <div class="results-row total">
+                                        <span class="results-label">True Cash</span>
+                                        <span class="results-value" id="trueCashResult">£3,056</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="projection-cards">
+                                <div class="wealth-card projection-card">
+                                    <div class="projection-period">3 Months</div>
+                                    <div class="projection-value" id="projection3m">£9,168</div>
+                                </div>
+                                <div class="wealth-card projection-card">
+                                    <div class="projection-period">6 Months</div>
+                                    <div class="projection-value" id="projection6m">£18,336</div>
+                                </div>
+                                <div class="wealth-card projection-card">
+                                    <div class="projection-period">12 Months</div>
+                                    <div class="projection-value" id="projection12m">£36,672</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -2792,4 +6323,599 @@
         }
 
         // ============================================
-        // INITIAL
+        // FRICTION FEED DATA & FUNCTIONS
+        // ============================================
+
+        const frictionItems = [
+            {
+                id: 'FRI-001',
+                type: 'amber',
+                icon: 'file-text',
+                title: 'Insurance renewal required',
+                description: 'Fatima Okafor\'s professional indemnity insurance expires in 14 days',
+                associate: 'Fatima Okafor',
+                dueDate: '22 Jan 2026',
+                action: 'Send Reminder'
+            },
+            {
+                id: 'FRI-002',
+                type: 'amber',
+                icon: 'file-signature',
+                title: 'Contract pending signature',
+                description: 'Amara Mensah has not signed the updated associate agreement',
+                associate: 'Amara Mensah',
+                dueDate: '15 Jan 2026',
+                action: 'Resend Contract'
+            },
+            {
+                id: 'FRI-003',
+                type: 'rose',
+                icon: 'alert-circle',
+                title: 'Overdue invoice #1042',
+                description: 'Client payment is 12 days overdue - Emma Stone (CLIENT-2516)',
+                client: 'Emma Stone',
+                amount: '£85',
+                action: 'View Invoice'
+            },
+            {
+                id: 'FRI-004',
+                type: 'blue',
+                icon: 'calendar',
+                title: 'Session unconfirmed',
+                description: 'Tomorrow\'s 2pm session with Mark & Lisa Harris awaiting confirmation',
+                client: 'Mark & Lisa Harris',
+                associate: 'Sarah Johnson',
+                action: 'Send Reminder'
+            }
+        ];
+
+        function renderFrictionFeed() {
+            const feed = document.getElementById('frictionFeed');
+            const allClear = document.getElementById('allClearState');
+
+            if (!feed) return;
+
+            if (frictionItems.length === 0) {
+                feed.style.display = 'none';
+                allClear.style.display = 'block';
+                return;
+            }
+
+            feed.style.display = 'flex';
+            allClear.style.display = 'none';
+
+            feed.innerHTML = frictionItems.map(item => `
+                <div class="friction-item ${item.type}">
+                    <div class="friction-icon ${item.type}">
+                        ${getFrictionIcon(item.icon)}
+                    </div>
+                    <div class="friction-content">
+                        <div class="friction-title">${item.title}</div>
+                        <div class="friction-description">${item.description}</div>
+                        <div class="friction-meta">
+                            ${item.associate ? `<span>Associate: ${item.associate}</span>` : ''}
+                            ${item.client ? `<span>Client: ${item.client}</span>` : ''}
+                            ${item.dueDate ? `<span>Due: ${item.dueDate}</span>` : ''}
+                            ${item.amount ? `<span>Amount: ${item.amount}</span>` : ''}
+                        </div>
+                    </div>
+                    <button class="friction-action">${item.action}</button>
+                </div>
+            `).join('');
+        }
+
+        function getFrictionIcon(iconName) {
+            const icons = {
+                'file-text': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+                'file-signature': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>',
+                'alert-circle': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+                'calendar': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
+            };
+            return icons[iconName] || icons['alert-circle'];
+        }
+
+        // ============================================
+        // ALL CLIENTS VIEW FUNCTIONS
+        // ============================================
+
+        let allClientsFilter = 'all';
+
+        function renderAllClientsGrid(filter = 'all') {
+            const grid = document.getElementById('allClientsGrid');
+            if (!grid) return;
+
+            const filteredClients = filter === 'all'
+                ? clients
+                : clients.filter(c => c.stage === filter);
+
+            // Update counts
+            updateAllClientsCounts();
+
+            if (filteredClients.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <div class="empty-state-title">No clients in this stage</div>
+                        <div class="empty-state-text">Select a different filter to see clients</div>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filteredClients.map(client => {
+                const associate = associates.find(a => a.id === client.associateId);
+                return `
+                    <div class="id-card" onclick="openClientFromGrid('${client.id}')">
+                        <div class="id-card-header">
+                            <div class="avatar">${client.initials}</div>
+                            <div class="id-card-info">
+                                <div class="id-card-name">${client.name}</div>
+                                <div class="id-card-ucid">${client.id}</div>
+                            </div>
+                            <span class="client-mini-stage ${client.stage}">${client.stage.charAt(0).toUpperCase() + client.stage.slice(1)}</span>
+                        </div>
+                        <div class="id-card-stats">
+                            <div class="stat">
+                                <div class="stat-value">${associate ? associate.name.split(' ')[0] : 'N/A'}</div>
+                                <div class="stat-label">Associate</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateAllClientsCounts() {
+            const counts = {
+                all: clients.length,
+                awaiting: clients.filter(c => c.stage === 'awaiting').length,
+                pending: clients.filter(c => c.stage === 'pending').length,
+                active: clients.filter(c => c.stage === 'active').length,
+                ending: clients.filter(c => c.stage === 'ending').length
+            };
+
+            const allCount = document.getElementById('allClientsCount');
+            const awaitingCount = document.getElementById('awaitingClientsCount');
+            const pendingCount = document.getElementById('pendingClientsCount');
+            const activeCount = document.getElementById('activeClientsCount');
+            const endingCount = document.getElementById('endingClientsCount');
+
+            if (allCount) allCount.textContent = counts.all;
+            if (awaitingCount) awaitingCount.textContent = counts.awaiting;
+            if (pendingCount) pendingCount.textContent = counts.pending;
+            if (activeCount) activeCount.textContent = counts.active;
+            if (endingCount) endingCount.textContent = counts.ending;
+
+            // Update subtitle
+            const subtitle = document.getElementById('clientsSubtitle');
+            if (subtitle) {
+                subtitle.textContent = `${clients.length} clients across the practice`;
+            }
+        }
+
+        function filterAllClients(stage) {
+            allClientsFilter = stage;
+
+            // Update active state on pipeline buttons
+            document.querySelectorAll('#clientsFilter .pipeline-stage').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.stage === stage) {
+                    btn.classList.add('active');
+                }
+            });
+
+            renderAllClientsGrid(stage);
+        }
+
+        function openClientFromGrid(clientId) {
+            // For now, just log - could open a client detail panel
+            const client = clients.find(c => c.id === clientId);
+            if (client) {
+                const associate = associates.find(a => a.id === client.associateId);
+                // Switch to associates view and open the panel for this associate
+                showView('associates');
+                setTimeout(() => {
+                    openPanel(client.associateId);
+                    // Then open client panel
+                    setTimeout(() => {
+                        openClientPanel(clientId);
+                    }, 350);
+                }, 350);
+            }
+        }
+
+        // ============================================
+        // SCHEDULE / CALENDAR FUNCTIONS
+        // ============================================
+
+        let currentCalendarDate = new Date(2026, 0, 8); // January 8, 2026
+
+        const sessions = [
+            { time: '09:00', client: 'James Wilson', associate: 'Sarah Johnson', type: 'Individual', date: new Date(2026, 0, 8) },
+            { time: '10:30', client: 'Sophie Taylor', associate: 'Sarah Johnson', type: 'Individual', date: new Date(2026, 0, 8) },
+            { time: '11:00', client: 'Michael Chen', associate: 'David Okonkwo', type: 'Couples', date: new Date(2026, 0, 8) },
+            { time: '14:00', client: 'Mark & Lisa Harris', associate: 'Sarah Johnson', type: 'Couples', date: new Date(2026, 0, 8) },
+            { time: '15:30', client: 'Rachel Green', associate: 'Fatima Okafor', type: 'Individual', date: new Date(2026, 0, 8) },
+            { time: '09:30', client: 'Emma Stone', associate: 'Amara Mensah', type: 'Individual', date: new Date(2026, 0, 9) },
+            { time: '11:00', client: 'Robert Lee', associate: 'Kwame Asante', type: 'Individual', date: new Date(2026, 0, 9) },
+            { time: '14:00', client: 'Julia Roberts', associate: 'Chioma Eze', type: 'Individual', date: new Date(2026, 0, 10) },
+            { time: '16:00', client: 'Diana Prince', associate: 'Yemi Adebayo', type: 'Individual', date: new Date(2026, 0, 12) }
+        ];
+
+        function renderCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            const monthLabel = document.getElementById('calendarMonth');
+
+            if (!grid || !monthLabel) return;
+
+            const year = currentCalendarDate.getFullYear();
+            const month = currentCalendarDate.getMonth();
+
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                                'July', 'August', 'September', 'October', 'November', 'December'];
+            monthLabel.textContent = `${monthNames[month]} ${year}`;
+
+            const firstDay = new Date(year, month, 1);
+            const lastDay = new Date(year, month + 1, 0);
+            const daysInMonth = lastDay.getDate();
+
+            // Get the day of week for the first day (0 = Sunday, we want Monday = 0)
+            let startDay = firstDay.getDay() - 1;
+            if (startDay < 0) startDay = 6;
+
+            // Get days from previous month
+            const prevMonth = new Date(year, month, 0);
+            const daysInPrevMonth = prevMonth.getDate();
+
+            const today = new Date(2026, 0, 8); // Mock "today"
+
+            let html = '';
+            let dayCounter = 1;
+            let nextMonthDay = 1;
+
+            for (let row = 0; row < 6; row++) {
+                for (let col = 0; col < 7; col++) {
+                    const cellIndex = row * 7 + col;
+
+                    if (cellIndex < startDay) {
+                        // Previous month
+                        const day = daysInPrevMonth - startDay + cellIndex + 1;
+                        html += `<div class="calendar-day other-month">${day}</div>`;
+                    } else if (dayCounter <= daysInMonth) {
+                        // Current month
+                        const isToday = year === today.getFullYear() &&
+                                        month === today.getMonth() &&
+                                        dayCounter === today.getDate();
+
+                        const currentDate = new Date(year, month, dayCounter);
+                        const hasSessions = sessions.some(s =>
+                            s.date.getFullYear() === currentDate.getFullYear() &&
+                            s.date.getMonth() === currentDate.getMonth() &&
+                            s.date.getDate() === currentDate.getDate()
+                        );
+
+                        const classes = ['calendar-day'];
+                        if (isToday) classes.push('today');
+                        if (hasSessions) classes.push('has-sessions');
+
+                        html += `<div class="${classes.join(' ')}">${dayCounter}</div>`;
+                        dayCounter++;
+                    } else {
+                        // Next month
+                        html += `<div class="calendar-day other-month">${nextMonthDay}</div>`;
+                        nextMonthDay++;
+                    }
+                }
+            }
+
+            grid.innerHTML = html;
+            renderTodaysSessions();
+        }
+
+        function renderTodaysSessions() {
+            const list = document.getElementById('todaySessionsList');
+            if (!list) return;
+
+            const today = new Date(2026, 0, 8);
+            const todaysSessions = sessions.filter(s =>
+                s.date.getFullYear() === today.getFullYear() &&
+                s.date.getMonth() === today.getMonth() &&
+                s.date.getDate() === today.getDate()
+            );
+
+            if (todaysSessions.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-title">No sessions today</div>
+                        <div class="empty-state-text">Enjoy your day off!</div>
+                    </div>
+                `;
+                return;
+            }
+
+            list.innerHTML = todaysSessions.map(session => `
+                <div class="session-item">
+                    <div class="session-time">${session.time}</div>
+                    <div class="session-info">
+                        <div class="session-client">${session.client}</div>
+                        <div class="session-associate">with ${session.associate}</div>
+                    </div>
+                    <div class="session-type">${session.type}</div>
+                </div>
+            `).join('');
+        }
+
+        function changeMonth(delta) {
+            currentCalendarDate.setMonth(currentCalendarDate.getMonth() + delta);
+            renderCalendar();
+        }
+
+        // ============================================
+        // CPD FUNCTIONS
+        // ============================================
+
+        const cpdActivities = [
+            { date: '3 Jan 2026', title: 'Trauma-Informed Practice Workshop', category: 'Clinical Skills', hours: 4 },
+            { date: '18 Dec 2025', title: 'BACP Ethics Update', category: 'Ethics & Law', hours: 2 },
+            { date: '5 Dec 2025', title: 'Group Supervision Session', category: 'Supervision', hours: 2 },
+            { date: '28 Nov 2025', title: 'Mindfulness for Therapists', category: 'Self-Care', hours: 3 },
+            { date: '15 Nov 2025', title: 'Couples Therapy Techniques', category: 'Clinical Skills', hours: 4 }
+        ];
+
+        function renderCpdActivities() {
+            const list = document.getElementById('cpdActivityList');
+            if (!list) return;
+
+            list.innerHTML = cpdActivities.map(activity => `
+                <div class="cpd-activity-item">
+                    <div class="cpd-activity-date">${activity.date}</div>
+                    <div class="cpd-activity-info">
+                        <div class="cpd-activity-title">${activity.title}</div>
+                        <div class="cpd-activity-category">${activity.category}</div>
+                    </div>
+                    <div class="cpd-activity-hours">${activity.hours} hrs</div>
+                </div>
+            `).join('');
+        }
+
+        // ============================================
+        // WEALTH MODULE FUNCTIONS
+        // ============================================
+
+        let currentWealthModule = null;
+
+        const wealthModuleTitles = {
+            'cash-density': 'Cash Density',
+            'tax-intel': 'Tax Intelligence',
+            'payouts': 'Payout Cockpit',
+            'simulator': 'Wealth Lab'
+        };
+
+        const wealthModuleViews = {
+            'cash-density': 'cashDensityView',
+            'tax-intel': 'taxIntelView',
+            'payouts': 'payoutsView',
+            'simulator': 'simulatorView'
+        };
+
+        function openWealthModule(moduleName) {
+            currentWealthModule = moduleName;
+
+            // Update panel title
+            const titleEl = document.getElementById('wealthPanelTitle');
+            titleEl.textContent = wealthModuleTitles[moduleName] || 'Module';
+
+            // Hide all views, show selected
+            document.querySelectorAll('.wealth-view').forEach(v => v.classList.remove('active'));
+            const targetView = document.getElementById(wealthModuleViews[moduleName]);
+            if (targetView) {
+                targetView.classList.add('active');
+            }
+
+            // Open the panel
+            document.getElementById('wealthPanel').classList.add('open');
+        }
+
+        function closeWealthModule() {
+            document.getElementById('wealthPanel').classList.remove('open');
+            currentWealthModule = null;
+        }
+
+        // ============================================
+        // TAX INTELLIGENCE FUNCTIONS
+        // ============================================
+
+        let isPostVat = false;
+
+        function toggleVatMode() {
+            isPostVat = !isPostVat;
+
+            const toggle = document.getElementById('vatToggle');
+            const preLabel = document.getElementById('preVatLabel');
+            const postLabel = document.getElementById('postVatLabel');
+            const description = document.getElementById('taxModeDescription');
+            const preContent = document.getElementById('preVatContent');
+            const postContent = document.getElementById('postVatContent');
+
+            if (isPostVat) {
+                toggle.classList.add('active');
+                preLabel.classList.remove('active');
+                postLabel.classList.add('active');
+                description.textContent = 'Showing tax obligations including VAT';
+                preContent.style.display = 'none';
+                postContent.style.display = 'block';
+            } else {
+                toggle.classList.remove('active');
+                postLabel.classList.remove('active');
+                preLabel.classList.add('active');
+                description.textContent = 'Showing tax obligations before VAT registration threshold';
+                postContent.style.display = 'none';
+                preContent.style.display = 'block';
+            }
+        }
+
+        // ============================================
+        // PAYOUT COCKPIT FUNCTIONS
+        // ============================================
+
+        let currentPayoutFilter = 'all';
+
+        function filterPayouts(filter) {
+            currentPayoutFilter = filter;
+
+            // Update active button
+            document.querySelectorAll('.payout-filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === filter) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Filter cards
+            document.querySelectorAll('.payout-card').forEach(card => {
+                const status = card.dataset.status;
+                if (filter === 'all' || status === filter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openPayoutDetail(associateId) {
+            // Show detail view, hide overview
+            document.getElementById('payoutOverviewContent').style.display = 'none';
+            document.getElementById('payoutDetailContent').style.display = 'block';
+
+            // In a real app, you'd fetch data based on associateId
+            // For now, the mock data is already in the HTML
+            console.log('Opened payout detail for:', associateId);
+        }
+
+        function closePayoutDetail() {
+            // Hide detail view, show overview
+            document.getElementById('payoutDetailContent').style.display = 'none';
+            document.getElementById('payoutOverviewContent').style.display = 'block';
+        }
+
+        function markAsPaid() {
+            // In a real app, this would make an API call
+            alert('Payment marked as paid! (Demo only)');
+            closePayoutDetail();
+        }
+
+        // ============================================
+        // WEALTH LAB SIMULATOR FUNCTIONS
+        // ============================================
+
+        const simulatorDefaults = {
+            sessions: 25,
+            rate: 75,
+            split: 40,
+            overheads: 800,
+            taxRate: 25
+        };
+
+        function formatCurrency(value) {
+            return '£' + value.toLocaleString('en-GB', { maximumFractionDigits: 0 });
+        }
+
+        function updateSimulator() {
+            // Get input values
+            const sessions = parseInt(document.getElementById('sessionsSlider').value);
+            const rate = parseInt(document.getElementById('rateSlider').value);
+            const split = parseInt(document.getElementById('splitSlider').value);
+            const overheads = parseInt(document.getElementById('overheadsSlider').value);
+            const taxRate = parseInt(document.getElementById('taxRateSlider').value);
+
+            // Update displayed values
+            document.getElementById('sessionsValue').textContent = sessions;
+            document.getElementById('rateValue').textContent = formatCurrency(rate);
+            document.getElementById('splitValue').textContent = split + '%';
+            document.getElementById('overheadsValue').textContent = formatCurrency(overheads);
+            document.getElementById('taxRateValue').textContent = taxRate + '%';
+
+            // Calculate monthly values (4.33 weeks per month)
+            const weeksPerMonth = 4.33;
+            const grossRevenue = sessions * rate * weeksPerMonth;
+            const practiceShareAmount = grossRevenue * (split / 100);
+            const netToPractice = grossRevenue - practiceShareAmount;
+            const taxReserveAmount = netToPractice * (taxRate / 100);
+            const trueCash = netToPractice - overheads - taxReserveAmount;
+
+            // Update results display
+            document.getElementById('grossRevenue').textContent = formatCurrency(grossRevenue);
+            document.getElementById('practiceShare').textContent = '−' + formatCurrency(practiceShareAmount);
+            document.getElementById('netToPractice').textContent = formatCurrency(netToPractice);
+            document.getElementById('overheadsResult').textContent = '−' + formatCurrency(overheads);
+            document.getElementById('taxReserveResult').textContent = '−' + formatCurrency(taxReserveAmount);
+            document.getElementById('trueCashResult').textContent = formatCurrency(trueCash);
+
+            // Update hero value
+            document.getElementById('projectedIncome').textContent = formatCurrency(trueCash);
+
+            // Update projections
+            document.getElementById('projection3m').textContent = formatCurrency(trueCash * 3);
+            document.getElementById('projection6m').textContent = formatCurrency(trueCash * 6);
+            document.getElementById('projection12m').textContent = formatCurrency(trueCash * 12);
+
+            // Update dynamic label for practice share
+            const practiceShareLabel = document.querySelector('#practiceShare').closest('.results-row').querySelector('.results-label');
+            if (practiceShareLabel) {
+                practiceShareLabel.textContent = `Practice Share (${split}%)`;
+            }
+
+            // Update dynamic label for tax reserve
+            const taxReserveLabel = document.querySelector('#taxReserveResult').closest('.results-row').querySelector('.results-label');
+            if (taxReserveLabel) {
+                taxReserveLabel.textContent = `Tax Reserve (${taxRate}%)`;
+            }
+        }
+
+        function resetSimulator() {
+            // Reset sliders to defaults
+            document.getElementById('sessionsSlider').value = simulatorDefaults.sessions;
+            document.getElementById('rateSlider').value = simulatorDefaults.rate;
+            document.getElementById('splitSlider').value = simulatorDefaults.split;
+            document.getElementById('overheadsSlider').value = simulatorDefaults.overheads;
+            document.getElementById('taxRateSlider').value = simulatorDefaults.taxRate;
+
+            // Recalculate
+            updateSimulator();
+        }
+
+        function initSimulator() {
+            // Initialize with default values
+            updateSimulator();
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+
+        function init() {
+            renderCards();
+            initTabs();
+            initNavigation();
+            initBottomSheetSwipe();
+
+            // Initialize new views
+            renderFrictionFeed();
+            renderAllClientsGrid();
+            renderCalendar();
+            renderCpdActivities();
+
+            // Initialize Phase 2 modules
+            initSimulator();
+
+            // Handle window resize
+            window.addEventListener('resize', handleResize);
+
+            // Set initial mobile state
+            isMobile = window.innerWidth <= 768;
+        }
+
+        // Start the application
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
