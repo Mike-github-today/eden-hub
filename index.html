@@ -682,6 +682,194 @@
             white-space: nowrap;
         }
 
+        /* Enhanced Inbox Styles */
+        .message-item {
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            border-radius: var(--radius-standard);
+            margin: 0 -8px;
+            padding: 12px 8px;
+        }
+
+        .message-item:hover {
+            background-color: var(--eden-green-light);
+        }
+
+        .message-item.unread .message-subject {
+            font-weight: 600;
+        }
+
+        .message-item.unread::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--eden-green);
+        }
+
+        .inbox-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .compose-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: var(--radius-standard);
+            border: none;
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .compose-btn:hover {
+            background-color: var(--eden-green-hover);
+        }
+
+        .compose-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Message Viewer Panel */
+        .message-viewer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 500px;
+            max-width: 100%;
+            background-color: var(--pure-white);
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+            z-index: 270;
+            transform: translateX(100%);
+            transition: transform var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message-viewer.open {
+            transform: translateX(0);
+        }
+
+        .message-viewer-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--eden-border);
+            background-color: var(--eden-mint);
+        }
+
+        .message-viewer-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border: none;
+            background: transparent;
+            color: var(--eden-text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 16px;
+            border-radius: var(--radius-standard);
+            transition: all var(--transition-smooth);
+        }
+
+        .message-viewer-back:hover {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .message-viewer-subject {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--eden-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .message-viewer-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        .message-viewer-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px 20px;
+        }
+
+        .message-viewer-body {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--eden-text-primary);
+        }
+
+        .message-viewer-body p {
+            margin-bottom: 16px;
+        }
+
+        .message-viewer-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--eden-border);
+            background-color: var(--eden-surface);
+        }
+
+        .message-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .message-action-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: var(--radius-standard);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .message-action-btn.reply {
+            border: none;
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .message-action-btn.reply:hover {
+            background-color: var(--eden-green-hover);
+        }
+
+        .message-action-btn.archive {
+            border: 1px solid var(--eden-border);
+            background-color: var(--pure-white);
+            color: var(--eden-text-secondary);
+        }
+
+        .message-action-btn.archive:hover {
+            border-color: var(--eden-green);
+            color: var(--eden-green);
+        }
+
+        @media (max-width: 768px) {
+            .message-viewer {
+                width: 100%;
+            }
+        }
+
         /* ============================================
            BOTTOM SHEET (Mobile)
            ============================================ */
@@ -6128,45 +6316,18 @@
 
                 <!-- Inbox Tab -->
                 <div class="tab-panel" data-panel="inbox" id="inboxPanel">
-                    <div class="section-title">Recent Messages</div>
-                    <div class="message-item">
-                        <div class="message-icon">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
+                    <div class="inbox-header">
+                        <div class="section-title" style="margin: 0;">Messages</div>
+                        <button class="compose-btn" onclick="composeMessage()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
                             </svg>
-                        </div>
-                        <div class="message-content">
-                            <div class="message-subject">Insurance Renewal Reminder</div>
-                            <div class="message-preview">Your insurance certificate is due for renewal...</div>
-                        </div>
-                        <div class="message-date">2 days ago</div>
+                            Compose
+                        </button>
                     </div>
-                    <div class="message-item">
-                        <div class="message-icon">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
-                            </svg>
-                        </div>
-                        <div class="message-content">
-                            <div class="message-subject">Payout Processed</div>
-                            <div class="message-preview">Your December payout of £7,850 has been...</div>
-                        </div>
-                        <div class="message-date">1 week ago</div>
-                    </div>
-                    <div class="message-item">
-                        <div class="message-icon">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
-                            </svg>
-                        </div>
-                        <div class="message-content">
-                            <div class="message-subject">CPD Workshop Invitation</div>
-                            <div class="message-preview">You're invited to our upcoming trauma-informed...</div>
-                        </div>
-                        <div class="message-date">2 weeks ago</div>
+                    <div id="inboxMessages">
+                        <!-- Messages will be rendered by JavaScript -->
                     </div>
                 </div>
 
@@ -6198,6 +6359,47 @@
                 </div>
             </div>
         </aside>
+
+        <!-- Message Viewer Panel -->
+        <div class="message-viewer" id="messageViewer">
+            <div class="message-viewer-header">
+                <button class="message-viewer-back" onclick="closeMessageViewer()">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                    Back to Inbox
+                </button>
+                <h3 class="message-viewer-subject" id="messageViewerSubject">Message Subject</h3>
+                <div class="message-viewer-meta">
+                    <span id="messageViewerFrom">From: Eden Practice</span>
+                    <span id="messageViewerDate">2 days ago</span>
+                </div>
+            </div>
+            <div class="message-viewer-content">
+                <div class="message-viewer-body" id="messageViewerBody">
+                    <!-- Message content will be populated dynamically -->
+                </div>
+            </div>
+            <div class="message-viewer-footer">
+                <div class="message-actions">
+                    <button class="message-action-btn archive" onclick="archiveMessage()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="21 8 21 21 3 21 3 8"/>
+                            <rect x="1" y="3" width="22" height="5"/>
+                            <line x1="10" y1="12" x2="14" y2="12"/>
+                        </svg>
+                        Archive
+                    </button>
+                    <button class="message-action-btn reply" onclick="replyToMessage()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 17 4 12 9 7"/>
+                            <path d="M20 18v-2a4 4 0 0 0-4-4H4"/>
+                        </svg>
+                        Reply
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <!-- Bottom Sheet (Mobile) -->
         <div class="bottom-sheet-overlay" id="bottomSheetOverlay" onclick="closePanel()"></div>
@@ -7969,6 +8171,140 @@
 
                 sessionsTab.innerHTML = html;
             }
+        }
+
+        // ============================================
+        // INBOX MESSAGE FUNCTIONS
+        // ============================================
+
+        const messages = [
+            {
+                id: 'MSG-001',
+                subject: 'Insurance Renewal Reminder',
+                preview: 'Your professional indemnity insurance certificate is due for renewal...',
+                from: 'Eden Practice Admin',
+                date: '2 days ago',
+                unread: true,
+                body: `<p>Dear Associate,</p>
+                       <p>This is a friendly reminder that your professional indemnity insurance certificate is due for renewal in the next 14 days.</p>
+                       <p>Please ensure you upload your renewed certificate to the system before the expiry date to maintain your active status.</p>
+                       <p>If you have any questions about insurance requirements, please don't hesitate to reach out.</p>
+                       <p>Best regards,<br>Eden Practice Team</p>`
+            },
+            {
+                id: 'MSG-002',
+                subject: 'Payout Processed - December 2025',
+                preview: 'Your December payout of £7,850 has been processed and will arrive...',
+                from: 'Eden Finance',
+                date: '1 week ago',
+                unread: false,
+                body: `<p>Dear Associate,</p>
+                       <p>Your December 2025 payout has been processed:</p>
+                       <p><strong>Total Amount: £7,850.00</strong></p>
+                       <p>This payment covers 47 sessions at your agreed fee split. The funds will arrive in your account within 2-3 business days.</p>
+                       <p>You can view the full breakdown in your Earnings dashboard.</p>
+                       <p>Best regards,<br>Eden Finance Team</p>`
+            },
+            {
+                id: 'MSG-003',
+                subject: 'CPD Workshop Invitation: Trauma-Informed Practice',
+                preview: "You're invited to our upcoming workshop on trauma-informed approaches...",
+                from: 'Eden CPD',
+                date: '2 weeks ago',
+                unread: false,
+                body: `<p>Dear Associate,</p>
+                       <p>We're pleased to invite you to our upcoming CPD workshop:</p>
+                       <p><strong>Trauma-Informed Practice in Therapeutic Settings</strong></p>
+                       <p>Date: Saturday, 25th January 2026<br>Time: 10:00 AM - 4:00 PM<br>Location: Eden Practice HQ, London</p>
+                       <p>This workshop counts towards 6 CPD hours and is free for all associates.</p>
+                       <p>Best regards,<br>Eden CPD Team</p>`
+            },
+            {
+                id: 'MSG-004',
+                subject: 'New Client Referral',
+                preview: 'A new client has been referred to you. Please review their intake form...',
+                from: 'Eden Referrals',
+                date: '3 days ago',
+                unread: true,
+                body: `<p>Dear Associate,</p>
+                       <p>A new client has been referred to your caseload:</p>
+                       <p><strong>Client Reference: CLIENT-2521</strong></p>
+                       <p>The client is seeking couples therapy and has indicated availability on Tuesday and Thursday evenings.</p>
+                       <p>Please review their intake form and reach out within 48 hours to arrange an initial consultation.</p>
+                       <p>Best regards,<br>Eden Referrals Team</p>`
+            }
+        ];
+
+        let currentMessage = null;
+
+        function renderInboxMessages() {
+            const container = document.getElementById('inboxMessages');
+            if (!container) return;
+
+            container.innerHTML = messages.map(msg => `
+                <div class="message-item ${msg.unread ? 'unread' : ''}" onclick="openMessage('${msg.id}')" style="position: relative;">
+                    <div class="message-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-subject">${msg.subject}</div>
+                        <div class="message-preview">${msg.preview}</div>
+                    </div>
+                    <div class="message-date">${msg.date}</div>
+                </div>
+            `).join('');
+        }
+
+        function openMessage(messageId) {
+            const message = messages.find(m => m.id === messageId);
+            if (!message) return;
+
+            currentMessage = message;
+
+            // Mark as read
+            message.unread = false;
+            renderInboxMessages();
+
+            // Populate viewer
+            document.getElementById('messageViewerSubject').textContent = message.subject;
+            document.getElementById('messageViewerFrom').textContent = `From: ${message.from}`;
+            document.getElementById('messageViewerDate').textContent = message.date;
+            document.getElementById('messageViewerBody').innerHTML = message.body;
+
+            // Open viewer
+            document.getElementById('messageViewer').classList.add('open');
+        }
+
+        function closeMessageViewer() {
+            document.getElementById('messageViewer').classList.remove('open');
+            currentMessage = null;
+        }
+
+        function archiveMessage() {
+            if (!currentMessage) return;
+
+            // Remove from messages array
+            const index = messages.findIndex(m => m.id === currentMessage.id);
+            if (index > -1) {
+                messages.splice(index, 1);
+            }
+
+            closeMessageViewer();
+            renderInboxMessages();
+            showToast('Message archived');
+        }
+
+        function replyToMessage() {
+            if (!currentMessage) return;
+            showToast(`Replying to: ${currentMessage.subject}`);
+            closeMessageViewer();
+        }
+
+        function composeMessage() {
+            showToast('Compose message coming soon');
         }
 
         function viewClientAssociate(associateId) {
@@ -9751,6 +10087,7 @@
             renderContractsGrid();
             renderCalendar();
             renderCpdActivities();
+            renderInboxMessages();
 
             // Initialize Phase 2 modules
             initSimulator();
