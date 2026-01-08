@@ -3458,6 +3458,274 @@
             }
         }
 
+        /* Add Session Button & Modal */
+        .schedule-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+
+        .add-session-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: var(--radius-standard);
+            border: none;
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .add-session-btn:hover {
+            background-color: var(--eden-green-hover);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 400;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-container {
+            background-color: var(--pure-white);
+            border-radius: var(--radius-card);
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: modalSlideIn 200ms ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 1px solid var(--eden-border);
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin: 0;
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background-color: transparent;
+            color: var(--eden-text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-smooth);
+        }
+
+        .modal-close:hover {
+            background-color: var(--eden-mint);
+            color: var(--eden-text);
+        }
+
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 12px;
+            padding: 20px;
+            border-top: 1px solid var(--eden-border);
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: var(--radius-standard);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .modal-btn.primary {
+            background-color: var(--eden-green);
+            border: none;
+            color: var(--pure-white);
+        }
+
+        .modal-btn.primary:hover {
+            background-color: var(--eden-green-hover);
+        }
+
+        .modal-btn.secondary {
+            background-color: transparent;
+            border: 1px solid var(--eden-border);
+            color: var(--eden-text-secondary);
+        }
+
+        .modal-btn.secondary:hover {
+            border-color: var(--eden-green);
+            color: var(--eden-green);
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--eden-text);
+            margin-bottom: 6px;
+        }
+
+        .form-select,
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            font-size: 14px;
+            color: var(--eden-text);
+            background-color: var(--pure-white);
+            transition: all var(--transition-smooth);
+        }
+
+        .form-select:focus,
+        .form-input:focus {
+            outline: none;
+            border-color: var(--eden-green);
+            box-shadow: 0 0 0 3px var(--eden-green-light);
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            font-size: 14px;
+            color: var(--eden-text);
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--eden-green);
+            box-shadow: 0 0 0 3px var(--eden-green-light);
+        }
+
+        .session-type-options {
+            display: flex;
+            gap: 12px;
+        }
+
+        .session-type-option {
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .session-type-option input {
+            display: none;
+        }
+
+        .session-type-label {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+            transition: all var(--transition-smooth);
+        }
+
+        .session-type-option input:checked + .session-type-label {
+            border-color: var(--eden-green);
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+            font-weight: 500;
+        }
+
+        .session-conflict-warning {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background-color: #FEF3C7;
+            border: 1px solid #F59E0B;
+            border-radius: var(--radius-standard);
+            margin-bottom: 16px;
+            color: #92400E;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .schedule-header {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .add-session-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .session-type-options {
+                flex-direction: column;
+            }
+        }
+
         /* ============================================
            CPD VIEW
            ============================================ */
@@ -4091,9 +4359,18 @@
 
             <!-- Schedule View -->
             <div class="view-container" id="scheduleView">
-                <header class="page-header">
-                    <h1 class="page-title">Schedule</h1>
-                    <p class="page-subtitle">Session calendar</p>
+                <header class="page-header schedule-header">
+                    <div>
+                        <h1 class="page-title">Schedule</h1>
+                        <p class="page-subtitle">Session calendar</p>
+                    </div>
+                    <button class="add-session-btn" onclick="openAddSessionModal()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Add Session
+                    </button>
                 </header>
 
                 <!-- Calendar Navigation -->
@@ -4148,6 +4425,121 @@
                     </div>
                     <div class="session-detail-content" id="sessionDetailContent">
                         <!-- Session cards will be rendered here -->
+                    </div>
+                </div>
+
+                <!-- Add Session Modal -->
+                <div class="modal-overlay" id="addSessionModal">
+                    <div class="modal-container">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Add New Session</h3>
+                            <button class="modal-close" onclick="closeAddSessionModal()">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"/>
+                                    <line x1="6" y1="6" x2="18" y2="18"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Conflict Warning (hidden by default) -->
+                            <div class="session-conflict-warning" id="sessionConflictWarning" style="display: none;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                                    <line x1="12" y1="9" x2="12" y2="13"/>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                                </svg>
+                                <span id="conflictMessage">Scheduling conflict detected</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Client</label>
+                                <select class="form-select" id="sessionClient" onchange="checkSessionConflict()">
+                                    <option value="">Select client...</option>
+                                    <option value="James Wilson">James Wilson</option>
+                                    <option value="Sophie Taylor">Sophie Taylor</option>
+                                    <option value="Michael Chen">Michael Chen</option>
+                                    <option value="Mark & Lisa Harris">Mark & Lisa Harris</option>
+                                    <option value="Rachel Green">Rachel Green</option>
+                                    <option value="Emma Stone">Emma Stone</option>
+                                    <option value="Robert Lee">Robert Lee</option>
+                                    <option value="Julia Roberts">Julia Roberts</option>
+                                    <option value="Diana Prince">Diana Prince</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Associate</label>
+                                <select class="form-select" id="sessionAssociate" onchange="checkSessionConflict()">
+                                    <option value="">Select associate...</option>
+                                    <option value="Sarah Johnson">Sarah Johnson</option>
+                                    <option value="David Okonkwo">David Okonkwo</option>
+                                    <option value="Fatima Okafor">Fatima Okafor</option>
+                                    <option value="Amara Mensah">Amara Mensah</option>
+                                    <option value="Kwame Asante">Kwame Asante</option>
+                                    <option value="Chioma Eze">Chioma Eze</option>
+                                    <option value="Yemi Adebayo">Yemi Adebayo</option>
+                                </select>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Date</label>
+                                    <input type="date" class="form-input" id="sessionDate" onchange="checkSessionConflict()">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Time</label>
+                                    <select class="form-select" id="sessionTime" onchange="checkSessionConflict()">
+                                        <option value="">Select time...</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="09:30">09:30</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="10:30">10:30</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="11:30">11:30</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="14:30">14:30</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="15:30">15:30</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="16:30">16:30</option>
+                                        <option value="17:00">17:00</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Session Type</label>
+                                <div class="session-type-options">
+                                    <label class="session-type-option">
+                                        <input type="radio" name="sessionType" value="Individual" checked>
+                                        <span class="session-type-label">Individual</span>
+                                    </label>
+                                    <label class="session-type-option">
+                                        <input type="radio" name="sessionType" value="Couples">
+                                        <span class="session-type-label">Couples</span>
+                                    </label>
+                                    <label class="session-type-option">
+                                        <input type="radio" name="sessionType" value="Family">
+                                        <span class="session-type-label">Family</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Notes (optional)</label>
+                                <textarea class="form-textarea" id="sessionNotes" rows="3" placeholder="Add any notes about this session..."></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="modal-btn secondary" onclick="closeAddSessionModal()">Cancel</button>
+                            <button class="modal-btn primary" onclick="saveNewSession()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                                Save Session
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -6992,6 +7384,111 @@
 
         function viewSessionNotes(client) {
             alert(`Session notes for ${client} - Coming soon!`);
+        }
+
+        // Add Session Modal Functions
+        function openAddSessionModal() {
+            // Set default date to today
+            const today = new Date(2026, 0, 8); // Mock today
+            const dateInput = document.getElementById('sessionDate');
+            dateInput.value = today.toISOString().split('T')[0];
+
+            // Reset form
+            document.getElementById('sessionClient').value = '';
+            document.getElementById('sessionAssociate').value = '';
+            document.getElementById('sessionTime').value = '';
+            document.getElementById('sessionNotes').value = '';
+            document.querySelector('input[name="sessionType"][value="Individual"]').checked = true;
+            document.getElementById('sessionConflictWarning').style.display = 'none';
+
+            // Open modal
+            document.getElementById('addSessionModal').classList.add('open');
+        }
+
+        function closeAddSessionModal() {
+            document.getElementById('addSessionModal').classList.remove('open');
+        }
+
+        function checkSessionConflict() {
+            const associate = document.getElementById('sessionAssociate').value;
+            const dateValue = document.getElementById('sessionDate').value;
+            const time = document.getElementById('sessionTime').value;
+
+            if (!associate || !dateValue || !time) {
+                document.getElementById('sessionConflictWarning').style.display = 'none';
+                return false;
+            }
+
+            const dateParts = dateValue.split('-');
+            const year = parseInt(dateParts[0]);
+            const month = parseInt(dateParts[1]) - 1;
+            const day = parseInt(dateParts[2]);
+
+            // Check for conflicts
+            const conflict = sessions.find(s =>
+                s.associate === associate &&
+                s.date.getFullYear() === year &&
+                s.date.getMonth() === month &&
+                s.date.getDate() === day &&
+                s.time === time &&
+                s.status !== 'cancelled'
+            );
+
+            if (conflict) {
+                document.getElementById('conflictMessage').textContent =
+                    `${associate} already has a session at ${time} with ${conflict.client}`;
+                document.getElementById('sessionConflictWarning').style.display = 'flex';
+                return true;
+            }
+
+            document.getElementById('sessionConflictWarning').style.display = 'none';
+            return false;
+        }
+
+        function saveNewSession() {
+            const client = document.getElementById('sessionClient').value;
+            const associate = document.getElementById('sessionAssociate').value;
+            const dateValue = document.getElementById('sessionDate').value;
+            const time = document.getElementById('sessionTime').value;
+            const type = document.querySelector('input[name="sessionType"]:checked').value;
+
+            // Validate required fields
+            if (!client || !associate || !dateValue || !time) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // Check for conflicts
+            if (checkSessionConflict()) {
+                if (!confirm('There is a scheduling conflict. Add session anyway?')) {
+                    return;
+                }
+            }
+
+            // Parse date
+            const dateParts = dateValue.split('-');
+            const newDate = new Date(
+                parseInt(dateParts[0]),
+                parseInt(dateParts[1]) - 1,
+                parseInt(dateParts[2])
+            );
+
+            // Add new session to array
+            sessions.push({
+                time: time,
+                client: client,
+                associate: associate,
+                type: type,
+                status: 'pending',
+                date: newDate
+            });
+
+            // Refresh calendar and close modal
+            renderCalendar();
+            closeAddSessionModal();
+
+            // Show confirmation
+            alert(`Session added for ${client} on ${newDate.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })} at ${time}`);
         }
 
         // ============================================
