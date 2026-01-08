@@ -1830,6 +1830,130 @@
             white-space: nowrap;
         }
 
+        /* Cash Density Specific Styles */
+        .cash-chart-container {
+            position: relative;
+            padding-left: 100px;
+        }
+
+        .cash-threshold-marker {
+            position: absolute;
+            left: 0;
+            right: 0;
+            border-top: 2px dashed var(--alert-amber);
+        }
+
+        .cash-threshold-marker .threshold-text {
+            position: absolute;
+            left: 0;
+            top: -20px;
+            font-size: 11px;
+            color: var(--alert-amber);
+            font-weight: 500;
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            padding-top: 16px;
+            border-top: 1px solid var(--eden-border);
+            margin-top: 16px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .legend-color.projected {
+            background-color: var(--eden-green-light);
+            border: 2px dashed var(--eden-green);
+        }
+
+        .legend-text {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        /* Month Breakdown */
+        .month-breakdown {
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .month-breakdown:last-child {
+            margin-bottom: 0;
+        }
+
+        .month-breakdown-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background-color: var(--eden-mint);
+            border-bottom: 1px solid var(--eden-border);
+        }
+
+        .month-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .month-status {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .month-status.current {
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .month-status.projected {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .breakdown-details {
+            padding: 8px 16px;
+        }
+
+        .info-value.positive {
+            color: var(--eden-green);
+        }
+
+        .info-value.negative {
+            color: var(--alert-rose);
+        }
+
+        .info-row.total {
+            border-top: 2px solid var(--eden-border);
+            border-bottom: none;
+            margin-top: 8px;
+            padding-top: 12px;
+            font-weight: 600;
+        }
+
+        .info-row.total .info-label,
+        .info-row.total .info-value {
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
         /* ============================================
            SCHEDULE / CALENDAR
            ============================================ */
@@ -3355,7 +3479,177 @@
             <div class="wealth-panel-content">
                 <!-- Cash Density View -->
                 <div class="wealth-view" id="cashDensityView">
-                    <!-- Content will be added in Chunk 2 -->
+                    <!-- Hero Summary -->
+                    <div class="wealth-card">
+                        <div class="wealth-card-header">
+                            <span class="wealth-card-title">3-Month Cash Projection</span>
+                        </div>
+                        <div class="wealth-hero-value">£24,680</div>
+                        <div class="wealth-hero-label">Projected available cash by end of March</div>
+                    </div>
+
+                    <!-- Month Stats Grid -->
+                    <div class="wealth-stats-grid">
+                        <div class="wealth-stat-card">
+                            <div class="wealth-stat-value">£18,420</div>
+                            <div class="wealth-stat-label">January (Current)</div>
+                        </div>
+                        <div class="wealth-stat-card">
+                            <div class="wealth-stat-value">£21,350</div>
+                            <div class="wealth-stat-label">February (Projected)</div>
+                        </div>
+                        <div class="wealth-stat-card">
+                            <div class="wealth-stat-value">£24,680</div>
+                            <div class="wealth-stat-label">March (Projected)</div>
+                        </div>
+                    </div>
+
+                    <!-- Cash Flow Bar Chart -->
+                    <div class="wealth-card">
+                        <div class="wealth-card-header">
+                            <span class="wealth-card-title">Cash Flow Visualization</span>
+                        </div>
+                        <div class="cash-chart-container">
+                            <div class="cash-threshold-marker" style="bottom: 40%;">
+                                <span class="threshold-text">£10k Safe Threshold</span>
+                            </div>
+                            <div class="bar-chart" id="cashDensityChart">
+                                <div class="bar-item">
+                                    <div class="bar-value">£18.4k</div>
+                                    <div class="bar-fill" style="height: 73%;">
+                                        <div class="threshold-line" style="bottom: 54%;"></div>
+                                    </div>
+                                    <div class="bar-label">Jan</div>
+                                </div>
+                                <div class="bar-item">
+                                    <div class="bar-value">£21.4k</div>
+                                    <div class="bar-fill projected" style="height: 85%;"></div>
+                                    <div class="bar-label">Feb</div>
+                                </div>
+                                <div class="bar-item">
+                                    <div class="bar-value">£24.7k</div>
+                                    <div class="bar-fill projected" style="height: 98%;"></div>
+                                    <div class="bar-label">Mar</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-color" style="background-color: var(--eden-green);"></span>
+                                <span class="legend-text">Actual</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color projected"></span>
+                                <span class="legend-text">Projected</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monthly Breakdown Cards -->
+                    <div class="wealth-card">
+                        <div class="wealth-card-header">
+                            <span class="wealth-card-title">Monthly Breakdown</span>
+                        </div>
+
+                        <div class="month-breakdown">
+                            <div class="month-breakdown-header">
+                                <span class="month-name">January 2026</span>
+                                <span class="month-status current">Current Month</span>
+                            </div>
+                            <div class="breakdown-details">
+                                <div class="info-row">
+                                    <span class="info-label">Opening Balance</span>
+                                    <span class="info-value">£32,680</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Expected Income</span>
+                                    <span class="info-value positive">+£8,400</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Payouts Due</span>
+                                    <span class="info-value negative">−£2,890</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Tax Reserve</span>
+                                    <span class="info-value negative">−£7,170</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Operating Costs</span>
+                                    <span class="info-value negative">−£1,200</span>
+                                </div>
+                                <div class="info-row total">
+                                    <span class="info-label">Projected Close</span>
+                                    <span class="info-value">£18,420</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="month-breakdown">
+                            <div class="month-breakdown-header">
+                                <span class="month-name">February 2026</span>
+                                <span class="month-status projected">Projected</span>
+                            </div>
+                            <div class="breakdown-details">
+                                <div class="info-row">
+                                    <span class="info-label">Opening Balance</span>
+                                    <span class="info-value">£18,420</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Expected Income</span>
+                                    <span class="info-value positive">+£9,200</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Payouts Due</span>
+                                    <span class="info-value negative">−£3,120</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Tax Reserve</span>
+                                    <span class="info-value negative">−£2,300</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Operating Costs</span>
+                                    <span class="info-value negative">−£850</span>
+                                </div>
+                                <div class="info-row total">
+                                    <span class="info-label">Projected Close</span>
+                                    <span class="info-value">£21,350</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="month-breakdown">
+                            <div class="month-breakdown-header">
+                                <span class="month-name">March 2026</span>
+                                <span class="month-status projected">Projected</span>
+                            </div>
+                            <div class="breakdown-details">
+                                <div class="info-row">
+                                    <span class="info-label">Opening Balance</span>
+                                    <span class="info-value">£21,350</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Expected Income</span>
+                                    <span class="info-value positive">+£9,800</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Payouts Due</span>
+                                    <span class="info-value negative">−£3,450</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Tax Reserve</span>
+                                    <span class="info-value negative">−£2,450</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Operating Costs</span>
+                                    <span class="info-value negative">−£570</span>
+                                </div>
+                                <div class="info-row total">
+                                    <span class="info-label">Projected Close</span>
+                                    <span class="info-value">£24,680</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Tax Intelligence View -->
