@@ -2843,6 +2843,247 @@
         }
 
         /* ============================================
+           WEALTH LAB SIMULATOR
+           ============================================ */
+
+        .simulator-intro {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .simulator-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background-color: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--eden-green);
+            flex-shrink: 0;
+        }
+
+        .simulator-intro-text h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin: 0 0 4px 0;
+        }
+
+        .simulator-intro-text p {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+            margin: 0;
+        }
+
+        .simulator-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .simulator-inputs,
+        .simulator-results {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .simulator-input-group {
+            margin-bottom: 20px;
+        }
+
+        .simulator-input-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .simulator-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--eden-text);
+        }
+
+        .simulator-value {
+            font-weight: 600;
+            color: var(--eden-green);
+        }
+
+        .simulator-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--eden-border);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .simulator-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--eden-green);
+            cursor: pointer;
+            border: 3px solid var(--pure-white);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            transition: transform var(--transition-smooth);
+        }
+
+        .simulator-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        .simulator-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--eden-green);
+            cursor: pointer;
+            border: 3px solid var(--pure-white);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4px;
+            font-size: 11px;
+            color: var(--eden-text-secondary);
+        }
+
+        .simulator-reset-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: var(--radius-standard);
+            border: 1px solid var(--eden-border);
+            background-color: var(--pure-white);
+            color: var(--eden-text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .simulator-reset-btn:hover {
+            border-color: var(--eden-green);
+            color: var(--eden-green);
+        }
+
+        .results-hero {
+            text-align: center;
+            background-color: var(--eden-green);
+            border-color: var(--eden-green);
+        }
+
+        .results-hero .wealth-card-title {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .results-hero-value {
+            font-size: 42px;
+            font-weight: 600;
+            color: var(--pure-white);
+            margin: 8px 0;
+        }
+
+        .results-hero-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .results-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--eden-border);
+        }
+
+        .results-row:last-child {
+            border-bottom: none;
+        }
+
+        .results-label {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+        }
+
+        .results-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--eden-text);
+        }
+
+        .results-value.negative {
+            color: var(--alert-rose);
+        }
+
+        .results-divider {
+            height: 1px;
+            background-color: var(--eden-border);
+            margin: 8px 0;
+        }
+
+        .results-row.total {
+            padding-top: 12px;
+            border-bottom: none;
+        }
+
+        .results-row.total .results-label,
+        .results-row.total .results-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .projection-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .projection-card {
+            text-align: center;
+            padding: 16px 12px;
+        }
+
+        .projection-period {
+            font-size: 11px;
+            color: var(--eden-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .projection-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        @media (max-width: 768px) {
+            .simulator-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .projection-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .results-hero-value {
+                font-size: 32px;
+            }
+        }
+
+        /* ============================================
            SCHEDULE / CALENDAR
            ============================================ */
 
@@ -5179,7 +5420,170 @@
 
                 <!-- Wealth Lab View -->
                 <div class="wealth-view" id="simulatorView">
-                    <!-- Content will be added in Chunks 7-8 -->
+                    <!-- Simulator Header -->
+                    <div class="wealth-card simulator-intro">
+                        <div class="simulator-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                                <polyline points="2 17 12 22 22 17"/>
+                                <polyline points="2 12 12 17 22 12"/>
+                            </svg>
+                        </div>
+                        <div class="simulator-intro-text">
+                            <h3>Financial Scenario Planner</h3>
+                            <p>Adjust the inputs below to see how changes affect your projected earnings</p>
+                        </div>
+                    </div>
+
+                    <div class="simulator-layout">
+                        <!-- Input Panel -->
+                        <div class="simulator-inputs">
+                            <div class="wealth-card">
+                                <div class="wealth-card-header">
+                                    <span class="wealth-card-title">Revenue Assumptions</span>
+                                </div>
+
+                                <div class="simulator-input-group">
+                                    <label class="simulator-label">
+                                        <span>Sessions per Week</span>
+                                        <span class="simulator-value" id="sessionsValue">25</span>
+                                    </label>
+                                    <input type="range" class="simulator-slider" id="sessionsSlider"
+                                           min="10" max="50" value="25" oninput="updateSimulator()">
+                                    <div class="slider-labels">
+                                        <span>10</span>
+                                        <span>50</span>
+                                    </div>
+                                </div>
+
+                                <div class="simulator-input-group">
+                                    <label class="simulator-label">
+                                        <span>Average Session Rate</span>
+                                        <span class="simulator-value" id="rateValue">£75</span>
+                                    </label>
+                                    <input type="range" class="simulator-slider" id="rateSlider"
+                                           min="50" max="150" value="75" step="5" oninput="updateSimulator()">
+                                    <div class="slider-labels">
+                                        <span>£50</span>
+                                        <span>£150</span>
+                                    </div>
+                                </div>
+
+                                <div class="simulator-input-group">
+                                    <label class="simulator-label">
+                                        <span>Practice Split (%)</span>
+                                        <span class="simulator-value" id="splitValue">40%</span>
+                                    </label>
+                                    <input type="range" class="simulator-slider" id="splitSlider"
+                                           min="20" max="60" value="40" step="5" oninput="updateSimulator()">
+                                    <div class="slider-labels">
+                                        <span>20%</span>
+                                        <span>60%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="wealth-card">
+                                <div class="wealth-card-header">
+                                    <span class="wealth-card-title">Expense Adjustments</span>
+                                </div>
+
+                                <div class="simulator-input-group">
+                                    <label class="simulator-label">
+                                        <span>Monthly Overheads</span>
+                                        <span class="simulator-value" id="overheadsValue">£800</span>
+                                    </label>
+                                    <input type="range" class="simulator-slider" id="overheadsSlider"
+                                           min="200" max="2000" value="800" step="100" oninput="updateSimulator()">
+                                    <div class="slider-labels">
+                                        <span>£200</span>
+                                        <span>£2,000</span>
+                                    </div>
+                                </div>
+
+                                <div class="simulator-input-group">
+                                    <label class="simulator-label">
+                                        <span>Tax Reserve Rate</span>
+                                        <span class="simulator-value" id="taxRateValue">25%</span>
+                                    </label>
+                                    <input type="range" class="simulator-slider" id="taxRateSlider"
+                                           min="15" max="40" value="25" oninput="updateSimulator()">
+                                    <div class="slider-labels">
+                                        <span>15%</span>
+                                        <span>40%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="simulator-reset-btn" onclick="resetSimulator()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="1 4 1 10 7 10"/>
+                                    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                                </svg>
+                                Reset to Defaults
+                            </button>
+                        </div>
+
+                        <!-- Results Panel -->
+                        <div class="simulator-results">
+                            <div class="wealth-card results-hero">
+                                <div class="wealth-card-header">
+                                    <span class="wealth-card-title">Projected Monthly Income</span>
+                                </div>
+                                <div class="results-hero-value" id="projectedIncome">£4,500</div>
+                                <div class="results-hero-label">After tax reserve & expenses</div>
+                            </div>
+
+                            <div class="results-breakdown">
+                                <div class="wealth-card">
+                                    <div class="wealth-card-header">
+                                        <span class="wealth-card-title">Monthly Breakdown</span>
+                                    </div>
+                                    <div class="results-row">
+                                        <span class="results-label">Gross Revenue</span>
+                                        <span class="results-value" id="grossRevenue">£8,125</span>
+                                    </div>
+                                    <div class="results-row">
+                                        <span class="results-label">Practice Share (40%)</span>
+                                        <span class="results-value negative" id="practiceShare">−£3,250</span>
+                                    </div>
+                                    <div class="results-row">
+                                        <span class="results-label">Net to Practice</span>
+                                        <span class="results-value" id="netToPractice">£4,875</span>
+                                    </div>
+                                    <div class="results-divider"></div>
+                                    <div class="results-row">
+                                        <span class="results-label">Overheads</span>
+                                        <span class="results-value negative" id="overheadsResult">−£800</span>
+                                    </div>
+                                    <div class="results-row">
+                                        <span class="results-label">Tax Reserve (25%)</span>
+                                        <span class="results-value negative" id="taxReserveResult">−£1,019</span>
+                                    </div>
+                                    <div class="results-divider"></div>
+                                    <div class="results-row total">
+                                        <span class="results-label">True Cash</span>
+                                        <span class="results-value" id="trueCashResult">£3,056</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="projection-cards">
+                                <div class="wealth-card projection-card">
+                                    <div class="projection-period">3 Months</div>
+                                    <div class="projection-value" id="projection3m">£9,168</div>
+                                </div>
+                                <div class="wealth-card projection-card">
+                                    <div class="projection-period">6 Months</div>
+                                    <div class="projection-value" id="projection6m">£18,336</div>
+                                </div>
+                                <div class="wealth-card projection-card">
+                                    <div class="projection-period">12 Months</div>
+                                    <div class="projection-value" id="projection12m">£36,672</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
