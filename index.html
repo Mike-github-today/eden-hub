@@ -682,6 +682,194 @@
             white-space: nowrap;
         }
 
+        /* Enhanced Inbox Styles */
+        .message-item {
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            border-radius: var(--radius-standard);
+            margin: 0 -8px;
+            padding: 12px 8px;
+        }
+
+        .message-item:hover {
+            background-color: var(--eden-green-light);
+        }
+
+        .message-item.unread .message-subject {
+            font-weight: 600;
+        }
+
+        .message-item.unread::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--eden-green);
+        }
+
+        .inbox-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .compose-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: var(--radius-standard);
+            border: none;
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .compose-btn:hover {
+            background-color: var(--eden-green-hover);
+        }
+
+        .compose-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Message Viewer Panel */
+        .message-viewer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 500px;
+            max-width: 100%;
+            background-color: var(--pure-white);
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+            z-index: 270;
+            transform: translateX(100%);
+            transition: transform var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message-viewer.open {
+            transform: translateX(0);
+        }
+
+        .message-viewer-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--eden-border);
+            background-color: var(--eden-mint);
+        }
+
+        .message-viewer-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border: none;
+            background: transparent;
+            color: var(--eden-text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 16px;
+            border-radius: var(--radius-standard);
+            transition: all var(--transition-smooth);
+        }
+
+        .message-viewer-back:hover {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .message-viewer-subject {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--eden-text-primary);
+            margin-bottom: 8px;
+        }
+
+        .message-viewer-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        .message-viewer-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px 20px;
+        }
+
+        .message-viewer-body {
+            font-size: 14px;
+            line-height: 1.7;
+            color: var(--eden-text-primary);
+        }
+
+        .message-viewer-body p {
+            margin-bottom: 16px;
+        }
+
+        .message-viewer-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--eden-border);
+            background-color: var(--eden-surface);
+        }
+
+        .message-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .message-action-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: var(--radius-standard);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .message-action-btn.reply {
+            border: none;
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .message-action-btn.reply:hover {
+            background-color: var(--eden-green-hover);
+        }
+
+        .message-action-btn.archive {
+            border: 1px solid var(--eden-border);
+            background-color: var(--pure-white);
+            color: var(--eden-text-secondary);
+        }
+
+        .message-action-btn.archive:hover {
+            border-color: var(--eden-green);
+            color: var(--eden-green);
+        }
+
+        @media (max-width: 768px) {
+            .message-viewer {
+                width: 100%;
+            }
+        }
+
         /* ============================================
            BOTTOM SHEET (Mobile)
            ============================================ */
@@ -930,6 +1118,178 @@
         .summary-card-action svg {
             width: 16px;
             height: 16px;
+        }
+
+        /* Analytics Card Enhancements */
+        .summary-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .summary-card-trend {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .summary-card-trend.up {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .summary-card-trend.down {
+            background-color: #FCE7E7;
+            color: #B91C1C;
+        }
+
+        .summary-card-trend.neutral {
+            background-color: var(--eden-surface);
+            color: var(--eden-text-secondary);
+        }
+
+        .summary-card-trend svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .summary-card-sparkline {
+            height: 40px;
+            margin: 12px 0;
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+        }
+
+        .sparkline-bar {
+            flex: 1;
+            background-color: var(--eden-green-light);
+            border-radius: 2px 2px 0 0;
+            transition: all var(--transition-smooth);
+            min-height: 4px;
+        }
+
+        .sparkline-bar:hover {
+            background-color: var(--eden-green);
+        }
+
+        .sparkline-bar.highlight {
+            background-color: var(--eden-green);
+        }
+
+        .summary-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--eden-border);
+        }
+
+        .summary-card-detail {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .summary-card-detail strong {
+            color: var(--eden-text-primary);
+        }
+
+        /* Analytics Section */
+        .analytics-section {
+            margin-top: 32px;
+        }
+
+        .analytics-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .analytics-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--eden-text-primary);
+        }
+
+        .analytics-period-toggle {
+            display: flex;
+            gap: 4px;
+            padding: 4px;
+            background-color: var(--eden-surface);
+            border-radius: var(--radius-standard);
+        }
+
+        .analytics-period-btn {
+            padding: 6px 12px;
+            border: none;
+            background: none;
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all var(--transition-smooth);
+        }
+
+        .analytics-period-btn.active {
+            background-color: var(--pure-white);
+            color: var(--eden-text-primary);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .analytics-metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .analytics-metric-card {
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            padding: 16px;
+            text-align: center;
+        }
+
+        .analytics-metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--eden-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .analytics-metric-label {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .analytics-metric-change {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .analytics-metric-change.up {
+            color: var(--eden-green);
+        }
+
+        .analytics-metric-change.down {
+            color: #B91C1C;
+        }
+
+        @media (max-width: 768px) {
+            .analytics-metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         /* View containers */
@@ -3969,6 +4329,292 @@
             }
         }
 
+        /* Contract Detail Panel */
+        .contract-detail-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 480px;
+            max-width: 100%;
+            background-color: var(--pure-white);
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+            z-index: 260;
+            transform: translateX(100%);
+            transition: transform var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contract-detail-panel.open {
+            transform: translateX(0);
+        }
+
+        .contract-detail-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--eden-border);
+            background-color: var(--eden-mint);
+        }
+
+        .contract-detail-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border: none;
+            background: transparent;
+            color: var(--eden-text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            margin-bottom: 16px;
+            border-radius: var(--radius-standard);
+            transition: all var(--transition-smooth);
+        }
+
+        .contract-detail-back:hover {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .contract-detail-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .contract-detail-associate {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contract-detail-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-standard);
+            background-color: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--eden-green);
+            font-size: 18px;
+        }
+
+        .contract-detail-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--eden-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .contract-detail-role {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+        }
+
+        .contract-detail-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px 20px;
+        }
+
+        .contract-detail-section {
+            margin-bottom: 28px;
+        }
+
+        .contract-detail-section-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--eden-text-secondary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contract-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .contract-info-item {
+            background-color: var(--eden-surface);
+            border-radius: var(--radius-standard);
+            padding: 14px;
+        }
+
+        .contract-info-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .contract-info-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--eden-text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .contract-info-value {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--eden-text-primary);
+        }
+
+        .contract-timeline {
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .contract-timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background-color: var(--eden-border);
+        }
+
+        .contract-timeline-item {
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .contract-timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .contract-timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -17px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--eden-green);
+            border: 2px solid var(--pure-white);
+        }
+
+        .contract-timeline-date {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            margin-bottom: 2px;
+        }
+
+        .contract-timeline-event {
+            font-size: 14px;
+            color: var(--eden-text-primary);
+        }
+
+        .contract-documents {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contract-document-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background-color: var(--eden-surface);
+            border-radius: var(--radius-standard);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .contract-document-item:hover {
+            background-color: var(--eden-green-light);
+        }
+
+        .contract-document-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-standard);
+            background-color: var(--pure-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--eden-green);
+        }
+
+        .contract-document-info {
+            flex: 1;
+        }
+
+        .contract-document-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--eden-text-primary);
+        }
+
+        .contract-document-meta {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .contract-detail-footer {
+            padding: 16px 20px;
+            border-top: 1px solid var(--eden-border);
+            background-color: var(--eden-surface);
+        }
+
+        .contract-footer-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .contract-footer-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px;
+            border-radius: var(--radius-standard);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .contract-footer-btn.secondary {
+            border: 1px solid var(--eden-border);
+            background-color: var(--pure-white);
+            color: var(--eden-text-secondary);
+        }
+
+        .contract-footer-btn.secondary:hover {
+            border-color: var(--eden-green);
+            color: var(--eden-green);
+        }
+
+        .contract-footer-btn.primary {
+            border: none;
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .contract-footer-btn.primary:hover {
+            background-color: var(--eden-green-hover);
+        }
+
+        @media (max-width: 768px) {
+            .contract-detail-panel {
+                width: 100%;
+            }
+
+            .contract-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Add Session Button & Modal */
         .schedule-header {
             display: flex;
@@ -4622,58 +5268,105 @@
                 </header>
 
                 <div class="dashboard-grid">
-                    <!-- Revenue Card -->
-                    <div class="summary-card">
-                        <div class="summary-card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="12" y1="1" x2="12" y2="23"/>
-                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                            </svg>
+                    <!-- Revenue Card with Trend -->
+                    <div class="summary-card clickable" onclick="showView('earnings')">
+                        <div class="summary-card-header">
+                            <div class="summary-card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="1" x2="12" y2="23"/>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                </svg>
+                            </div>
+                            <div class="summary-card-trend up">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="18 15 12 9 6 15"/>
+                                </svg>
+                                12%
+                            </div>
                         </div>
                         <div class="summary-card-value">£24,680</div>
                         <div class="summary-card-label">Revenue (MTD)</div>
+                        <div class="summary-card-sparkline">
+                            <div class="sparkline-bar" style="height: 45%"></div>
+                            <div class="sparkline-bar" style="height: 60%"></div>
+                            <div class="sparkline-bar" style="height: 55%"></div>
+                            <div class="sparkline-bar" style="height: 70%"></div>
+                            <div class="sparkline-bar" style="height: 65%"></div>
+                            <div class="sparkline-bar" style="height: 80%"></div>
+                            <div class="sparkline-bar highlight" style="height: 100%"></div>
+                        </div>
+                        <div class="summary-card-footer">
+                            <span class="summary-card-detail">Target: <strong>£30,000</strong></span>
+                            <span class="summary-card-detail">82% achieved</span>
+                        </div>
                     </div>
 
-                    <!-- Clients Card -->
-                    <div class="summary-card">
-                        <div class="summary-card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                <circle cx="12" cy="7" r="4"/>
-                            </svg>
+                    <!-- Clients Card with Trend -->
+                    <div class="summary-card clickable" onclick="showView('clients')">
+                        <div class="summary-card-header">
+                            <div class="summary-card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                            </div>
+                            <div class="summary-card-trend up">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="18 15 12 9 6 15"/>
+                                </svg>
+                                5%
+                            </div>
                         </div>
                         <div class="summary-card-value">74</div>
                         <div class="summary-card-label">Active Clients</div>
+                        <div class="summary-card-footer">
+                            <span class="summary-card-detail">New this month: <strong>8</strong></span>
+                            <span class="summary-card-detail">Retention: 94%</span>
+                        </div>
                     </div>
 
                     <!-- Associates Card (Clickable) -->
                     <div class="summary-card clickable" onclick="showView('associates')">
-                        <div class="summary-card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                            </svg>
+                        <div class="summary-card-header">
+                            <div class="summary-card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                            </div>
+                            <div class="summary-card-trend neutral">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="5" y1="12" x2="19" y2="12"/>
+                                </svg>
+                                0%
+                            </div>
                         </div>
                         <div class="summary-card-value">7</div>
                         <div class="summary-card-label">Associates</div>
-                        <div class="summary-card-action">
-                            View all
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="9 18 15 12 9 6"/>
-                            </svg>
+                        <div class="summary-card-footer">
+                            <span class="summary-card-detail">Independent: <strong>5</strong></span>
+                            <span class="summary-card-detail">Supported: 2</span>
                         </div>
                     </div>
 
                     <!-- Actions Card -->
-                    <div class="summary-card">
-                        <div class="summary-card-icon" style="background-color: #FEF3C7;">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="#92400E" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="12" y1="8" x2="12" y2="12"/>
-                                <line x1="12" y1="16" x2="12.01" y2="16"/>
-                            </svg>
+                    <div class="summary-card clickable" onclick="showView('action-centre')">
+                        <div class="summary-card-header">
+                            <div class="summary-card-icon" style="background-color: #FEF3C7;">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#92400E" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="12" y1="8" x2="12" y2="12"/>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                </svg>
+                            </div>
+                            <div class="summary-card-trend down">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"/>
+                                </svg>
+                                2
+                            </div>
                         </div>
                         <div class="summary-card-value">3</div>
                         <div class="summary-card-label">Pending Actions</div>
@@ -4693,18 +5386,84 @@
                         </div>
                     </div>
 
-                    <!-- Calendar Card -->
-                    <div class="summary-card">
-                        <div class="summary-card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                <line x1="16" y1="2" x2="16" y2="6"/>
-                                <line x1="8" y1="2" x2="8" y2="6"/>
-                                <line x1="3" y1="10" x2="21" y2="10"/>
-                            </svg>
+                    <!-- Sessions Card with Trend -->
+                    <div class="summary-card clickable" onclick="showView('schedule')">
+                        <div class="summary-card-header">
+                            <div class="summary-card-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                    <line x1="16" y1="2" x2="16" y2="6"/>
+                                    <line x1="8" y1="2" x2="8" y2="6"/>
+                                    <line x1="3" y1="10" x2="21" y2="10"/>
+                                </svg>
+                            </div>
+                            <div class="summary-card-trend up">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="18 15 12 9 6 15"/>
+                                </svg>
+                                8%
+                            </div>
                         </div>
                         <div class="summary-card-value">12</div>
                         <div class="summary-card-label">Sessions Today</div>
+                        <div class="summary-card-footer">
+                            <span class="summary-card-detail">Confirmed: <strong>10</strong></span>
+                            <span class="summary-card-detail">Pending: 2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weekly Analytics Section -->
+                <div class="analytics-section">
+                    <div class="analytics-section-header">
+                        <h2 class="analytics-section-title">This Week Overview</h2>
+                        <div class="analytics-period-toggle">
+                            <button class="analytics-period-btn active" onclick="setAnalyticsPeriod('week')">Week</button>
+                            <button class="analytics-period-btn" onclick="setAnalyticsPeriod('month')">Month</button>
+                            <button class="analytics-period-btn" onclick="setAnalyticsPeriod('quarter')">Quarter</button>
+                        </div>
+                    </div>
+                    <div class="analytics-metrics-grid">
+                        <div class="analytics-metric-card">
+                            <div class="analytics-metric-value">47</div>
+                            <div class="analytics-metric-label">Total Sessions</div>
+                            <span class="analytics-metric-change up">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="18 15 12 9 6 15"/>
+                                </svg>
+                                +12% vs last week
+                            </span>
+                        </div>
+                        <div class="analytics-metric-card">
+                            <div class="analytics-metric-value">£6,820</div>
+                            <div class="analytics-metric-label">Weekly Revenue</div>
+                            <span class="analytics-metric-change up">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="18 15 12 9 6 15"/>
+                                </svg>
+                                +8% vs last week
+                            </span>
+                        </div>
+                        <div class="analytics-metric-card">
+                            <div class="analytics-metric-value">92%</div>
+                            <div class="analytics-metric-label">Attendance Rate</div>
+                            <span class="analytics-metric-change up">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="18 15 12 9 6 15"/>
+                                </svg>
+                                +3% vs last week
+                            </span>
+                        </div>
+                        <div class="analytics-metric-card">
+                            <div class="analytics-metric-value">4.8</div>
+                            <div class="analytics-metric-label">Avg. Rating</div>
+                            <span class="analytics-metric-change up">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="18 15 12 9 6 15"/>
+                                </svg>
+                                +0.2 vs last week
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -4875,6 +5634,86 @@
                 <!-- Contracts Grid -->
                 <div class="contracts-grid" id="contractsGrid">
                     <!-- Contract cards will be rendered by JavaScript -->
+                </div>
+
+                <!-- Contract Detail Panel -->
+                <div class="contract-detail-panel" id="contractDetailPanel">
+                    <div class="contract-detail-header">
+                        <button class="contract-detail-back" onclick="closeContractDetail()">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <polyline points="15 18 9 12 15 6"/>
+                            </svg>
+                            Back to Contracts
+                        </button>
+                        <div class="contract-detail-title-row">
+                            <div class="contract-detail-associate">
+                                <div class="contract-detail-avatar" id="contractDetailAvatar">SJ</div>
+                                <div>
+                                    <div class="contract-detail-name" id="contractDetailName">Sarah Johnson</div>
+                                    <div class="contract-detail-role" id="contractDetailRole">Counsellor</div>
+                                </div>
+                            </div>
+                            <span class="contract-status-badge active" id="contractDetailStatus">Active</span>
+                        </div>
+                    </div>
+                    <div class="contract-detail-content">
+                        <div class="contract-detail-section">
+                            <div class="contract-detail-section-title">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                </svg>
+                                Contract Details
+                            </div>
+                            <div class="contract-info-grid" id="contractInfoGrid">
+                                <!-- Details will be populated dynamically -->
+                            </div>
+                        </div>
+
+                        <div class="contract-detail-section">
+                            <div class="contract-detail-section-title">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                                Contract History
+                            </div>
+                            <div class="contract-timeline" id="contractTimeline">
+                                <!-- Timeline will be populated dynamically -->
+                            </div>
+                        </div>
+
+                        <div class="contract-detail-section">
+                            <div class="contract-detail-section-title">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                </svg>
+                                Documents
+                            </div>
+                            <div class="contract-documents" id="contractDocuments">
+                                <!-- Documents will be populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contract-detail-footer">
+                        <div class="contract-footer-actions">
+                            <button class="contract-footer-btn secondary" onclick="downloadContract()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7 10 12 15 17 10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                                Download
+                            </button>
+                            <button class="contract-footer-btn primary" onclick="renewContract()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                                </svg>
+                                Renew Contract
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -5477,45 +6316,18 @@
 
                 <!-- Inbox Tab -->
                 <div class="tab-panel" data-panel="inbox" id="inboxPanel">
-                    <div class="section-title">Recent Messages</div>
-                    <div class="message-item">
-                        <div class="message-icon">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
+                    <div class="inbox-header">
+                        <div class="section-title" style="margin: 0;">Messages</div>
+                        <button class="compose-btn" onclick="composeMessage()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
                             </svg>
-                        </div>
-                        <div class="message-content">
-                            <div class="message-subject">Insurance Renewal Reminder</div>
-                            <div class="message-preview">Your insurance certificate is due for renewal...</div>
-                        </div>
-                        <div class="message-date">2 days ago</div>
+                            Compose
+                        </button>
                     </div>
-                    <div class="message-item">
-                        <div class="message-icon">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
-                            </svg>
-                        </div>
-                        <div class="message-content">
-                            <div class="message-subject">Payout Processed</div>
-                            <div class="message-preview">Your December payout of £7,850 has been...</div>
-                        </div>
-                        <div class="message-date">1 week ago</div>
-                    </div>
-                    <div class="message-item">
-                        <div class="message-icon">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
-                            </svg>
-                        </div>
-                        <div class="message-content">
-                            <div class="message-subject">CPD Workshop Invitation</div>
-                            <div class="message-preview">You're invited to our upcoming trauma-informed...</div>
-                        </div>
-                        <div class="message-date">2 weeks ago</div>
+                    <div id="inboxMessages">
+                        <!-- Messages will be rendered by JavaScript -->
                     </div>
                 </div>
 
@@ -5547,6 +6359,47 @@
                 </div>
             </div>
         </aside>
+
+        <!-- Message Viewer Panel -->
+        <div class="message-viewer" id="messageViewer">
+            <div class="message-viewer-header">
+                <button class="message-viewer-back" onclick="closeMessageViewer()">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                    Back to Inbox
+                </button>
+                <h3 class="message-viewer-subject" id="messageViewerSubject">Message Subject</h3>
+                <div class="message-viewer-meta">
+                    <span id="messageViewerFrom">From: Eden Practice</span>
+                    <span id="messageViewerDate">2 days ago</span>
+                </div>
+            </div>
+            <div class="message-viewer-content">
+                <div class="message-viewer-body" id="messageViewerBody">
+                    <!-- Message content will be populated dynamically -->
+                </div>
+            </div>
+            <div class="message-viewer-footer">
+                <div class="message-actions">
+                    <button class="message-action-btn archive" onclick="archiveMessage()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="21 8 21 21 3 21 3 8"/>
+                            <rect x="1" y="3" width="22" height="5"/>
+                            <line x1="10" y1="12" x2="14" y2="12"/>
+                        </svg>
+                        Archive
+                    </button>
+                    <button class="message-action-btn reply" onclick="replyToMessage()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 17 4 12 9 7"/>
+                            <path d="M20 18v-2a4 4 0 0 0-4-4H4"/>
+                        </svg>
+                        Reply
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <!-- Bottom Sheet (Mobile) -->
         <div class="bottom-sheet-overlay" id="bottomSheetOverlay" onclick="closePanel()"></div>
@@ -7029,6 +7882,48 @@
             }
         }
 
+        // Analytics period toggle
+        function setAnalyticsPeriod(period) {
+            // Update toggle buttons
+            document.querySelectorAll('.analytics-period-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase() === period) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update metrics based on period (mock data)
+            const metricsData = {
+                week: { sessions: 47, revenue: '£6,820', attendance: '92%', rating: '4.8', comparison: 'vs last week' },
+                month: { sessions: 186, revenue: '£24,680', attendance: '91%', rating: '4.7', comparison: 'vs last month' },
+                quarter: { sessions: 542, revenue: '£72,450', attendance: '90%', rating: '4.7', comparison: 'vs last quarter' }
+            };
+
+            const data = metricsData[period];
+            const cards = document.querySelectorAll('.analytics-metric-card');
+
+            if (cards.length >= 4) {
+                cards[0].querySelector('.analytics-metric-value').textContent = data.sessions;
+                cards[0].querySelector('.analytics-metric-change').innerHTML = `
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="18 15 12 9 6 15"/>
+                    </svg>
+                    +12% ${data.comparison}
+                `;
+                cards[1].querySelector('.analytics-metric-value').textContent = data.revenue;
+                cards[1].querySelector('.analytics-metric-change').innerHTML = `
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="18 15 12 9 6 15"/>
+                    </svg>
+                    +8% ${data.comparison}
+                `;
+                cards[2].querySelector('.analytics-metric-value').textContent = data.attendance;
+                cards[3].querySelector('.analytics-metric-value').textContent = data.rating;
+            }
+
+            showToast(`Showing ${period} analytics`);
+        }
+
         // ============================================
         // RENDER FUNCTIONS
         // ============================================
@@ -7201,9 +8096,17 @@
             document.getElementById('mobileClientName').textContent = client.name;
             document.getElementById('mobileClientUcid').textContent = client.id;
 
-            // Update associate name in contact tab
+            // Update associate name in contact tab with clickable link
             const associateName = associate ? associate.name : 'Unknown';
-            document.getElementById('clientAssociate').textContent = associateName;
+            const associateEl = document.getElementById('clientAssociate');
+            if (associate) {
+                associateEl.innerHTML = `<a href="#" onclick="event.preventDefault(); viewClientAssociate('${associate.id}')" style="color: var(--eden-green); text-decoration: none;">${associateName}</a>`;
+            } else {
+                associateEl.textContent = associateName;
+            }
+
+            // Update sessions tab with dynamic content
+            updateClientSessionsTab(client, associate);
 
             // Update pipeline stages
             updateClientPipelineUI(client.stage);
@@ -7217,6 +8120,200 @@
 
             // Attach tab listeners for client panel
             initClientPanelTabs();
+        }
+
+        function updateClientSessionsTab(client, associate) {
+            // Find sessions for this client
+            const clientSessions = sessions.filter(s =>
+                s.client.toLowerCase().includes(client.name.split(' ')[0].toLowerCase()) ||
+                s.client.toLowerCase().includes(client.name.split('&')[0].trim().toLowerCase())
+            );
+
+            const upcomingSessions = clientSessions.filter(s => s.date >= new Date());
+            const pastSessions = clientSessions.filter(s => s.date < new Date());
+
+            const sessionsTab = document.querySelector('[data-panel="client-sessions"]');
+            if (sessionsTab) {
+                let html = '<div class="section-title">Upcoming Sessions</div>';
+
+                if (upcomingSessions.length > 0) {
+                    html += '<div class="timeline">';
+                    upcomingSessions.forEach(session => {
+                        const dateStr = session.date.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+                        html += `
+                            <div class="timeline-item">
+                                <div class="timeline-dot upcoming"></div>
+                                <div class="timeline-date">${dateStr}, ${session.time}</div>
+                                <div class="timeline-content">${session.type} session with ${associate ? associate.name : 'Associate'}</div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                } else {
+                    html += '<p style="color: var(--eden-text-secondary); font-size: 14px; margin-top: 8px;">No upcoming sessions scheduled</p>';
+                }
+
+                html += '<div class="section-title" style="margin-top: 24px;">Session History</div>';
+                html += `
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot past"></div>
+                            <div class="timeline-date">Last Tuesday, 10:00 AM</div>
+                            <div class="timeline-content">Session #23 - Completed</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot past"></div>
+                            <div class="timeline-date">2 weeks ago</div>
+                            <div class="timeline-content">Session #22 - Completed</div>
+                        </div>
+                    </div>
+                `;
+
+                sessionsTab.innerHTML = html;
+            }
+        }
+
+        // ============================================
+        // INBOX MESSAGE FUNCTIONS
+        // ============================================
+
+        const messages = [
+            {
+                id: 'MSG-001',
+                subject: 'Insurance Renewal Reminder',
+                preview: 'Your professional indemnity insurance certificate is due for renewal...',
+                from: 'Eden Practice Admin',
+                date: '2 days ago',
+                unread: true,
+                body: `<p>Dear Associate,</p>
+                       <p>This is a friendly reminder that your professional indemnity insurance certificate is due for renewal in the next 14 days.</p>
+                       <p>Please ensure you upload your renewed certificate to the system before the expiry date to maintain your active status.</p>
+                       <p>If you have any questions about insurance requirements, please don't hesitate to reach out.</p>
+                       <p>Best regards,<br>Eden Practice Team</p>`
+            },
+            {
+                id: 'MSG-002',
+                subject: 'Payout Processed - December 2025',
+                preview: 'Your December payout of £7,850 has been processed and will arrive...',
+                from: 'Eden Finance',
+                date: '1 week ago',
+                unread: false,
+                body: `<p>Dear Associate,</p>
+                       <p>Your December 2025 payout has been processed:</p>
+                       <p><strong>Total Amount: £7,850.00</strong></p>
+                       <p>This payment covers 47 sessions at your agreed fee split. The funds will arrive in your account within 2-3 business days.</p>
+                       <p>You can view the full breakdown in your Earnings dashboard.</p>
+                       <p>Best regards,<br>Eden Finance Team</p>`
+            },
+            {
+                id: 'MSG-003',
+                subject: 'CPD Workshop Invitation: Trauma-Informed Practice',
+                preview: "You're invited to our upcoming workshop on trauma-informed approaches...",
+                from: 'Eden CPD',
+                date: '2 weeks ago',
+                unread: false,
+                body: `<p>Dear Associate,</p>
+                       <p>We're pleased to invite you to our upcoming CPD workshop:</p>
+                       <p><strong>Trauma-Informed Practice in Therapeutic Settings</strong></p>
+                       <p>Date: Saturday, 25th January 2026<br>Time: 10:00 AM - 4:00 PM<br>Location: Eden Practice HQ, London</p>
+                       <p>This workshop counts towards 6 CPD hours and is free for all associates.</p>
+                       <p>Best regards,<br>Eden CPD Team</p>`
+            },
+            {
+                id: 'MSG-004',
+                subject: 'New Client Referral',
+                preview: 'A new client has been referred to you. Please review their intake form...',
+                from: 'Eden Referrals',
+                date: '3 days ago',
+                unread: true,
+                body: `<p>Dear Associate,</p>
+                       <p>A new client has been referred to your caseload:</p>
+                       <p><strong>Client Reference: CLIENT-2521</strong></p>
+                       <p>The client is seeking couples therapy and has indicated availability on Tuesday and Thursday evenings.</p>
+                       <p>Please review their intake form and reach out within 48 hours to arrange an initial consultation.</p>
+                       <p>Best regards,<br>Eden Referrals Team</p>`
+            }
+        ];
+
+        let currentMessage = null;
+
+        function renderInboxMessages() {
+            const container = document.getElementById('inboxMessages');
+            if (!container) return;
+
+            container.innerHTML = messages.map(msg => `
+                <div class="message-item ${msg.unread ? 'unread' : ''}" onclick="openMessage('${msg.id}')" style="position: relative;">
+                    <div class="message-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-subject">${msg.subject}</div>
+                        <div class="message-preview">${msg.preview}</div>
+                    </div>
+                    <div class="message-date">${msg.date}</div>
+                </div>
+            `).join('');
+        }
+
+        function openMessage(messageId) {
+            const message = messages.find(m => m.id === messageId);
+            if (!message) return;
+
+            currentMessage = message;
+
+            // Mark as read
+            message.unread = false;
+            renderInboxMessages();
+
+            // Populate viewer
+            document.getElementById('messageViewerSubject').textContent = message.subject;
+            document.getElementById('messageViewerFrom').textContent = `From: ${message.from}`;
+            document.getElementById('messageViewerDate').textContent = message.date;
+            document.getElementById('messageViewerBody').innerHTML = message.body;
+
+            // Open viewer
+            document.getElementById('messageViewer').classList.add('open');
+        }
+
+        function closeMessageViewer() {
+            document.getElementById('messageViewer').classList.remove('open');
+            currentMessage = null;
+        }
+
+        function archiveMessage() {
+            if (!currentMessage) return;
+
+            // Remove from messages array
+            const index = messages.findIndex(m => m.id === currentMessage.id);
+            if (index > -1) {
+                messages.splice(index, 1);
+            }
+
+            closeMessageViewer();
+            renderInboxMessages();
+            showToast('Message archived');
+        }
+
+        function replyToMessage() {
+            if (!currentMessage) return;
+            showToast(`Replying to: ${currentMessage.subject}`);
+            closeMessageViewer();
+        }
+
+        function composeMessage() {
+            showToast('Compose message coming soon');
+        }
+
+        function viewClientAssociate(associateId) {
+            // Close client panel and open associate panel
+            closeClientPanelDirect();
+            showView('associates');
+            setTimeout(() => {
+                openPanel(associateId);
+            }, 300);
         }
 
         function updateClientPipelineUI(currentStage) {
@@ -8107,11 +9204,131 @@
             renderContractsGrid(filter);
         }
 
+        let currentContract = null;
+
         function openContractDetail(contractId) {
-            // This will be implemented in Chunk 5
             const contract = contracts.find(c => c.id === contractId);
-            if (contract) {
-                alert(`Contract details for ${contract.associateName} (${contract.id})\n\nThis will open a detailed view in Chunk 5.`);
+            if (!contract) return;
+
+            currentContract = contract;
+
+            // Populate header
+            const initials = contract.associateName.split(' ').map(n => n[0]).join('');
+            document.getElementById('contractDetailAvatar').textContent = initials;
+            document.getElementById('contractDetailName').textContent = contract.associateName;
+            document.getElementById('contractDetailRole').textContent = contract.role;
+
+            const statusBadge = document.getElementById('contractDetailStatus');
+            statusBadge.className = `contract-status-badge ${contract.status}`;
+            statusBadge.textContent = getStatusLabel(contract.status);
+
+            // Populate contract info grid
+            document.getElementById('contractInfoGrid').innerHTML = `
+                <div class="contract-info-item">
+                    <div class="contract-info-label">Contract ID</div>
+                    <div class="contract-info-value">${contract.id}</div>
+                </div>
+                <div class="contract-info-item">
+                    <div class="contract-info-label">Associate ID</div>
+                    <div class="contract-info-value">${contract.associateId}</div>
+                </div>
+                <div class="contract-info-item">
+                    <div class="contract-info-label">Contract Type</div>
+                    <div class="contract-info-value">${contract.type}</div>
+                </div>
+                <div class="contract-info-item">
+                    <div class="contract-info-label">Fee Split</div>
+                    <div class="contract-info-value">${contract.feeSplit}</div>
+                </div>
+                <div class="contract-info-item">
+                    <div class="contract-info-label">Start Date</div>
+                    <div class="contract-info-value">${contract.startDate}</div>
+                </div>
+                <div class="contract-info-item">
+                    <div class="contract-info-label">End Date</div>
+                    <div class="contract-info-value">${contract.endDate}</div>
+                </div>
+                <div class="contract-info-item full-width">
+                    <div class="contract-info-label">Renewal Status</div>
+                    <div class="contract-info-value">${getRenewalText(contract)}</div>
+                </div>
+            `;
+
+            // Populate timeline
+            document.getElementById('contractTimeline').innerHTML = `
+                <div class="contract-timeline-item">
+                    <div class="contract-timeline-date">${contract.lastUpdated}</div>
+                    <div class="contract-timeline-event">Contract ${contract.status === 'pending' ? 'sent for signature' : 'signed and activated'}</div>
+                </div>
+                <div class="contract-timeline-item">
+                    <div class="contract-timeline-date">${contract.startDate}</div>
+                    <div class="contract-timeline-event">Contract period begins</div>
+                </div>
+                <div class="contract-timeline-item">
+                    <div class="contract-timeline-date">${contract.endDate}</div>
+                    <div class="contract-timeline-event">Contract expires</div>
+                </div>
+            `;
+
+            // Populate documents
+            document.getElementById('contractDocuments').innerHTML = `
+                <div class="contract-document-item" onclick="viewContractPDF('${contract.id}')">
+                    <div class="contract-document-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                        </svg>
+                    </div>
+                    <div class="contract-document-info">
+                        <div class="contract-document-name">Associate Agreement</div>
+                        <div class="contract-document-meta">PDF - Signed ${contract.lastUpdated}</div>
+                    </div>
+                </div>
+                <div class="contract-document-item" onclick="showToast('Opening insurance document')">
+                    <div class="contract-document-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <div class="contract-document-info">
+                        <div class="contract-document-name">Insurance Certificate</div>
+                        <div class="contract-document-meta">PDF - Valid until ${contract.endDate}</div>
+                    </div>
+                </div>
+                <div class="contract-document-item" onclick="showToast('Opening DBS certificate')">
+                    <div class="contract-document-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="8.5" cy="7" r="4"/>
+                            <polyline points="17 11 19 13 23 9"/>
+                        </svg>
+                    </div>
+                    <div class="contract-document-info">
+                        <div class="contract-document-name">DBS Certificate</div>
+                        <div class="contract-document-meta">PDF - Enhanced check</div>
+                    </div>
+                </div>
+            `;
+
+            // Open panel
+            document.getElementById('contractDetailPanel').classList.add('open');
+        }
+
+        function closeContractDetail() {
+            document.getElementById('contractDetailPanel').classList.remove('open');
+            currentContract = null;
+        }
+
+        function downloadContract() {
+            if (currentContract) {
+                showToast(`Downloading ${currentContract.associateName}'s contract`);
+            }
+        }
+
+        function renewContract() {
+            if (currentContract) {
+                showToast(`Initiating renewal for ${currentContract.associateName}`);
+                closeContractDetail();
             }
         }
 
@@ -8215,20 +9432,58 @@
         }
 
         function openClientFromGrid(clientId) {
-            // For now, just log - could open a client detail panel
             const client = clients.find(c => c.id === clientId);
-            if (client) {
-                const associate = associates.find(a => a.id === client.associateId);
-                // Switch to associates view and open the panel for this associate
-                showView('associates');
-                setTimeout(() => {
-                    openPanel(client.associateId);
-                    // Then open client panel
-                    setTimeout(() => {
-                        openClientPanel(clientId);
-                    }, 350);
-                }, 350);
+            if (!client) return;
+
+            const associate = associates.find(a => a.id === client.associateId);
+
+            // Update back button text for direct client access
+            const backBtn = document.querySelector('#clientPanel .panel-back-btn');
+            if (backBtn) {
+                backBtn.innerHTML = `
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                    Back to Clients
+                `;
+                backBtn.onclick = function() {
+                    closeClientPanelDirect();
+                };
             }
+
+            // Open client panel directly
+            openClientPanelDirect(clientId);
+        }
+
+        function openClientPanelDirect(clientId) {
+            const client = clients.find(c => c.id === clientId);
+            if (!client) return;
+
+            selectedClient = client;
+            const associate = associates.find(a => a.id === client.associateId);
+
+            // Update panel content
+            updateClientPanelContent(client, associate);
+
+            if (isMobile) {
+                const clientSheet = document.getElementById('clientBottomSheet');
+                clientSheet.style.transition = 'transform var(--transition-smooth)';
+                clientSheet.style.transform = 'translateY(0)';
+                clientSheet.classList.add('open');
+            } else {
+                document.getElementById('clientPanel').classList.add('open');
+            }
+        }
+
+        function closeClientPanelDirect() {
+            if (isMobile) {
+                const clientSheet = document.getElementById('clientBottomSheet');
+                clientSheet.style.transform = 'translateY(100%)';
+                clientSheet.classList.remove('open');
+            } else {
+                document.getElementById('clientPanel').classList.remove('open');
+            }
+            selectedClient = null;
         }
 
         // ============================================
@@ -8832,6 +10087,7 @@
             renderContractsGrid();
             renderCalendar();
             renderCpdActivities();
+            renderInboxMessages();
 
             // Initialize Phase 2 modules
             initSimulator();
