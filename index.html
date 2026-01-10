@@ -158,6 +158,111 @@
             50% { opacity: 0.5; }
         }
 
+        /* User Profile Section */
+        .user-profile-section {
+            margin-top: auto;
+            padding: 16px 12px;
+            border-top: 1px solid var(--eden-border);
+        }
+
+        .user-profile-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--eden-green);
+            color: var(--pure-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .user-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .user-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user-role {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        .role-badge-admin {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .role-badge-associate {
+            background-color: #E8F0ED;
+            color: var(--eden-text-secondary);
+        }
+
+        .role-toggle-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--eden-border);
+            border-radius: 6px;
+            background-color: var(--pure-white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-smooth);
+        }
+
+        .role-toggle-btn:hover {
+            background-color: var(--eden-green-light);
+            border-color: var(--eden-green);
+        }
+
+        .role-toggle-btn svg {
+            width: 16px;
+            height: 16px;
+            color: var(--eden-text-secondary);
+        }
+
+        /* Access Denied Notification */
+        .access-denied-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background-color: var(--eden-text);
+            color: var(--pure-white);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 9999;
+            opacity: 0;
+            transition: all 0.3s ease-out;
+        }
+
+        .access-denied-notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
         /* Main Content */
         .main-content {
             flex: 1;
@@ -5256,6 +5361,11 @@
                     <span>Support</span>
                 </a>
             </nav>
+
+            <!-- User Profile Section -->
+            <div class="user-profile-section" id="userProfileSection">
+                <!-- Populated by JavaScript -->
+            </div>
         </aside>
 
         <!-- Main Content -->
@@ -7852,10 +7962,137 @@
         let currentPipelineFilter = 'all';
 
         // ============================================
+        // ROLE-BASED ACCESS CONTROL
+        // ============================================
+
+        // Current user state - change these to test different roles
+        let currentUserRole = 'admin'; // 'admin' or 'associate'
+        let currentUserId = null;       // null for admin, 'ASSOC-XXXX' for associates
+        let currentUserName = 'Mike';   // Display name
+
+        // Navigation permissions by role
+        const roleNavPermissions = {
+            admin: {
+                allowedViews: ['dashboard', 'action-centre', 'associates', 'clients', 'contracts', 'earnings', 'schedule', 'cpd', 'support'],
+                navLabels: {
+                    'clients': 'Clients',
+                    'earnings': 'Earnings',
+                    'schedule': 'Schedule'
+                }
+            },
+            associate: {
+                allowedViews: ['dashboard', 'clients', 'earnings', 'schedule', 'cpd', 'support'],
+                navLabels: {
+                    'clients': 'My Clients',
+                    'earnings': 'My Earnings',
+                    'schedule': 'My Schedule'
+                }
+            }
+        };
+
+        // Filter navigation based on current role
+        function updateNavigationForRole() {
+            const permissions = roleNavPermissions[currentUserRole];
+            if (!permissions) return;
+
+            document.querySelectorAll('.nav-item').forEach(item => {
+                const viewName = item.dataset.view;
+                if (permissions.allowedViews.includes(viewName)) {
+                    item.style.display = 'flex';
+                    // Update label if role-specific label exists
+                    if (permissions.navLabels[viewName]) {
+                        const labelSpan = item.querySelector('span');
+                        if (labelSpan) {
+                            labelSpan.textContent = permissions.navLabels[viewName];
+                        }
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Hide admin-only nav sections for associates
+            if (currentUserRole === 'associate') {
+                // Hide "Directory" section label if all items hidden
+                const directorySections = document.querySelectorAll('.nav-section');
+                directorySections.forEach(section => {
+                    const visibleItems = section.querySelectorAll('.nav-item[style*="flex"], .nav-item:not([style*="none"])');
+                    const label = section.querySelector('.nav-label');
+                    if (label && visibleItems.length === 0) {
+                        label.style.display = 'none';
+                    } else if (label) {
+                        label.style.display = 'block';
+                    }
+                });
+            }
+
+            // Update user profile display
+            updateUserProfileDisplay();
+        }
+
+        // Update the user profile section in sidebar
+        function updateUserProfileDisplay() {
+            const profileSection = document.getElementById('userProfileSection');
+            if (!profileSection) return;
+
+            const roleLabel = currentUserRole === 'admin' ? 'Administrator' : 'Associate';
+            const roleBadgeClass = currentUserRole === 'admin' ? 'role-badge-admin' : 'role-badge-associate';
+
+            profileSection.innerHTML = `
+                <div class="user-profile-content">
+                    <div class="user-avatar">${currentUserName.charAt(0).toUpperCase()}</div>
+                    <div class="user-info">
+                        <div class="user-name">${currentUserName}</div>
+                        <div class="user-role ${roleBadgeClass}">${roleLabel}</div>
+                    </div>
+                </div>
+                <button class="role-toggle-btn" onclick="toggleRole()" title="Toggle role (for testing)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
+                    </svg>
+                </button>
+            `;
+        }
+
+        // Toggle between admin and associate roles (for testing)
+        function toggleRole() {
+            if (currentUserRole === 'admin') {
+                currentUserRole = 'associate';
+                currentUserId = 'ASSOC-2401';
+                currentUserName = 'Adaeze Nwosu';
+            } else {
+                currentUserRole = 'admin';
+                currentUserId = null;
+                currentUserName = 'Mike';
+            }
+            updateNavigationForRole();
+
+            // If current view is not allowed for new role, redirect to dashboard
+            const permissions = roleNavPermissions[currentUserRole];
+            if (!permissions.allowedViews.includes(currentView)) {
+                showView('dashboard');
+            }
+        }
+
+        // Check if current user can access a view
+        function canAccessView(viewName) {
+            const permissions = roleNavPermissions[currentUserRole];
+            return permissions && permissions.allowedViews.includes(viewName);
+        }
+
+        // ============================================
         // VIEW NAVIGATION
         // ============================================
 
         function showView(viewName) {
+            // Role-based access control check
+            if (!canAccessView(viewName)) {
+                console.warn(`Access denied: ${currentUserRole} cannot access ${viewName}`);
+                // Show brief access denied notification
+                showAccessDeniedNotification(viewName);
+                return;
+            }
+
             currentView = viewName;
 
             // Update view containers
@@ -7880,6 +8117,26 @@
                 sidebar.classList.remove('open');
                 overlay.classList.remove('open');
             }
+        }
+
+        // Show access denied notification
+        function showAccessDeniedNotification(viewName) {
+            // Create notification element if it doesn't exist
+            let notification = document.getElementById('accessDeniedNotification');
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.id = 'accessDeniedNotification';
+                notification.className = 'access-denied-notification';
+                document.body.appendChild(notification);
+            }
+
+            notification.textContent = `Access to ${viewName.replace('-', ' ')} is restricted`;
+            notification.classList.add('show');
+
+            // Hide after 2 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2000);
         }
 
         // Analytics period toggle
@@ -10091,6 +10348,9 @@
 
             // Initialize Phase 2 modules
             initSimulator();
+
+            // Initialize Role-Based Navigation (Phase 4)
+            updateNavigationForRole();
 
             // Handle window resize
             window.addEventListener('resize', handleResize);
