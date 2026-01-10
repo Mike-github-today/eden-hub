@@ -218,27 +218,36 @@
         }
 
         .role-toggle-btn {
-            width: 32px;
-            height: 32px;
-            border: 1px solid var(--eden-border);
-            border-radius: 6px;
-            background-color: var(--pure-white);
+            position: fixed;
+            bottom: 60px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background-color: var(--eden-green-light, #E8F0ED);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all var(--transition-smooth);
+            z-index: 9999;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
 
         .role-toggle-btn:hover {
-            background-color: var(--eden-green-light);
-            border-color: var(--eden-green);
+            background-color: var(--eden-green, #2d5f4d);
+            transform: scale(1.1);
+        }
+
+        .role-toggle-btn:hover svg {
+            color: white;
         }
 
         .role-toggle-btn svg {
-            width: 16px;
-            height: 16px;
-            color: var(--eden-text-secondary);
+            width: 18px;
+            height: 18px;
+            color: var(--eden-green, #2d5f4d);
         }
 
         /* Access Denied Notification */
