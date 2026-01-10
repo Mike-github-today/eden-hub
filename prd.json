@@ -1,0 +1,94 @@
+{
+  "project": "Eden Hub Portal - Phase 4",
+  "version": "1.0",
+  "lastUpdated": "2026-01-10",
+  "stories": [
+    {
+      "id": 1,
+      "title": "Role-Based Navigation",
+      "description": "As a user, I want the navigation to show only the items relevant to my role so that I can focus on my responsibilities.",
+      "status": "completed",
+      "acceptanceCriteria": [
+        "Admin role sees all navigation items (Dashboard, Action Centre, Associates, Clients, Contracts, Earnings, Schedule, CPD, Support)",
+        "Associate role sees limited navigation (Dashboard, My Clients, My Schedule, My Earnings, CPD, Support)",
+        "Navigation updates dynamically when role changes",
+        "Current user role is displayed in sidebar footer"
+      ],
+      "verifiableTests": [
+        "Set currentUserRole to 'admin' and verify all 9 nav items are visible",
+        "Set currentUserRole to 'associate' and verify only 6 nav items are visible",
+        "Toggle between roles and confirm nav updates without page refresh",
+        "Verify role badge displays correctly in sidebar"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Authentication State Display",
+      "description": "As a user, I want to see my logged-in status and profile information so that I know my session is active.",
+      "status": "pending",
+      "acceptanceCriteria": [
+        "User avatar/initials displayed in header",
+        "User name displayed when logged in",
+        "Login button shown when logged out",
+        "Session expiry warning shown 5 minutes before timeout"
+      ],
+      "verifiableTests": [
+        "Set isLoggedIn to true and verify user profile appears in header",
+        "Set isLoggedIn to false and verify login button appears",
+        "Simulate session timeout warning and verify alert displays"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Associate Self-Service View",
+      "description": "As an associate, I want to see only my own data when logged in so that I can manage my practice efficiently.",
+      "status": "pending",
+      "acceptanceCriteria": [
+        "Associates see only their assigned clients",
+        "Associates see only their own sessions in schedule",
+        "Associates see only their own earnings",
+        "Associates cannot access other associates' data"
+      ],
+      "verifiableTests": [
+        "Login as associate ASSOC-2401 and verify only their clients appear",
+        "Verify schedule shows only sessions for current associate",
+        "Verify earnings show only current associate's revenue"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Mobile Navigation Enhancement",
+      "description": "As a mobile user, I want smooth navigation with proper touch targets so that I can use the portal effectively on my phone.",
+      "status": "pending",
+      "acceptanceCriteria": [
+        "Hamburger menu button visible on mobile",
+        "Sidebar slides in smoothly on tap",
+        "Touch targets are minimum 44px",
+        "Swipe-to-close works on sidebar"
+      ],
+      "verifiableTests": [
+        "Resize to mobile breakpoint and verify hamburger menu appears",
+        "Tap hamburger and verify sidebar slides in from left",
+        "Measure touch targets to confirm 44px minimum",
+        "Swipe left on sidebar to close it"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "View Access Control",
+      "description": "As an admin, I want to control which views are accessible to different roles so that data remains secure.",
+      "status": "pending",
+      "acceptanceCriteria": [
+        "Attempting to access restricted view shows access denied message",
+        "URL manipulation cannot bypass role restrictions",
+        "Action Centre items filtered by role permissions",
+        "Sensitive data hidden from non-admin roles"
+      ],
+      "verifiableTests": [
+        "As associate, try to access Associates view and verify access denied",
+        "Manually call showView('associates') as associate and verify blocked",
+        "Verify Friction Feed hides admin-only items for associates"
+      ]
+    }
+  ]
+}
