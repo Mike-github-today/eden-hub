@@ -17,8 +17,11 @@
             --eden-green-hover: #245040;
             --eden-green-light: #E8F0ED;
             --eden-text: #1A3329;
+            --eden-text-primary: #111827;
             --eden-text-secondary: #4A6259;
+            --eden-text-muted: #9ca3af;
             --eden-border: #D4E5DE;
+            --eden-surface: #f4f7f6;
 
             /* Alert Colours (Friction Feed) */
             --alert-amber: #F59E0B;
@@ -4443,6 +4446,213 @@
             }
         }
 
+        /* ============================================
+           UNIFIED PAGE COMPONENTS
+           Used across Associates, Clients, Contracts
+           ============================================ */
+
+        /* Summary Stats Grid - 2x2 on mobile, 4 on desktop */
+        .summary-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .summary-stat-card {
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 16px;
+            text-align: center;
+        }
+
+        .summary-stat-value {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--eden-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .summary-stat-value.warning {
+            color: var(--alert-amber);
+        }
+
+        .summary-stat-value.danger {
+            color: var(--alert-rose);
+        }
+
+        .summary-stat-value.success {
+            color: var(--eden-green);
+        }
+
+        .summary-stat-label {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        /* Filter Pills */
+        .filter-pills {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .filter-pill {
+            padding: 8px 16px;
+            border-radius: 100px;
+            border: 1px solid var(--eden-border);
+            background-color: var(--pure-white);
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            white-space: nowrap;
+        }
+
+        .filter-pill:hover {
+            border-color: var(--eden-green);
+            color: var(--eden-green);
+        }
+
+        .filter-pill.active {
+            background-color: var(--eden-green);
+            border-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        /* Entity Card (Associates, Clients unified layout) */
+        .entity-card {
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 20px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .entity-card:hover {
+            border-color: var(--eden-green);
+            box-shadow: 0 4px 12px rgba(45, 95, 77, 0.1);
+        }
+
+        .entity-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .entity-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .entity-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-standard);
+            background-color: var(--eden-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--pure-white);
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .entity-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--eden-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .entity-subtitle {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        .entity-badge {
+            padding: 4px 10px;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            flex-shrink: 0;
+        }
+
+        .entity-badge.active {
+            background-color: rgba(34, 197, 94, 0.1);
+            color: #15803d;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .entity-badge.supported,
+        .entity-badge.onboarding,
+        .entity-badge.awaiting,
+        .entity-badge.pending {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: #b45309;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .entity-badge.ending,
+        .entity-badge.attention {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #dc2626;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .entity-badge.independent {
+            background-color: rgba(45, 95, 77, 0.1);
+            color: var(--eden-green);
+            border: 1px solid rgba(45, 95, 77, 0.2);
+        }
+
+        .entity-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px 16px;
+        }
+
+        .entity-detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .entity-detail-label {
+            font-size: 10px;
+            color: var(--eden-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .entity-detail-value {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--eden-text-primary);
+        }
+
+        /* Entity Cards Grid */
+        .entity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .entity-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Contract Detail Panel */
         .contract-detail-panel {
             position: fixed;
@@ -5597,11 +5807,39 @@
                         Back to Dashboard
                     </button>
                     <h1 class="page-title">Associates</h1>
-                    <p class="page-subtitle">7 associates across the practice</p>
+                    <p class="page-subtitle" id="associatesSubtitle">Your therapy team</p>
                 </header>
 
-                <!-- ID Card Grid -->
-                <div class="card-grid" id="cardGrid">
+                <!-- Summary Stats -->
+                <div class="summary-stats-grid" id="associatesStats">
+                    <div class="summary-stat-card">
+                        <div class="summary-stat-value" id="totalAssociatesCount">7</div>
+                        <div class="summary-stat-label">Total Associates</div>
+                    </div>
+                    <div class="summary-stat-card">
+                        <div class="summary-stat-value" id="activeAssociatesCount">5</div>
+                        <div class="summary-stat-label">Independent</div>
+                    </div>
+                    <div class="summary-stat-card">
+                        <div class="summary-stat-value" id="supportedAssociatesCount">2</div>
+                        <div class="summary-stat-label">Supported</div>
+                    </div>
+                    <div class="summary-stat-card">
+                        <div class="summary-stat-value" id="highCapacityCount">3</div>
+                        <div class="summary-stat-label">High Capacity</div>
+                    </div>
+                </div>
+
+                <!-- Filter Pills -->
+                <div class="filter-pills" id="associatesFilter">
+                    <button class="filter-pill active" data-filter="all" onclick="filterAssociates('all')">All</button>
+                    <button class="filter-pill" data-filter="independent" onclick="filterAssociates('independent')">Independent</button>
+                    <button class="filter-pill" data-filter="supported" onclick="filterAssociates('supported')">Supported</button>
+                    <button class="filter-pill" data-filter="highCapacity" onclick="filterAssociates('highCapacity')">High Capacity</button>
+                </div>
+
+                <!-- Entity Card Grid -->
+                <div class="entity-grid" id="cardGrid">
                     <!-- Cards will be rendered by JavaScript -->
                 </div>
             </div>
@@ -5690,27 +5928,37 @@
                     <p class="page-subtitle" id="clientsSubtitle">All clients across the practice</p>
                 </header>
 
-                <!-- Client Pipeline Filter -->
-                <div class="pipeline-strip" id="clientsFilter">
-                    <button class="pipeline-stage active" data-stage="all" onclick="filterAllClients('all')">
-                        All <span class="pipeline-count" id="allClientsCount">0</span>
-                    </button>
-                    <button class="pipeline-stage" data-stage="awaiting" onclick="filterAllClients('awaiting')">
-                        Awaiting <span class="pipeline-count" id="awaitingClientsCount">0</span>
-                    </button>
-                    <button class="pipeline-stage" data-stage="pending" onclick="filterAllClients('pending')">
-                        Pending <span class="pipeline-count" id="pendingClientsCount">0</span>
-                    </button>
-                    <button class="pipeline-stage" data-stage="active" onclick="filterAllClients('active')">
-                        Active <span class="pipeline-count" id="activeClientsCount">0</span>
-                    </button>
-                    <button class="pipeline-stage" data-stage="ending" onclick="filterAllClients('ending')">
-                        Ending <span class="pipeline-count" id="endingClientsCount">0</span>
-                    </button>
+                <!-- Summary Stats -->
+                <div class="summary-stats-grid" id="clientsStats">
+                    <div class="summary-stat-card">
+                        <div class="summary-stat-value" id="totalClientsStatCount">0</div>
+                        <div class="summary-stat-label">Total Clients</div>
+                    </div>
+                    <div class="summary-stat-card">
+                        <div class="summary-stat-value" id="activeClientsStatCount">0</div>
+                        <div class="summary-stat-label">Active</div>
+                    </div>
+                    <div class="summary-stat-card">
+                        <div class="summary-stat-value" id="awaitingClientsStatCount">0</div>
+                        <div class="summary-stat-label">Awaiting</div>
+                    </div>
+                    <div class="summary-stat-card">
+                        <div class="summary-stat-value" id="endingClientsStatCount">0</div>
+                        <div class="summary-stat-label">Ending Soon</div>
+                    </div>
                 </div>
 
-                <!-- All Clients Grid -->
-                <div class="card-grid" id="allClientsGrid">
+                <!-- Filter Pills -->
+                <div class="filter-pills" id="clientsFilter">
+                    <button class="filter-pill active" data-stage="all" onclick="filterAllClients('all')">All</button>
+                    <button class="filter-pill" data-stage="awaiting" onclick="filterAllClients('awaiting')">Awaiting</button>
+                    <button class="filter-pill" data-stage="pending" onclick="filterAllClients('pending')">Pending</button>
+                    <button class="filter-pill" data-stage="active" onclick="filterAllClients('active')">Active</button>
+                    <button class="filter-pill" data-stage="ending" onclick="filterAllClients('ending')">Ending</button>
+                </div>
+
+                <!-- Entity Cards Grid -->
+                <div class="entity-grid" id="allClientsGrid">
                     <!-- Client cards will be rendered by JavaScript -->
                 </div>
             </div>
@@ -8194,35 +8442,116 @@
         // RENDER FUNCTIONS
         // ============================================
 
-        function renderCards() {
+        let associatesFilter = 'all';
+
+        function renderCards(filter = 'all') {
             const grid = document.getElementById('cardGrid');
-            grid.innerHTML = associates.map(associate => `
-                <div class="id-card" onclick="openPanel('${associate.id}')">
-                    <div class="id-card-header">
-                        <div class="avatar">${associate.initials}</div>
-                        <div class="id-card-info">
-                            <div class="id-card-name">${associate.name}</div>
-                            <div class="id-card-ucid">${associate.id}</div>
-                        </div>
-                        <span class="support-badge ${associate.supportMode}">
-                            ${associate.supportMode === 'independent' ? '✓ Independent' : '◐ Supported'}
-                        </span>
+            if (!grid) return;
+
+            associatesFilter = filter;
+
+            // Update filter pills
+            document.querySelectorAll('#associatesFilter .filter-pill').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === filter);
+            });
+
+            // Filter associates
+            let filteredAssociates = associates;
+            if (filter === 'independent') {
+                filteredAssociates = associates.filter(a => a.supportMode === 'independent');
+            } else if (filter === 'supported') {
+                filteredAssociates = associates.filter(a => a.supportMode === 'supported');
+            } else if (filter === 'highCapacity') {
+                filteredAssociates = associates.filter(a => (a.clients / a.maxCapacity) >= 0.8);
+            }
+
+            // Update stats
+            updateAssociateStats();
+
+            if (filteredAssociates.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--eden-text-secondary)" stroke-width="1.5" style="margin-bottom: 16px;">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        <p style="color: var(--eden-text-secondary);">No associates match this filter</p>
                     </div>
-                    <div class="id-card-stats">
-                        <div class="stat">
-                            <div class="stat-value">${associate.clients}</div>
-                            <div class="stat-label">Active Clients</div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filteredAssociates.map(associate => {
+                const capacityPercent = Math.round((associate.clients / associate.maxCapacity) * 100);
+                const badgeClass = associate.supportMode === 'independent' ? 'independent' : 'supported';
+                const badgeText = associate.supportMode === 'independent' ? 'Independent' : 'Supported';
+
+                return `
+                    <div class="entity-card" onclick="openPanel('${associate.id}')">
+                        <div class="entity-card-header">
+                            <div class="entity-info">
+                                <div class="entity-avatar">${associate.initials}</div>
+                                <div>
+                                    <div class="entity-name">${associate.name}</div>
+                                    <div class="entity-subtitle">${associate.specialisation}</div>
+                                </div>
+                            </div>
+                            <span class="entity-badge ${badgeClass}">${badgeText}</span>
                         </div>
-                        <div class="stat">
-                            <div class="stat-value">${Math.round((associate.clients / associate.maxCapacity) * 100)}%</div>
-                            <div class="stat-label">Capacity</div>
-                            <div class="capacity-bar">
-                                <div class="capacity-fill" style="width: ${(associate.clients / associate.maxCapacity) * 100}%"></div>
+                        <div class="entity-details">
+                            <div class="entity-detail-item">
+                                <span class="entity-detail-label">UCID</span>
+                                <span class="entity-detail-value" style="font-family: monospace;">${associate.id}</span>
+                            </div>
+                            <div class="entity-detail-item">
+                                <span class="entity-detail-label">Support Mode</span>
+                                <span class="entity-detail-value">${badgeText}</span>
+                            </div>
+                            <div class="entity-detail-item">
+                                <span class="entity-detail-label">Active Clients</span>
+                                <span class="entity-detail-value">${associate.clients} / ${associate.maxCapacity}</span>
+                            </div>
+                            <div class="entity-detail-item">
+                                <span class="entity-detail-label">This Month</span>
+                                <span class="entity-detail-value">${associate.pendingPayout}</span>
                             </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
+        }
+
+        function updateAssociateStats() {
+            const total = associates.length;
+            const independent = associates.filter(a => a.supportMode === 'independent').length;
+            const supported = associates.filter(a => a.supportMode === 'supported').length;
+            const highCapacity = associates.filter(a => (a.clients / a.maxCapacity) >= 0.8).length;
+
+            const totalEl = document.getElementById('totalAssociatesCount');
+            const independentEl = document.getElementById('activeAssociatesCount');
+            const supportedEl = document.getElementById('supportedAssociatesCount');
+            const highCapacityEl = document.getElementById('highCapacityCount');
+
+            if (totalEl) totalEl.textContent = total;
+            if (independentEl) independentEl.textContent = independent;
+            if (supportedEl) supportedEl.textContent = supported;
+            if (highCapacityEl) {
+                highCapacityEl.textContent = highCapacity;
+                // Add warning color if high capacity count > 0
+                highCapacityEl.className = 'summary-stat-value' + (highCapacity > 0 ? ' warning' : '');
+            }
+
+            // Update subtitle
+            const subtitle = document.getElementById('associatesSubtitle');
+            if (subtitle) {
+                subtitle.textContent = `${total} associates across the practice`;
+            }
+        }
+
+        function filterAssociates(filter) {
+            renderCards(filter);
         }
 
         function getAssociateClients(associateId) {
@@ -9615,18 +9944,28 @@
             const grid = document.getElementById('allClientsGrid');
             if (!grid) return;
 
+            allClientsFilter = filter;
+
+            // Update filter pills
+            document.querySelectorAll('#clientsFilter .filter-pill').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.stage === filter);
+            });
+
             const filteredClients = filter === 'all'
                 ? clients
                 : clients.filter(c => c.stage === filter);
 
-            // Update counts
+            // Update counts and stats
             updateAllClientsCounts();
 
             if (filteredClients.length === 0) {
                 grid.innerHTML = `
-                    <div class="empty-state" style="grid-column: 1 / -1;">
-                        <div class="empty-state-title">No clients in this stage</div>
-                        <div class="empty-state-text">Select a different filter to see clients</div>
+                    <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--eden-text-secondary)" stroke-width="1.5" style="margin-bottom: 16px;">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                        </svg>
+                        <p style="color: var(--eden-text-secondary);">No clients match this filter</p>
                     </div>
                 `;
                 return;
@@ -9634,20 +9973,37 @@
 
             grid.innerHTML = filteredClients.map(client => {
                 const associate = associates.find(a => a.id === client.associateId);
+                const stageName = client.stage.charAt(0).toUpperCase() + client.stage.slice(1);
+                const badgeClass = client.stage; // active, pending, awaiting, ending
+
                 return `
-                    <div class="id-card" onclick="openClientFromGrid('${client.id}')">
-                        <div class="id-card-header">
-                            <div class="avatar">${client.initials}</div>
-                            <div class="id-card-info">
-                                <div class="id-card-name">${client.name}</div>
-                                <div class="id-card-ucid">${client.id}</div>
+                    <div class="entity-card" onclick="openClientFromGrid('${client.id}')">
+                        <div class="entity-card-header">
+                            <div class="entity-info">
+                                <div class="entity-avatar">${client.initials}</div>
+                                <div>
+                                    <div class="entity-name">${client.name}</div>
+                                    <div class="entity-subtitle">Individual Therapy</div>
+                                </div>
                             </div>
-                            <span class="client-mini-stage ${client.stage}">${client.stage.charAt(0).toUpperCase() + client.stage.slice(1)}</span>
+                            <span class="entity-badge ${badgeClass}">${stageName}</span>
                         </div>
-                        <div class="id-card-stats">
-                            <div class="stat">
-                                <div class="stat-value">${associate ? associate.name.split(' ')[0] : 'N/A'}</div>
-                                <div class="stat-label">Associate</div>
+                        <div class="entity-details">
+                            <div class="entity-detail-item">
+                                <span class="entity-detail-label">Therapist</span>
+                                <span class="entity-detail-value">${associate ? associate.name : 'Unassigned'}</span>
+                            </div>
+                            <div class="entity-detail-item">
+                                <span class="entity-detail-label">Session Type</span>
+                                <span class="entity-detail-value">Weekly</span>
+                            </div>
+                            <div class="entity-detail-item">
+                                <span class="entity-detail-label">Client ID</span>
+                                <span class="entity-detail-value" style="font-family: monospace;">${client.id}</span>
+                            </div>
+                            <div class="entity-detail-item">
+                                <span class="entity-detail-label">Sessions</span>
+                                <span class="entity-detail-value">${Math.floor(Math.random() * 20) + 1}</span>
                             </div>
                         </div>
                     </div>
@@ -9664,17 +10020,22 @@
                 ending: clients.filter(c => c.stage === 'ending').length
             };
 
-            const allCount = document.getElementById('allClientsCount');
-            const awaitingCount = document.getElementById('awaitingClientsCount');
-            const pendingCount = document.getElementById('pendingClientsCount');
-            const activeCount = document.getElementById('activeClientsCount');
-            const endingCount = document.getElementById('endingClientsCount');
+            // Update summary stats grid
+            const totalStat = document.getElementById('totalClientsStatCount');
+            const activeStat = document.getElementById('activeClientsStatCount');
+            const awaitingStat = document.getElementById('awaitingClientsStatCount');
+            const endingStat = document.getElementById('endingClientsStatCount');
 
-            if (allCount) allCount.textContent = counts.all;
-            if (awaitingCount) awaitingCount.textContent = counts.awaiting;
-            if (pendingCount) pendingCount.textContent = counts.pending;
-            if (activeCount) activeCount.textContent = counts.active;
-            if (endingCount) endingCount.textContent = counts.ending;
+            if (totalStat) totalStat.textContent = counts.all;
+            if (activeStat) activeStat.textContent = counts.active;
+            if (awaitingStat) {
+                awaitingStat.textContent = counts.awaiting;
+                awaitingStat.className = 'summary-stat-value' + (counts.awaiting > 0 ? ' warning' : '');
+            }
+            if (endingStat) {
+                endingStat.textContent = counts.ending;
+                endingStat.className = 'summary-stat-value' + (counts.ending > 0 ? ' danger' : '');
+            }
 
             // Update subtitle
             const subtitle = document.getElementById('clientsSubtitle');
@@ -9684,16 +10045,6 @@
         }
 
         function filterAllClients(stage) {
-            allClientsFilter = stage;
-
-            // Update active state on pipeline buttons
-            document.querySelectorAll('#clientsFilter .pipeline-stage').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.stage === stage) {
-                    btn.classList.add('active');
-                }
-            });
-
             renderAllClientsGrid(stage);
         }
 
