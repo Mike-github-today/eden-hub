@@ -9591,9 +9591,15 @@ Sarah
 
         // Update panel UI based on navigation state
         function updatePanelNavigationUI() {
+            console.log('=== updatePanelNavigationUI called ===');
+            console.log('panelNavigationStack:', panelNavigationStack);
+
             const currentView = panelNavigationStack[panelNavigationStack.length - 1];
             const isAtRoot = panelNavigationStack.length === 1 && currentView === 'overview';
             const isInSubView = ['inbox', 'capacity', 'payout-cockpit'].includes(currentView) || currentView.startsWith('email-');
+
+            console.log('currentView:', currentView);
+            console.log('isInSubView:', isInSubView);
 
             // Toggle headers
             const desktopStandardHeader = document.getElementById('desktopStandardHeader');
@@ -9636,10 +9642,22 @@ Sarah
                 if (mobileTabNav) mobileTabNav.style.display = 'flex';
             }
 
-            // Show/hide views and tabs
-            const allViews = document.querySelectorAll('.panel-view');
-            const overviewPanel = document.getElementById('overviewPanel');
-            const allTabPanels = document.querySelectorAll('.tab-panel');
+            // Show/hide views and tabs - handle both desktop and mobile
+            const container = isMobile
+                ? document.getElementById('mobileTabContent')
+                : document.getElementById('tabContent');
+
+            if (!container) {
+                console.error('Tab content container not found');
+                return;
+            }
+
+            const allViews = container.querySelectorAll('.panel-view');
+            const overviewPanel = container.querySelector('[data-panel="overview"]');
+            const allTabPanels = container.querySelectorAll('.tab-panel');
+
+            console.log('Container:', isMobile ? 'mobile' : 'desktop');
+            console.log('Found views:', allViews.length);
 
             // Hide all views first
             allViews.forEach(view => view.style.display = 'none');
@@ -9649,24 +9667,34 @@ Sarah
                 if (overviewPanel) overviewPanel.classList.remove('active');
                 allTabPanels.forEach(panel => panel.classList.remove('active'));
 
-                // Find and show the current view
+                // Find and show the current view within the correct container
                 let viewToShow = null;
+                console.log('Looking for view:', currentView);
+
                 if (currentView === 'inbox') {
-                    viewToShow = document.getElementById('inboxView');
-                    populateInboxView();
+                    viewToShow = container.querySelector('[data-view="inbox"]');
+                    console.log('Found inboxView:', viewToShow);
+                    if (viewToShow) populateInboxView(container);
                 } else if (currentView === 'capacity') {
-                    viewToShow = document.getElementById('capacityView');
-                    populateCapacityView();
+                    viewToShow = container.querySelector('[data-view="capacity"]');
+                    console.log('Found capacityView:', viewToShow);
+                    if (viewToShow) populateCapacityView(container);
                 } else if (currentView === 'payout-cockpit') {
-                    viewToShow = document.getElementById('payoutCockpitView');
-                    populatePayoutCockpitView();
+                    viewToShow = container.querySelector('[data-view="payout-cockpit"]');
+                    console.log('Found payoutCockpitView:', viewToShow);
+                    if (viewToShow) populatePayoutCockpitView(container);
                 } else if (currentView.startsWith('email-')) {
-                    viewToShow = document.getElementById('emailDetailView');
-                    // Populate email content (mock)
-                    populateEmailDetail(currentView);
+                    viewToShow = container.querySelector('[data-view="email-detail"]');
+                    console.log('Found emailDetailView:', viewToShow);
+                    if (viewToShow) populateEmailDetail(currentView, container);
                 }
 
-                if (viewToShow) viewToShow.style.display = 'block';
+                if (viewToShow) {
+                    viewToShow.style.display = 'block';
+                    console.log('View displayed, innerHTML length:', viewToShow.innerHTML.length);
+                } else {
+                    console.error('VIEW NOT FOUND:', currentView);
+                }
             } else {
                 // Show overview and restore active tab
                 if (overviewPanel) overviewPanel.classList.add('active');
@@ -9688,9 +9716,14 @@ Sarah
 
         // Navigate back (pop from stack)
         function navigatePanelBack() {
+            console.log('=== navigatePanelBack called ===');
+            console.log('Stack before pop:', [...panelNavigationStack]);
             if (panelNavigationStack.length > 1) {
                 panelNavigationStack.pop();
+                console.log('Stack after pop:', [...panelNavigationStack]);
                 updatePanelNavigationUI();
+            } else {
+                console.log('Cannot go back - already at root');
             }
         }
 
@@ -9729,7 +9762,7 @@ Sarah
         }
 
         // Populate email detail (mock data)
-        function populateEmailDetail(emailId) {
+        function populateEmailDetail(emailId, parentContainer) {
             const mockEmails = {
                 'email-1': {
                     subject: 'Session confirmation for Friday',
@@ -9753,27 +9786,47 @@ Sarah
 
             const email = mockEmails[emailId] || mockEmails['email-1'];
 
-            const subjectEl = document.getElementById('emailDetailSubject');
-            const fromEl = document.getElementById('emailDetailFrom');
-            const dateEl = document.getElementById('emailDetailDate');
-            const bodyEl = document.getElementById('emailDetailBody');
+            // Find elements within the correct container
+            const view = parentContainer
+                ? parentContainer.querySelector('[data-view="email-detail"]')
+                : document.getElementById('emailDetailView');
+
+            if (!view) {
+                console.error('Email detail view not found');
+                return;
+            }
+
+            const subjectEl = view.querySelector('.email-detail-subject');
+            const fromEl = view.querySelector('.email-detail-meta span:first-child');
+            const dateEl = view.querySelector('.email-detail-meta span:last-child');
+            const bodyEl = view.querySelector('.email-detail-body');
 
             if (subjectEl) subjectEl.textContent = email.subject;
             if (fromEl) fromEl.textContent = 'From: ' + email.from;
             if (dateEl) dateEl.textContent = email.date;
             if (bodyEl) bodyEl.textContent = email.body;
+
+            console.log('Email detail populated');
         }
 
         // Populate Inbox view with mock data
-        function populateInboxView() {
+        function populateInboxView(parentContainer) {
+            console.log('=== populateInboxView called ===');
             const mockEmails = [
                 { id: 'email-1', subject: 'Session confirmation for Friday', from: 'Sarah Johnson', unread: true, date: '2 hours ago' },
                 { id: 'email-2', subject: 'Need to reschedule next week', from: 'David Mitchell', unread: true, date: 'Yesterday' },
                 { id: 'email-3', subject: 'Payment confirmation', from: 'Stripe', unread: false, date: '3 days ago' }
             ];
 
-            const container = document.getElementById('inboxMessagesList');
-            if (!container) return;
+            const container = parentContainer
+                ? parentContainer.querySelector('.inbox-messages-list')
+                : document.getElementById('inboxMessagesList');
+
+            console.log('inboxMessagesList container:', container);
+            if (!container) {
+                console.error('inboxMessagesList container NOT FOUND');
+                return;
+            }
 
             container.innerHTML = mockEmails.map(email => `
                 <div class="inbox-message-item ${email.unread ? 'unread' : ''}" onclick="navigatePanelTo('${email.id}')">
@@ -9785,11 +9838,17 @@ Sarah
                     <div class="inbox-message-date">${email.date}</div>
                 </div>
             `).join('');
+            console.log('Inbox populated, container innerHTML length:', container.innerHTML.length);
         }
 
         // Populate Capacity view with mock/associate data
-        function populateCapacityView() {
-            if (!selectedAssociate) return;
+        function populateCapacityView(parentContainer) {
+            console.log('=== populateCapacityView called ===');
+            console.log('selectedAssociate:', selectedAssociate);
+            if (!selectedAssociate) {
+                console.error('No selectedAssociate - cannot populate capacity view');
+                return;
+            }
 
             const capacityPercent = selectedAssociate.maxCapacity
                 ? Math.round((selectedAssociate.clients / selectedAssociate.maxCapacity) * 100)
@@ -9797,22 +9856,39 @@ Sarah
             const hoursBooked = Math.round(capacityPercent * 0.4); // Mock calculation
             const hoursAvailable = 40;
 
-            const gaugeValue = document.getElementById('capacityGaugeValue');
-            const progressFill = document.getElementById('capacityProgressFill');
-            const hoursBookedEl = document.getElementById('hoursBooked');
-            const hoursAvailableEl = document.getElementById('hoursAvailable');
-            const nextSlotEl = document.getElementById('nextAvailableSlot');
+            // Find elements within the correct container
+            const view = parentContainer
+                ? parentContainer.querySelector('[data-view="capacity"]')
+                : document.getElementById('capacityView');
+
+            if (!view) {
+                console.error('Capacity view not found');
+                return;
+            }
+
+            const gaugeValue = view.querySelector('.capacity-gauge-value');
+            const progressFill = view.querySelector('.capacity-progress-fill');
+            const hoursBookedEl = view.querySelector('#hoursBooked') || view.querySelectorAll('.capacity-stat-value')[0];
+            const hoursAvailableEl = view.querySelector('#hoursAvailable') || view.querySelectorAll('.capacity-stat-value')[1];
+            const nextSlotEl = view.querySelector('.capacity-next-slot-value');
 
             if (gaugeValue) gaugeValue.textContent = capacityPercent + '%';
             if (progressFill) progressFill.style.width = capacityPercent + '%';
             if (hoursBookedEl) hoursBookedEl.textContent = hoursBooked;
             if (hoursAvailableEl) hoursAvailableEl.textContent = hoursAvailable;
             if (nextSlotEl) nextSlotEl.textContent = 'Tomorrow 2:00 PM';
+
+            console.log('Capacity view populated');
         }
 
         // Populate Payout Cockpit view with mock/associate data
-        function populatePayoutCockpitView() {
-            if (!selectedAssociate) return;
+        function populatePayoutCockpitView(parentContainer) {
+            console.log('=== populatePayoutCockpitView called ===');
+            console.log('selectedAssociate:', selectedAssociate);
+            if (!selectedAssociate) {
+                console.error('No selectedAssociate - cannot populate payout view');
+                return;
+            }
 
             const mockPayouts = [
                 { month: 'January 2026', amount: 1240, status: 'PENDING', date: 'Due 15 Jan' },
@@ -9823,14 +9899,24 @@ Sarah
             const earningsValue = selectedAssociate.totalEarnings || '£8,420';
             const pendingValue = selectedAssociate.pendingPayout || '£1,240';
 
+            // Find view within the correct container
+            const view = parentContainer
+                ? parentContainer.querySelector('[data-view="payout-cockpit"]')
+                : document.getElementById('payoutCockpitView');
+
+            if (!view) {
+                console.error('Payout cockpit view not found');
+                return;
+            }
+
             // Update stat cards
-            const thisMonthEarnings = document.getElementById('payoutThisMonthEarnings');
-            const pendingPayout = document.getElementById('payoutPendingAmount');
+            const thisMonthEarnings = view.querySelector('.payout-stat-card:first-child .payout-stat-value');
+            const pendingPayout = view.querySelector('.payout-stat-card.pending .payout-stat-value');
             if (thisMonthEarnings) thisMonthEarnings.textContent = earningsValue;
             if (pendingPayout) pendingPayout.textContent = pendingValue;
 
             // Render payout history
-            const historyContainer = document.getElementById('payoutHistoryList');
+            const historyContainer = view.querySelector('.payout-history-list');
             if (historyContainer) {
                 historyContainer.innerHTML = mockPayouts.map(payout => `
                     <div class="payout-history-item">
@@ -9845,6 +9931,8 @@ Sarah
                     </div>
                 `).join('');
             }
+
+            console.log('Payout cockpit populated');
         }
 
         // Legacy function - kept for backwards compatibility
