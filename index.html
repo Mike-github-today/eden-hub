@@ -733,6 +733,230 @@
             color: #b45309;
         }
 
+        /* Navigation Header (for back button views) */
+        .navigation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            background: var(--pure-white);
+        }
+
+        .nav-back-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--eden-text-secondary);
+            transition: all var(--transition-fast);
+        }
+
+        .nav-back-btn:hover {
+            background: var(--eden-mint);
+            color: var(--eden-green);
+        }
+
+        .nav-header-title {
+            flex: 1;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .nav-header-subtitle {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+        }
+
+        /* Panel Views (pushed views like Inbox, Capacity) */
+        .panel-view {
+            padding: 24px;
+            animation: fadeIn 200ms ease-out;
+        }
+
+        /* Inbox View Styles */
+        .inbox-messages-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .inbox-message-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            border-bottom: 1px solid var(--eden-border);
+            cursor: pointer;
+            transition: background-color var(--transition-fast);
+        }
+
+        .inbox-message-item:hover {
+            background: var(--eden-mint);
+        }
+
+        .inbox-message-unread-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--eden-green);
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        .inbox-message-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .inbox-message-subject {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--eden-text);
+            margin-bottom: 2px;
+        }
+
+        .inbox-message-item.unread .inbox-message-subject {
+            font-weight: 600;
+        }
+
+        .inbox-message-from {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .inbox-message-date {
+            font-size: 12px;
+            color: var(--eden-text-muted);
+            flex-shrink: 0;
+        }
+
+        /* Capacity View Styles */
+        .capacity-gauge-card {
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .capacity-gauge-value {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--eden-green);
+            margin-bottom: 4px;
+        }
+
+        .capacity-gauge-label {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .capacity-progress-bar {
+            height: 12px;
+            background: var(--eden-border);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .capacity-progress-fill {
+            height: 100%;
+            background: var(--eden-green);
+            border-radius: 6px;
+            transition: width 0.3s ease;
+        }
+
+        .capacity-info-card {
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .capacity-stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .capacity-stat {
+            text-align: center;
+        }
+
+        .capacity-stat-value {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .capacity-stat-label {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            margin-top: 4px;
+        }
+
+        .capacity-next-slot {
+            background: var(--eden-mint);
+            border-radius: var(--radius-standard);
+            padding: 16px;
+        }
+
+        .capacity-next-slot-label {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .capacity-next-slot-value {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--eden-text);
+        }
+
+        .capacity-todo-note {
+            font-size: 11px;
+            color: var(--eden-text-muted);
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        /* Email Detail View Styles */
+        .email-detail-header {
+            margin-bottom: 20px;
+        }
+
+        .email-detail-subject {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin: 0 0 12px 0;
+        }
+
+        .email-detail-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        .email-detail-body {
+            padding-top: 20px;
+            border-top: 1px solid var(--eden-border);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--eden-text);
+            white-space: pre-line;
+        }
+
         /* Needs Attention Section */
         .needs-attention-section {
             background: #fef2f2;
@@ -6726,7 +6950,8 @@
 
         <!-- Side Panel (Desktop) -->
         <aside class="side-panel" id="sidePanel">
-            <header class="panel-header">
+            <!-- Standard Header (shown in overview) -->
+            <header class="panel-header" id="desktopStandardHeader">
                 <div class="panel-header-info">
                     <div class="panel-avatar" id="panelAvatar">SJ</div>
                     <div>
@@ -6742,14 +6967,22 @@
                 </button>
             </header>
 
+            <!-- Navigation Header (shown when in sub-views like Inbox/Capacity) -->
+            <header class="panel-header navigation-header" id="desktopNavHeader" style="display: none;">
+                <button class="nav-back-btn" onclick="navigatePanelBack()" aria-label="Go back">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                </button>
+                <div class="nav-header-title" id="desktopNavTitle">Inbox</div>
+                <div class="nav-header-subtitle" id="desktopNavSubtitle">Sarah J.</div>
+            </header>
+
             <!-- Tab Navigation -->
-            <nav class="tab-nav">
-                <button class="tab-btn active" data-tab="overview">Overview</button>
-                <button class="tab-btn" data-tab="sessions">Sessions</button>
+            <nav class="tab-nav" id="desktopTabNav">
+                <button class="tab-btn active" data-tab="sessions">Sessions</button>
                 <button class="tab-btn" data-tab="contracts">Contracts</button>
                 <button class="tab-btn" data-tab="finance">Finance</button>
-                <button class="tab-btn" data-tab="inbox">Inbox</button>
-                <button class="tab-btn" data-tab="clients">Clients</button>
             </nav>
 
             <!-- Tab Content -->
@@ -6768,15 +7001,27 @@
                     <div class="info-group">
                         <div class="section-title">This Month</div>
                         <div class="overview-stats-row">
-                            <div class="overview-stat-card" onclick="switchToTab('sessions')">
-                                <div class="overview-stat-value" id="overviewSessions">12</div>
-                                <div class="overview-stat-label">Sessions</div>
+                            <div class="overview-stat-card" onclick="navigatePanelTo('inbox')">
+                                <div class="overview-stat-value" id="overviewInbox">2</div>
+                                <div class="overview-stat-label">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <rect width="20" height="16" x="2" y="4" rx="2"/>
+                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                                    </svg>
+                                    Inbox
+                                </div>
                             </div>
-                            <div class="overview-stat-card" onclick="viewAssociateClients()">
-                                <div class="overview-stat-value" id="overviewClients">8</div>
-                                <div class="overview-stat-label">Clients</div>
+                            <div class="overview-stat-card" onclick="navigatePanelTo('capacity')">
+                                <div class="overview-stat-value" id="overviewCapacity">75%</div>
+                                <div class="overview-stat-label">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
+                                        <path d="M22 12A10 10 0 0 0 12 2v10z"/>
+                                    </svg>
+                                    Capacity
+                                </div>
                             </div>
-                            <div class="overview-stat-card tappable-earnings" onclick="openAssociatePayouts()">
+                            <div class="overview-stat-card tappable-earnings" onclick="switchPanelTab('finance')">
                                 <div class="overview-stat-value" id="overviewEarnings">£2,450</div>
                                 <div class="overview-stat-label">
                                     Earnings
@@ -6786,22 +7031,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- View Clients Button -->
-                    <div class="info-group">
-                        <button class="view-clients-btn" onclick="viewAssociateClients()">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                            </svg>
-                            <span id="viewClientsText">View 8 Clients</span>
-                            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="m9 18 6-6-6-6"/>
-                            </svg>
-                        </button>
                     </div>
 
                     <div class="overview-divider"></div>
@@ -6951,8 +7180,8 @@
                     </div>
                 </div>
 
-                <!-- Inbox Tab -->
-                <div class="tab-panel" data-panel="inbox" id="inboxPanel">
+                <!-- Inbox View (pushed via navigation, not a tab) -->
+                <div class="panel-view" data-view="inbox" id="inboxView" style="display: none;">
                     <div class="inbox-header">
                         <div class="section-title" style="margin: 0;">Messages</div>
                         <button class="compose-btn" onclick="composeMessage()">
@@ -6963,35 +7192,90 @@
                             Compose
                         </button>
                     </div>
-                    <div id="inboxMessages">
-                        <!-- Messages will be rendered by JavaScript -->
+                    <div class="inbox-messages-list" id="inboxMessages">
+                        <!-- Mock emails -->
+                        <div class="inbox-message-item unread" onclick="navigatePanelTo('email-1')">
+                            <div class="inbox-message-unread-dot"></div>
+                            <div class="inbox-message-content">
+                                <div class="inbox-message-subject">Session confirmation for Friday</div>
+                                <div class="inbox-message-from">sarah.j@email.com</div>
+                            </div>
+                            <div class="inbox-message-date">2 hours ago</div>
+                        </div>
+                        <div class="inbox-message-item unread" onclick="navigatePanelTo('email-2')">
+                            <div class="inbox-message-unread-dot"></div>
+                            <div class="inbox-message-content">
+                                <div class="inbox-message-subject">Need to reschedule next week</div>
+                                <div class="inbox-message-from">david.m@email.com</div>
+                            </div>
+                            <div class="inbox-message-date">Yesterday</div>
+                        </div>
+                        <div class="inbox-message-item" onclick="navigatePanelTo('email-3')">
+                            <div class="inbox-message-content" style="margin-left: 14px;">
+                                <div class="inbox-message-subject">Payment confirmation</div>
+                                <div class="inbox-message-from">notifications@stripe.com</div>
+                            </div>
+                            <div class="inbox-message-date">3 days ago</div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Clients Tab -->
-                <div class="tab-panel" data-panel="clients" id="clientsPanel">
-                    <!-- Pipeline Strip -->
-                    <div class="pipeline-strip" id="pipelineStrip">
-                        <button class="pipeline-stage active" data-stage="all" onclick="filterClients('all')">
-                            All <span class="count" id="countAll">12</span>
-                        </button>
-                        <button class="pipeline-stage" data-stage="awaiting" onclick="filterClients('awaiting')">
-                            Awaiting <span class="count" id="countAwaiting">2</span>
-                        </button>
-                        <button class="pipeline-stage" data-stage="pending" onclick="filterClients('pending')">
-                            Pending <span class="count" id="countPending">3</span>
-                        </button>
-                        <button class="pipeline-stage" data-stage="active" onclick="filterClients('active')">
-                            Active <span class="count" id="countActive">6</span>
-                        </button>
-                        <button class="pipeline-stage" data-stage="ending" onclick="filterClients('ending')">
-                            Ending <span class="count" id="countEnding">1</span>
-                        </button>
+                <!-- Capacity View (pushed via navigation, not a tab) -->
+                <div class="panel-view" data-view="capacity" id="capacityView" style="display: none;">
+                    <!-- Capacity Gauge -->
+                    <div class="capacity-gauge-card">
+                        <div class="capacity-gauge-value" id="capacityGaugeValue">75%</div>
+                        <div class="capacity-gauge-label">Current Capacity</div>
+                        <div class="capacity-progress-bar">
+                            <div class="capacity-progress-fill" id="capacityProgressFill" style="width: 75%;"></div>
+                        </div>
                     </div>
 
-                    <!-- Client Mini Cards -->
-                    <div class="client-mini-grid" id="clientMiniGrid">
-                        <!-- Rendered by JavaScript -->
+                    <!-- Weekly Breakdown -->
+                    <div class="capacity-info-card">
+                        <div class="section-title">This Week</div>
+                        <div class="capacity-stats-row">
+                            <div class="capacity-stat">
+                                <div class="capacity-stat-value" id="hoursBooked">30</div>
+                                <div class="capacity-stat-label">Hours Booked</div>
+                            </div>
+                            <div class="capacity-stat">
+                                <div class="capacity-stat-value" id="hoursAvailable">40</div>
+                                <div class="capacity-stat-label">Hours Available</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Next Available Slot -->
+                    <div class="capacity-next-slot">
+                        <div class="capacity-next-slot-label">Next Available Slot</div>
+                        <div class="capacity-next-slot-value" id="nextAvailableSlot">Tomorrow 2:00 PM</div>
+                    </div>
+
+                    <!-- TODO marker -->
+                    <div class="capacity-todo-note">
+                        <!-- TODO: Connect to Airtable Capacity % field -->
+                    </div>
+                </div>
+
+                <!-- Email Detail View (pushed from Inbox) -->
+                <div class="panel-view" data-view="email-detail" id="emailDetailView" style="display: none;">
+                    <div class="email-detail-header">
+                        <h3 class="email-detail-subject" id="emailDetailSubject">Session confirmation for Friday</h3>
+                        <div class="email-detail-meta">
+                            <span id="emailDetailFrom">From: sarah.j@email.com</span>
+                            <span id="emailDetailDate">January 11, 2026 at 10:30 AM</span>
+                        </div>
+                    </div>
+                    <div class="email-detail-body" id="emailDetailBody">
+                        Hi Marcus,
+
+Just confirming our session this Friday at 3pm.
+
+Looking forward to it.
+
+Best regards,
+Sarah
                     </div>
                 </div>
             </div>
@@ -7044,7 +7328,9 @@
             <div class="bottom-sheet-handle-area" id="bottomSheetHandleArea">
                 <div class="bottom-sheet-handle"></div>
             </div>
-            <header class="panel-header">
+
+            <!-- Standard Header (shown in overview) -->
+            <header class="panel-header" id="mobileStandardHeader">
                 <div class="panel-header-info">
                     <div class="panel-avatar" id="mobileAvatar">SJ</div>
                     <div>
@@ -7060,14 +7346,22 @@
                 </button>
             </header>
 
+            <!-- Navigation Header (shown when in sub-views like Inbox/Capacity) -->
+            <header class="panel-header navigation-header" id="mobileNavHeader" style="display: none;">
+                <button class="nav-back-btn" onclick="navigatePanelBack()" aria-label="Go back">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"/>
+                    </svg>
+                </button>
+                <div class="nav-header-title" id="mobileNavTitle">Inbox</div>
+                <div class="nav-header-subtitle" id="mobileNavSubtitle">Sarah J.</div>
+            </header>
+
             <!-- Tab Navigation (Mobile) -->
             <nav class="tab-nav" id="mobileTabNav">
-                <button class="tab-btn active" data-tab="contact">Contact</button>
-                <button class="tab-btn" data-tab="sessions">Sessions</button>
+                <button class="tab-btn active" data-tab="sessions">Sessions</button>
                 <button class="tab-btn" data-tab="contracts">Contracts</button>
                 <button class="tab-btn" data-tab="finance">Finance</button>
-                <button class="tab-btn" data-tab="inbox">Inbox</button>
-                <button class="tab-btn" data-tab="clients">Clients</button>
             </nav>
 
             <!-- Tab Content (Mobile) -->
@@ -8488,6 +8782,10 @@
         let currentView = 'dashboard';
         let currentPipelineFilter = 'all';
 
+        // Navigation Stack State for Associate Panel
+        let panelNavigationStack = ['overview'];
+        let activePanelTab = 'sessions'; // Default tab when viewing overview
+
         // ============================================
         // ROLE-BASED ACCESS CONTROL
         // ============================================
@@ -9173,29 +9471,194 @@
         }
 
         // ============================================
-        // OVERVIEW TAB NAVIGATION FUNCTIONS
+        // PANEL NAVIGATION STACK FUNCTIONS
         // ============================================
 
-        function switchToTab(tabName) {
-            // Switch to specified tab within the associate panel
-            const tabButtons = document.querySelectorAll('.side-panel .tab-btn, .bottom-sheet .tab-btn');
-            const tabPanels = document.querySelectorAll('.side-panel .tab-panel, .bottom-sheet .tab-panel');
+        // Get view title for navigation header
+        function getPanelViewTitle(viewName) {
+            const titles = {
+                'overview': 'Overview',
+                'inbox': 'Inbox',
+                'capacity': 'Capacity',
+                'sessions': 'Sessions',
+                'contracts': 'Contracts',
+                'finance': 'Finance'
+            };
+            if (viewName.startsWith('email-')) return 'Email';
+            return titles[viewName] || viewName;
+        }
 
+        // Update panel UI based on navigation state
+        function updatePanelNavigationUI() {
+            const currentView = panelNavigationStack[panelNavigationStack.length - 1];
+            const isAtRoot = panelNavigationStack.length === 1 && currentView === 'overview';
+            const isInSubView = ['inbox', 'capacity'].includes(currentView) || currentView.startsWith('email-');
+
+            // Toggle headers
+            const desktopStandardHeader = document.getElementById('desktopStandardHeader');
+            const desktopNavHeader = document.getElementById('desktopNavHeader');
+            const mobileStandardHeader = document.getElementById('mobileStandardHeader');
+            const mobileNavHeader = document.getElementById('mobileNavHeader');
+
+            if (isInSubView) {
+                // Show navigation header with back button
+                if (desktopStandardHeader) desktopStandardHeader.style.display = 'none';
+                if (desktopNavHeader) desktopNavHeader.style.display = 'flex';
+                if (mobileStandardHeader) mobileStandardHeader.style.display = 'none';
+                if (mobileNavHeader) mobileNavHeader.style.display = 'flex';
+
+                // Update title
+                const title = getPanelViewTitle(currentView);
+                const subtitle = selectedAssociate ? selectedAssociate.name.split(' ')[0] + ' ' + selectedAssociate.name.split(' ')[1]?.charAt(0) + '.' : '';
+
+                if (document.getElementById('desktopNavTitle')) document.getElementById('desktopNavTitle').textContent = title;
+                if (document.getElementById('desktopNavSubtitle')) document.getElementById('desktopNavSubtitle').textContent = subtitle;
+                if (document.getElementById('mobileNavTitle')) document.getElementById('mobileNavTitle').textContent = title;
+                if (document.getElementById('mobileNavSubtitle')) document.getElementById('mobileNavSubtitle').textContent = subtitle;
+            } else {
+                // Show standard header
+                if (desktopStandardHeader) desktopStandardHeader.style.display = 'flex';
+                if (desktopNavHeader) desktopNavHeader.style.display = 'none';
+                if (mobileStandardHeader) mobileStandardHeader.style.display = 'flex';
+                if (mobileNavHeader) mobileNavHeader.style.display = 'none';
+            }
+
+            // Toggle tab navigation visibility
+            const desktopTabNav = document.getElementById('desktopTabNav');
+            const mobileTabNav = document.getElementById('mobileTabNav');
+
+            if (isInSubView) {
+                if (desktopTabNav) desktopTabNav.style.display = 'none';
+                if (mobileTabNav) mobileTabNav.style.display = 'none';
+            } else {
+                if (desktopTabNav) desktopTabNav.style.display = 'flex';
+                if (mobileTabNav) mobileTabNav.style.display = 'flex';
+            }
+
+            // Show/hide views and tabs
+            const allViews = document.querySelectorAll('.panel-view');
+            const overviewPanel = document.getElementById('overviewPanel');
+            const allTabPanels = document.querySelectorAll('.tab-panel');
+
+            // Hide all views first
+            allViews.forEach(view => view.style.display = 'none');
+
+            if (isInSubView) {
+                // Hide overview and tab content, show the pushed view
+                if (overviewPanel) overviewPanel.classList.remove('active');
+                allTabPanels.forEach(panel => panel.classList.remove('active'));
+
+                // Find and show the current view
+                let viewToShow = null;
+                if (currentView === 'inbox') {
+                    viewToShow = document.getElementById('inboxView');
+                } else if (currentView === 'capacity') {
+                    viewToShow = document.getElementById('capacityView');
+                } else if (currentView.startsWith('email-')) {
+                    viewToShow = document.getElementById('emailDetailView');
+                    // Populate email content (mock)
+                    populateEmailDetail(currentView);
+                }
+
+                if (viewToShow) viewToShow.style.display = 'block';
+            } else {
+                // Show overview and active tab
+                if (overviewPanel) overviewPanel.classList.add('active');
+            }
+        }
+
+        // Navigate to a view (push onto stack)
+        function navigatePanelTo(viewName) {
+            panelNavigationStack.push(viewName);
+            updatePanelNavigationUI();
+        }
+
+        // Navigate back (pop from stack)
+        function navigatePanelBack() {
+            if (panelNavigationStack.length > 1) {
+                panelNavigationStack.pop();
+                updatePanelNavigationUI();
+            }
+        }
+
+        // Switch tab (replaces navigation to overview + tab)
+        function switchPanelTab(tabName) {
+            // Reset stack to overview
+            panelNavigationStack = ['overview'];
+            activePanelTab = tabName;
+
+            // Update tab buttons
+            const tabButtons = document.querySelectorAll('.side-panel .tab-btn, .bottom-sheet .tab-btn');
             tabButtons.forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.dataset.tab === tabName) btn.classList.add('active');
             });
 
+            // Update tab panels
+            const tabPanels = document.querySelectorAll('.side-panel .tab-panel, .bottom-sheet .tab-panel');
             tabPanels.forEach(panel => {
                 panel.classList.remove('active');
                 if (panel.dataset.panel === tabName) panel.classList.add('active');
             });
+
+            // Also ensure overview is visible (since tabs appear below overview content)
+            const overviewPanel = document.getElementById('overviewPanel');
+            if (overviewPanel) overviewPanel.classList.add('active');
+
+            updatePanelNavigationUI();
+        }
+
+        // Reset navigation when panel closes
+        function resetPanelNavigation() {
+            panelNavigationStack = ['overview'];
+            activePanelTab = 'sessions';
+            updatePanelNavigationUI();
+        }
+
+        // Populate email detail (mock data)
+        function populateEmailDetail(emailId) {
+            const mockEmails = {
+                'email-1': {
+                    subject: 'Session confirmation for Friday',
+                    from: 'sarah.j@email.com',
+                    date: 'January 11, 2026 at 10:30 AM',
+                    body: 'Hi Marcus,\n\nJust confirming our session this Friday at 3pm.\n\nLooking forward to it.\n\nBest regards,\nSarah'
+                },
+                'email-2': {
+                    subject: 'Need to reschedule next week',
+                    from: 'david.m@email.com',
+                    date: 'January 10, 2026 at 2:15 PM',
+                    body: 'Hi Marcus,\n\nI have a conflict next Tuesday. Can we move to Wednesday same time?\n\nThanks,\nDavid'
+                },
+                'email-3': {
+                    subject: 'Payment confirmation',
+                    from: 'notifications@stripe.com',
+                    date: 'January 8, 2026 at 9:00 AM',
+                    body: 'Your payment of £85.00 has been processed successfully.\n\nTransaction ID: txn_1234567890\n\nThank you for using Stripe.'
+                }
+            };
+
+            const email = mockEmails[emailId] || mockEmails['email-1'];
+
+            const subjectEl = document.getElementById('emailDetailSubject');
+            const fromEl = document.getElementById('emailDetailFrom');
+            const dateEl = document.getElementById('emailDetailDate');
+            const bodyEl = document.getElementById('emailDetailBody');
+
+            if (subjectEl) subjectEl.textContent = email.subject;
+            if (fromEl) fromEl.textContent = 'From: ' + email.from;
+            if (dateEl) dateEl.textContent = email.date;
+            if (bodyEl) bodyEl.textContent = email.body;
+        }
+
+        // Legacy function - kept for backwards compatibility
+        function switchToTab(tabName) {
+            switchPanelTab(tabName);
         }
 
         function viewAssociateClients() {
-            // Switch to the Clients tab to view this associate's clients
-            if (!selectedAssociate) return;
-            switchToTab('clients');
+            // Deprecated - clients tab removed
+            showToast('View clients from the main Clients page');
         }
 
         function openAssociatePayouts() {
@@ -9392,20 +9855,24 @@
                 feeSplitEl.textContent = associate.supportMode === 'independent' ? '70/30' : '60/40';
             }
 
-            // Overview tab - This Month stats
-            const clientCount = clients.filter(c => c.associateId === associate.id).length;
-            const sessionsThisMonth = Math.floor(Math.random() * 15) + 8; // Mock data
+            // Overview tab - This Month stats (new: Inbox, Capacity, Earnings)
+            const unreadCount = Math.floor(Math.random() * 5); // Mock unread inbox count
+            const capacityPercent = associate.maxCapacity ? Math.round((associate.clients / associate.maxCapacity) * 100) : 75;
             const earningsAmount = associate.totalEarnings || '£0';
 
-            const overviewSessionsEl = document.getElementById('overviewSessions');
-            const overviewClientsEl = document.getElementById('overviewClients');
+            const overviewInboxEl = document.getElementById('overviewInbox');
+            const overviewCapacityEl = document.getElementById('overviewCapacity');
             const overviewEarningsEl = document.getElementById('overviewEarnings');
-            const viewClientsTextEl = document.getElementById('viewClientsText');
 
-            if (overviewSessionsEl) overviewSessionsEl.textContent = sessionsThisMonth;
-            if (overviewClientsEl) overviewClientsEl.textContent = clientCount;
+            if (overviewInboxEl) overviewInboxEl.textContent = unreadCount;
+            if (overviewCapacityEl) overviewCapacityEl.textContent = capacityPercent + '%';
             if (overviewEarningsEl) overviewEarningsEl.textContent = earningsAmount;
-            if (viewClientsTextEl) viewClientsTextEl.textContent = `View ${clientCount} Client${clientCount !== 1 ? 's' : ''}`;
+
+            // Update Capacity View values
+            const capacityGaugeValue = document.getElementById('capacityGaugeValue');
+            const capacityProgressFill = document.getElementById('capacityProgressFill');
+            if (capacityGaugeValue) capacityGaugeValue.textContent = capacityPercent + '%';
+            if (capacityProgressFill) capacityProgressFill.style.width = capacityPercent + '%';
 
             // Overview tab - Status badge
             const statusBadgeEl = document.getElementById('associateStatusBadge');
@@ -9448,6 +9915,8 @@
             selectedAssociate = associates.find(a => a.id === associateId);
             if (!selectedAssociate) return;
 
+            // Reset navigation stack and update content
+            resetPanelNavigation();
             updatePanelContent(selectedAssociate);
 
             if (isMobile) {
@@ -9476,10 +9945,13 @@
                 document.getElementById('mainContent').classList.remove('panel-open');
             }
 
-            // Reset tabs to Overview
+            // Reset navigation stack
+            resetPanelNavigation();
+
+            // Reset tabs to Sessions (default) and show overview
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.dataset.tab === 'overview') btn.classList.add('active');
+                if (btn.dataset.tab === 'sessions') btn.classList.add('active');
             });
             document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.classList.remove('active');
@@ -9503,18 +9975,11 @@
         // ============================================
 
         function initTabs() {
-            document.querySelectorAll('.tab-btn').forEach(btn => {
+            document.querySelectorAll('.side-panel .tab-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    const tabContainer = this.closest('.side-panel, .bottom-sheet');
                     const tabName = this.dataset.tab;
-
-                    // Update active tab button
-                    tabContainer.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-
-                    // Update active panel
-                    tabContainer.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-                    tabContainer.querySelector(`[data-panel="${tabName}"]`).classList.add('active');
+                    // Use switchPanelTab to handle navigation reset and tab switching
+                    switchPanelTab(tabName);
                 });
             });
         }
@@ -9523,14 +9988,8 @@
             document.querySelectorAll('#bottomSheet .tab-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const tabName = this.dataset.tab;
-
-                    // Update active tab button
-                    document.querySelectorAll('#bottomSheet .tab-btn').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-
-                    // Update active panel
-                    document.querySelectorAll('#mobileTabContent .tab-panel').forEach(p => p.classList.remove('active'));
-                    document.querySelector(`#mobileTabContent [data-panel="${tabName}"]`).classList.add('active');
+                    // Use switchPanelTab to handle navigation reset and tab switching
+                    switchPanelTab(tabName);
                 });
             });
         }
