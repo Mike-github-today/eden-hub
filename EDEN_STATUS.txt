@@ -2,40 +2,53 @@
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
 Last Updated: 11 January 2026
-Session: UX Enhancement - Collapsible Overview Section
+Session: UX Enhancement - Profile Tab Addition
 ================================================================================
 
-LATEST CHANGE: Collapsible Overview Section [COMPLETED]
+LATEST CHANGE: Profile Tab (First Position) [COMPLETED]
 ================================================================================
 
-Requested: Add chevron toggle to Associate Detail panel's Overview section.
-When collapsed, Profile/Contact section rises up for quick access.
+Requested: Create a new "Profile" tab as the FIRST tab in Associate Detail panel.
+Move Profile and Practice Info content from Overview to dedicated Profile tab.
+Establish "who is this person" as the entry point before Sessions, Contracts, Finance.
 
 Implemented:
-- "Overview" header row with chevron toggle (ChevronUp/ChevronDown)
-- Tappable header row (full width, 44px min height for touch)
-- Smooth 250ms collapse/expand animation
-- Needs Attention + This Month stats collapse together
-- Profile section rises up when collapsed
-- State persists while switching tabs within panel
-- State resets to expanded on panel close/reopen
+- Added "Profile" tab as first tab (leftmost position)
+- Tab order now: Profile | Sessions | Contracts | Finance
+- Profile tab is DEFAULT tab when panel opens
+- Profile tab contains:
+  - Profile section (Email, Phone, Specialisms, Support Mode)
+  - Practice Info section (Joined, Fee Split, Status)
+- Email and Phone remain tappable with mailto/tel links
+- Status badge styling preserved
+- Removed Profile and Practice Info from Overview section
+- Overview now only contains: Needs Attention + This Month stats
 - Works on both desktop (side panel) and mobile (bottom sheet)
-- Accessible: aria-expanded attribute updates on toggle
 
 Key outcomes:
-- Mobile users can collapse Overview to see Profile immediately
-- Desktop users get same toggle for preference
-- Clean, minimal UX following Eden Calm design
+- Associates' identity info is now first thing visible
+- Clear separation between "who they are" (Profile) and "what they do" (Sessions, etc.)
+- Overview remains for quick stats and alerts
+- Consistent UX patterns with other tabs
 
 FILES MODIFIED
 ================================================================================
 - index.html:
-  - Added CSS for .overview-header, .overview-collapsible classes
-  - Added Overview header HTML with chevron SVG
-  - Wrapped Needs Attention + This Month in collapsible div
-  - Added toggleOverviewSection() JavaScript function
-  - Added resetOverviewSection() function
-  - Updated closePanel() to reset collapsed state
+  - Added Profile tab button to desktop tab nav (first position)
+  - Added Profile tab button to mobile tab nav (first position)
+  - Created Profile tab panel with Profile + Practice Info sections
+  - Removed Profile and Practice Info from Overview section
+  - Removed overview-divider (no longer needed)
+  - Updated activePanelTab default from 'sessions' to 'profile'
+  - Updated resetPanelNavigation() to use 'profile'
+  - Updated closePanel() tab reset logic for 'profile'
+
+PREVIOUS CHANGE: Collapsible Overview Section [COMPLETED]
+================================================================================
+- "Overview" header row with chevron toggle
+- Tappable header row (44px min height)
+- Smooth 250ms collapse/expand animation
+- State resets to expanded on panel close/reopen
 
 PREVIOUS PROGRESS (Phase 4)
 ================================================================================
