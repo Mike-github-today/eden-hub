@@ -7138,7 +7138,8 @@
 
             <!-- Tab Navigation -->
             <nav class="tab-nav" id="desktopTabNav">
-                <button class="tab-btn active" data-tab="sessions">Sessions</button>
+                <button class="tab-btn active" data-tab="profile">Profile</button>
+                <button class="tab-btn" data-tab="sessions">Sessions</button>
                 <button class="tab-btn" data-tab="contracts">Contracts</button>
                 <button class="tab-btn" data-tab="finance">Finance</button>
             </nav>
@@ -7201,9 +7202,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="overview-divider" id="overviewDivider"></div>
-
+                <!-- Profile Tab -->
+                <div class="tab-panel active" data-panel="profile" id="profilePanel">
                     <!-- Profile Section -->
                     <div class="info-group">
                         <div class="section-title">Profile</div>
@@ -7527,7 +7529,8 @@ Sarah
 
             <!-- Tab Navigation (Mobile) -->
             <nav class="tab-nav" id="mobileTabNav">
-                <button class="tab-btn active" data-tab="sessions">Sessions</button>
+                <button class="tab-btn active" data-tab="profile">Profile</button>
+                <button class="tab-btn" data-tab="sessions">Sessions</button>
                 <button class="tab-btn" data-tab="contracts">Contracts</button>
                 <button class="tab-btn" data-tab="finance">Finance</button>
             </nav>
@@ -8952,7 +8955,7 @@ Sarah
 
         // Navigation Stack State for Associate Panel
         let panelNavigationStack = ['overview'];
-        let activePanelTab = 'sessions'; // Default tab when viewing overview
+        let activePanelTab = 'profile'; // Default tab when viewing overview
 
         // ============================================
         // ROLE-BASED ACCESS CONTROL
@@ -9825,7 +9828,7 @@ Sarah
         // Reset navigation when panel closes
         function resetPanelNavigation() {
             panelNavigationStack = ['overview'];
-            activePanelTab = 'sessions';
+            activePanelTab = 'profile';
             updatePanelNavigationUI();
         }
 
@@ -10303,14 +10306,14 @@ Sarah
             // Reset overview section to expanded state
             resetOverviewSection();
 
-            // Reset tabs to Sessions (default) and show overview
+            // Reset tabs to Profile (default) and show overview
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.dataset.tab === 'sessions') btn.classList.add('active');
+                if (btn.dataset.tab === 'profile') btn.classList.add('active');
             });
             document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.classList.remove('active');
-                if (panel.dataset.panel === 'overview') panel.classList.add('active');
+                if (panel.dataset.panel === 'overview' || panel.dataset.panel === 'profile') panel.classList.add('active');
             });
         }
 
