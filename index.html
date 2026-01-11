@@ -603,6 +603,222 @@
             text-align: right;
         }
 
+        /* Overview Tab Styles */
+        .overview-stats-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .overview-stat-card {
+            flex: 1;
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            padding: 16px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .overview-stat-card:hover {
+            border-color: var(--eden-green);
+            box-shadow: 0 2px 8px rgba(45, 95, 77, 0.1);
+        }
+
+        .overview-stat-card.tappable-earnings {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+        }
+
+        .overview-stat-value {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 4px;
+        }
+
+        .overview-stat-label {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .stat-arrow {
+            color: var(--eden-green);
+        }
+
+        .view-clients-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--eden-text);
+            transition: all var(--transition-fast);
+        }
+
+        .view-clients-btn:hover {
+            border-color: var(--eden-green);
+            box-shadow: 0 2px 8px rgba(45, 95, 77, 0.1);
+        }
+
+        .view-clients-btn svg:first-child {
+            color: var(--eden-green);
+        }
+
+        .view-clients-btn span {
+            flex: 1;
+            text-align: left;
+        }
+
+        .view-clients-btn .btn-arrow {
+            color: var(--eden-text-secondary);
+        }
+
+        .overview-divider {
+            height: 1px;
+            background: var(--eden-border);
+            margin: 24px 0;
+        }
+
+        .info-row.tappable-row {
+            cursor: pointer;
+            transition: background-color var(--transition-fast);
+            margin: 0 -16px;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-row.tappable-row:hover {
+            background-color: var(--eden-mint);
+        }
+
+        .info-row.tappable-row .info-value {
+            flex: 1;
+        }
+
+        .info-link {
+            color: var(--eden-green) !important;
+        }
+
+        .row-arrow {
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+
+        .status-badge-inline {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-badge-inline.active {
+            background: #f0fdf4;
+            color: #166534;
+        }
+
+        .status-badge-inline.onboarding {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        /* Needs Attention Section */
+        .needs-attention-section {
+            background: #fef2f2;
+            border-radius: var(--radius-standard);
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .needs-attention-section .section-title {
+            color: #dc2626;
+        }
+
+        .attention-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--pure-white);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .attention-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .attention-item:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .attention-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .attention-icon.warning {
+            background: #fef3c7;
+            color: #b45309;
+        }
+
+        .attention-icon.urgent {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .attention-text {
+            flex: 1;
+            font-size: 14px;
+            color: var(--eden-text);
+        }
+
+        .attention-arrow {
+            color: var(--eden-text-secondary);
+        }
+
+        /* Therapist link in client cards */
+        .therapist-link {
+            color: var(--eden-green) !important;
+            cursor: pointer;
+            transition: opacity var(--transition-fast);
+        }
+
+        .therapist-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Payout name link */
+        .payout-name.tappable,
+        .payout-detail-name.tappable {
+            color: var(--eden-green);
+            cursor: pointer;
+            transition: opacity var(--transition-fast);
+        }
+
+        .payout-name.tappable:hover,
+        .payout-detail-name.tappable:hover {
+            opacity: 0.8;
+        }
+
         /* Session Timeline */
         .timeline {
             position: relative;
@@ -6528,7 +6744,7 @@
 
             <!-- Tab Navigation -->
             <nav class="tab-nav">
-                <button class="tab-btn active" data-tab="contact">Contact</button>
+                <button class="tab-btn active" data-tab="overview">Overview</button>
                 <button class="tab-btn" data-tab="sessions">Sessions</button>
                 <button class="tab-btn" data-tab="contracts">Contracts</button>
                 <button class="tab-btn" data-tab="finance">Finance</button>
@@ -6538,47 +6754,101 @@
 
             <!-- Tab Content -->
             <div class="tab-content" id="tabContent">
-                <!-- Contact Tab -->
-                <div class="tab-panel active" data-panel="contact" id="contactPanel">
+                <!-- Overview Tab (formerly Contact) -->
+                <div class="tab-panel active" data-panel="overview" id="overviewPanel">
+                    <!-- Needs Attention Section (conditional - only shows if alerts exist) -->
+                    <div class="info-group needs-attention-section" id="needsAttentionSection" style="display: none;">
+                        <div class="section-title">Needs Attention</div>
+                        <div id="needsAttentionItems">
+                            <!-- Alert items rendered by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- This Month Stats -->
                     <div class="info-group">
-                        <div class="section-title">Contact Details</div>
-                        <div class="info-row">
+                        <div class="section-title">This Month</div>
+                        <div class="overview-stats-row">
+                            <div class="overview-stat-card" onclick="switchToTab('sessions')">
+                                <div class="overview-stat-value" id="overviewSessions">12</div>
+                                <div class="overview-stat-label">Sessions</div>
+                            </div>
+                            <div class="overview-stat-card" onclick="viewAssociateClients()">
+                                <div class="overview-stat-value" id="overviewClients">8</div>
+                                <div class="overview-stat-label">Clients</div>
+                            </div>
+                            <div class="overview-stat-card tappable-earnings" onclick="openAssociatePayouts()">
+                                <div class="overview-stat-value" id="overviewEarnings">£2,450</div>
+                                <div class="overview-stat-label">
+                                    Earnings
+                                    <svg class="stat-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="m9 18 6-6-6-6"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- View Clients Button -->
+                    <div class="info-group">
+                        <button class="view-clients-btn" onclick="viewAssociateClients()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            <span id="viewClientsText">View 8 Clients</span>
+                            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="m9 18 6-6-6-6"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="overview-divider"></div>
+
+                    <!-- Profile Section -->
+                    <div class="info-group">
+                        <div class="section-title">Profile</div>
+                        <div class="info-row tappable-row" onclick="window.location.href='mailto:' + document.getElementById('contactEmail').textContent">
                             <span class="info-label">Email</span>
-                            <span class="info-value" id="contactEmail"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="097a687b68612763496c64686065276a6664">[email&#160;protected]</a></span>
+                            <span class="info-value info-link" id="contactEmail">sarah.j@email.com</span>
+                            <svg class="row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--eden-green)" stroke-width="1.5">
+                                <path d="m9 18 6-6-6-6"/>
+                            </svg>
                         </div>
-                        <div class="info-row">
+                        <div class="info-row tappable-row" onclick="window.location.href='tel:' + document.getElementById('contactPhone').textContent">
                             <span class="info-label">Phone</span>
-                            <span class="info-value" id="contactPhone">07700 900123</span>
+                            <span class="info-value info-link" id="contactPhone">07700 900123</span>
+                            <svg class="row-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--eden-green)" stroke-width="1.5">
+                                <path d="m9 18 6-6-6-6"/>
+                            </svg>
                         </div>
                         <div class="info-row">
-                            <span class="info-label">Address</span>
-                            <span class="info-value" id="contactAddress">London, SE1</span>
+                            <span class="info-label">Specialisms</span>
+                            <span class="info-value" id="specialisation">Couples Therapy</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Support Mode</span>
+                            <span class="info-value" id="supportModeValue">Independent</span>
                         </div>
                     </div>
+
+                    <!-- Practice Info Section -->
                     <div class="info-group">
-                        <div class="section-title">Emergency Contact</div>
-                        <div class="info-row">
-                            <span class="info-label">Name</span>
-                            <span class="info-value" id="emergencyName">Michael Johnson</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Relation</span>
-                            <span class="info-value" id="emergencyRelation">Partner</span>
-                        </div>
-                        <div class="info-row">
-                            <span class="info-label">Phone</span>
-                            <span class="info-value" id="emergencyPhone">07700 900456</span>
-                        </div>
-                    </div>
-                    <div class="info-group">
-                        <div class="section-title">Practice Details</div>
+                        <div class="section-title">Practice Info</div>
                         <div class="info-row">
                             <span class="info-label">Joined</span>
                             <span class="info-value" id="joinDate">January 2024</span>
                         </div>
                         <div class="info-row">
-                            <span class="info-label">Specialisation</span>
-                            <span class="info-value" id="specialisation">Couples Therapy</span>
+                            <span class="info-label">Fee Split</span>
+                            <span class="info-value" id="feeSplitValue">70/30</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Status</span>
+                            <span class="info-value">
+                                <span class="status-badge-inline active" id="associateStatusBadge">Active</span>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -7609,7 +7879,7 @@
                                 <div class="payout-card-header">
                                     <div class="payout-avatar">SC</div>
                                     <div class="payout-info">
-                                        <div class="payout-name">Sarah Chen</div>
+                                        <div class="payout-name tappable" onclick="event.stopPropagation(); openAssociateFromPayout('ASSOC-2402')">Sarah Chen</div>
                                         <div class="payout-id">EDEN-A002</div>
                                     </div>
                                     <span class="payout-status overdue">Overdue</span>
@@ -7632,7 +7902,7 @@
                                 <div class="payout-card-header">
                                     <div class="payout-avatar">JW</div>
                                     <div class="payout-info">
-                                        <div class="payout-name">James Wilson</div>
+                                        <div class="payout-name tappable" onclick="event.stopPropagation(); openAssociateFromPayout('ASSOC-2403')">James Wilson</div>
                                         <div class="payout-id">EDEN-A003</div>
                                     </div>
                                     <span class="payout-status pending">Pending</span>
@@ -7655,7 +7925,7 @@
                                 <div class="payout-card-header">
                                     <div class="payout-avatar">ET</div>
                                     <div class="payout-info">
-                                        <div class="payout-name">Emma Thompson</div>
+                                        <div class="payout-name tappable" onclick="event.stopPropagation(); openAssociateFromPayout('ASSOC-2404')">Emma Thompson</div>
                                         <div class="payout-id">EDEN-A004</div>
                                     </div>
                                     <span class="payout-status pending">Pending</span>
@@ -7678,7 +7948,7 @@
                                 <div class="payout-card-header">
                                     <div class="payout-avatar">MB</div>
                                     <div class="payout-info">
-                                        <div class="payout-name">Michael Brown</div>
+                                        <div class="payout-name tappable" onclick="event.stopPropagation(); openAssociateFromPayout('ASSOC-2405')">Michael Brown</div>
                                         <div class="payout-id">EDEN-A005</div>
                                     </div>
                                     <span class="payout-status paid">Paid</span>
@@ -7697,7 +7967,7 @@
                                 <div class="payout-card-header">
                                     <div class="payout-avatar">LP</div>
                                     <div class="payout-info">
-                                        <div class="payout-name">Lisa Patel</div>
+                                        <div class="payout-name tappable" onclick="event.stopPropagation(); openAssociateFromPayout('ASSOC-2501')">Lisa Patel</div>
                                         <div class="payout-id">EDEN-A006</div>
                                     </div>
                                     <span class="payout-status paid">Paid</span>
@@ -7716,7 +7986,7 @@
                                 <div class="payout-card-header">
                                     <div class="payout-avatar">DK</div>
                                     <div class="payout-info">
-                                        <div class="payout-name">David Kim</div>
+                                        <div class="payout-name tappable" onclick="event.stopPropagation(); openAssociateFromPayout('ASSOC-2405')">David Kim</div>
                                         <div class="payout-id">EDEN-A007</div>
                                     </div>
                                     <span class="payout-status paid">Paid</span>
@@ -7735,7 +8005,7 @@
                                 <div class="payout-card-header">
                                     <div class="payout-avatar">RG</div>
                                     <div class="payout-info">
-                                        <div class="payout-name">Rachel Green</div>
+                                        <div class="payout-name tappable" onclick="event.stopPropagation(); openAssociateFromPayout('ASSOC-2401')">Rachel Green</div>
                                         <div class="payout-id">EDEN-A001</div>
                                     </div>
                                     <span class="payout-status paid">Paid</span>
@@ -7766,7 +8036,7 @@
                         <div class="payout-detail-header" id="payoutDetailHeader">
                             <div class="payout-detail-avatar" id="detailAvatar">JW</div>
                             <div class="payout-detail-info">
-                                <h3 class="payout-detail-name" id="detailName">James Wilson</h3>
+                                <h3 class="payout-detail-name tappable" id="detailName" onclick="navigateToAssociateFromPayoutDetail()">James Wilson</h3>
                                 <span class="payout-detail-id" id="detailId">EDEN-A003</span>
                             </div>
                             <span class="payout-status pending" id="detailStatus">Pending</span>
@@ -8902,9 +9172,119 @@
             showToast('Compose message coming soon');
         }
 
+        // ============================================
+        // OVERVIEW TAB NAVIGATION FUNCTIONS
+        // ============================================
+
+        function switchToTab(tabName) {
+            // Switch to specified tab within the associate panel
+            const tabButtons = document.querySelectorAll('.side-panel .tab-btn, .bottom-sheet .tab-btn');
+            const tabPanels = document.querySelectorAll('.side-panel .tab-panel, .bottom-sheet .tab-panel');
+
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.tab === tabName) btn.classList.add('active');
+            });
+
+            tabPanels.forEach(panel => {
+                panel.classList.remove('active');
+                if (panel.dataset.panel === tabName) panel.classList.add('active');
+            });
+        }
+
+        function viewAssociateClients() {
+            // Switch to the Clients tab to view this associate's clients
+            if (!selectedAssociate) return;
+            switchToTab('clients');
+        }
+
+        function openAssociatePayouts() {
+            // Close associate panel and open Payout Cockpit
+            if (!selectedAssociate) return;
+
+            closePanel();
+            showView('earnings');
+
+            setTimeout(() => {
+                openWealthModule('payouts');
+                // Store reference to associate for back navigation
+                window.payoutSourceAssociate = selectedAssociate;
+                showToast(`Viewing payouts for ${selectedAssociate.name}`);
+            }, 300);
+        }
+
+        function updateNeedsAttention(associate) {
+            const section = document.getElementById('needsAttentionSection');
+            const container = document.getElementById('needsAttentionItems');
+
+            if (!section || !container) return;
+
+            // Mock alerts based on associate data
+            const alerts = [];
+
+            // Check for pending payout
+            if (associate.pendingPayout && associate.pendingPayout !== '£0') {
+                alerts.push({
+                    type: 'warning',
+                    message: `${associate.pendingPayout} payout pending approval`,
+                    tab: 'finance'
+                });
+            }
+
+            // Random chance of contract expiring alert (mock)
+            if (Math.random() > 0.6) {
+                alerts.push({
+                    type: 'warning',
+                    message: 'Contract expires in 23 days',
+                    tab: 'contracts'
+                });
+            }
+
+            if (alerts.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+
+            section.style.display = 'block';
+            container.innerHTML = alerts.map(alert => `
+                <div class="attention-item" onclick="switchToTab('${alert.tab}')">
+                    <div class="attention-icon ${alert.type}">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                    </div>
+                    <span class="attention-text">${alert.message}</span>
+                    <svg class="attention-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="m9 18 6-6-6-6"/>
+                    </svg>
+                </div>
+            `).join('');
+        }
+
         function viewClientAssociate(associateId) {
             // Close client panel and open associate panel
             closeClientPanelDirect();
+            showView('associates');
+            setTimeout(() => {
+                openPanel(associateId);
+            }, 300);
+        }
+
+        function openAssociatePanelFromClient(associateId) {
+            // Navigate to Associates page and open the associate's panel
+            // Used when clicking therapist name in Clients Grid
+            showView('associates');
+            setTimeout(() => {
+                openPanel(associateId);
+            }, 300);
+        }
+
+        function openAssociateFromPayout(associateId) {
+            // Close payout cockpit and navigate to associate panel
+            // Used when clicking associate name in Payout Cockpit
+            closeWealthModule();
             showView('associates');
             setTimeout(() => {
                 openPanel(associateId);
@@ -8996,15 +9376,46 @@
             document.getElementById('mobilePanelName').textContent = associate.name;
             document.getElementById('mobilePanelUcid').textContent = associate.id;
 
-            // Contact details
+            // Overview tab - Profile section
             document.getElementById('contactEmail').textContent = associate.email;
             document.getElementById('contactPhone').textContent = associate.phone;
-            document.getElementById('contactAddress').textContent = associate.address;
-            document.getElementById('emergencyName').textContent = associate.emergencyName;
-            document.getElementById('emergencyRelation').textContent = associate.emergencyRelation;
-            document.getElementById('emergencyPhone').textContent = associate.emergencyPhone;
             document.getElementById('joinDate').textContent = associate.joinDate;
             document.getElementById('specialisation').textContent = associate.specialisation;
+
+            // Overview tab - Support Mode and Fee Split
+            const supportModeEl = document.getElementById('supportModeValue');
+            if (supportModeEl) {
+                supportModeEl.textContent = associate.supportMode === 'independent' ? 'Independent' : 'Supported';
+            }
+            const feeSplitEl = document.getElementById('feeSplitValue');
+            if (feeSplitEl) {
+                feeSplitEl.textContent = associate.supportMode === 'independent' ? '70/30' : '60/40';
+            }
+
+            // Overview tab - This Month stats
+            const clientCount = clients.filter(c => c.associateId === associate.id).length;
+            const sessionsThisMonth = Math.floor(Math.random() * 15) + 8; // Mock data
+            const earningsAmount = associate.totalEarnings || '£0';
+
+            const overviewSessionsEl = document.getElementById('overviewSessions');
+            const overviewClientsEl = document.getElementById('overviewClients');
+            const overviewEarningsEl = document.getElementById('overviewEarnings');
+            const viewClientsTextEl = document.getElementById('viewClientsText');
+
+            if (overviewSessionsEl) overviewSessionsEl.textContent = sessionsThisMonth;
+            if (overviewClientsEl) overviewClientsEl.textContent = clientCount;
+            if (overviewEarningsEl) overviewEarningsEl.textContent = earningsAmount;
+            if (viewClientsTextEl) viewClientsTextEl.textContent = `View ${clientCount} Client${clientCount !== 1 ? 's' : ''}`;
+
+            // Overview tab - Status badge
+            const statusBadgeEl = document.getElementById('associateStatusBadge');
+            if (statusBadgeEl) {
+                statusBadgeEl.textContent = 'Active';
+                statusBadgeEl.className = 'status-badge-inline active';
+            }
+
+            // Overview tab - Needs Attention section (mock alerts)
+            updateNeedsAttention(associate);
 
             // Finance
             document.getElementById('totalEarnings').textContent = associate.totalEarnings;
@@ -9065,14 +9476,14 @@
                 document.getElementById('mainContent').classList.remove('panel-open');
             }
 
-            // Reset tabs
+            // Reset tabs to Overview
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.dataset.tab === 'contact') btn.classList.add('active');
+                if (btn.dataset.tab === 'overview') btn.classList.add('active');
             });
             document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.classList.remove('active');
-                if (panel.dataset.panel === 'contact') panel.classList.add('active');
+                if (panel.dataset.panel === 'overview') panel.classList.add('active');
             });
         }
 
@@ -9991,7 +10402,7 @@
                         <div class="entity-details">
                             <div class="entity-detail-item">
                                 <span class="entity-detail-label">Therapist</span>
-                                <span class="entity-detail-value">${associate ? associate.name : 'Unassigned'}</span>
+                                <span class="entity-detail-value ${associate ? 'therapist-link' : ''}" ${associate ? `onclick="event.stopPropagation(); openAssociatePanelFromClient('${associate.id}')"` : ''}>${associate ? associate.name : 'Unassigned'}</span>
                             </div>
                             <div class="entity-detail-item">
                                 <span class="entity-detail-label">Session Type</span>
@@ -10595,6 +11006,33 @@
             // Hide detail view, show overview
             document.getElementById('payoutDetailContent').style.display = 'none';
             document.getElementById('payoutOverviewContent').style.display = 'block';
+        }
+
+        function navigateToAssociateFromPayoutDetail() {
+            // Navigate to associate from payout detail view
+            // This uses a mapping since payout detail doesn't have real associate IDs
+            const nameEl = document.getElementById('detailName');
+            const name = nameEl ? nameEl.textContent : '';
+
+            // Map payout names to associate IDs (mock mapping)
+            const nameToId = {
+                'James Wilson': 'ASSOC-2403',
+                'Sarah Chen': 'ASSOC-2402',
+                'Emma Thompson': 'ASSOC-2404',
+                'Michael Brown': 'ASSOC-2405',
+                'Lisa Patel': 'ASSOC-2501',
+                'David Kim': 'ASSOC-2405',
+                'Rachel Green': 'ASSOC-2401'
+            };
+
+            const associateId = nameToId[name];
+            if (associateId) {
+                closeWealthModule();
+                showView('associates');
+                setTimeout(() => {
+                    openPanel(associateId);
+                }, 300);
+            }
         }
 
         function markAsPaid() {
