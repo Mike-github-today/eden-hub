@@ -5995,6 +5995,63 @@
             background-color: var(--eden-border);
             color: var(--eden-text-secondary);
         }
+
+        /* Collapsible Overview Section */
+        .overview-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            cursor: pointer;
+            min-height: 44px;
+            user-select: none;
+            transition: background-color var(--transition-fast);
+            margin: 0 -16px;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+
+        .overview-header:hover {
+            background-color: var(--eden-whisper);
+        }
+
+        .overview-header:active {
+            background-color: #e9efec;
+        }
+
+        .overview-header-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-green);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .overview-chevron {
+            color: var(--eden-green);
+            transition: transform 250ms ease-out;
+            flex-shrink: 0;
+        }
+
+        .overview-header.collapsed .overview-chevron {
+            transform: rotate(180deg);
+        }
+
+        .overview-collapsible {
+            overflow: hidden;
+            transition: max-height 250ms ease-out, opacity 200ms ease-out;
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        .overview-collapsible.collapsed {
+            max-height: 0;
+            opacity: 0;
+        }
+
+        .overview-header.collapsed + .overview-collapsible + .overview-divider {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -7090,51 +7147,62 @@
             <div class="tab-content" id="tabContent">
                 <!-- Overview Tab (formerly Contact) -->
                 <div class="tab-panel active" data-panel="overview" id="overviewPanel">
-                    <!-- Needs Attention Section (conditional - only shows if alerts exist) -->
-                    <div class="info-group needs-attention-section" id="needsAttentionSection" style="display: none;">
-                        <div class="section-title">Needs Attention</div>
-                        <div id="needsAttentionItems">
-                            <!-- Alert items rendered by JavaScript -->
+                    <!-- Overview Header (Collapsible Toggle) -->
+                    <div class="overview-header" id="overviewHeader" onclick="toggleOverviewSection()" role="button" aria-expanded="true" aria-controls="overviewCollapsible">
+                        <span class="overview-header-label">Overview</span>
+                        <svg class="overview-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="18 15 12 9 6 15"/>
+                        </svg>
+                    </div>
+
+                    <!-- Collapsible Content (Needs Attention + This Month) -->
+                    <div class="overview-collapsible" id="overviewCollapsible">
+                        <!-- Needs Attention Section (conditional - only shows if alerts exist) -->
+                        <div class="info-group needs-attention-section" id="needsAttentionSection" style="display: none;">
+                            <div class="section-title">Needs Attention</div>
+                            <div id="needsAttentionItems">
+                                <!-- Alert items rendered by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- This Month Stats -->
+                        <div class="info-group">
+                            <div class="section-title">This Month</div>
+                            <div class="overview-stats-row">
+                                <div class="overview-stat-card" onclick="navigatePanelTo('inbox')">
+                                    <div class="overview-stat-value" id="overviewInbox">2</div>
+                                    <div class="overview-stat-label">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                            <rect width="20" height="16" x="2" y="4" rx="2"/>
+                                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                                        </svg>
+                                        Inbox
+                                    </div>
+                                </div>
+                                <div class="overview-stat-card" onclick="navigatePanelTo('capacity')">
+                                    <div class="overview-stat-value" id="overviewCapacity">75%</div>
+                                    <div class="overview-stat-label">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                            <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
+                                            <path d="M22 12A10 10 0 0 0 12 2v10z"/>
+                                        </svg>
+                                        Capacity
+                                    </div>
+                                </div>
+                                <div class="overview-stat-card tappable-earnings" onclick="navigatePanelTo('payout-cockpit')">
+                                    <div class="overview-stat-value" id="overviewEarnings">£2,450</div>
+                                    <div class="overview-stat-label">
+                                        Earnings
+                                        <svg class="stat-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="m9 18 6-6-6-6"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- This Month Stats -->
-                    <div class="info-group">
-                        <div class="section-title">This Month</div>
-                        <div class="overview-stats-row">
-                            <div class="overview-stat-card" onclick="navigatePanelTo('inbox')">
-                                <div class="overview-stat-value" id="overviewInbox">2</div>
-                                <div class="overview-stat-label">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <rect width="20" height="16" x="2" y="4" rx="2"/>
-                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                                    </svg>
-                                    Inbox
-                                </div>
-                            </div>
-                            <div class="overview-stat-card" onclick="navigatePanelTo('capacity')">
-                                <div class="overview-stat-value" id="overviewCapacity">75%</div>
-                                <div class="overview-stat-label">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                        <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>
-                                        <path d="M22 12A10 10 0 0 0 12 2v10z"/>
-                                    </svg>
-                                    Capacity
-                                </div>
-                            </div>
-                            <div class="overview-stat-card tappable-earnings" onclick="navigatePanelTo('payout-cockpit')">
-                                <div class="overview-stat-value" id="overviewEarnings">£2,450</div>
-                                <div class="overview-stat-label">
-                                    Earnings
-                                    <svg class="stat-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="m9 18 6-6-6-6"/>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="overview-divider"></div>
+                    <div class="overview-divider" id="overviewDivider"></div>
 
                     <!-- Profile Section -->
                     <div class="info-group">
@@ -10232,6 +10300,9 @@ Sarah
             // Reset navigation stack
             resetPanelNavigation();
 
+            // Reset overview section to expanded state
+            resetOverviewSection();
+
             // Reset tabs to Sessions (default) and show overview
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
@@ -10240,6 +10311,66 @@ Sarah
             document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.classList.remove('active');
                 if (panel.dataset.panel === 'overview') panel.classList.add('active');
+            });
+        }
+
+        // Toggle the Overview section (Needs Attention + This Month stats)
+        // Works for both desktop and mobile panels (handles cloned content)
+        function toggleOverviewSection() {
+            // Get all overview headers (desktop and mobile have cloned content)
+            const headers = document.querySelectorAll('.overview-header');
+            const collapsibles = document.querySelectorAll('.overview-collapsible');
+            const dividers = document.querySelectorAll('.overview-divider');
+
+            if (headers.length === 0 || collapsibles.length === 0) return;
+
+            // Check the first header's state to determine toggle direction
+            const isExpanded = !headers[0].classList.contains('collapsed');
+
+            headers.forEach(header => {
+                if (isExpanded) {
+                    header.classList.add('collapsed');
+                    header.setAttribute('aria-expanded', 'false');
+                } else {
+                    header.classList.remove('collapsed');
+                    header.setAttribute('aria-expanded', 'true');
+                }
+            });
+
+            collapsibles.forEach(collapsible => {
+                if (isExpanded) {
+                    collapsible.classList.add('collapsed');
+                } else {
+                    collapsible.classList.remove('collapsed');
+                }
+            });
+
+            dividers.forEach(divider => {
+                if (isExpanded) {
+                    divider.style.display = 'none';
+                } else {
+                    divider.style.display = '';
+                }
+            });
+        }
+
+        // Reset overview section to expanded state (called on panel close)
+        function resetOverviewSection() {
+            const headers = document.querySelectorAll('.overview-header');
+            const collapsibles = document.querySelectorAll('.overview-collapsible');
+            const dividers = document.querySelectorAll('.overview-divider');
+
+            headers.forEach(header => {
+                header.classList.remove('collapsed');
+                header.setAttribute('aria-expanded', 'true');
+            });
+
+            collapsibles.forEach(collapsible => {
+                collapsible.classList.remove('collapsed');
+            });
+
+            dividers.forEach(divider => {
+                divider.style.display = '';
             });
         }
 
