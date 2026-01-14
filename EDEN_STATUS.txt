@@ -2,145 +2,124 @@
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
 Last Updated: 14 January 2026
-Session: Referral System Implementation
+Session: Progress Stepper Implementation
 ================================================================================
 
-LATEST CHANGE: Referral System & UX Overhaul [COMPLETED]
+LATEST CHANGE: Progress Stepper & Onboarding Flow [COMPLETED]
 ================================================================================
 
-Requested: Implement comprehensive Referral Flow with broadcast-and-accept
-mechanics, including Admin Command Centre and Associate Referral Inbox.
+Requested: Add gated onboarding flows with visual stepper UI to Client and
+Associate pages, inspired by It Takes a Village Play Cafe checkout flow.
 
 Implemented:
 
-## 1. Design Tokens (CSS Variables)
-- Added referral-specific colors:
-  - --referral-new: #9b59b6 (Purple)
-  - --referral-broadcasting: #3498db (Blue)
-  - --referral-pending: #f39c12 (Amber)
-  - --referral-accepted: #27ae60 (Green)
-  - --referral-declined: #95a5a6 (Grey)
+## 1. Progress Stepper Component (CSS + JS)
+- Visual stepper with 32px circles, connecting lines, and labels
+- Three states: inactive (grey), active (green ring), complete (green fill + checkmark)
+- Smooth 300ms transitions between states
+- Completed steps are clickable (for review), future steps are not
+- Mobile-friendly with horizontal scroll if needed
 
-## 2. Mock Data Structures
-- Referrals array with full lifecycle data:
-  - REF-25003: New (untriaged)
-  - REF-25002: Broadcasting (24hr window active)
-  - REF-25001: Pending Allocation (window closed)
-  - REF-25000: Accepted (allocated to associate)
-- Referral Expressions array for associate interest tracking
-- Associate Referral Settings (capacity, availability, specialisations)
-- SPECIALISATIONS master list (24 therapy areas)
+## 2. Onboarding Stages Configuration
+- Client stages (4): Enquiry -> Broadcasting -> Matching -> Onboarded
+  - Each stage validates required fields automatically
+  - Auto-advances when all fields are populated
+- Associate stages (4): Interest -> Documents -> Profile -> Ready
+  - Document upload tracking with verification status
+  - Profile approval workflow
 
-## 3. Navigation
-- Added "Referrals" nav item in Command Centre section
-- Shows alert dot when new referrals or pending allocations exist
-- Role-based access: Admin sees "Referrals", Associate sees "Referral Inbox"
+## 3. Status Card Component
+- Unified card design matching Referral Command Centre style
+- Status badges with color-coded backgrounds
+- Pulse indicator dots (purple, blue, amber, green)
+- 2-line preview truncation
+- Meta chips for tags/categories
+- Hover effects: translateY(-2px) + shadow increase
 
-## 4. Admin: Referral Command Centre
-- Stats row showing New/Broadcasting/Pending/Accepted counts
-- Click stats to filter referral list
-- Referral cards show:
-  - ID, status badge, time since creation
-  - Client pseudonym (if assigned)
-  - Enquiry preview (2-line clamp)
-  - Preferred times and presenting issue
-  - Time remaining and interest count (for broadcasting)
+## 4. Animated Card List
+- Staggered entrance animation (fade in + slide up)
+- 300ms duration with ease-out easing
+- 75ms delay between each card
+- Applied to both Clients and Associates grids
 
-## 5. Admin: Triage Panel
-- Enquiry preview section
-- Triage fields: Client Reference, Presenting Issue, Urgency
-- Eligible Associates list (auto-filtered by capacity + time overlap)
-- Checkbox selection for associates
-- "Broadcast to X Associates" button
-- 24-hour window countdown
+## 5. Detail Panel Component
+- Desktop: Side Panel (480px, slides from right)
+- Mobile: Bottom Sheet (90vh, slides from bottom, drag handle)
+- Header with back button, title, and actions menu
+- Progress stepper below header
+- Scrollable form content area
+- Activity timeline at bottom
+- Keyboard support (Escape to close)
+- Touch swipe to dismiss on mobile
 
-## 6. Admin: Allocation Panel
-- Referral summary
-- Interested expressions grouped (with notes)
-- "Allocate to [Name]" button per interested associate
-- Declined expressions section
-- Re-broadcast option
+## 6. Client Page Integration
+- Cards now use StatusCard with animated list
+- Clicking card opens Detail Panel with onboarding stepper
+- Form fields for each stage (Enquiry, Broadcasting, Matching, Onboarded)
+- Auto-stage-advance when fields are completed
 
-## 7. Associate: Referral Inbox
-- Header with available count badge
-- Capacity Quick Card showing:
-  - Accepting Referrals toggle
-  - Available slots count
-- Available Referrals section:
-  - Cards with "I'm Interested" / "Not For Me" buttons
-  - Specialisation tags
-  - Time remaining
-- Awaiting Allocation section (my expressions)
-
-## 8. Associate: Express Interest Panel
-- Optional note field for allocation consideration
-- Info box about non-guaranteed allocation
-- "Confirm Interest" button
-
-## 9. CSS Styling (~800 lines)
-- Referral stats row (4-column grid, 2 on mobile)
-- Referral cards with hover effects
-- Status badges (color-coded)
-- Panel system (side panel desktop, bottom sheet mobile)
-- Form elements (inputs, selects, textareas)
-- Toggle switch component
-- Expression cards
-- Empty states
-
-## 10. JavaScript Functions (~750 lines)
-- renderReferrals() - Role-based rendering
-- renderAdminReferrals() - Command centre view
-- renderAssociateReferrals() - Inbox view
-- filterReferrals() - Status filtering
-- openReferralPanel() / closeReferralPanel()
-- renderTriageContent() - Triage panel
-- renderAllocationContent() - Allocation panel
-- renderInterestContent() - Interest panel
-- getEligibleAssociates() - Time/capacity matching
-- broadcastReferral() - Start 24hr window
-- expressInterest() / declineReferral()
-- allocateReferral() - Final allocation
-- rebroadcastReferral()
-- toggleAcceptingReferrals()
-- updateReferralAlertDot()
+## 7. Associate Page Integration
+- Cards now use StatusCard with animated list
+- Clicking card opens Detail Panel with onboarding stepper
+- Form fields for each stage (Interest, Documents, Profile, Ready)
+- Document upload simulation
+- Verification status tracking
 
 FILES MODIFIED
 ================================================================================
 - index.html:
-  - Added CSS variables for referral colors (lines 31-36)
-  - Added SPECIALISATIONS array (lines 10086-10096)
-  - Added referrals mock data (lines 10098-10172)
-  - Added referralExpressions mock data (lines 10174-10187)
-  - Added associateReferralSettings (lines 10189-10198)
-  - Added state variables (lines 10214-10216)
-  - Updated roleNavPermissions (lines 10228-10247)
-  - Added Referrals nav item in sidebar (lines 7096-7107)
-  - Added Referrals View HTML structure (lines 7674-7788)
-  - Added CSS styles (~780 lines, starting line 6267)
-  - Added JavaScript functions (~750 lines, starting line 14952)
-  - Updated init() to call renderReferrals()
-  - Updated showView() to refresh referrals
-  - Updated toggleRole() to update referrals
+  - Added Progress Stepper CSS (~200 lines)
+  - Added StatusCard CSS (~100 lines)
+  - Added AnimatedCardList CSS (~20 lines)
+  - Added DetailPanel CSS (~250 lines)
+  - Added Onboarding Form CSS (~150 lines)
+  - Added Detail Panel HTML structure (overlay + panel)
+  - Added clientStages configuration (4 stages with validation)
+  - Added associateStages configuration (4 stages with validation)
+  - Added Progress Stepper JS (calculateCurrentStep, renderProgressStepper)
+  - Added StatusCard JS (renderStatusCard)
+  - Added AnimatedCardList JS (applyCardAnimation)
+  - Added DetailPanel JS (openDetailPanel, closeDetailPanel, renderDetailPanelContent)
+  - Added Onboarding Form JS (renderOnboardingForm, renderStageFields)
+  - Added Activity Timeline JS (renderActivityTimeline, formatTimeAgo)
+  - Updated renderAllClientsGrid() to use StatusCard + animation
+  - Updated renderCards() to use StatusCard + animation
+  - Added openClientDetailPanel() and openAssociateDetailPanel()
 
 BACKUP CREATED
 ================================================================================
-- index_v1_pre_referral.html (backup before changes)
+- index_v2_pre_stepper.html (backup before changes)
 
 PREVIOUS CHANGES
 ================================================================================
+- Referral System Implementation [Jan 14, 2026]
 - Profile Tab (First Position) [Jan 11, 2026]
 - Collapsible Overview Section [Jan 11, 2026]
 - Role-Based Navigation [Jan 11, 2026]
 - Ivy Wallet-inspired UX Redesign [Jan 11, 2026]
 
 ================================================================================
+TESTING CHECKLIST
+================================================================================
+[ ] Stepper visually matches the It Takes a Village style
+[ ] Completed steps show checkmark icon
+[ ] Current step has green ring border
+[ ] Cannot click future steps (cursor: not-allowed)
+[ ] Can click completed steps to review that stage
+[ ] Cards animate in with stagger effect (75ms delay each)
+[ ] Opens as Bottom Sheet on mobile (< 768px)
+[ ] Opens as Side Panel on desktop (>= 768px)
+[ ] Back button closes panel
+[ ] Backdrop click closes panel
+[ ] Escape key closes panel (desktop)
+[ ] Stage auto-advances when all required fields are populated
+
+================================================================================
 NEXT STEPS
 ================================================================================
-1. Test referral flow end-to-end
-2. Verify mobile responsiveness (bottom sheet panels)
-3. Consider adding:
-   - Email notifications (Make.com integration)
-   - Airtable sync for referrals
-   - Squarespace form integration
+1. Test stepper and panel flow end-to-end
+2. Verify mobile responsiveness
+3. Connect to Airtable for real data persistence
+4. Add form validation with error messages
 
 ================================================================================
