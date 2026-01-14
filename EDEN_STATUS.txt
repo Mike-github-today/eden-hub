@@ -1,61 +1,146 @@
 ================================================================================
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
-Last Updated: 11 January 2026
-Session: UX Enhancement - Profile Tab Addition
+Last Updated: 14 January 2026
+Session: Referral System Implementation
 ================================================================================
 
-LATEST CHANGE: Profile Tab (First Position) [COMPLETED]
+LATEST CHANGE: Referral System & UX Overhaul [COMPLETED]
 ================================================================================
 
-Requested: Create a new "Profile" tab as the FIRST tab in Associate Detail panel.
-Move Profile and Practice Info content from Overview to dedicated Profile tab.
-Establish "who is this person" as the entry point before Sessions, Contracts, Finance.
+Requested: Implement comprehensive Referral Flow with broadcast-and-accept
+mechanics, including Admin Command Centre and Associate Referral Inbox.
 
 Implemented:
-- Added "Profile" tab as first tab (leftmost position)
-- Tab order now: Profile | Sessions | Contracts | Finance
-- Profile tab is DEFAULT tab when panel opens
-- Profile tab contains:
-  - Profile section (Email, Phone, Specialisms, Support Mode)
-  - Practice Info section (Joined, Fee Split, Status)
-- Email and Phone remain tappable with mailto/tel links
-- Status badge styling preserved
-- Removed Profile and Practice Info from Overview section
-- Overview now only contains: Needs Attention + This Month stats
-- Works on both desktop (side panel) and mobile (bottom sheet)
 
-Key outcomes:
-- Associates' identity info is now first thing visible
-- Clear separation between "who they are" (Profile) and "what they do" (Sessions, etc.)
-- Overview remains for quick stats and alerts
-- Consistent UX patterns with other tabs
+## 1. Design Tokens (CSS Variables)
+- Added referral-specific colors:
+  - --referral-new: #9b59b6 (Purple)
+  - --referral-broadcasting: #3498db (Blue)
+  - --referral-pending: #f39c12 (Amber)
+  - --referral-accepted: #27ae60 (Green)
+  - --referral-declined: #95a5a6 (Grey)
+
+## 2. Mock Data Structures
+- Referrals array with full lifecycle data:
+  - REF-25003: New (untriaged)
+  - REF-25002: Broadcasting (24hr window active)
+  - REF-25001: Pending Allocation (window closed)
+  - REF-25000: Accepted (allocated to associate)
+- Referral Expressions array for associate interest tracking
+- Associate Referral Settings (capacity, availability, specialisations)
+- SPECIALISATIONS master list (24 therapy areas)
+
+## 3. Navigation
+- Added "Referrals" nav item in Command Centre section
+- Shows alert dot when new referrals or pending allocations exist
+- Role-based access: Admin sees "Referrals", Associate sees "Referral Inbox"
+
+## 4. Admin: Referral Command Centre
+- Stats row showing New/Broadcasting/Pending/Accepted counts
+- Click stats to filter referral list
+- Referral cards show:
+  - ID, status badge, time since creation
+  - Client pseudonym (if assigned)
+  - Enquiry preview (2-line clamp)
+  - Preferred times and presenting issue
+  - Time remaining and interest count (for broadcasting)
+
+## 5. Admin: Triage Panel
+- Enquiry preview section
+- Triage fields: Client Reference, Presenting Issue, Urgency
+- Eligible Associates list (auto-filtered by capacity + time overlap)
+- Checkbox selection for associates
+- "Broadcast to X Associates" button
+- 24-hour window countdown
+
+## 6. Admin: Allocation Panel
+- Referral summary
+- Interested expressions grouped (with notes)
+- "Allocate to [Name]" button per interested associate
+- Declined expressions section
+- Re-broadcast option
+
+## 7. Associate: Referral Inbox
+- Header with available count badge
+- Capacity Quick Card showing:
+  - Accepting Referrals toggle
+  - Available slots count
+- Available Referrals section:
+  - Cards with "I'm Interested" / "Not For Me" buttons
+  - Specialisation tags
+  - Time remaining
+- Awaiting Allocation section (my expressions)
+
+## 8. Associate: Express Interest Panel
+- Optional note field for allocation consideration
+- Info box about non-guaranteed allocation
+- "Confirm Interest" button
+
+## 9. CSS Styling (~800 lines)
+- Referral stats row (4-column grid, 2 on mobile)
+- Referral cards with hover effects
+- Status badges (color-coded)
+- Panel system (side panel desktop, bottom sheet mobile)
+- Form elements (inputs, selects, textareas)
+- Toggle switch component
+- Expression cards
+- Empty states
+
+## 10. JavaScript Functions (~750 lines)
+- renderReferrals() - Role-based rendering
+- renderAdminReferrals() - Command centre view
+- renderAssociateReferrals() - Inbox view
+- filterReferrals() - Status filtering
+- openReferralPanel() / closeReferralPanel()
+- renderTriageContent() - Triage panel
+- renderAllocationContent() - Allocation panel
+- renderInterestContent() - Interest panel
+- getEligibleAssociates() - Time/capacity matching
+- broadcastReferral() - Start 24hr window
+- expressInterest() / declineReferral()
+- allocateReferral() - Final allocation
+- rebroadcastReferral()
+- toggleAcceptingReferrals()
+- updateReferralAlertDot()
 
 FILES MODIFIED
 ================================================================================
 - index.html:
-  - Added Profile tab button to desktop tab nav (first position)
-  - Added Profile tab button to mobile tab nav (first position)
-  - Created Profile tab panel with Profile + Practice Info sections
-  - Removed Profile and Practice Info from Overview section
-  - Removed overview-divider (no longer needed)
-  - Updated activePanelTab default from 'sessions' to 'profile'
-  - Updated resetPanelNavigation() to use 'profile'
-  - Updated closePanel() tab reset logic for 'profile'
+  - Added CSS variables for referral colors (lines 31-36)
+  - Added SPECIALISATIONS array (lines 10086-10096)
+  - Added referrals mock data (lines 10098-10172)
+  - Added referralExpressions mock data (lines 10174-10187)
+  - Added associateReferralSettings (lines 10189-10198)
+  - Added state variables (lines 10214-10216)
+  - Updated roleNavPermissions (lines 10228-10247)
+  - Added Referrals nav item in sidebar (lines 7096-7107)
+  - Added Referrals View HTML structure (lines 7674-7788)
+  - Added CSS styles (~780 lines, starting line 6267)
+  - Added JavaScript functions (~750 lines, starting line 14952)
+  - Updated init() to call renderReferrals()
+  - Updated showView() to refresh referrals
+  - Updated toggleRole() to update referrals
 
-PREVIOUS CHANGE: Collapsible Overview Section [COMPLETED]
+BACKUP CREATED
 ================================================================================
-- "Overview" header row with chevron toggle
-- Tappable header row (44px min height)
-- Smooth 250ms collapse/expand animation
-- State resets to expanded on panel close/reopen
+- index_v1_pre_referral.html (backup before changes)
 
-PREVIOUS PROGRESS (Phase 4)
+PREVIOUS CHANGES
 ================================================================================
+- Profile Tab (First Position) [Jan 11, 2026]
+- Collapsible Overview Section [Jan 11, 2026]
+- Role-Based Navigation [Jan 11, 2026]
+- Ivy Wallet-inspired UX Redesign [Jan 11, 2026]
 
-Story #1: Role-Based Navigation [COMPLETED]
-- Role state variables, navigation permissions, UI updates
-
-Story #2-5: [PENDING]
+================================================================================
+NEXT STEPS
+================================================================================
+1. Test referral flow end-to-end
+2. Verify mobile responsiveness (bottom sheet panels)
+3. Consider adding:
+   - Email notifications (Make.com integration)
+   - Airtable sync for referrals
+   - Squarespace form integration
 
 ================================================================================
