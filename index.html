@@ -6052,6 +6052,980 @@
         .overview-header.collapsed + .overview-collapsible + .overview-divider {
             display: none;
         }
+
+        /* ============================================
+           IVY WALLET-INSPIRED UX COMPONENTS
+           ============================================ */
+
+        /* Progress Ring Component */
+        .progress-ring-container {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+
+        .progress-ring-bg {
+            fill: none;
+            stroke: var(--eden-border);
+        }
+
+        .progress-ring-progress {
+            fill: none;
+            stroke: var(--eden-green);
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s ease-out;
+        }
+
+        .progress-ring-content {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .progress-ring-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--eden-text);
+            line-height: 1.1;
+        }
+
+        .progress-ring-label {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            margin-top: 2px;
+        }
+
+        /* Cash Density Ring (Admin) */
+        .cash-density-ring .progress-ring-value {
+            font-size: 32px;
+            color: var(--pure-white);
+        }
+
+        .cash-density-ring .progress-ring-label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .cash-density-ring .progress-ring-progress {
+            stroke: #4ADE80;
+        }
+
+        .cash-density-ring .progress-ring-bg {
+            stroke: rgba(255, 255, 255, 0.2);
+        }
+
+        /* QuickStat Card */
+        .quick-stat {
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 16px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            text-align: center;
+            position: relative;
+            min-width: 100px;
+            flex: 1;
+        }
+
+        .quick-stat:hover {
+            border-color: var(--eden-green);
+            box-shadow: 0 4px 12px rgba(45, 95, 77, 0.12);
+            transform: translateY(-2px);
+        }
+
+        .quick-stat:active {
+            transform: translateY(0);
+        }
+
+        .quick-stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--eden-text);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .quick-stat-label {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .quick-stat-subtext {
+            font-size: 11px;
+            color: var(--eden-text-muted);
+            margin-top: 4px;
+        }
+
+        .quick-stat.warning {
+            border-color: var(--alert-amber);
+            background: linear-gradient(135deg, #FFFBEB 0%, var(--pure-white) 100%);
+        }
+
+        .quick-stat.warning .quick-stat-value {
+            color: #B45309;
+        }
+
+        .quick-stat-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        /* PulseDot */
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--alert-amber);
+            animation: pulse-animation 2s ease-in-out infinite;
+            position: absolute;
+            top: 8px;
+            right: 8px;
+        }
+
+        .pulse-dot.alert {
+            background-color: var(--alert-rose);
+        }
+
+        .pulse-dot.success {
+            background-color: var(--eden-green);
+        }
+
+        @keyframes pulse-animation {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0.7;
+            }
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-default {
+            background: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .badge-warning {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .badge-success {
+            background: #F0FDF4;
+            color: #166534;
+        }
+
+        .badge-alert {
+            background: #FEF2F2;
+            color: #991B1B;
+        }
+
+        .badge-info {
+            background: #EFF6FF;
+            color: #1E40AF;
+        }
+
+        .badge.pulse .pulse-indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: pulse-animation 2s ease-in-out infinite;
+        }
+
+        /* ============================================
+           ROLE-SPECIFIC HOME SCREENS
+           ============================================ */
+
+        /* Associate Home Screen */
+        .associate-home {
+            display: none;
+        }
+
+        .associate-home.active {
+            display: block;
+        }
+
+        .home-greeting {
+            margin-bottom: 24px;
+        }
+
+        .greeting-text {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 4px;
+        }
+
+        .greeting-subtext {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+        }
+
+        .home-actions-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .home-action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: var(--radius-standard);
+            border: 1px solid var(--eden-border);
+            background: var(--pure-white);
+            color: var(--eden-text);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            position: relative;
+        }
+
+        .home-action-btn:hover {
+            border-color: var(--eden-green);
+            color: var(--eden-green);
+        }
+
+        .home-action-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .home-action-btn .badge-count {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--eden-green);
+            color: var(--pure-white);
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Period Selector */
+        .period-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding: 4px;
+            background: var(--eden-mint);
+            border-radius: 20px;
+            width: fit-content;
+        }
+
+        .period-btn {
+            padding: 8px 16px;
+            border-radius: 16px;
+            border: none;
+            background: transparent;
+            color: var(--eden-text-secondary);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .period-btn:hover {
+            color: var(--eden-text);
+        }
+
+        .period-btn.active {
+            background: var(--pure-white);
+            color: var(--eden-green);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* My Clients Card */
+        .clients-card {
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 20px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .clients-card:hover {
+            border-color: var(--eden-green);
+            box-shadow: 0 4px 12px rgba(45, 95, 77, 0.12);
+        }
+
+        .clients-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .clients-card-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .clients-card-count {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+        }
+
+        /* Pipeline Visualization (Horizontal) */
+        .pipeline-visual {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 0;
+        }
+
+        .pipeline-stage-dot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .stage-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-bottom: 6px;
+        }
+
+        .stage-dot.enquiry { background: #9b59b6; }
+        .stage-dot.consultation { background: #3498db; }
+        .stage-dot.onboarding { background: #f39c12; }
+        .stage-dot.active { background: var(--eden-green); }
+        .stage-dot.paused { background: #7f8c8d; }
+        .stage-dot.completed { background: #95a5a6; }
+
+        .stage-count {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .stage-label {
+            font-size: 10px;
+            color: var(--eden-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .pipeline-connector {
+            flex: 0.5;
+            height: 2px;
+            background: var(--eden-border);
+            margin-bottom: 20px;
+        }
+
+        /* ============================================
+           ADMIN HOME SCREEN
+           ============================================ */
+
+        .admin-home {
+            display: none;
+        }
+
+        .admin-home.active {
+            display: block;
+        }
+
+        /* Admin Dark Header */
+        .admin-header {
+            background: linear-gradient(135deg, #1e4035 0%, #2d5f4d 100%);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            margin-bottom: 24px;
+            color: var(--pure-white);
+        }
+
+        .admin-header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .admin-header-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .admin-header-practice {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--pure-white);
+        }
+
+        .admin-header-center {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .admin-header-stats {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+        }
+
+        .admin-stat {
+            text-align: center;
+            cursor: pointer;
+            padding: 12px 16px;
+            border-radius: var(--radius-standard);
+            transition: background-color var(--transition-smooth);
+        }
+
+        .admin-stat:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--pure-white);
+            line-height: 1.2;
+        }
+
+        .admin-stat-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .admin-stat .pulse-dot {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        /* Admin Cards Row */
+        .admin-cards-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .admin-card {
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 20px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .admin-card:hover {
+            border-color: var(--eden-green);
+            box-shadow: 0 4px 12px rgba(45, 95, 77, 0.12);
+        }
+
+        .admin-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .admin-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .admin-card-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--eden-green);
+        }
+
+        .admin-card-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .admin-card-content {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+            line-height: 1.5;
+        }
+
+        .admin-card-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--eden-green);
+            margin-bottom: 4px;
+        }
+
+        /* Responsive adjustments for home screens */
+        @media (max-width: 768px) {
+            .quick-stat-row {
+                flex-wrap: wrap;
+            }
+
+            .quick-stat {
+                min-width: calc(50% - 8px);
+            }
+
+            .admin-header-stats {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .admin-stat {
+                min-width: 80px;
+            }
+
+            .admin-cards-row {
+                grid-template-columns: 1fr;
+            }
+
+            .pipeline-visual {
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+
+            .pipeline-connector {
+                display: none;
+            }
+        }
+
+        /* ============================================
+           NAVIGATION VIEWS (Sessions, Pending, etc.)
+           ============================================ */
+
+        .nav-view {
+            display: none;
+            animation: fadeIn 300ms ease-out;
+        }
+
+        .nav-view.active {
+            display: block;
+        }
+
+        .nav-view-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 0;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--eden-border);
+        }
+
+        .nav-back-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: none;
+            background: var(--eden-mint);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--eden-text-secondary);
+            transition: all var(--transition-smooth);
+        }
+
+        .nav-back-btn:hover {
+            background: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .nav-view-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        /* Session Item */
+        .session-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .session-item:hover {
+            border-color: var(--eden-green);
+            box-shadow: 0 2px 8px rgba(45, 95, 77, 0.1);
+        }
+
+        .session-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--eden-green);
+            font-size: 14px;
+        }
+
+        .session-info {
+            flex: 1;
+        }
+
+        .session-client {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 2px;
+        }
+
+        .session-time {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        .session-amount {
+            text-align: right;
+        }
+
+        .session-fee {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .session-status {
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        .session-status.paid {
+            color: var(--eden-green);
+        }
+
+        .session-status.pending {
+            color: #B45309;
+        }
+
+        /* Day Group */
+        .day-group {
+            margin-bottom: 24px;
+        }
+
+        .day-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--eden-text-secondary);
+            margin-bottom: 12px;
+            padding-left: 4px;
+        }
+
+        /* Pending Payment Card */
+        .pending-summary-card {
+            background: linear-gradient(135deg, #FFFBEB 0%, var(--pure-white) 100%);
+            border: 1px solid #FCD34D;
+            border-radius: var(--radius-card);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .pending-summary-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #B45309;
+            margin-bottom: 4px;
+        }
+
+        .pending-summary-label {
+            font-size: 14px;
+            color: #92400E;
+        }
+
+        /* Payout Card */
+        .payout-preview-card {
+            background: linear-gradient(135deg, #F0FDF4 0%, var(--pure-white) 100%);
+            border: 1px solid var(--eden-green-light);
+            border-radius: var(--radius-card);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .payout-preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .payout-preview-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--eden-text-secondary);
+        }
+
+        .payout-preview-date {
+            font-size: 13px;
+            color: var(--eden-green);
+            font-weight: 500;
+        }
+
+        .payout-preview-amount {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--eden-green);
+            margin-bottom: 4px;
+        }
+
+        .payout-preview-sessions {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+        }
+
+        /* Session Detail View */
+        .session-detail-card {
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .session-detail-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--eden-border);
+        }
+
+        .session-detail-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--eden-green);
+            font-size: 18px;
+        }
+
+        .session-detail-info h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 4px;
+        }
+
+        .session-detail-info p {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+        }
+
+        .session-detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--eden-border);
+        }
+
+        .session-detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .session-detail-label {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+        }
+
+        .session-detail-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--eden-text);
+        }
+
+        /* Stripe Status Section */
+        .stripe-status-section {
+            background: var(--eden-mint);
+            border-radius: var(--radius-standard);
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stripe-status-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .stripe-logo {
+            color: #635BFF;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .stripe-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .stripe-status-badge.paid {
+            background: #F0FDF4;
+            color: #166534;
+        }
+
+        .stripe-status-badge.pending {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        /* Action Buttons */
+        .action-btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 20px;
+            border-radius: var(--radius-standard);
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            border: none;
+        }
+
+        .action-btn-primary {
+            background: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .action-btn-primary:hover {
+            background: var(--eden-green-hover);
+        }
+
+        .action-btn-secondary {
+            background: var(--pure-white);
+            color: var(--eden-text);
+            border: 1px solid var(--eden-border);
+        }
+
+        .action-btn-secondary:hover {
+            border-color: var(--eden-green);
+            color: var(--eden-green);
+        }
+
+        .action-btn-warning {
+            background: #FEF3C7;
+            color: #92400E;
+            border: 1px solid #FCD34D;
+        }
+
+        .action-btn-warning:hover {
+            background: #FDE68A;
+        }
+
+        /* Email Preview Modal */
+        .email-preview {
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .email-preview-header {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--eden-text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .email-preview-to {
+            font-size: 14px;
+            color: var(--eden-text);
+            margin-bottom: 8px;
+        }
+
+        .email-preview-subject {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 12px;
+        }
+
+        .email-preview-body {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+            line-height: 1.6;
+            padding: 16px;
+            background: var(--eden-mint);
+            border-radius: var(--radius-standard);
+        }
     </style>
 </head>
 <body>
@@ -6189,208 +7163,367 @@
         <main class="main-content" id="mainContent">
             <!-- Dashboard View -->
             <div class="view-container active" id="dashboardView">
-                <header class="page-header">
-                    <h1 class="page-title">Dashboard</h1>
-                    <p class="page-subtitle">Eden Relationships overview</p>
-                </header>
+                <!-- ============================================
+                     ASSOCIATE HOME SCREEN
+                     ============================================ -->
+                <div class="associate-home" id="associateHome">
+                    <!-- Greeting -->
+                    <div class="home-greeting">
+                        <h1 class="greeting-text" id="associateGreeting">Good morning, Sarah</h1>
+                        <p class="greeting-subtext">Here's your practice overview</p>
+                    </div>
 
-                <div class="dashboard-grid">
-                    <!-- Revenue Card with Trend -->
-                    <div class="summary-card clickable" onclick="showView('earnings')">
-                        <div class="summary-card-header">
-                            <div class="summary-card-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <line x1="12" y1="1" x2="12" y2="23"/>
-                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                                </svg>
-                            </div>
-                            <div class="summary-card-trend up">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="18 15 12 9 6 15"/>
-                                </svg>
-                                12%
-                            </div>
+                    <!-- Action Buttons Row -->
+                    <div class="home-actions-row">
+                        <button class="home-action-btn" onclick="navigateToAssociateView('inbox')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            Inbox
+                            <span class="badge-count" id="inboxBadge">3</span>
+                        </button>
+                        <button class="home-action-btn" onclick="navigateToAssociateView('pipeline')">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                            Pipeline
+                        </button>
+                    </div>
+
+                    <!-- Period Selector -->
+                    <div class="period-selector" id="periodSelector">
+                        <button class="period-btn active" onclick="setHomePeriod('week')">This Week</button>
+                        <button class="period-btn" onclick="setHomePeriod('month')">This Month</button>
+                        <button class="period-btn" onclick="setHomePeriod('quarter')">Quarter</button>
+                    </div>
+
+                    <!-- Quick Stats Row -->
+                    <div class="quick-stat-row">
+                        <div class="quick-stat" onclick="navigateToAssociateView('sessions')">
+                            <div class="quick-stat-value" id="statSessions">8</div>
+                            <div class="quick-stat-label">Sessions</div>
+                            <div class="quick-stat-subtext" id="statSessionsSubtext">This week</div>
                         </div>
-                        <div class="summary-card-value">£24,680</div>
-                        <div class="summary-card-label">Revenue (MTD)</div>
-                        <div class="summary-card-sparkline">
-                            <div class="sparkline-bar" style="height: 45%"></div>
-                            <div class="sparkline-bar" style="height: 60%"></div>
-                            <div class="sparkline-bar" style="height: 55%"></div>
-                            <div class="sparkline-bar" style="height: 70%"></div>
-                            <div class="sparkline-bar" style="height: 65%"></div>
-                            <div class="sparkline-bar" style="height: 80%"></div>
-                            <div class="sparkline-bar highlight" style="height: 100%"></div>
+                        <div class="quick-stat warning" onclick="navigateToAssociateView('pending')" id="pendingStatCard">
+                            <div class="pulse-dot" id="pendingPulseDot"></div>
+                            <div class="quick-stat-value" id="statPending">2</div>
+                            <div class="quick-stat-label">Pending</div>
+                            <div class="quick-stat-subtext">Awaiting payment</div>
                         </div>
-                        <div class="summary-card-footer">
-                            <span class="summary-card-detail">Target: <strong>£30,000</strong></span>
-                            <span class="summary-card-detail">82% achieved</span>
+                        <div class="quick-stat" onclick="navigateToAssociateView('earnings')">
+                            <div class="quick-stat-value" id="statEarnings">£680</div>
+                            <div class="quick-stat-label">Earnings</div>
+                            <div class="quick-stat-subtext" id="statEarningsSubtext">This week</div>
                         </div>
                     </div>
 
-                    <!-- Clients Card with Trend -->
-                    <div class="summary-card clickable" onclick="showView('clients')">
-                        <div class="summary-card-header">
-                            <div class="summary-card-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                    <circle cx="12" cy="7" r="4"/>
-                                </svg>
-                            </div>
-                            <div class="summary-card-trend up">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="18 15 12 9 6 15"/>
-                                </svg>
-                                5%
-                            </div>
+                    <!-- My Clients Card -->
+                    <div class="clients-card" onclick="navigateToAssociateView('clients')">
+                        <div class="clients-card-header">
+                            <span class="clients-card-title">My Clients</span>
+                            <span class="clients-card-count" id="totalClientsCount">12 active</span>
                         </div>
-                        <div class="summary-card-value">74</div>
-                        <div class="summary-card-label">Active Clients</div>
-                        <div class="summary-card-footer">
-                            <span class="summary-card-detail">New this month: <strong>8</strong></span>
-                            <span class="summary-card-detail">Retention: 94%</span>
-                        </div>
-                    </div>
-
-                    <!-- Associates Card (Clickable) -->
-                    <div class="summary-card clickable" onclick="showView('associates')">
-                        <div class="summary-card-header">
-                            <div class="summary-card-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                    <circle cx="9" cy="7" r="4"/>
-                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                                </svg>
+                        <div class="pipeline-visual" id="pipelineVisual">
+                            <div class="pipeline-stage-dot">
+                                <div class="stage-dot enquiry"></div>
+                                <span class="stage-count" id="stageEnquiry">2</span>
+                                <span class="stage-label">Enquiry</span>
                             </div>
-                            <div class="summary-card-trend neutral">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="5" y1="12" x2="19" y2="12"/>
-                                </svg>
-                                0%
+                            <div class="pipeline-connector"></div>
+                            <div class="pipeline-stage-dot">
+                                <div class="stage-dot consultation"></div>
+                                <span class="stage-count" id="stageConsultation">1</span>
+                                <span class="stage-label">Consult</span>
                             </div>
-                        </div>
-                        <div class="summary-card-value">7</div>
-                        <div class="summary-card-label">Associates</div>
-                        <div class="summary-card-footer">
-                            <span class="summary-card-detail">Independent: <strong>5</strong></span>
-                            <span class="summary-card-detail">Supported: 2</span>
-                        </div>
-                    </div>
-
-                    <!-- Actions Card -->
-                    <div class="summary-card clickable" onclick="showView('action-centre')">
-                        <div class="summary-card-header">
-                            <div class="summary-card-icon" style="background-color: #FEF3C7;">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="#92400E" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <line x1="12" y1="8" x2="12" y2="12"/>
-                                    <line x1="12" y1="16" x2="12.01" y2="16"/>
-                                </svg>
+                            <div class="pipeline-connector"></div>
+                            <div class="pipeline-stage-dot">
+                                <div class="stage-dot onboarding"></div>
+                                <span class="stage-count" id="stageOnboarding">2</span>
+                                <span class="stage-label">Onboard</span>
                             </div>
-                            <div class="summary-card-trend down">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6 9 12 15 18 9"/>
-                                </svg>
-                                2
+                            <div class="pipeline-connector"></div>
+                            <div class="pipeline-stage-dot">
+                                <div class="stage-dot active"></div>
+                                <span class="stage-count" id="stageActive">7</span>
+                                <span class="stage-label">Active</span>
                             </div>
-                        </div>
-                        <div class="summary-card-value">3</div>
-                        <div class="summary-card-label">Pending Actions</div>
-                        <div class="action-list">
-                            <div class="action-item">
-                                <span class="action-dot amber"></span>
-                                Insurance renewal (Fatima)
-                            </div>
-                            <div class="action-item">
-                                <span class="action-dot amber"></span>
-                                Contract pending (Amara)
-                            </div>
-                            <div class="action-item">
-                                <span class="action-dot rose"></span>
-                                Overdue invoice #1042
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Sessions Card with Trend -->
-                    <div class="summary-card clickable" onclick="showView('schedule')">
-                        <div class="summary-card-header">
-                            <div class="summary-card-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                    <line x1="16" y1="2" x2="16" y2="6"/>
-                                    <line x1="8" y1="2" x2="8" y2="6"/>
-                                    <line x1="3" y1="10" x2="21" y2="10"/>
-                                </svg>
-                            </div>
-                            <div class="summary-card-trend up">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="18 15 12 9 6 15"/>
-                                </svg>
-                                8%
-                            </div>
-                        </div>
-                        <div class="summary-card-value">12</div>
-                        <div class="summary-card-label">Sessions Today</div>
-                        <div class="summary-card-footer">
-                            <span class="summary-card-detail">Confirmed: <strong>10</strong></span>
-                            <span class="summary-card-detail">Pending: 2</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Weekly Analytics Section -->
-                <div class="analytics-section">
-                    <div class="analytics-section-header">
-                        <h2 class="analytics-section-title">This Week Overview</h2>
-                        <div class="analytics-period-toggle">
-                            <button class="analytics-period-btn active" onclick="setAnalyticsPeriod('week')">Week</button>
-                            <button class="analytics-period-btn" onclick="setAnalyticsPeriod('month')">Month</button>
-                            <button class="analytics-period-btn" onclick="setAnalyticsPeriod('quarter')">Quarter</button>
+                <!-- ============================================
+                     ADMIN HOME SCREEN
+                     ============================================ -->
+                <div class="admin-home" id="adminHome">
+                    <!-- Dark Header with Cash Ring -->
+                    <div class="admin-header">
+                        <div class="admin-header-top">
+                            <div>
+                                <div class="admin-header-title">Practice Overview</div>
+                                <div class="admin-header-practice">Eden Relationships</div>
+                            </div>
+                        </div>
+
+                        <!-- Cash Density Ring -->
+                        <div class="admin-header-center">
+                            <div class="progress-ring-container cash-density-ring" id="cashDensityRing">
+                                <svg class="progress-ring" width="140" height="140">
+                                    <circle class="progress-ring-bg" cx="70" cy="70" r="60" stroke-width="10"/>
+                                    <circle class="progress-ring-progress" id="cashRingProgress" cx="70" cy="70" r="60" stroke-width="10"
+                                        stroke-dasharray="377" stroke-dashoffset="377"/>
+                                </svg>
+                                <div class="progress-ring-content">
+                                    <div class="progress-ring-value" id="trueCashValue">£18,450</div>
+                                    <div class="progress-ring-label" id="projectedLabel">of £24,680 projected</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Admin Stats Row -->
+                        <div class="admin-header-stats">
+                            <div class="admin-stat" onclick="showView('associates')" style="position: relative;">
+                                <div class="admin-stat-value" id="adminAssociatesCount">7</div>
+                                <div class="admin-stat-label">Associates</div>
+                            </div>
+                            <div class="admin-stat" onclick="showView('clients')" style="position: relative;">
+                                <div class="admin-stat-value" id="adminClientsCount">74</div>
+                                <div class="admin-stat-label">Clients</div>
+                            </div>
+                            <div class="admin-stat" onclick="navigateToAdminView('pending-payments')" style="position: relative;">
+                                <div class="admin-stat-value" id="adminPendingCount">£4,820</div>
+                                <div class="admin-stat-label">Pending</div>
+                                <div class="pulse-dot" id="adminPendingPulse"></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="analytics-metrics-grid">
-                        <div class="analytics-metric-card">
-                            <div class="analytics-metric-value">47</div>
-                            <div class="analytics-metric-label">Total Sessions</div>
-                            <span class="analytics-metric-change up">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="18 15 12 9 6 15"/>
-                                </svg>
-                                +12% vs last week
-                            </span>
+
+                    <!-- Admin Cards -->
+                    <div class="admin-cards-row">
+                        <div class="admin-card" onclick="navigateToAdminView('finance')">
+                            <div class="admin-card-header">
+                                <span class="admin-card-title">Financial Summary</span>
+                                <div class="admin-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <line x1="12" y1="1" x2="12" y2="23"/>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="admin-card-content">
+                                <div class="admin-card-value" id="adminRevenueValue">£24,680</div>
+                                <span>Revenue this month</span>
+                            </div>
                         </div>
-                        <div class="analytics-metric-card">
-                            <div class="analytics-metric-value">£6,820</div>
-                            <div class="analytics-metric-label">Weekly Revenue</div>
-                            <span class="analytics-metric-change up">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="18 15 12 9 6 15"/>
-                                </svg>
-                                +8% vs last week
-                            </span>
+
+                        <div class="admin-card" onclick="navigateToAdminView('health')">
+                            <div class="admin-card-header">
+                                <span class="admin-card-title">Practice Health</span>
+                                <div class="admin-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="admin-card-content">
+                                <div class="admin-card-value" style="color: var(--eden-green);">82%</div>
+                                <span>Average capacity utilisation</span>
+                            </div>
                         </div>
-                        <div class="analytics-metric-card">
-                            <div class="analytics-metric-value">92%</div>
-                            <div class="analytics-metric-label">Attendance Rate</div>
-                            <span class="analytics-metric-change up">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="18 15 12 9 6 15"/>
-                                </svg>
-                                +3% vs last week
-                            </span>
+                    </div>
+
+                    <!-- Weekly Analytics (Shared) -->
+                    <div class="analytics-section" style="margin-top: 24px;">
+                        <div class="analytics-section-header">
+                            <h2 class="analytics-section-title">This Week Overview</h2>
+                            <div class="analytics-period-toggle">
+                                <button class="analytics-period-btn active" onclick="setAnalyticsPeriod('week')">Week</button>
+                                <button class="analytics-period-btn" onclick="setAnalyticsPeriod('month')">Month</button>
+                                <button class="analytics-period-btn" onclick="setAnalyticsPeriod('quarter')">Quarter</button>
+                            </div>
                         </div>
-                        <div class="analytics-metric-card">
-                            <div class="analytics-metric-value">4.8</div>
-                            <div class="analytics-metric-label">Avg. Rating</div>
-                            <span class="analytics-metric-change up">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="18 15 12 9 6 15"/>
-                                </svg>
-                                +0.2 vs last week
-                            </span>
+                        <div class="analytics-metrics-grid">
+                            <div class="analytics-metric-card">
+                                <div class="analytics-metric-value">47</div>
+                                <div class="analytics-metric-label">Total Sessions</div>
+                                <span class="analytics-metric-change up">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="18 15 12 9 6 15"/>
+                                    </svg>
+                                    +12% vs last week
+                                </span>
+                            </div>
+                            <div class="analytics-metric-card">
+                                <div class="analytics-metric-value">£6,820</div>
+                                <div class="analytics-metric-label">Weekly Revenue</div>
+                                <span class="analytics-metric-change up">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="18 15 12 9 6 15"/>
+                                    </svg>
+                                    +8% vs last week
+                                </span>
+                            </div>
+                            <div class="analytics-metric-card">
+                                <div class="analytics-metric-value">92%</div>
+                                <div class="analytics-metric-label">Attendance Rate</div>
+                                <span class="analytics-metric-change up">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="18 15 12 9 6 15"/>
+                                    </svg>
+                                    +3% vs last week
+                                </span>
+                            </div>
+                            <div class="analytics-metric-card">
+                                <div class="analytics-metric-value">4.8</div>
+                                <div class="analytics-metric-label">Avg. Rating</div>
+                                <span class="analytics-metric-change up">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="18 15 12 9 6 15"/>
+                                    </svg>
+                                    +0.2 vs last week
+                                </span>
+                            </div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- ============================================
+                     NAVIGATION VIEWS (pushed views for both roles)
+                     ============================================ -->
+
+                <!-- Sessions View (Associate) -->
+                <div class="nav-view" id="sessionsNavView">
+                    <div class="nav-view-header">
+                        <button class="nav-back-btn" onclick="navigateHomeBack()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="m15 18-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <h2 class="nav-view-title">Sessions This Week</h2>
+                    </div>
+                    <div id="sessionsContent">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+
+                <!-- Pending Payments View (Associate) -->
+                <div class="nav-view" id="pendingNavView">
+                    <div class="nav-view-header">
+                        <button class="nav-back-btn" onclick="navigateHomeBack()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="m15 18-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <h2 class="nav-view-title">Pending Payments</h2>
+                    </div>
+                    <div id="pendingContent">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+
+                <!-- Earnings View (Associate) -->
+                <div class="nav-view" id="earningsNavView">
+                    <div class="nav-view-header">
+                        <button class="nav-back-btn" onclick="navigateHomeBack()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="m15 18-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <h2 class="nav-view-title">Earnings</h2>
+                    </div>
+                    <div id="earningsContent">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+
+                <!-- My Clients View (Associate) -->
+                <div class="nav-view" id="clientsNavView">
+                    <div class="nav-view-header">
+                        <button class="nav-back-btn" onclick="navigateHomeBack()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="m15 18-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <h2 class="nav-view-title">My Clients</h2>
+                    </div>
+                    <div id="clientsNavContent">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+
+                <!-- Inbox View (Associate) -->
+                <div class="nav-view" id="inboxNavView">
+                    <div class="nav-view-header">
+                        <button class="nav-back-btn" onclick="navigateHomeBack()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="m15 18-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <h2 class="nav-view-title">Inbox</h2>
+                    </div>
+                    <div id="inboxNavContent">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+
+                <!-- Session Detail View (Associate) -->
+                <div class="nav-view" id="sessionDetailView">
+                    <div class="nav-view-header">
+                        <button class="nav-back-btn" onclick="navigateHomeBack()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="m15 18-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <h2 class="nav-view-title">Session Details</h2>
+                    </div>
+                    <div id="sessionDetailContent">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+
+                <!-- Admin: Pending Payments View -->
+                <div class="nav-view" id="adminPendingView">
+                    <div class="nav-view-header">
+                        <button class="nav-back-btn" onclick="navigateHomeBack()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="m15 18-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <h2 class="nav-view-title">Pending Payments</h2>
+                    </div>
+                    <div id="adminPendingContent">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+
+                <!-- Admin: Finance View -->
+                <div class="nav-view" id="adminFinanceView">
+                    <div class="nav-view-header">
+                        <button class="nav-back-btn" onclick="navigateHomeBack()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="m15 18-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <h2 class="nav-view-title">Financial Summary</h2>
+                    </div>
+                    <div id="adminFinanceContent">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+
+                <!-- Admin: Practice Health View -->
+                <div class="nav-view" id="adminHealthView">
+                    <div class="nav-view-header">
+                        <button class="nav-back-btn" onclick="navigateHomeBack()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="m15 18-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <h2 class="nav-view-title">Practice Health</h2>
+                    </div>
+                    <div id="adminHealthContent">
+                        <!-- Dynamically populated -->
                     </div>
                 </div>
             </div>
@@ -9055,7 +10188,7 @@ Sarah
             if (currentUserRole === 'admin') {
                 currentUserRole = 'associate';
                 currentUserId = 'ASSOC-2401';
-                currentUserName = 'Adaeze Nwosu';
+                currentUserName = 'Sarah Johnson';
             } else {
                 currentUserRole = 'admin';
                 currentUserId = null;
@@ -9068,6 +10201,10 @@ Sarah
             if (!permissions.allowedViews.includes(currentView)) {
                 showView('dashboard');
             }
+
+            // Reset home navigation and update home screen
+            homeNavStack = ['home'];
+            updateHomeScreenForRole();
         }
 
         // Check if current user can access a view
@@ -12004,6 +13141,784 @@ Sarah
         }
 
         // ============================================
+        // IVY WALLET-INSPIRED HOME SCREEN FUNCTIONS
+        // ============================================
+
+        // Home navigation stack
+        let homeNavStack = ['home'];
+        let currentHomePeriod = 'week';
+
+        // Mock session data for associate view
+        const associateSessions = [
+            { id: 'SES-001', client: 'James Wilson', initials: 'JW', date: 'Monday', time: '10:00 AM', fee: 85, status: 'paid' },
+            { id: 'SES-002', client: 'Emma Stone', initials: 'ES', date: 'Monday', time: '2:00 PM', fee: 85, status: 'pending' },
+            { id: 'SES-003', client: 'David Miller', initials: 'DM', date: 'Tuesday', time: '11:00 AM', fee: 85, status: 'paid' },
+            { id: 'SES-004', client: 'Sophie Taylor', initials: 'ST', date: 'Wednesday', time: '9:00 AM', fee: 85, status: 'paid' },
+            { id: 'SES-005', client: 'Mark Harris', initials: 'MH', date: 'Wednesday', time: '3:00 PM', fee: 85, status: 'pending' },
+            { id: 'SES-006', client: 'Rachel Green', initials: 'RG', date: 'Thursday', time: '10:00 AM', fee: 85, status: 'paid' },
+            { id: 'SES-007', client: 'Tom Bennett', initials: 'TB', date: 'Friday', time: '11:00 AM', fee: 85, status: 'paid' },
+            { id: 'SES-008', client: 'Nina Patel', initials: 'NP', date: 'Friday', time: '2:00 PM', fee: 85, status: 'paid' }
+        ];
+
+        // Update home screen based on role
+        function updateHomeScreenForRole() {
+            const associateHome = document.getElementById('associateHome');
+            const adminHome = document.getElementById('adminHome');
+
+            if (!associateHome || !adminHome) return;
+
+            if (currentUserRole === 'associate') {
+                associateHome.classList.add('active');
+                adminHome.classList.remove('active');
+                updateAssociateHomeData();
+            } else {
+                associateHome.classList.remove('active');
+                adminHome.classList.add('active');
+                updateAdminHomeData();
+                animateCashDensityRing();
+            }
+
+            // Hide all nav views
+            document.querySelectorAll('.nav-view').forEach(v => v.classList.remove('active'));
+        }
+
+        // Update associate home with current user data
+        function updateAssociateHomeData() {
+            // Get greeting based on time of day
+            const hour = new Date().getHours();
+            let greeting = 'Good morning';
+            if (hour >= 12 && hour < 17) greeting = 'Good afternoon';
+            else if (hour >= 17) greeting = 'Good evening';
+
+            // Get associate name (first name only)
+            const firstName = currentUserName.split(' ')[0];
+            const greetingEl = document.getElementById('associateGreeting');
+            if (greetingEl) greetingEl.textContent = `${greeting}, ${firstName}`;
+
+            // Update stats based on period
+            updateAssociateStats();
+        }
+
+        function updateAssociateStats() {
+            const periodData = {
+                week: { sessions: 8, pending: 2, earnings: '£680', label: 'This week' },
+                month: { sessions: 32, pending: 5, earnings: '£2,720', label: 'This month' },
+                quarter: { sessions: 96, pending: 8, earnings: '£8,160', label: 'This quarter' }
+            };
+
+            const data = periodData[currentHomePeriod];
+
+            const statSessions = document.getElementById('statSessions');
+            const statPending = document.getElementById('statPending');
+            const statEarnings = document.getElementById('statEarnings');
+            const statSessionsSubtext = document.getElementById('statSessionsSubtext');
+            const statEarningsSubtext = document.getElementById('statEarningsSubtext');
+
+            if (statSessions) statSessions.textContent = data.sessions;
+            if (statPending) statPending.textContent = data.pending;
+            if (statEarnings) statEarnings.textContent = data.earnings;
+            if (statSessionsSubtext) statSessionsSubtext.textContent = data.label;
+            if (statEarningsSubtext) statEarningsSubtext.textContent = data.label;
+
+            // Show/hide pending pulse dot based on count
+            const pendingCard = document.getElementById('pendingStatCard');
+            const pulseDot = document.getElementById('pendingPulseDot');
+            if (data.pending > 0) {
+                if (pendingCard) pendingCard.classList.add('warning');
+                if (pulseDot) pulseDot.style.display = 'block';
+            } else {
+                if (pendingCard) pendingCard.classList.remove('warning');
+                if (pulseDot) pulseDot.style.display = 'none';
+            }
+        }
+
+        // Update admin home data
+        function updateAdminHomeData() {
+            // Calculate total pending from all associates
+            let totalPending = 0;
+            associates.forEach(a => {
+                const amount = parseInt(a.pendingPayout.replace('£', '').replace(',', '')) || 0;
+                totalPending += amount;
+            });
+
+            const adminPendingCount = document.getElementById('adminPendingCount');
+            if (adminPendingCount) adminPendingCount.textContent = '£' + totalPending.toLocaleString();
+
+            const adminAssociatesCount = document.getElementById('adminAssociatesCount');
+            if (adminAssociatesCount) adminAssociatesCount.textContent = associates.length;
+
+            const adminClientsCount = document.getElementById('adminClientsCount');
+            if (adminClientsCount) adminClientsCount.textContent = clients.length;
+
+            // Show pulse dot if pending > 0
+            const adminPendingPulse = document.getElementById('adminPendingPulse');
+            if (adminPendingPulse) {
+                adminPendingPulse.style.display = totalPending > 0 ? 'block' : 'none';
+            }
+        }
+
+        // Animate Cash Density Ring
+        function animateCashDensityRing() {
+            const ring = document.getElementById('cashRingProgress');
+            if (!ring) return;
+
+            // Reset animation
+            ring.style.strokeDashoffset = 377;
+
+            // Calculate target (example: 75% of projected)
+            const trueCash = 18450;
+            const projected = 24680;
+            const percentage = trueCash / projected;
+            const circumference = 2 * Math.PI * 60; // r=60
+            const targetOffset = circumference * (1 - percentage);
+
+            // Animate after a short delay
+            setTimeout(() => {
+                ring.style.transition = 'stroke-dashoffset 1.5s ease-out';
+                ring.style.strokeDashoffset = targetOffset;
+            }, 100);
+        }
+
+        // Set home period (This Week / This Month / Quarter)
+        function setHomePeriod(period) {
+            currentHomePeriod = period;
+
+            // Update period selector buttons
+            document.querySelectorAll('.period-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update stats
+            updateAssociateStats();
+        }
+
+        // Navigate to associate view (sessions, pending, earnings, clients, inbox)
+        function navigateToAssociateView(viewName) {
+            homeNavStack.push(viewName);
+
+            // Hide home screens
+            document.getElementById('associateHome').classList.remove('active');
+            document.getElementById('adminHome').classList.remove('active');
+
+            // Hide all nav views first
+            document.querySelectorAll('.nav-view').forEach(v => v.classList.remove('active'));
+
+            // Show the target view
+            const viewMap = {
+                'sessions': 'sessionsNavView',
+                'pending': 'pendingNavView',
+                'earnings': 'earningsNavView',
+                'clients': 'clientsNavView',
+                'inbox': 'inboxNavView',
+                'pipeline': 'clientsNavView'
+            };
+
+            const targetViewId = viewMap[viewName];
+            const targetView = document.getElementById(targetViewId);
+            if (targetView) {
+                targetView.classList.add('active');
+                populateAssociateView(viewName);
+            }
+        }
+
+        // Navigate to admin view
+        function navigateToAdminView(viewName) {
+            homeNavStack.push(viewName);
+
+            // Hide home screens
+            document.getElementById('associateHome').classList.remove('active');
+            document.getElementById('adminHome').classList.remove('active');
+
+            // Hide all nav views first
+            document.querySelectorAll('.nav-view').forEach(v => v.classList.remove('active'));
+
+            // Show the target view
+            const viewMap = {
+                'pending-payments': 'adminPendingView',
+                'finance': 'adminFinanceView',
+                'health': 'adminHealthView'
+            };
+
+            const targetViewId = viewMap[viewName];
+            const targetView = document.getElementById(targetViewId);
+            if (targetView) {
+                targetView.classList.add('active');
+                populateAdminView(viewName);
+            }
+        }
+
+        // Navigate back to home
+        function navigateHomeBack() {
+            if (homeNavStack.length > 1) {
+                homeNavStack.pop();
+            }
+
+            const currentView = homeNavStack[homeNavStack.length - 1];
+
+            if (currentView === 'home') {
+                // Hide all nav views
+                document.querySelectorAll('.nav-view').forEach(v => v.classList.remove('active'));
+                // Show appropriate home screen
+                updateHomeScreenForRole();
+            } else {
+                // Navigate to the view on the stack
+                if (currentUserRole === 'associate') {
+                    navigateToAssociateView(currentView);
+                } else {
+                    navigateToAdminView(currentView);
+                }
+            }
+        }
+
+        // Populate associate views with content
+        function populateAssociateView(viewName) {
+            switch (viewName) {
+                case 'sessions':
+                    populateSessionsView();
+                    break;
+                case 'pending':
+                    populatePendingView();
+                    break;
+                case 'earnings':
+                    populateEarningsView();
+                    break;
+                case 'clients':
+                case 'pipeline':
+                    populateClientsView();
+                    break;
+                case 'inbox':
+                    populateAssociateInboxView();
+                    break;
+            }
+        }
+
+        // Populate sessions view
+        function populateSessionsView() {
+            const container = document.getElementById('sessionsContent');
+            if (!container) return;
+
+            // Group sessions by day
+            const sessionsByDay = {};
+            associateSessions.forEach(s => {
+                if (!sessionsByDay[s.date]) sessionsByDay[s.date] = [];
+                sessionsByDay[s.date].push(s);
+            });
+
+            let html = '';
+            Object.entries(sessionsByDay).forEach(([day, sessions]) => {
+                html += `<div class="day-group">
+                    <div class="day-label">${day}</div>`;
+
+                sessions.forEach(session => {
+                    html += `
+                        <div class="session-item" onclick="openSessionDetail('${session.id}')">
+                            <div class="session-avatar">${session.initials}</div>
+                            <div class="session-info">
+                                <div class="session-client">${session.client}</div>
+                                <div class="session-time">${session.time}</div>
+                            </div>
+                            <div class="session-amount">
+                                <div class="session-fee">£${session.fee}</div>
+                                <div class="session-status ${session.status}">${session.status === 'paid' ? '✓ Paid' : 'Pending'}</div>
+                            </div>
+                        </div>`;
+                });
+
+                html += '</div>';
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Populate pending payments view
+        function populatePendingView() {
+            const container = document.getElementById('pendingContent');
+            if (!container) return;
+
+            const pendingSessions = associateSessions.filter(s => s.status === 'pending');
+            const totalPending = pendingSessions.reduce((sum, s) => sum + s.fee, 0);
+
+            let html = `
+                <div class="pending-summary-card">
+                    <div class="pending-summary-value">£${totalPending}</div>
+                    <div class="pending-summary-label">${pendingSessions.length} sessions awaiting payment</div>
+                </div>`;
+
+            pendingSessions.forEach(session => {
+                html += `
+                    <div class="session-item" onclick="openSessionDetail('${session.id}')">
+                        <div class="session-avatar">${session.initials}</div>
+                        <div class="session-info">
+                            <div class="session-client">${session.client}</div>
+                            <div class="session-time">${session.date}, ${session.time}</div>
+                        </div>
+                        <div class="session-amount">
+                            <div class="session-fee">£${session.fee}</div>
+                            <div class="session-status pending">Pending</div>
+                        </div>
+                    </div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Populate earnings view
+        function populateEarningsView() {
+            const container = document.getElementById('earningsContent');
+            if (!container) return;
+
+            const paidSessions = associateSessions.filter(s => s.status === 'paid');
+            const upcomingPayout = paidSessions.reduce((sum, s) => sum + s.fee, 0);
+
+            container.innerHTML = `
+                <div class="payout-preview-card">
+                    <div class="payout-preview-header">
+                        <span class="payout-preview-label">Upcoming Payout</span>
+                        <span class="payout-preview-date">15th January</span>
+                    </div>
+                    <div class="payout-preview-amount">£${upcomingPayout}</div>
+                    <div class="payout-preview-sessions">${paidSessions.length} sessions confirmed</div>
+                </div>
+
+                <div class="section-title">Payout History</div>
+                <div class="payout-history-list">
+                    <div class="payout-history-item">
+                        <div class="payout-history-header">
+                            <span class="payout-month">December 2025</span>
+                            <span class="payout-status completed">Paid</span>
+                        </div>
+                        <div class="payout-history-details">
+                            <span class="payout-amount">£2,180</span>
+                            <span class="payout-date">Paid 15 Dec</span>
+                        </div>
+                    </div>
+                    <div class="payout-history-item">
+                        <div class="payout-history-header">
+                            <span class="payout-month">November 2025</span>
+                            <span class="payout-status completed">Paid</span>
+                        </div>
+                        <div class="payout-history-details">
+                            <span class="payout-amount">£1,890</span>
+                            <span class="payout-date">Paid 15 Nov</span>
+                        </div>
+                    </div>
+                </div>`;
+        }
+
+        // Populate clients view
+        function populateClientsView() {
+            const container = document.getElementById('clientsNavContent');
+            if (!container) return;
+
+            // Get clients for current associate
+            const myClients = currentUserId
+                ? clients.filter(c => c.associateId === currentUserId)
+                : clients.slice(0, 12); // Mock for testing
+
+            // Count by stage
+            const stageCounts = {
+                awaiting: myClients.filter(c => c.stage === 'awaiting').length,
+                pending: myClients.filter(c => c.stage === 'pending').length,
+                active: myClients.filter(c => c.stage === 'active').length,
+                ending: myClients.filter(c => c.stage === 'ending').length
+            };
+
+            let html = `
+                <div class="pipeline-visual" style="margin-bottom: 24px; padding: 16px; background: var(--eden-mint); border-radius: var(--radius-card);">
+                    <div class="pipeline-stage-dot">
+                        <div class="stage-dot" style="background: #9b59b6;"></div>
+                        <span class="stage-count">${stageCounts.awaiting}</span>
+                        <span class="stage-label">Awaiting</span>
+                    </div>
+                    <div class="pipeline-connector"></div>
+                    <div class="pipeline-stage-dot">
+                        <div class="stage-dot" style="background: #f39c12;"></div>
+                        <span class="stage-count">${stageCounts.pending}</span>
+                        <span class="stage-label">Pending</span>
+                    </div>
+                    <div class="pipeline-connector"></div>
+                    <div class="pipeline-stage-dot">
+                        <div class="stage-dot active"></div>
+                        <span class="stage-count">${stageCounts.active}</span>
+                        <span class="stage-label">Active</span>
+                    </div>
+                    <div class="pipeline-connector"></div>
+                    <div class="pipeline-stage-dot">
+                        <div class="stage-dot" style="background: #7f8c8d;"></div>
+                        <span class="stage-count">${stageCounts.ending}</span>
+                        <span class="stage-label">Ending</span>
+                    </div>
+                </div>
+
+                <div class="section-title">In Pipeline</div>`;
+
+            const inPipeline = myClients.filter(c => c.stage !== 'active');
+            inPipeline.forEach(client => {
+                html += `
+                    <div class="session-item" onclick="openClientPanel('${client.id}')">
+                        <div class="session-avatar">${client.initials}</div>
+                        <div class="session-info">
+                            <div class="session-client">${client.name}</div>
+                            <div class="session-time">${client.id}</div>
+                        </div>
+                        <span class="badge badge-${client.stage === 'pending' ? 'warning' : 'info'}">${client.stage}</span>
+                    </div>`;
+            });
+
+            html += '<div class="section-title" style="margin-top: 24px;">Active Clients</div>';
+
+            const activeClients = myClients.filter(c => c.stage === 'active');
+            activeClients.forEach(client => {
+                html += `
+                    <div class="session-item" onclick="openClientPanel('${client.id}')">
+                        <div class="session-avatar">${client.initials}</div>
+                        <div class="session-info">
+                            <div class="session-client">${client.name}</div>
+                            <div class="session-time">${client.id}</div>
+                        </div>
+                        <span class="badge badge-success">Active</span>
+                    </div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Populate associate inbox view
+        function populateAssociateInboxView() {
+            const container = document.getElementById('inboxNavContent');
+            if (!container) return;
+
+            container.innerHTML = messages.map(msg => `
+                <div class="session-item ${msg.unread ? 'unread' : ''}" onclick="openMessage('${msg.id}')" style="position: relative;">
+                    <div class="session-avatar" style="background: ${msg.unread ? 'var(--eden-green)' : 'var(--eden-green-light)'}; color: ${msg.unread ? 'white' : 'var(--eden-green)'};">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                    </div>
+                    <div class="session-info" style="flex: 1;">
+                        <div class="session-client" style="font-weight: ${msg.unread ? '600' : '500'};">${msg.subject}</div>
+                        <div class="session-time">${msg.from}</div>
+                    </div>
+                    <div style="font-size: 12px; color: var(--eden-text-muted);">${msg.date}</div>
+                </div>
+            `).join('');
+        }
+
+        // Open session detail
+        function openSessionDetail(sessionId) {
+            const session = associateSessions.find(s => s.id === sessionId);
+            if (!session) return;
+
+            homeNavStack.push('session-detail');
+
+            // Hide all nav views
+            document.querySelectorAll('.nav-view').forEach(v => v.classList.remove('active'));
+
+            // Show session detail view
+            const view = document.getElementById('sessionDetailView');
+            if (view) {
+                view.classList.add('active');
+                populateSessionDetail(session);
+            }
+        }
+
+        // Populate session detail
+        function populateSessionDetail(session) {
+            const container = document.getElementById('sessionDetailContent');
+            if (!container) return;
+
+            const isPaid = session.status === 'paid';
+
+            container.innerHTML = `
+                <div class="session-detail-card">
+                    <div class="session-detail-header">
+                        <div class="session-detail-avatar">${session.initials}</div>
+                        <div class="session-detail-info">
+                            <h3>${session.client}</h3>
+                            <p>${session.date}, ${session.time}</p>
+                        </div>
+                    </div>
+
+                    <div class="session-detail-row">
+                        <span class="session-detail-label">Session Fee</span>
+                        <span class="session-detail-value">£${session.fee}</span>
+                    </div>
+                    <div class="session-detail-row">
+                        <span class="session-detail-label">Session ID</span>
+                        <span class="session-detail-value" style="font-family: monospace;">${session.id}</span>
+                    </div>
+                </div>
+
+                <div class="stripe-status-section">
+                    <div class="stripe-status-header">
+                        <span class="stripe-logo">stripe</span>
+                        <span>Payment Status</span>
+                    </div>
+                    <div class="stripe-status-badge ${isPaid ? 'paid' : 'pending'}">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            ${isPaid
+                                ? '<path d="M20 6L9 17l-5-5"/>'
+                                : '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>'
+                            }
+                        </svg>
+                        ${isPaid ? 'Payment Confirmed' : 'Payment Pending'}
+                    </div>
+                </div>
+
+                <div class="action-btn-group">
+                    ${isPaid
+                        ? '<button class="action-btn action-btn-primary" onclick="navigateHomeBack()">Confirmed</button>'
+                        : `<button class="action-btn action-btn-warning" onclick="showPaymentReminder('${session.id}')">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <line x1="22" y1="2" x2="11" y2="13"/>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                                </svg>
+                                Send Payment Reminder
+                           </button>
+                           <button class="action-btn action-btn-secondary" onclick="markSessionPaid('${session.id}')">
+                                Mark as Paid (Manual)
+                           </button>`
+                    }
+                </div>`;
+        }
+
+        // Show payment reminder email preview
+        function showPaymentReminder(sessionId) {
+            const session = associateSessions.find(s => s.id === sessionId);
+            if (!session) return;
+
+            const container = document.getElementById('sessionDetailContent');
+            if (!container) return;
+
+            container.innerHTML = `
+                <div class="email-preview">
+                    <div class="email-preview-header">Email Preview</div>
+                    <div class="email-preview-to"><strong>To:</strong> ${session.client.toLowerCase().replace(' ', '.')}@email.com</div>
+                    <div class="email-preview-subject"><strong>Subject:</strong> Payment Reminder - Session on ${session.date}</div>
+                    <div class="email-preview-body">
+Dear ${session.client.split(' ')[0]},
+
+This is a friendly reminder that payment for your session on ${session.date} at ${session.time} is still pending.
+
+Session Fee: £${session.fee}
+
+Please complete your payment at your earliest convenience using the secure payment link below.
+
+Best regards,
+Eden Relationships
+                    </div>
+                </div>
+
+                <div class="action-btn-group">
+                    <button class="action-btn action-btn-primary" onclick="sendPaymentReminder('${session.id}')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <line x1="22" y1="2" x2="11" y2="13"/>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                        </svg>
+                        Send Email
+                    </button>
+                    <button class="action-btn action-btn-secondary" onclick="openSessionDetail('${session.id}')">
+                        Cancel
+                    </button>
+                </div>`;
+        }
+
+        // Send payment reminder
+        function sendPaymentReminder(sessionId) {
+            showToast('Payment reminder sent');
+            navigateHomeBack();
+        }
+
+        // Mark session as paid manually
+        function markSessionPaid(sessionId) {
+            const session = associateSessions.find(s => s.id === sessionId);
+            if (session) {
+                session.status = 'paid';
+                showToast('Session marked as paid');
+                navigateHomeBack();
+            }
+        }
+
+        // Populate admin views
+        function populateAdminView(viewName) {
+            switch (viewName) {
+                case 'pending-payments':
+                    populateAdminPendingView();
+                    break;
+                case 'finance':
+                    populateAdminFinanceView();
+                    break;
+                case 'health':
+                    populateAdminHealthView();
+                    break;
+            }
+        }
+
+        // Admin: Populate pending payments view
+        function populateAdminPendingView() {
+            const container = document.getElementById('adminPendingContent');
+            if (!container) return;
+
+            // Calculate total pending
+            let totalPending = 0;
+            associates.forEach(a => {
+                const amount = parseInt(a.pendingPayout.replace('£', '').replace(',', '')) || 0;
+                totalPending += amount;
+            });
+
+            let html = `
+                <div class="pending-summary-card">
+                    <div class="pending-summary-value">£${totalPending.toLocaleString()}</div>
+                    <div class="pending-summary-label">Total pending across all associates</div>
+                </div>
+
+                <div class="section-title">By Associate</div>`;
+
+            associates.forEach(associate => {
+                if (associate.pendingPayout && associate.pendingPayout !== '£0') {
+                    html += `
+                        <div class="session-item" onclick="openPanel('${associate.id}')" style="cursor: pointer;">
+                            <div class="session-avatar">${associate.initials}</div>
+                            <div class="session-info">
+                                <div class="session-client">${associate.name}</div>
+                                <div class="session-time">${associate.id}</div>
+                            </div>
+                            <div class="session-amount">
+                                <div class="session-fee">${associate.pendingPayout}</div>
+                                <div class="session-status pending">Pending</div>
+                            </div>
+                        </div>`;
+                }
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Admin: Populate finance view
+        function populateAdminFinanceView() {
+            const container = document.getElementById('adminFinanceContent');
+            if (!container) return;
+
+            // Mock financial data
+            const bankBalance = 32450;
+            const taxReserve = 8200;
+            const trueCash = bankBalance - taxReserve;
+
+            let totalPayouts = 0;
+            associates.forEach(a => {
+                const amount = parseInt(a.pendingPayout.replace('£', '').replace(',', '')) || 0;
+                totalPayouts += amount;
+            });
+
+            container.innerHTML = `
+                <div class="session-detail-card">
+                    <div class="section-title">True Cash Calculation</div>
+
+                    <div class="session-detail-row">
+                        <span class="session-detail-label">Bank Balance</span>
+                        <span class="session-detail-value">£${bankBalance.toLocaleString()}</span>
+                    </div>
+                    <div class="session-detail-row">
+                        <span class="session-detail-label">Tax Reserve (25%)</span>
+                        <span class="session-detail-value" style="color: #B45309;">- £${taxReserve.toLocaleString()}</span>
+                    </div>
+                    <div class="session-detail-row" style="border-top: 2px solid var(--eden-green); padding-top: 16px; margin-top: 8px;">
+                        <span class="session-detail-label" style="font-weight: 600;">True Cash</span>
+                        <span class="session-detail-value" style="font-size: 20px; color: var(--eden-green);">£${trueCash.toLocaleString()}</span>
+                    </div>
+                </div>
+
+                <div class="section-title" style="margin-top: 24px;">Upcoming Obligations</div>
+
+                <div class="session-item">
+                    <div class="session-avatar" style="background: #FEF3C7; color: #92400E;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <div class="session-info">
+                        <div class="session-client">Associate Payouts</div>
+                        <div class="session-time">Due 15th January</div>
+                    </div>
+                    <div class="session-fee">£${totalPayouts.toLocaleString()}</div>
+                </div>
+
+                <div class="session-item">
+                    <div class="session-avatar" style="background: #EFF6FF; color: #1E40AF;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                            <line x1="1" y1="10" x2="23" y2="10"/>
+                        </svg>
+                    </div>
+                    <div class="session-info">
+                        <div class="session-client">VAT Return</div>
+                        <div class="session-time">Due 7th February</div>
+                    </div>
+                    <div class="session-fee">£4,120</div>
+                </div>`;
+        }
+
+        // Admin: Populate health view
+        function populateAdminHealthView() {
+            const container = document.getElementById('adminHealthContent');
+            if (!container) return;
+
+            // Calculate capacity metrics
+            let totalClients = 0;
+            let totalCapacity = 0;
+            associates.forEach(a => {
+                totalClients += a.clients;
+                totalCapacity += a.maxCapacity;
+            });
+            const avgCapacity = Math.round((totalClients / totalCapacity) * 100);
+
+            container.innerHTML = `
+                <div class="session-detail-card" style="text-align: center;">
+                    <div class="progress-ring-container" style="margin-bottom: 16px;">
+                        <svg class="progress-ring" width="120" height="120">
+                            <circle class="progress-ring-bg" cx="60" cy="60" r="50" stroke-width="10" fill="none" stroke="var(--eden-border)"/>
+                            <circle class="progress-ring-progress" cx="60" cy="60" r="50" stroke-width="10" fill="none" stroke="var(--eden-green)"
+                                stroke-dasharray="314" stroke-dashoffset="${314 * (1 - avgCapacity / 100)}" style="transform: rotate(-90deg); transform-origin: center;"/>
+                        </svg>
+                        <div class="progress-ring-content" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <div class="progress-ring-value" style="font-size: 28px; color: var(--eden-green);">${avgCapacity}%</div>
+                            <div class="progress-ring-label" style="font-size: 12px; color: var(--eden-text-secondary);">Utilisation</div>
+                        </div>
+                    </div>
+                    <p style="color: var(--eden-text-secondary); font-size: 14px;">Average capacity across ${associates.length} associates</p>
+                </div>
+
+                <div class="section-title" style="margin-top: 24px;">Associate Capacity</div>`;
+
+            let html = container.innerHTML;
+
+            associates.forEach(associate => {
+                const capacity = Math.round((associate.clients / associate.maxCapacity) * 100);
+                const isHigh = capacity >= 80;
+
+                html += `
+                    <div class="session-item" onclick="openPanel('${associate.id}')" style="cursor: pointer;">
+                        <div class="session-avatar">${associate.initials}</div>
+                        <div class="session-info" style="flex: 1;">
+                            <div class="session-client">${associate.name}</div>
+                            <div style="height: 4px; background: var(--eden-border); border-radius: 2px; margin-top: 6px;">
+                                <div style="height: 100%; width: ${capacity}%; background: ${isHigh ? '#B45309' : 'var(--eden-green)'}; border-radius: 2px;"></div>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="session-fee" style="color: ${isHigh ? '#B45309' : 'var(--eden-text)'};">${capacity}%</div>
+                            <div style="font-size: 11px; color: var(--eden-text-muted);">${associate.clients}/${associate.maxCapacity}</div>
+                        </div>
+                    </div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // ============================================
         // INITIALIZATION
         // ============================================
 
@@ -12026,6 +13941,9 @@ Sarah
 
             // Initialize Role-Based Navigation (Phase 4)
             updateNavigationForRole();
+
+            // Initialize Ivy Wallet-inspired Home Screens
+            updateHomeScreenForRole();
 
             // Handle window resize
             window.addEventListener('resize', handleResize);
