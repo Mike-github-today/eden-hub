@@ -12466,7 +12466,7 @@ Sarah
         // SESSIONS MOCK DATA (Finance Integration)
         // ============================================
 
-        const sessions = [
+        const sessionRecords = [
             // Sarah Johnson's sessions (ASSOC-2401) - January 2026
             { id: 'SES-26001', sessionDate: '2026-01-02', sessionTime: '10:00', clientId: 'CLIENT-2501', clientName: 'James & Emma Wilson', associateId: 'ASSOC-2401', associateName: 'Sarah Johnson', sessionType: 'Couples', rate: 95, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-01', stripeChargeId: 'ch_3abc001', payoutStatus: 'Paid Out', payoutId: 'PAY-26001' },
             { id: 'SES-26002', sessionDate: '2026-01-03', sessionTime: '14:00', clientId: 'CLIENT-2502', clientName: 'David Miller', associateId: 'ASSOC-2401', associateName: 'Sarah Johnson', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-02', stripeChargeId: 'ch_3abc002', payoutStatus: 'Paid Out', payoutId: 'PAY-26001' },
@@ -12559,12 +12559,12 @@ Sarah
 
         // Get sessions for a specific associate
         function getSessionsForAssociate(associateId) {
-            return sessions.filter(s => s.associateId === associateId);
+            return sessionRecords.filter(s => s.associateId === associateId);
         }
 
         // Get sessions by payment status
         function getSessionsByPaymentStatus(status, associateId = null) {
-            let filtered = sessions.filter(s => s.paymentStatus === status);
+            let filtered = sessionRecords.filter(s => s.paymentStatus === status);
             if (associateId) {
                 filtered = filtered.filter(s => s.associateId === associateId);
             }
@@ -12573,7 +12573,7 @@ Sarah
 
         // Get sessions by payout status
         function getSessionsByPayoutStatus(status, associateId = null) {
-            let filtered = sessions.filter(s => s.payoutStatus === status);
+            let filtered = sessionRecords.filter(s => s.payoutStatus === status);
             if (associateId) {
                 filtered = filtered.filter(s => s.associateId === associateId);
             }
@@ -12618,7 +12618,7 @@ Sarah
             const bankBalance = financialSnapshot.bankBalance;
 
             // Calculate outstanding payouts (sessions ready for payout)
-            const readyForPayout = sessions.filter(s => s.payoutStatus === 'Ready for Payout');
+            const readyForPayout = sessionRecords.filter(s => s.payoutStatus === 'Ready for Payout');
             const outstandingPayouts = readyForPayout.reduce((sum, s) => sum + (s.rate * 0.69), 0);
 
             // Tax reserve (25% of bank balance)
@@ -12638,7 +12638,7 @@ Sarah
 
         // Get payment overview for admin
         function getPaymentOverview() {
-            const allSessions = sessions.filter(s => s.sessionStatus === 'Completed');
+            const allSessions = sessionRecords.filter(s => s.sessionStatus === 'Completed');
             const awaitingPayment = allSessions.filter(s => s.paymentStatus === 'Awaiting Payment');
             const paid = allSessions.filter(s => s.paymentStatus === 'Paid');
 
@@ -12660,7 +12660,7 @@ Sarah
 
         // Get payout pipeline (sessions ready for payout grouped by associate)
         function getPayoutPipeline() {
-            const readyForPayout = sessions.filter(s => s.payoutStatus === 'Ready for Payout');
+            const readyForPayout = sessionRecords.filter(s => s.payoutStatus === 'Ready for Payout');
             const grouped = {};
 
             readyForPayout.forEach(session => {
