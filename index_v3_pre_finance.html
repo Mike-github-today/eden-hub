@@ -1065,687 +1065,6 @@
             color: var(--eden-text-secondary);
         }
 
-        /* Enhanced Associate Payout Cockpit Styles */
-        .earnings-hero {
-            background: linear-gradient(135deg, var(--eden-green) 0%, #3d7a66 100%);
-            border-radius: var(--radius-standard);
-            padding: 24px;
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .earnings-hero-label {
-            font-size: 13px;
-            opacity: 0.9;
-            margin-bottom: 4px;
-        }
-
-        .earnings-hero-value {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .earnings-hero-subtitle {
-            font-size: 13px;
-            opacity: 0.8;
-        }
-
-        .earnings-progress-bar {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-            margin-top: 16px;
-            overflow: hidden;
-        }
-
-        .earnings-progress-fill {
-            height: 100%;
-            background: white;
-            border-radius: 4px;
-            transition: width 0.5s ease;
-        }
-
-        .earnings-progress-labels {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 8px;
-            font-size: 12px;
-            opacity: 0.8;
-        }
-
-        .earnings-breakdown {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .earnings-breakdown-card {
-            background: var(--eden-mint);
-            border-radius: var(--radius-standard);
-            padding: 16px;
-            text-align: center;
-        }
-
-        .earnings-breakdown-card.awaiting {
-            background: #fffbeb;
-            border: 1px solid #fcd34d;
-        }
-
-        .earnings-breakdown-card.ready {
-            background: #f0fdf4;
-            border: 1px solid #86efac;
-        }
-
-        .earnings-breakdown-card.paid {
-            background: #f0f9ff;
-            border: 1px solid #93c5fd;
-        }
-
-        .earnings-breakdown-value {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--eden-text);
-        }
-
-        .earnings-breakdown-card.awaiting .earnings-breakdown-value {
-            color: #b45309;
-        }
-
-        .earnings-breakdown-card.ready .earnings-breakdown-value {
-            color: #166534;
-        }
-
-        .earnings-breakdown-card.paid .earnings-breakdown-value {
-            color: #1d4ed8;
-        }
-
-        .earnings-breakdown-label {
-            font-size: 12px;
-            color: var(--eden-text-secondary);
-            margin-top: 4px;
-        }
-
-        .earnings-breakdown-count {
-            font-size: 11px;
-            color: var(--eden-text-secondary);
-            margin-top: 2px;
-        }
-
-        /* Session List in Payout Cockpit */
-        .session-group {
-            margin-bottom: 20px;
-        }
-
-        .session-group-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .session-group-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--eden-text);
-        }
-
-        .session-group-count {
-            font-size: 12px;
-            color: var(--eden-text-secondary);
-        }
-
-        .session-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: var(--pure-white);
-            border: 1px solid var(--eden-border);
-            border-radius: var(--radius-standard);
-            margin-bottom: 8px;
-        }
-
-        .session-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .session-status-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .session-status-dot.awaiting { background: #f59e0b; }
-        .session-status-dot.paid { background: #10b981; }
-        .session-status-dot.ready { background: #3b82f6; }
-        .session-status-dot.paid-out { background: #6366f1; }
-
-        .session-item-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .session-item-date {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--eden-text);
-        }
-
-        .session-item-client {
-            font-size: 12px;
-            color: var(--eden-text-secondary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .session-item-amounts {
-            text-align: right;
-        }
-
-        .session-item-rate {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--eden-text);
-        }
-
-        .session-item-share {
-            font-size: 12px;
-            color: var(--eden-green);
-        }
-
-        /* Payout History Enhanced */
-        .payout-history-card {
-            background: var(--pure-white);
-            border: 1px solid var(--eden-border);
-            border-radius: var(--radius-standard);
-            padding: 16px;
-            margin-bottom: 12px;
-        }
-
-        .payout-history-card:last-child {
-            margin-bottom: 0;
-        }
-
-        .payout-history-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-        }
-
-        .payout-history-period {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--eden-text);
-        }
-
-        .payout-history-status {
-            font-size: 11px;
-            font-weight: 500;
-            text-transform: uppercase;
-            padding: 2px 8px;
-            border-radius: 4px;
-        }
-
-        .payout-history-status.paid {
-            background: #f0fdf4;
-            color: #166534;
-        }
-
-        .payout-history-status.pending {
-            background: #fffbeb;
-            color: #b45309;
-        }
-
-        .payout-history-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-        }
-
-        .payout-history-sessions {
-            color: var(--eden-text-secondary);
-        }
-
-        .payout-history-amount {
-            font-weight: 600;
-            color: var(--eden-green);
-        }
-
-        .payout-history-paid-date {
-            font-size: 12px;
-            color: var(--eden-text-secondary);
-            margin-top: 4px;
-        }
-
-        /* Collapsible Section */
-        .collapsible-section {
-            margin-bottom: 16px;
-        }
-
-        .collapsible-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            cursor: pointer;
-            border-bottom: 1px solid var(--eden-border);
-        }
-
-        .collapsible-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--eden-text);
-        }
-
-        .collapsible-toggle {
-            color: var(--eden-text-secondary);
-            transition: transform 0.2s ease;
-        }
-
-        .collapsible-section.open .collapsible-toggle {
-            transform: rotate(180deg);
-        }
-
-        .collapsible-content {
-            padding-top: 12px;
-            display: none;
-        }
-
-        .collapsible-section.open .collapsible-content {
-            display: block;
-        }
-
-        /* Admin Payment Tracker Styles */
-        .payment-overview-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        @media (max-width: 768px) {
-            .payment-overview-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .payment-overview-card {
-            background: var(--pure-white);
-            border: 1px solid var(--eden-border);
-            border-radius: var(--radius-standard);
-            padding: 20px;
-            text-align: center;
-            transition: box-shadow var(--transition-fast);
-        }
-
-        .payment-overview-card:hover {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .payment-overview-card.awaiting {
-            border-left: 4px solid #f59e0b;
-        }
-
-        .payment-overview-card.paid {
-            border-left: 4px solid #10b981;
-        }
-
-        .payment-overview-card.overdue {
-            border-left: 4px solid #ef4444;
-        }
-
-        .payment-overview-value {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--eden-text);
-            margin-bottom: 4px;
-        }
-
-        .payment-overview-card.awaiting .payment-overview-value {
-            color: #b45309;
-        }
-
-        .payment-overview-card.paid .payment-overview-value {
-            color: #166534;
-        }
-
-        .payment-overview-card.overdue .payment-overview-value {
-            color: #dc2626;
-        }
-
-        .payment-overview-label {
-            font-size: 14px;
-            color: var(--eden-text-secondary);
-            margin-bottom: 4px;
-        }
-
-        .payment-overview-count {
-            font-size: 12px;
-            color: var(--eden-text-secondary);
-        }
-
-        /* Unmatched Payments Alert */
-        .unmatched-alert {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            border-radius: var(--radius-standard);
-            padding: 16px 20px;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .unmatched-alert-icon {
-            width: 40px;
-            height: 40px;
-            background: #fee2e2;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #dc2626;
-            flex-shrink: 0;
-        }
-
-        .unmatched-alert-content {
-            flex: 1;
-        }
-
-        .unmatched-alert-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #991b1b;
-            margin-bottom: 4px;
-        }
-
-        .unmatched-alert-desc {
-            font-size: 13px;
-            color: #b91c1c;
-        }
-
-        .unmatched-alert-action {
-            background: #dc2626;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background var(--transition-fast);
-        }
-
-        .unmatched-alert-action:hover {
-            background: #b91c1c;
-        }
-
-        /* Payment Table */
-        .payment-table-container {
-            background: var(--pure-white);
-            border: 1px solid var(--eden-border);
-            border-radius: var(--radius-standard);
-            overflow: hidden;
-        }
-
-        .payment-table-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--eden-border);
-            background: var(--eden-mint);
-        }
-
-        .payment-table-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--eden-text);
-        }
-
-        .payment-table-filters {
-            display: flex;
-            gap: 8px;
-        }
-
-        .payment-filter-btn {
-            background: var(--pure-white);
-            border: 1px solid var(--eden-border);
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            color: var(--eden-text-secondary);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-        }
-
-        .payment-filter-btn:hover {
-            border-color: var(--eden-green);
-            color: var(--eden-green);
-        }
-
-        .payment-filter-btn.active {
-            background: var(--eden-green);
-            border-color: var(--eden-green);
-            color: white;
-        }
-
-        .payment-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .payment-table th {
-            text-align: left;
-            padding: 12px 16px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--eden-text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid var(--eden-border);
-            background: var(--eden-whisper);
-        }
-
-        .payment-table td {
-            padding: 14px 16px;
-            font-size: 14px;
-            color: var(--eden-text);
-            border-bottom: 1px solid var(--eden-border);
-        }
-
-        .payment-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .payment-table tr:hover {
-            background: var(--eden-whisper);
-        }
-
-        .payment-table-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .payment-table-status.awaiting {
-            background: #fef3c7;
-            color: #b45309;
-        }
-
-        .payment-table-status.paid {
-            background: #f0fdf4;
-            color: #166534;
-        }
-
-        .payment-table-status.overdue {
-            background: #fef2f2;
-            color: #dc2626;
-        }
-
-        .payment-table-status-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: currentColor;
-        }
-
-        .payment-table-amount {
-            font-weight: 600;
-        }
-
-        .payment-table-associate {
-            color: var(--eden-green);
-            cursor: pointer;
-        }
-
-        .payment-table-associate:hover {
-            text-decoration: underline;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--eden-text-secondary);
-        }
-
-        .empty-state-icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 16px;
-            opacity: 0.4;
-        }
-
-        .empty-state-text {
-            font-size: 14px;
-        }
-
-        /* Payout Pipeline Cards */
-        .payout-pipeline-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 16px;
-            margin-top: 16px;
-        }
-
-        .payout-pipeline-card {
-            background: var(--pure-white);
-            border: 1px solid var(--eden-border);
-            border-radius: var(--radius-standard);
-            padding: 20px;
-            transition: box-shadow var(--transition-fast);
-        }
-
-        .payout-pipeline-card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .payout-pipeline-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .payout-pipeline-avatar {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: var(--eden-green-light);
-            color: var(--eden-green);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .payout-pipeline-info {
-            flex: 1;
-        }
-
-        .payout-pipeline-name {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--eden-text);
-        }
-
-        .payout-pipeline-sessions {
-            font-size: 13px;
-            color: var(--eden-text-secondary);
-        }
-
-        .payout-pipeline-amounts {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            padding: 16px 0;
-            border-top: 1px solid var(--eden-border);
-            border-bottom: 1px solid var(--eden-border);
-        }
-
-        .payout-pipeline-amount {
-            text-align: center;
-        }
-
-        .payout-pipeline-amount-value {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--eden-text);
-        }
-
-        .payout-pipeline-amount-label {
-            font-size: 11px;
-            color: var(--eden-text-secondary);
-            margin-top: 2px;
-        }
-
-        .payout-pipeline-action {
-            margin-top: 16px;
-        }
-
-        .payout-pipeline-btn {
-            width: 100%;
-            background: var(--eden-green);
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: background var(--transition-fast);
-        }
-
-        .payout-pipeline-btn:hover {
-            background: var(--eden-green-dark);
-        }
-
-        .payout-pipeline-btn.secondary {
-            background: transparent;
-            color: var(--eden-green);
-            border: 1px solid var(--eden-green);
-        }
-
-        .payout-pipeline-btn.secondary:hover {
-            background: var(--eden-green-light);
-        }
-
         /* Needs Attention Section */
         .needs-attention-section {
             background: #fef2f2;
@@ -3210,54 +2529,6 @@
 
         .breakdown-value.negative {
             opacity: 0.8;
-        }
-
-        /* True Cash Pulse Indicator */
-        .true-cash-pulse {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .pulse-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .pulse-dot.healthy {
-            background: #86efac;
-            box-shadow: 0 0 8px rgba(134, 239, 172, 0.6);
-        }
-
-        .pulse-dot.caution {
-            background: #fcd34d;
-            box-shadow: 0 0 8px rgba(252, 211, 77, 0.6);
-        }
-
-        .pulse-dot.critical {
-            background: #fca5a5;
-            box-shadow: 0 0 8px rgba(252, 165, 165, 0.6);
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-
-        .pulse-label {
-            font-size: 13px;
-            opacity: 0.9;
-        }
-
-        .pulse-runway {
-            font-size: 12px;
-            opacity: 0.7;
-            margin-left: auto;
         }
 
         .wealth-hub-grid {
@@ -10198,59 +9469,31 @@
                         </div>
                         <div class="gateway-label">True Cash</div>
                     </div>
-                    <div class="gateway-value" id="trueCashValue">£0</div>
+                    <div class="gateway-value">£18,420</div>
                     <div class="gateway-subtitle">Available after all obligations</div>
 
                     <div class="gateway-breakdown">
                         <div class="breakdown-row">
                             <span class="breakdown-label">Bank Balance</span>
-                            <span class="breakdown-value" id="bankBalanceValue">£0</span>
+                            <span class="breakdown-value">£32,680</span>
                         </div>
                         <div class="breakdown-row">
-                            <span class="breakdown-label">− Outstanding Payouts</span>
-                            <span class="breakdown-value negative" id="outstandingPayoutsValue">£0</span>
+                            <span class="breakdown-label">− Unspent Credits</span>
+                            <span class="breakdown-value negative">£4,200</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span class="breakdown-label">− Payouts Owed</span>
+                            <span class="breakdown-value negative">£2,890</span>
                         </div>
                         <div class="breakdown-row">
                             <span class="breakdown-label">− Tax Reserve (25%)</span>
-                            <span class="breakdown-value negative" id="taxReserveValue">£0</span>
+                            <span class="breakdown-value negative">£7,170</span>
                         </div>
-                    </div>
-
-                    <div class="true-cash-pulse">
-                        <div class="pulse-dot healthy" id="trueCashPulse"></div>
-                        <span class="pulse-label" id="trueCashStatus">Healthy</span>
-                        <span class="pulse-runway" id="trueCashRunway">~X months runway</span>
                     </div>
                 </div>
 
                 <!-- Wealth Hub Modules Grid -->
                 <div class="wealth-hub-grid">
-                    <div class="wealth-module" onclick="openWealthModule('payment-tracker')">
-                        <div class="wealth-module-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
-                                <line x1="1" y1="10" x2="23" y2="10"/>
-                            </svg>
-                        </div>
-                        <div class="wealth-module-title">Payment Tracker</div>
-                        <div class="wealth-module-desc">Client payments</div>
-                        <div class="wealth-module-alert" id="paymentTrackerAlert">0 awaiting</div>
-                    </div>
-
-                    <div class="wealth-module" onclick="openWealthModule('payouts')">
-                        <div class="wealth-module-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                            </svg>
-                        </div>
-                        <div class="wealth-module-title">Payout Pipeline</div>
-                        <div class="wealth-module-desc">Associate payments</div>
-                        <div class="wealth-module-alert" id="payoutPipelineAlert">0 ready</div>
-                    </div>
-
                     <div class="wealth-module" onclick="openWealthModule('cash-density')">
                         <div class="wealth-module-icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -10273,6 +9516,20 @@
                         <div class="wealth-module-title">Tax Intelligence</div>
                         <div class="wealth-module-desc">VAT tracking</div>
                         <div class="wealth-module-badge">Pre-VAT</div>
+                    </div>
+
+                    <div class="wealth-module" onclick="openWealthModule('payouts')">
+                        <div class="wealth-module-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <div class="wealth-module-title">Payout Cockpit</div>
+                        <div class="wealth-module-desc">Associate payments</div>
+                        <div class="wealth-module-alert">2 pending</div>
                     </div>
 
                     <div class="wealth-module" onclick="openWealthModule('simulator')">
@@ -10941,62 +10198,16 @@ Sarah
 
                 <!-- Payout Cockpit View (pushed via Earnings stat card) -->
                 <div class="panel-view" data-view="payout-cockpit" id="payoutCockpitView" style="display: none;">
-                    <!-- Earnings Hero Card -->
-                    <div class="earnings-hero" id="earningsHero">
-                        <div class="earnings-hero-label">Your Earnings This Month</div>
-                        <div class="earnings-hero-value" id="earningsHeroValue">£0</div>
-                        <div class="earnings-hero-subtitle" id="earningsHeroSubtitle">Your 69% share from sessions</div>
-                        <div class="earnings-progress-bar">
-                            <div class="earnings-progress-fill" id="earningsProgressFill" style="width: 0%;"></div>
+                    <!-- This Month Stats -->
+                    <div class="section-title">This Month</div>
+                    <div class="payout-stats-row">
+                        <div class="payout-stat-card">
+                            <div class="payout-stat-value" id="payoutThisMonthEarnings">£8,420</div>
+                            <div class="payout-stat-label">Earnings</div>
                         </div>
-                        <div class="earnings-progress-labels">
-                            <span id="earningsProgressPaid">£0 paid out</span>
-                            <span id="earningsProgressPending">£0 pending</span>
-                        </div>
-                    </div>
-
-                    <!-- Earnings Breakdown Cards -->
-                    <div class="earnings-breakdown" id="earningsBreakdown">
-                        <div class="earnings-breakdown-card awaiting">
-                            <div class="earnings-breakdown-value" id="awaitingPaymentValue">£0</div>
-                            <div class="earnings-breakdown-label">Awaiting Payment</div>
-                            <div class="earnings-breakdown-count" id="awaitingPaymentCount">0 sessions</div>
-                        </div>
-                        <div class="earnings-breakdown-card ready">
-                            <div class="earnings-breakdown-value" id="readyForPayoutValue">£0</div>
-                            <div class="earnings-breakdown-label">Ready for Payout</div>
-                            <div class="earnings-breakdown-count" id="readyForPayoutCount">0 sessions</div>
-                        </div>
-                        <div class="earnings-breakdown-card paid">
-                            <div class="earnings-breakdown-value" id="paidOutValue">£0</div>
-                            <div class="earnings-breakdown-label">Paid to You</div>
-                            <div class="earnings-breakdown-count" id="paidOutCount">0 sessions</div>
-                        </div>
-                    </div>
-
-                    <!-- Sessions List - Ready for Payout (collapsible) -->
-                    <div class="collapsible-section open" id="readySessionsSection">
-                        <div class="collapsible-header" onclick="toggleCollapsible('readySessionsSection')">
-                            <span class="collapsible-title">Sessions Ready for Payout</span>
-                            <svg class="collapsible-toggle" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6 9 12 15 18 9"/>
-                            </svg>
-                        </div>
-                        <div class="collapsible-content" id="readySessionsList">
-                            <!-- Rendered dynamically -->
-                        </div>
-                    </div>
-
-                    <!-- Sessions List - Awaiting Payment (collapsible) -->
-                    <div class="collapsible-section" id="awaitingSessionsSection">
-                        <div class="collapsible-header" onclick="toggleCollapsible('awaitingSessionsSection')">
-                            <span class="collapsible-title">Sessions Awaiting Client Payment</span>
-                            <svg class="collapsible-toggle" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6 9 12 15 18 9"/>
-                            </svg>
-                        </div>
-                        <div class="collapsible-content" id="awaitingSessionsList">
-                            <!-- Rendered dynamically -->
+                        <div class="payout-stat-card pending">
+                            <div class="payout-stat-value" id="payoutPendingAmount">£1,240</div>
+                            <div class="payout-stat-label">Pending</div>
                         </div>
                     </div>
 
@@ -11850,110 +11061,198 @@ Sarah
                     </div>
                 </div>
 
-                <!-- Payment Tracker View -->
-                <div class="wealth-view" id="paymentTrackerView">
-                    <!-- Unmatched Payments Alert (shown conditionally) -->
-                    <div class="unmatched-alert" id="unmatchedAlert" style="display: none;">
-                        <div class="unmatched-alert-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                                <line x1="12" y1="9" x2="12" y2="13"/>
-                                <line x1="12" y1="17" x2="12.01" y2="17"/>
-                            </svg>
-                        </div>
-                        <div class="unmatched-alert-content">
-                            <div class="unmatched-alert-title" id="unmatchedAlertTitle">1 Unmatched Payment Needs Review</div>
-                            <div class="unmatched-alert-desc" id="unmatchedAlertDesc">A Stripe payment couldn't be matched to a session</div>
-                        </div>
-                        <button class="unmatched-alert-action" onclick="showUnmatchedPayments()">Review</button>
-                    </div>
-
-                    <!-- Payment Overview Cards -->
-                    <div class="payment-overview-grid" id="paymentOverviewGrid">
-                        <div class="payment-overview-card awaiting">
-                            <div class="payment-overview-value" id="awaitingPaymentOverviewValue">£0</div>
-                            <div class="payment-overview-label">Awaiting Payment</div>
-                            <div class="payment-overview-count" id="awaitingPaymentOverviewCount">0 sessions</div>
-                        </div>
-                        <div class="payment-overview-card paid">
-                            <div class="payment-overview-value" id="paidOverviewValue">£0</div>
-                            <div class="payment-overview-label">Paid This Month</div>
-                            <div class="payment-overview-count" id="paidOverviewCount">0 sessions</div>
-                        </div>
-                        <div class="payment-overview-card overdue">
-                            <div class="payment-overview-value" id="overdueOverviewValue">£0</div>
-                            <div class="payment-overview-label">Overdue (7+ days)</div>
-                            <div class="payment-overview-count" id="overdueOverviewCount">0 sessions</div>
-                        </div>
-                    </div>
-
-                    <!-- Session Payment Table -->
-                    <div class="payment-table-container">
-                        <div class="payment-table-header">
-                            <div class="payment-table-title">Session Payments</div>
-                            <div class="payment-table-filters">
-                                <button class="payment-filter-btn active" data-filter="all" onclick="filterPaymentTable('all')">All</button>
-                                <button class="payment-filter-btn" data-filter="awaiting" onclick="filterPaymentTable('awaiting')">Awaiting</button>
-                                <button class="payment-filter-btn" data-filter="paid" onclick="filterPaymentTable('paid')">Paid</button>
-                                <button class="payment-filter-btn" data-filter="overdue" onclick="filterPaymentTable('overdue')">Overdue</button>
-                            </div>
-                        </div>
-                        <table class="payment-table">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Client</th>
-                                    <th>Associate</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="paymentTableBody">
-                                <!-- Populated by JavaScript -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Payout Pipeline View -->
+                <!-- Payout Cockpit View -->
                 <div class="wealth-view" id="payoutsView">
                     <!-- Payout Overview Content -->
                     <div id="payoutOverviewContent">
-                        <!-- Pipeline Summary Hero -->
+                        <!-- Pending Payouts Hero -->
                         <div class="wealth-card payout-hero">
                             <div class="wealth-card-header">
-                                <span class="wealth-card-title">Ready for Payout</span>
-                                <span class="payout-count-badge" id="pipelineReadyCount">0 associates</span>
+                                <span class="wealth-card-title">Pending Payouts</span>
+                                <span class="payout-count-badge">2 pending</span>
                             </div>
-                            <div class="wealth-hero-value" id="pipelineTotalAmount">£0</div>
-                            <div class="wealth-hero-label">Total owed to associates</div>
+                            <div class="wealth-hero-value">£2,890</div>
+                            <div class="wealth-hero-label">Total owed to associates this month</div>
 
                             <div class="payout-summary-row">
                                 <div class="payout-summary-item">
-                                    <span class="payout-summary-value" id="pipelineSessionCount">0</span>
-                                    <span class="payout-summary-label">Sessions ready</span>
+                                    <span class="payout-summary-value">£1,420</span>
+                                    <span class="payout-summary-label">Due this week</span>
                                 </div>
                                 <div class="payout-summary-item">
-                                    <span class="payout-summary-value" id="pipelineEdenShare">£0</span>
-                                    <span class="payout-summary-label">Eden share (31%)</span>
+                                    <span class="payout-summary-value">£1,470</span>
+                                    <span class="payout-summary-label">Due later</span>
                                 </div>
                                 <div class="payout-summary-item">
-                                    <span class="payout-summary-value" id="pipelinePaidThisMonth">£0</span>
+                                    <span class="payout-summary-value">£4,230</span>
                                     <span class="payout-summary-label">Paid this month</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Payout Pipeline Grid -->
-                        <div class="section-title" style="margin-top: 24px;">Associates Ready for Payout</div>
-                        <div class="payout-pipeline-grid" id="payoutPipelineGrid">
-                            <!-- Populated by JavaScript -->
+                        <!-- Filter Tabs -->
+                        <div class="payout-filters">
+                            <button class="payout-filter-btn active" data-filter="all" onclick="filterPayouts('all')">
+                                All <span class="filter-count">7</span>
+                            </button>
+                            <button class="payout-filter-btn" data-filter="pending" onclick="filterPayouts('pending')">
+                                Pending <span class="filter-count">2</span>
+                            </button>
+                            <button class="payout-filter-btn" data-filter="overdue" onclick="filterPayouts('overdue')">
+                                Overdue <span class="filter-count">1</span>
+                            </button>
+                            <button class="payout-filter-btn" data-filter="paid" onclick="filterPayouts('paid')">
+                                Paid <span class="filter-count">4</span>
+                            </button>
                         </div>
 
-                        <!-- Recent Payouts Section -->
-                        <div class="section-title" style="margin-top: 32px;">Recent Payouts</div>
-                        <div id="recentPayoutsList">
-                            <!-- Populated by JavaScript -->
+                        <!-- Associate Payout Cards Grid -->
+                        <div class="payout-cards-grid" id="payoutCardsGrid">
+                            <!-- Overdue Card -->
+                            <div class="payout-card overdue" data-status="overdue" onclick="openPayoutDetail('sarah-chen')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">SC</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name tappable" onclick="event.stopPropagation(); openAssociateFromPayout('ASSOC-2402')">Sarah Chen</div>
+                                        <div class="payout-id">EDEN-A002</div>
+                                    </div>
+                                    <span class="payout-status overdue">Overdue</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£890</div>
+                                    <div class="payout-details">
+                                        <span>12 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Due 3 Jan</span>
+                                    </div>
+                                </div>
+                                <div class="payout-card-footer">
+                                    <span class="overdue-warning">5 days overdue</span>
+                                </div>
+                            </div>
+
+                            <!-- Pending Card 1 -->
+                            <div class="payout-card pending" data-status="pending" onclick="openPayoutDetail('james-wilson')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">JW</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name tappable" onclick="event.stopPropagation(); openAssociateFromPayout('ASSOC-2403')">James Wilson</div>
+                                        <div class="payout-id">EDEN-A003</div>
+                                    </div>
+                                    <span class="payout-status pending">Pending</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£1,420</div>
+                                    <div class="payout-details">
+                                        <span>18 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Due 10 Jan</span>
+                                    </div>
+                                </div>
+                                <div class="payout-card-footer">
+                                    <span class="due-soon">Due in 2 days</span>
+                                </div>
+                            </div>
+
+                            <!-- Pending Card 2 -->
+                            <div class="payout-card pending" data-status="pending" onclick="openPayoutDetail('emma-thompson')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">ET</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name tappable" onclick="event.stopPropagation(); openAssociateFromPayout('ASSOC-2404')">Emma Thompson</div>
+                                        <div class="payout-id">EDEN-A004</div>
+                                    </div>
+                                    <span class="payout-status pending">Pending</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£580</div>
+                                    <div class="payout-details">
+                                        <span>8 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Due 15 Jan</span>
+                                    </div>
+                                </div>
+                                <div class="payout-card-footer">
+                                    <span>Due in 7 days</span>
+                                </div>
+                            </div>
+
+                            <!-- Paid Cards -->
+                            <div class="payout-card paid" data-status="paid" onclick="openPayoutDetail('michael-brown')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">MB</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name tappable" onclick="event.stopPropagation(); openAssociateFromPayout('ASSOC-2405')">Michael Brown</div>
+                                        <div class="payout-id">EDEN-A005</div>
+                                    </div>
+                                    <span class="payout-status paid">Paid</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£1,250</div>
+                                    <div class="payout-details">
+                                        <span>16 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Paid 5 Jan</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payout-card paid" data-status="paid" onclick="openPayoutDetail('lisa-patel')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">LP</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name tappable" onclick="event.stopPropagation(); openAssociateFromPayout('ASSOC-2501')">Lisa Patel</div>
+                                        <div class="payout-id">EDEN-A006</div>
+                                    </div>
+                                    <span class="payout-status paid">Paid</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£980</div>
+                                    <div class="payout-details">
+                                        <span>14 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Paid 5 Jan</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payout-card paid" data-status="paid" onclick="openPayoutDetail('david-kim')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">DK</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name tappable" onclick="event.stopPropagation(); openAssociateFromPayout('ASSOC-2405')">David Kim</div>
+                                        <div class="payout-id">EDEN-A007</div>
+                                    </div>
+                                    <span class="payout-status paid">Paid</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£1,100</div>
+                                    <div class="payout-details">
+                                        <span>15 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Paid 3 Jan</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payout-card paid" data-status="paid" onclick="openPayoutDetail('rachel-green')">
+                                <div class="payout-card-header">
+                                    <div class="payout-avatar">RG</div>
+                                    <div class="payout-info">
+                                        <div class="payout-name tappable" onclick="event.stopPropagation(); openAssociateFromPayout('ASSOC-2401')">Rachel Green</div>
+                                        <div class="payout-id">EDEN-A001</div>
+                                    </div>
+                                    <span class="payout-status paid">Paid</span>
+                                </div>
+                                <div class="payout-card-body">
+                                    <div class="payout-amount">£900</div>
+                                    <div class="payout-details">
+                                        <span>12 sessions</span>
+                                        <span class="payout-dot"></span>
+                                        <span>Paid 2 Jan</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -11964,53 +11263,118 @@ Sarah
                             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="15 18 9 12 15 6"/>
                             </svg>
-                            Back to Pipeline
+                            Back to Payouts
                         </button>
 
                         <!-- Associate Header -->
                         <div class="payout-detail-header" id="payoutDetailHeader">
-                            <div class="payout-detail-avatar" id="detailAvatar">SJ</div>
+                            <div class="payout-detail-avatar" id="detailAvatar">JW</div>
                             <div class="payout-detail-info">
-                                <h3 class="payout-detail-name tappable" id="detailName" onclick="navigateToAssociateFromPayoutDetail()">Sarah Johnson</h3>
-                                <span class="payout-detail-id" id="detailId">ASSOC-2401</span>
+                                <h3 class="payout-detail-name tappable" id="detailName" onclick="navigateToAssociateFromPayoutDetail()">James Wilson</h3>
+                                <span class="payout-detail-id" id="detailId">EDEN-A003</span>
                             </div>
-                            <span class="payout-status pending" id="detailStatus">Ready</span>
+                            <span class="payout-status pending" id="detailStatus">Pending</span>
                         </div>
 
                         <!-- Payout Amount Card -->
                         <div class="wealth-card">
                             <div class="wealth-card-header">
-                                <span class="wealth-card-title">Payout Summary</span>
-                                <span class="payout-period" id="detailPeriod">January 2026</span>
+                                <span class="wealth-card-title">Payout Amount</span>
+                                <span class="payout-period">January 2026</span>
                             </div>
-                            <div class="wealth-hero-value" id="detailAmount">£0</div>
-                            <div class="wealth-hero-label">Associate's 69% share</div>
+                            <div class="wealth-hero-value" id="detailAmount">£1,420</div>
+                            <div class="wealth-hero-label" id="detailDue">Due 10 January 2026</div>
 
-                            <div class="payout-breakdown" id="detailBreakdown">
-                                <!-- Populated by JavaScript -->
+                            <div class="payout-breakdown">
+                                <div class="section-title" style="margin-top: 20px;">Breakdown</div>
+                                <div class="info-row">
+                                    <span class="info-label">Session Fees (18 sessions)</span>
+                                    <span class="info-value">£1,350</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Supervision Bonus</span>
+                                    <span class="info-value positive">+£100</span>
+                                </div>
+                                <div class="info-row">
+                                    <span class="info-label">Room Hire Contribution</span>
+                                    <span class="info-value negative">−£30</span>
+                                </div>
+                                <div class="info-row total">
+                                    <span class="info-label">Net Payout</span>
+                                    <span class="info-value">£1,420</span>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Sessions List -->
+                        <!-- Session Details -->
                         <div class="wealth-card">
                             <div class="wealth-card-header">
-                                <span class="wealth-card-title">Sessions Included</span>
+                                <span class="wealth-card-title">Session Details</span>
                             </div>
-                            <div id="detailSessionsList">
-                                <!-- Populated by JavaScript -->
+                            <div class="session-stats-grid">
+                                <div class="session-stat">
+                                    <div class="session-stat-value">18</div>
+                                    <div class="session-stat-label">Total Sessions</div>
+                                </div>
+                                <div class="session-stat">
+                                    <div class="session-stat-value">£75</div>
+                                    <div class="session-stat-label">Avg per Session</div>
+                                </div>
+                                <div class="session-stat">
+                                    <div class="session-stat-value">60%</div>
+                                    <div class="session-stat-label">Split Rate</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment History -->
+                        <div class="wealth-card">
+                            <div class="wealth-card-header">
+                                <span class="wealth-card-title">Payment History</span>
+                            </div>
+                            <div class="payment-history-list">
+                                <div class="payment-history-item">
+                                    <div class="payment-history-marker paid"></div>
+                                    <div class="payment-history-details">
+                                        <div class="payment-history-month">December 2025</div>
+                                        <div class="payment-history-date">Paid 5 Jan 2026</div>
+                                    </div>
+                                    <div class="payment-history-amount">£1,280</div>
+                                </div>
+                                <div class="payment-history-item">
+                                    <div class="payment-history-marker paid"></div>
+                                    <div class="payment-history-details">
+                                        <div class="payment-history-month">November 2025</div>
+                                        <div class="payment-history-date">Paid 5 Dec 2025</div>
+                                    </div>
+                                    <div class="payment-history-amount">£1,150</div>
+                                </div>
+                                <div class="payment-history-item">
+                                    <div class="payment-history-marker paid"></div>
+                                    <div class="payment-history-details">
+                                        <div class="payment-history-month">October 2025</div>
+                                        <div class="payment-history-date">Paid 5 Nov 2025</div>
+                                    </div>
+                                    <div class="payment-history-amount">£1,320</div>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Action Buttons -->
                         <div class="payout-actions">
-                            <button class="payout-action-btn primary" id="createPayoutBtn" onclick="createPayoutBatch()">
+                            <button class="payout-action-btn primary" onclick="markAsPaid()">
                                 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
                                     <polyline points="20 6 9 17 4 12"/>
                                 </svg>
-                                Create Payout Batch
+                                Mark as Paid
                             </button>
-                            <button class="payout-action-btn secondary" onclick="closePayoutDetail()">
-                                Cancel
+                            <button class="payout-action-btn secondary">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7 10 12 15 17 10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                                Export PDF
                             </button>
                         </div>
                     </div>
@@ -12461,225 +11825,6 @@ Sarah
             'ASSOC-2405': { acceptingReferrals: true, capacitySlots: 2, availableTimes: ['Evenings', 'Weekends'], specialisations: ['Relationships & Intimacy', 'Men\'s Issues'] },
             'ASSOC-2406': { acceptingReferrals: true, capacitySlots: 1, availableTimes: ['Weekdays', 'Evenings'], specialisations: ['Couples & Marriage', 'Pre-Marital Preparation'] }
         };
-
-        // ============================================
-        // SESSIONS MOCK DATA (Finance Integration)
-        // ============================================
-
-        const sessions = [
-            // Sarah Johnson's sessions (ASSOC-2401) - January 2026
-            { id: 'SES-26001', sessionDate: '2026-01-02', sessionTime: '10:00', clientId: 'CLIENT-2501', clientName: 'James & Emma Wilson', associateId: 'ASSOC-2401', associateName: 'Sarah Johnson', sessionType: 'Couples', rate: 95, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-01', stripeChargeId: 'ch_3abc001', payoutStatus: 'Paid Out', payoutId: 'PAY-26001' },
-            { id: 'SES-26002', sessionDate: '2026-01-03', sessionTime: '14:00', clientId: 'CLIENT-2502', clientName: 'David Miller', associateId: 'ASSOC-2401', associateName: 'Sarah Johnson', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-02', stripeChargeId: 'ch_3abc002', payoutStatus: 'Paid Out', payoutId: 'PAY-26001' },
-            { id: 'SES-26003', sessionDate: '2026-01-06', sessionTime: '11:00', clientId: 'CLIENT-2503', clientName: 'Sophie Taylor', associateId: 'ASSOC-2401', associateName: 'Sarah Johnson', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-05', stripeChargeId: 'ch_3abc003', payoutStatus: 'Paid Out', payoutId: 'PAY-26001' },
-            { id: 'SES-26004', sessionDate: '2026-01-07', sessionTime: '15:00', clientId: 'CLIENT-2504', clientName: 'Mark & Lisa Harris', associateId: 'ASSOC-2401', associateName: 'Sarah Johnson', sessionType: 'Couples', rate: 95, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-06', stripeChargeId: 'ch_3abc004', payoutStatus: 'Paid Out', payoutId: 'PAY-26001' },
-            { id: 'SES-26005', sessionDate: '2026-01-08', sessionTime: '10:00', clientId: 'CLIENT-2501', clientName: 'James & Emma Wilson', associateId: 'ASSOC-2401', associateName: 'Sarah Johnson', sessionType: 'Couples', rate: 95, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-07', stripeChargeId: 'ch_3abc005', payoutStatus: 'Ready for Payout', payoutId: null },
-            { id: 'SES-26006', sessionDate: '2026-01-09', sessionTime: '14:00', clientId: 'CLIENT-2507', clientName: 'Nina Patel', associateId: 'ASSOC-2401', associateName: 'Sarah Johnson', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-08', stripeChargeId: 'ch_3abc006', payoutStatus: 'Ready for Payout', payoutId: null },
-            { id: 'SES-26007', sessionDate: '2026-01-10', sessionTime: '11:00', clientId: 'CLIENT-2509', clientName: 'Laura Martinez', associateId: 'ASSOC-2401', associateName: 'Sarah Johnson', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-09', stripeChargeId: 'ch_3abc007', payoutStatus: 'Ready for Payout', payoutId: null },
-            { id: 'SES-26008', sessionDate: '2026-01-13', sessionTime: '10:00', clientId: 'CLIENT-2502', clientName: 'David Miller', associateId: 'ASSOC-2401', associateName: 'Sarah Johnson', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Awaiting Payment', paymentDate: null, stripeChargeId: null, payoutStatus: 'Pending', payoutId: null },
-            { id: 'SES-26009', sessionDate: '2026-01-14', sessionTime: '15:00', clientId: 'CLIENT-2504', clientName: 'Mark & Lisa Harris', associateId: 'ASSOC-2401', associateName: 'Sarah Johnson', sessionType: 'Couples', rate: 95, sessionStatus: 'Completed', paymentStatus: 'Awaiting Payment', paymentDate: null, stripeChargeId: null, payoutStatus: 'Pending', payoutId: null },
-            { id: 'SES-26010', sessionDate: '2026-01-15', sessionTime: '10:00', clientId: 'CLIENT-2501', clientName: 'James & Emma Wilson', associateId: 'ASSOC-2401', associateName: 'Sarah Johnson', sessionType: 'Couples', rate: 95, sessionStatus: 'Scheduled', paymentStatus: 'Awaiting Payment', paymentDate: null, stripeChargeId: null, payoutStatus: 'Pending', payoutId: null },
-            { id: 'SES-26011', sessionDate: '2026-01-16', sessionTime: '14:00', clientId: 'CLIENT-2503', clientName: 'Sophie Taylor', associateId: 'ASSOC-2401', associateName: 'Sarah Johnson', sessionType: 'Individual', rate: 85, sessionStatus: 'Scheduled', paymentStatus: 'Awaiting Payment', paymentDate: null, stripeChargeId: null, payoutStatus: 'Pending', payoutId: null },
-
-            // David Okonkwo's sessions (ASSOC-2402) - January 2026
-            { id: 'SES-26012', sessionDate: '2026-01-02', sessionTime: '09:00', clientId: 'CLIENT-2513', clientName: 'Michael Chen', associateId: 'ASSOC-2402', associateName: 'David Okonkwo', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-01', stripeChargeId: 'ch_3abc012', payoutStatus: 'Paid Out', payoutId: 'PAY-26002' },
-            { id: 'SES-26013', sessionDate: '2026-01-03', sessionTime: '11:00', clientId: 'CLIENT-2514', clientName: 'Sarah Adams', associateId: 'ASSOC-2402', associateName: 'David Okonkwo', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-02', stripeChargeId: 'ch_3abc013', payoutStatus: 'Paid Out', payoutId: 'PAY-26002' },
-            { id: 'SES-26014', sessionDate: '2026-01-06', sessionTime: '14:00', clientId: 'CLIENT-2515', clientName: 'Kevin & Jane Moore', associateId: 'ASSOC-2402', associateName: 'David Okonkwo', sessionType: 'Couples', rate: 95, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-05', stripeChargeId: 'ch_3abc014', payoutStatus: 'Paid Out', payoutId: 'PAY-26002' },
-            { id: 'SES-26015', sessionDate: '2026-01-07', sessionTime: '10:00', clientId: 'CLIENT-2513', clientName: 'Michael Chen', associateId: 'ASSOC-2402', associateName: 'David Okonkwo', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-06', stripeChargeId: 'ch_3abc015', payoutStatus: 'Paid Out', payoutId: 'PAY-26002' },
-            { id: 'SES-26016', sessionDate: '2026-01-08', sessionTime: '15:00', clientId: 'CLIENT-2514', clientName: 'Sarah Adams', associateId: 'ASSOC-2402', associateName: 'David Okonkwo', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-07', stripeChargeId: 'ch_3abc016', payoutStatus: 'Ready for Payout', payoutId: null },
-            { id: 'SES-26017', sessionDate: '2026-01-09', sessionTime: '09:00', clientId: 'CLIENT-2513', clientName: 'Michael Chen', associateId: 'ASSOC-2402', associateName: 'David Okonkwo', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-08', stripeChargeId: 'ch_3abc017', payoutStatus: 'Ready for Payout', payoutId: null },
-            { id: 'SES-26018', sessionDate: '2026-01-10', sessionTime: '11:00', clientId: 'CLIENT-2515', clientName: 'Kevin & Jane Moore', associateId: 'ASSOC-2402', associateName: 'David Okonkwo', sessionType: 'Couples', rate: 95, sessionStatus: 'Completed', paymentStatus: 'Awaiting Payment', paymentDate: null, stripeChargeId: null, payoutStatus: 'Pending', payoutId: null },
-            { id: 'SES-26019', sessionDate: '2026-01-13', sessionTime: '14:00', clientId: 'CLIENT-2514', clientName: 'Sarah Adams', associateId: 'ASSOC-2402', associateName: 'David Okonkwo', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Awaiting Payment', paymentDate: null, stripeChargeId: null, payoutStatus: 'Pending', payoutId: null },
-
-            // Amara Williams's sessions (ASSOC-2403) - January 2026
-            { id: 'SES-26020', sessionDate: '2026-01-03', sessionTime: '10:00', clientId: 'CLIENT-2516', clientName: 'Emma Stone', associateId: 'ASSOC-2403', associateName: 'Amara Williams', sessionType: 'Family', rate: 110, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-02', stripeChargeId: 'ch_3abc020', payoutStatus: 'Paid Out', payoutId: 'PAY-26003' },
-            { id: 'SES-26021', sessionDate: '2026-01-06', sessionTime: '14:00', clientId: 'CLIENT-2517', clientName: 'Robert Lee', associateId: 'ASSOC-2403', associateName: 'Amara Williams', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-05', stripeChargeId: 'ch_3abc021', payoutStatus: 'Paid Out', payoutId: 'PAY-26003' },
-            { id: 'SES-26022', sessionDate: '2026-01-08', sessionTime: '11:00', clientId: 'CLIENT-2516', clientName: 'Emma Stone', associateId: 'ASSOC-2403', associateName: 'Amara Williams', sessionType: 'Family', rate: 110, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-07', stripeChargeId: 'ch_3abc022', payoutStatus: 'Ready for Payout', payoutId: null },
-            { id: 'SES-26023', sessionDate: '2026-01-10', sessionTime: '10:00', clientId: 'CLIENT-2517', clientName: 'Robert Lee', associateId: 'ASSOC-2403', associateName: 'Amara Williams', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Awaiting Payment', paymentDate: null, stripeChargeId: null, payoutStatus: 'Pending', payoutId: null },
-            { id: 'SES-26024', sessionDate: '2026-01-13', sessionTime: '14:00', clientId: 'CLIENT-2516', clientName: 'Emma Stone', associateId: 'ASSOC-2403', associateName: 'Amara Williams', sessionType: 'Family', rate: 110, sessionStatus: 'Scheduled', paymentStatus: 'Awaiting Payment', paymentDate: null, stripeChargeId: null, payoutStatus: 'Pending', payoutId: null },
-
-            // Marcus Thompson's sessions (ASSOC-2404) - January 2026
-            { id: 'SES-26025', sessionDate: '2026-01-02', sessionTime: '14:00', clientId: 'CLIENT-2518', clientName: 'Julia Roberts', associateId: 'ASSOC-2404', associateName: 'Marcus Thompson', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-01', stripeChargeId: 'ch_3abc025', payoutStatus: 'Paid Out', payoutId: 'PAY-26004' },
-            { id: 'SES-26026', sessionDate: '2026-01-06', sessionTime: '10:00', clientId: 'CLIENT-2518', clientName: 'Julia Roberts', associateId: 'ASSOC-2404', associateName: 'Marcus Thompson', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-05', stripeChargeId: 'ch_3abc026', payoutStatus: 'Paid Out', payoutId: 'PAY-26004' },
-            { id: 'SES-26027', sessionDate: '2026-01-08', sessionTime: '15:00', clientId: 'CLIENT-2518', clientName: 'Julia Roberts', associateId: 'ASSOC-2404', associateName: 'Marcus Thompson', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-07', stripeChargeId: 'ch_3abc027', payoutStatus: 'Ready for Payout', payoutId: null },
-            { id: 'SES-26028', sessionDate: '2026-01-10', sessionTime: '14:00', clientId: 'CLIENT-2518', clientName: 'Julia Roberts', associateId: 'ASSOC-2404', associateName: 'Marcus Thompson', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Awaiting Payment', paymentDate: null, stripeChargeId: null, payoutStatus: 'Pending', payoutId: null },
-
-            // Kofi Mensah's sessions (ASSOC-2405) - January 2026
-            { id: 'SES-26029', sessionDate: '2026-01-03', sessionTime: '16:00', clientId: 'CLIENT-2519', clientName: 'Peter Parker', associateId: 'ASSOC-2405', associateName: 'Kofi Mensah', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-02', stripeChargeId: 'ch_3abc029', payoutStatus: 'Paid Out', payoutId: 'PAY-26005' },
-            { id: 'SES-26030', sessionDate: '2026-01-07', sessionTime: '17:00', clientId: 'CLIENT-2519', clientName: 'Peter Parker', associateId: 'ASSOC-2405', associateName: 'Kofi Mensah', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-06', stripeChargeId: 'ch_3abc030', payoutStatus: 'Ready for Payout', payoutId: null },
-            { id: 'SES-26031', sessionDate: '2026-01-10', sessionTime: '16:00', clientId: 'CLIENT-2519', clientName: 'Peter Parker', associateId: 'ASSOC-2405', associateName: 'Kofi Mensah', sessionType: 'Individual', rate: 85, sessionStatus: 'Completed', paymentStatus: 'Awaiting Payment', paymentDate: null, stripeChargeId: null, payoutStatus: 'Pending', payoutId: null },
-
-            // Zara Patel's sessions (ASSOC-2406) - January 2026
-            { id: 'SES-26032', sessionDate: '2026-01-02', sessionTime: '11:00', clientId: 'CLIENT-2520', clientName: 'Diana Prince', associateId: 'ASSOC-2406', associateName: 'Zara Patel', sessionType: 'Couples', rate: 95, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-01', stripeChargeId: 'ch_3abc032', payoutStatus: 'Paid Out', payoutId: 'PAY-26006' },
-            { id: 'SES-26033', sessionDate: '2026-01-06', sessionTime: '14:00', clientId: 'CLIENT-2520', clientName: 'Diana Prince', associateId: 'ASSOC-2406', associateName: 'Zara Patel', sessionType: 'Couples', rate: 95, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-05', stripeChargeId: 'ch_3abc033', payoutStatus: 'Paid Out', payoutId: 'PAY-26006' },
-            { id: 'SES-26034', sessionDate: '2026-01-09', sessionTime: '11:00', clientId: 'CLIENT-2520', clientName: 'Diana Prince', associateId: 'ASSOC-2406', associateName: 'Zara Patel', sessionType: 'Couples', rate: 95, sessionStatus: 'Completed', paymentStatus: 'Paid', paymentDate: '2026-01-08', stripeChargeId: 'ch_3abc034', payoutStatus: 'Ready for Payout', payoutId: null },
-            { id: 'SES-26035', sessionDate: '2026-01-13', sessionTime: '14:00', clientId: 'CLIENT-2520', clientName: 'Diana Prince', associateId: 'ASSOC-2406', associateName: 'Zara Patel', sessionType: 'Couples', rate: 95, sessionStatus: 'Scheduled', paymentStatus: 'Awaiting Payment', paymentDate: null, stripeChargeId: null, payoutStatus: 'Pending', payoutId: null }
-        ];
-
-        // ============================================
-        // PAYOUTS MOCK DATA (Finance Integration)
-        // ============================================
-
-        const payouts = [
-            // Week 1 payouts (1-7 Jan) - Already paid
-            { id: 'PAY-26001', associateId: 'ASSOC-2401', associateName: 'Sarah Johnson', periodStart: '2026-01-01', periodEnd: '2026-01-07', sessionIds: ['SES-26001', 'SES-26002', 'SES-26003', 'SES-26004'], sessionCount: 4, grossAmount: 360, associateAmount: 248.40, edenAmount: 111.60, status: 'Paid', approvedDate: '2026-01-08', approvedBy: 'Mike', paidDate: '2026-01-08', paymentMethod: 'Bank Transfer', paymentReference: 'EDEN-JAN26-SJ' },
-            { id: 'PAY-26002', associateId: 'ASSOC-2402', associateName: 'David Okonkwo', periodStart: '2026-01-01', periodEnd: '2026-01-07', sessionIds: ['SES-26012', 'SES-26013', 'SES-26014', 'SES-26015'], sessionCount: 4, grossAmount: 350, associateAmount: 241.50, edenAmount: 108.50, status: 'Paid', approvedDate: '2026-01-08', approvedBy: 'Mike', paidDate: '2026-01-08', paymentMethod: 'Bank Transfer', paymentReference: 'EDEN-JAN26-DO' },
-            { id: 'PAY-26003', associateId: 'ASSOC-2403', associateName: 'Amara Williams', periodStart: '2026-01-01', periodEnd: '2026-01-07', sessionIds: ['SES-26020', 'SES-26021'], sessionCount: 2, grossAmount: 195, associateAmount: 134.55, edenAmount: 60.45, status: 'Paid', approvedDate: '2026-01-08', approvedBy: 'Mike', paidDate: '2026-01-08', paymentMethod: 'Bank Transfer', paymentReference: 'EDEN-JAN26-AW' },
-            { id: 'PAY-26004', associateId: 'ASSOC-2404', associateName: 'Marcus Thompson', periodStart: '2026-01-01', periodEnd: '2026-01-07', sessionIds: ['SES-26025', 'SES-26026'], sessionCount: 2, grossAmount: 170, associateAmount: 117.30, edenAmount: 52.70, status: 'Paid', approvedDate: '2026-01-08', approvedBy: 'Mike', paidDate: '2026-01-08', paymentMethod: 'Bank Transfer', paymentReference: 'EDEN-JAN26-MT' },
-            { id: 'PAY-26005', associateId: 'ASSOC-2405', associateName: 'Kofi Mensah', periodStart: '2026-01-01', periodEnd: '2026-01-07', sessionIds: ['SES-26029'], sessionCount: 1, grossAmount: 85, associateAmount: 58.65, edenAmount: 26.35, status: 'Paid', approvedDate: '2026-01-08', approvedBy: 'Mike', paidDate: '2026-01-08', paymentMethod: 'Bank Transfer', paymentReference: 'EDEN-JAN26-KM' },
-            { id: 'PAY-26006', associateId: 'ASSOC-2406', associateName: 'Zara Patel', periodStart: '2026-01-01', periodEnd: '2026-01-07', sessionIds: ['SES-26032', 'SES-26033'], sessionCount: 2, grossAmount: 190, associateAmount: 131.10, edenAmount: 58.90, status: 'Paid', approvedDate: '2026-01-08', approvedBy: 'Mike', paidDate: '2026-01-08', paymentMethod: 'Bank Transfer', paymentReference: 'EDEN-JAN26-ZP' }
-        ];
-
-        // ============================================
-        // UNMATCHED PAYMENTS MOCK DATA
-        // ============================================
-
-        const unmatchedPayments = [
-            { id: 'UNM-26001', stripeChargeId: 'ch_3xyz999', customerEmail: 'unknown.client@email.com', amount: 85, paymentDate: '2026-01-12', status: 'Pending Review', matchedSessionId: null, resolvedDate: null, resolvedBy: null, notes: 'No matching session found - client email not in system' }
-        ];
-
-        // ============================================
-        // FINANCIAL SNAPSHOT MOCK DATA
-        // ============================================
-
-        const financialSnapshot = {
-            snapshotDate: '2026-01-15',
-            bankBalance: 32680,
-            outstandingPayouts: 1245.60, // Sum of sessions ready for payout (associate share)
-            taxReserve: 8170, // 25% of bank balance
-            trueCash: 23264.40, // Bank - Outstanding Payouts - Tax Reserve
-            unpaidSessions: 1110, // Sessions with PaymentStatus = "Awaiting Payment"
-            revenueThisMonth: 3150, // Sum of paid session rates this month
-            payoutsThisMonth: 931.50, // Sum of paid out associate amounts this month
-            source: 'Mock Data'
-        };
-
-        // ============================================
-        // FINANCE HELPER FUNCTIONS
-        // ============================================
-
-        // Get sessions for a specific associate
-        function getSessionsForAssociate(associateId) {
-            return sessions.filter(s => s.associateId === associateId);
-        }
-
-        // Get sessions by payment status
-        function getSessionsByPaymentStatus(status, associateId = null) {
-            let filtered = sessions.filter(s => s.paymentStatus === status);
-            if (associateId) {
-                filtered = filtered.filter(s => s.associateId === associateId);
-            }
-            return filtered;
-        }
-
-        // Get sessions by payout status
-        function getSessionsByPayoutStatus(status, associateId = null) {
-            let filtered = sessions.filter(s => s.payoutStatus === status);
-            if (associateId) {
-                filtered = filtered.filter(s => s.associateId === associateId);
-            }
-            return filtered;
-        }
-
-        // Calculate earnings for an associate
-        function calculateAssociateEarnings(associateId) {
-            const associateSessions = getSessionsForAssociate(associateId);
-            const paidSessions = associateSessions.filter(s => s.paymentStatus === 'Paid');
-            const awaitingPayment = associateSessions.filter(s => s.paymentStatus === 'Awaiting Payment');
-            const readyForPayout = associateSessions.filter(s => s.payoutStatus === 'Ready for Payout');
-            const paidOut = associateSessions.filter(s => s.payoutStatus === 'Paid Out');
-
-            const grossEarnings = paidSessions.reduce((sum, s) => sum + s.rate, 0);
-            const associateShare = grossEarnings * 0.69;
-            const awaitingTotal = awaitingPayment.reduce((sum, s) => sum + s.rate, 0);
-            const readyForPayoutTotal = readyForPayout.reduce((sum, s) => sum + (s.rate * 0.69), 0);
-            const paidOutTotal = paidOut.reduce((sum, s) => sum + (s.rate * 0.69), 0);
-
-            return {
-                grossEarnings,
-                associateShare,
-                awaitingPaymentCount: awaitingPayment.length,
-                awaitingPaymentTotal: awaitingTotal,
-                readyForPayoutCount: readyForPayout.length,
-                readyForPayoutTotal,
-                paidOutCount: paidOut.length,
-                paidOutTotal,
-                totalSessions: associateSessions.length,
-                completedSessions: associateSessions.filter(s => s.sessionStatus === 'Completed').length
-            };
-        }
-
-        // Get payouts for an associate
-        function getPayoutsForAssociate(associateId) {
-            return payouts.filter(p => p.associateId === associateId);
-        }
-
-        // Calculate True Cash
-        function calculateTrueCash() {
-            const bankBalance = financialSnapshot.bankBalance;
-
-            // Calculate outstanding payouts (sessions ready for payout)
-            const readyForPayout = sessions.filter(s => s.payoutStatus === 'Ready for Payout');
-            const outstandingPayouts = readyForPayout.reduce((sum, s) => sum + (s.rate * 0.69), 0);
-
-            // Tax reserve (25% of bank balance)
-            const taxReserve = bankBalance * 0.25;
-
-            // True Cash
-            const trueCash = bankBalance - outstandingPayouts - taxReserve;
-
-            return {
-                bankBalance,
-                outstandingPayouts,
-                taxReserve,
-                trueCash,
-                runway: trueCash / 2000 // Approximate months of runway at £2k/month operating costs
-            };
-        }
-
-        // Get payment overview for admin
-        function getPaymentOverview() {
-            const allSessions = sessions.filter(s => s.sessionStatus === 'Completed');
-            const awaitingPayment = allSessions.filter(s => s.paymentStatus === 'Awaiting Payment');
-            const paid = allSessions.filter(s => s.paymentStatus === 'Paid');
-
-            // Overdue = Awaiting Payment for more than 7 days
-            const sevenDaysAgo = new Date();
-            sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-            const overdue = awaitingPayment.filter(s => new Date(s.sessionDate) < sevenDaysAgo);
-
-            return {
-                awaitingPaymentCount: awaitingPayment.length,
-                awaitingPaymentTotal: awaitingPayment.reduce((sum, s) => sum + s.rate, 0),
-                paidCount: paid.length,
-                paidTotal: paid.reduce((sum, s) => sum + s.rate, 0),
-                overdueCount: overdue.length,
-                overdueTotal: overdue.reduce((sum, s) => sum + s.rate, 0),
-                overdueSessions: overdue
-            };
-        }
-
-        // Get payout pipeline (sessions ready for payout grouped by associate)
-        function getPayoutPipeline() {
-            const readyForPayout = sessions.filter(s => s.payoutStatus === 'Ready for Payout');
-            const grouped = {};
-
-            readyForPayout.forEach(session => {
-                if (!grouped[session.associateId]) {
-                    grouped[session.associateId] = {
-                        associateId: session.associateId,
-                        associateName: session.associateName,
-                        sessions: [],
-                        totalGross: 0,
-                        totalAssociateShare: 0
-                    };
-                }
-                grouped[session.associateId].sessions.push(session);
-                grouped[session.associateId].totalGross += session.rate;
-                grouped[session.associateId].totalAssociateShare += session.rate * 0.69;
-            });
-
-            return Object.values(grouped);
-        }
 
         // ============================================
         // STATE
@@ -13702,6 +12847,15 @@ Sarah
                 return;
             }
 
+            const mockPayouts = [
+                { month: 'January 2026', amount: 1240, status: 'PENDING', date: 'Due 15 Jan' },
+                { month: 'December 2025', amount: 2180, status: 'COMPLETED', date: 'Paid 15 Dec' },
+                { month: 'November 2025', amount: 1890, status: 'COMPLETED', date: 'Paid 15 Nov' }
+            ];
+
+            const earningsValue = selectedAssociate.totalEarnings || '£8,420';
+            const pendingValue = selectedAssociate.pendingPayout || '£1,240';
+
             // Find view within the correct container
             const view = parentContainer
                 ? parentContainer.querySelector('[data-view="payout-cockpit"]')
@@ -13712,143 +12866,30 @@ Sarah
                 return;
             }
 
-            // Get real data from sessions using helper functions
-            const earnings = calculateAssociateEarnings(selectedAssociate.id);
-            const associatePayouts = getPayoutsForAssociate(selectedAssociate.id);
-            const readySessions = getSessionsByPayoutStatus('Ready for Payout', selectedAssociate.id);
-            const awaitingSessions = getSessionsByPaymentStatus('Awaiting Payment', selectedAssociate.id);
+            // Update stat cards
+            const thisMonthEarnings = view.querySelector('.payout-stat-card:first-child .payout-stat-value');
+            const pendingPayout = view.querySelector('.payout-stat-card.pending .payout-stat-value');
+            if (thisMonthEarnings) thisMonthEarnings.textContent = earningsValue;
+            if (pendingPayout) pendingPayout.textContent = pendingValue;
 
-            // Calculate progress percentage (paid out vs total earned)
-            const totalEarned = earnings.paidOutTotal + earnings.readyForPayoutTotal;
-            const progressPercent = totalEarned > 0 ? (earnings.paidOutTotal / totalEarned) * 100 : 0;
-
-            // Update Earnings Hero
-            const heroValue = view.querySelector('#earningsHeroValue');
-            const heroSubtitle = view.querySelector('#earningsHeroSubtitle');
-            const progressFill = view.querySelector('#earningsProgressFill');
-            const progressPaid = view.querySelector('#earningsProgressPaid');
-            const progressPending = view.querySelector('#earningsProgressPending');
-
-            if (heroValue) heroValue.textContent = '£' + earnings.associateShare.toFixed(2);
-            if (heroSubtitle) heroSubtitle.textContent = `Your 69% share from ${earnings.completedSessions} sessions`;
-            if (progressFill) progressFill.style.width = progressPercent.toFixed(0) + '%';
-            if (progressPaid) progressPaid.textContent = '£' + earnings.paidOutTotal.toFixed(2) + ' paid out';
-            if (progressPending) progressPending.textContent = '£' + earnings.readyForPayoutTotal.toFixed(2) + ' ready';
-
-            // Update Earnings Breakdown Cards
-            const awaitingValue = view.querySelector('#awaitingPaymentValue');
-            const awaitingCount = view.querySelector('#awaitingPaymentCount');
-            const readyValue = view.querySelector('#readyForPayoutValue');
-            const readyCount = view.querySelector('#readyForPayoutCount');
-            const paidValue = view.querySelector('#paidOutValue');
-            const paidCount = view.querySelector('#paidOutCount');
-
-            if (awaitingValue) awaitingValue.textContent = '£' + (earnings.awaitingPaymentTotal * 0.69).toFixed(2);
-            if (awaitingCount) awaitingCount.textContent = earnings.awaitingPaymentCount + ' sessions';
-            if (readyValue) readyValue.textContent = '£' + earnings.readyForPayoutTotal.toFixed(2);
-            if (readyCount) readyCount.textContent = earnings.readyForPayoutCount + ' sessions';
-            if (paidValue) paidValue.textContent = '£' + earnings.paidOutTotal.toFixed(2);
-            if (paidCount) paidCount.textContent = earnings.paidOutCount + ' sessions';
-
-            // Render Sessions Ready for Payout
-            const readySessionsList = view.querySelector('#readySessionsList');
-            if (readySessionsList) {
-                if (readySessions.length === 0) {
-                    readySessionsList.innerHTML = '<p style="color: var(--eden-text-secondary); font-size: 13px; padding: 8px 0;">No sessions ready for payout</p>';
-                } else {
-                    readySessionsList.innerHTML = readySessions.map(session => `
-                        <div class="session-item">
-                            <div class="session-status-dot ready"></div>
-                            <div class="session-item-info">
-                                <div class="session-item-date">${formatSessionDate(session.sessionDate)} at ${session.sessionTime}</div>
-                                <div class="session-item-client">${session.clientName} · ${session.sessionType}</div>
-                            </div>
-                            <div class="session-item-amounts">
-                                <div class="session-item-rate">£${session.rate}</div>
-                                <div class="session-item-share">£${(session.rate * 0.69).toFixed(2)} to you</div>
-                            </div>
-                        </div>
-                    `).join('');
-                }
-            }
-
-            // Render Sessions Awaiting Payment
-            const awaitingSessionsList = view.querySelector('#awaitingSessionsList');
-            if (awaitingSessionsList) {
-                if (awaitingSessions.length === 0) {
-                    awaitingSessionsList.innerHTML = '<p style="color: var(--eden-text-secondary); font-size: 13px; padding: 8px 0;">No sessions awaiting payment</p>';
-                } else {
-                    awaitingSessionsList.innerHTML = awaitingSessions.map(session => `
-                        <div class="session-item">
-                            <div class="session-status-dot awaiting"></div>
-                            <div class="session-item-info">
-                                <div class="session-item-date">${formatSessionDate(session.sessionDate)} at ${session.sessionTime}</div>
-                                <div class="session-item-client">${session.clientName} · ${session.sessionType}</div>
-                            </div>
-                            <div class="session-item-amounts">
-                                <div class="session-item-rate">£${session.rate}</div>
-                                <div class="session-item-share">Pending payment</div>
-                            </div>
-                        </div>
-                    `).join('');
-                }
-            }
-
-            // Render Payout History
+            // Render payout history
             const historyContainer = view.querySelector('.payout-history-list');
             if (historyContainer) {
-                if (associatePayouts.length === 0) {
-                    historyContainer.innerHTML = '<p style="color: var(--eden-text-secondary); font-size: 13px;">No payout history yet</p>';
-                } else {
-                    historyContainer.innerHTML = associatePayouts.map(payout => `
-                        <div class="payout-history-card">
-                            <div class="payout-history-header">
-                                <span class="payout-history-period">${formatPayoutPeriod(payout.periodStart, payout.periodEnd)}</span>
-                                <span class="payout-history-status ${payout.status.toLowerCase()}">${payout.status}</span>
-                            </div>
-                            <div class="payout-history-row">
-                                <span class="payout-history-sessions">${payout.sessionCount} sessions</span>
-                                <span class="payout-history-amount">£${payout.associateAmount.toFixed(2)}</span>
-                            </div>
-                            ${payout.paidDate ? `<div class="payout-history-paid-date">Paid ${formatPayoutDate(payout.paidDate)}</div>` : ''}
+                historyContainer.innerHTML = mockPayouts.map(payout => `
+                    <div class="payout-history-item">
+                        <div class="payout-history-header">
+                            <span class="payout-month">${payout.month}</span>
+                            <span class="payout-status ${payout.status.toLowerCase()}">${payout.status}</span>
                         </div>
-                    `).join('');
-                }
+                        <div class="payout-history-details">
+                            <span class="payout-amount">£${payout.amount.toLocaleString()}</span>
+                            <span class="payout-date">${payout.date}</span>
+                        </div>
+                    </div>
+                `).join('');
             }
 
-            console.log('Payout cockpit populated with real session data');
-        }
-
-        // Helper function to format session date
-        function formatSessionDate(dateStr) {
-            const date = new Date(dateStr);
-            const options = { weekday: 'short', day: 'numeric', month: 'short' };
-            return date.toLocaleDateString('en-GB', options);
-        }
-
-        // Helper function to format payout period
-        function formatPayoutPeriod(start, end) {
-            const startDate = new Date(start);
-            const endDate = new Date(end);
-            const startDay = startDate.getDate();
-            const endDay = endDate.getDate();
-            const month = startDate.toLocaleDateString('en-GB', { month: 'long' });
-            const year = startDate.getFullYear();
-            return `${startDay}-${endDay} ${month} ${year}`;
-        }
-
-        // Helper function to format payout date
-        function formatPayoutDate(dateStr) {
-            const date = new Date(dateStr);
-            return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-        }
-
-        // Toggle collapsible section
-        function toggleCollapsible(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.classList.toggle('open');
-            }
+            console.log('Payout cockpit populated');
         }
 
         // Legacy function - kept for backwards compatibility
@@ -15605,15 +14646,13 @@ Sarah
         const wealthModuleTitles = {
             'cash-density': 'Cash Density',
             'tax-intel': 'Tax Intelligence',
-            'payment-tracker': 'Payment Tracker',
-            'payouts': 'Payout Pipeline',
+            'payouts': 'Payout Cockpit',
             'simulator': 'Wealth Lab'
         };
 
         const wealthModuleViews = {
             'cash-density': 'cashDensityView',
             'tax-intel': 'taxIntelView',
-            'payment-tracker': 'paymentTrackerView',
             'payouts': 'payoutsView',
             'simulator': 'simulatorView'
         };
@@ -15632,13 +14671,6 @@ Sarah
                 targetView.classList.add('active');
             }
 
-            // Initialize module-specific data
-            if (moduleName === 'payment-tracker') {
-                initPaymentTracker();
-            } else if (moduleName === 'payouts') {
-                initPayoutPipeline();
-            }
-
             // Open the panel
             document.getElementById('wealthPanel').classList.add('open');
         }
@@ -15646,169 +14678,6 @@ Sarah
         function closeWealthModule() {
             document.getElementById('wealthPanel').classList.remove('open');
             currentWealthModule = null;
-        }
-
-        // ============================================
-        // PAYMENT TRACKER FUNCTIONS
-        // ============================================
-
-        let currentPaymentFilter = 'all';
-
-        // Initialize Payment Tracker on load
-        function initPaymentTracker() {
-            updatePaymentOverview();
-            renderPaymentTable();
-            updatePaymentTrackerAlerts();
-        }
-
-        // Update Payment Overview Cards
-        function updatePaymentOverview() {
-            const overview = getPaymentOverview();
-
-            // Update Awaiting Payment
-            const awaitingValue = document.getElementById('awaitingPaymentOverviewValue');
-            const awaitingCount = document.getElementById('awaitingPaymentOverviewCount');
-            if (awaitingValue) awaitingValue.textContent = '£' + overview.awaitingPaymentTotal.toFixed(0);
-            if (awaitingCount) awaitingCount.textContent = overview.awaitingPaymentCount + ' sessions';
-
-            // Update Paid
-            const paidValue = document.getElementById('paidOverviewValue');
-            const paidCount = document.getElementById('paidOverviewCount');
-            if (paidValue) paidValue.textContent = '£' + overview.paidTotal.toFixed(0);
-            if (paidCount) paidCount.textContent = overview.paidCount + ' sessions';
-
-            // Update Overdue
-            const overdueValue = document.getElementById('overdueOverviewValue');
-            const overdueCount = document.getElementById('overdueOverviewCount');
-            if (overdueValue) overdueValue.textContent = '£' + overview.overdueTotal.toFixed(0);
-            if (overdueCount) overdueCount.textContent = overview.overdueCount + ' sessions';
-
-            // Update module alert badge
-            const alertBadge = document.getElementById('paymentTrackerAlert');
-            if (alertBadge) {
-                alertBadge.textContent = overview.awaitingPaymentCount + ' awaiting';
-            }
-        }
-
-        // Render Payment Table
-        function renderPaymentTable(filter = 'all') {
-            const tableBody = document.getElementById('paymentTableBody');
-            if (!tableBody) return;
-
-            let sessionData = sessions.filter(s => s.sessionStatus === 'Completed' || s.sessionStatus === 'Scheduled');
-
-            // Apply filter
-            if (filter === 'awaiting') {
-                sessionData = sessionData.filter(s => s.paymentStatus === 'Awaiting Payment');
-            } else if (filter === 'paid') {
-                sessionData = sessionData.filter(s => s.paymentStatus === 'Paid');
-            } else if (filter === 'overdue') {
-                const sevenDaysAgo = new Date();
-                sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-                sessionData = sessionData.filter(s =>
-                    s.paymentStatus === 'Awaiting Payment' &&
-                    new Date(s.sessionDate) < sevenDaysAgo
-                );
-            }
-
-            // Sort by date descending
-            sessionData.sort((a, b) => new Date(b.sessionDate) - new Date(a.sessionDate));
-
-            if (sessionData.length === 0) {
-                tableBody.innerHTML = `
-                    <tr>
-                        <td colspan="5" style="text-align: center; padding: 40px; color: var(--eden-text-secondary);">
-                            No sessions found for this filter
-                        </td>
-                    </tr>
-                `;
-                return;
-            }
-
-            tableBody.innerHTML = sessionData.map(session => {
-                const isOverdue = isSessionOverdue(session);
-                let statusClass = 'awaiting';
-                let statusText = 'Awaiting';
-
-                if (session.paymentStatus === 'Paid') {
-                    statusClass = 'paid';
-                    statusText = 'Paid';
-                } else if (isOverdue) {
-                    statusClass = 'overdue';
-                    statusText = 'Overdue';
-                }
-
-                return `
-                    <tr data-session-id="${session.id}">
-                        <td>${formatSessionDate(session.sessionDate)}</td>
-                        <td>${session.clientName}</td>
-                        <td class="payment-table-associate" onclick="openAssociateFromPaymentTable('${session.associateId}')">${session.associateName}</td>
-                        <td class="payment-table-amount">£${session.rate}</td>
-                        <td>
-                            <span class="payment-table-status ${statusClass}">
-                                <span class="payment-table-status-dot"></span>
-                                ${statusText}
-                            </span>
-                        </td>
-                    </tr>
-                `;
-            }).join('');
-        }
-
-        // Check if session is overdue (more than 7 days awaiting payment)
-        function isSessionOverdue(session) {
-            if (session.paymentStatus !== 'Awaiting Payment') return false;
-            const sevenDaysAgo = new Date();
-            sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-            return new Date(session.sessionDate) < sevenDaysAgo;
-        }
-
-        // Filter Payment Table
-        function filterPaymentTable(filter) {
-            currentPaymentFilter = filter;
-
-            // Update active button
-            document.querySelectorAll('.payment-filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.filter === filter) {
-                    btn.classList.add('active');
-                }
-            });
-
-            renderPaymentTable(filter);
-        }
-
-        // Update Payment Tracker Alerts
-        function updatePaymentTrackerAlerts() {
-            const alert = document.getElementById('unmatchedAlert');
-            const alertTitle = document.getElementById('unmatchedAlertTitle');
-            const alertDesc = document.getElementById('unmatchedAlertDesc');
-
-            if (unmatchedPayments.length > 0) {
-                alert.style.display = 'flex';
-                alertTitle.textContent = `${unmatchedPayments.length} Unmatched Payment${unmatchedPayments.length > 1 ? 's' : ''} Need${unmatchedPayments.length === 1 ? 's' : ''} Review`;
-                alertDesc.textContent = `Stripe payment${unmatchedPayments.length > 1 ? 's' : ''} couldn't be matched to session${unmatchedPayments.length > 1 ? 's' : ''}`;
-            } else {
-                alert.style.display = 'none';
-            }
-        }
-
-        // Show unmatched payments details
-        function showUnmatchedPayments() {
-            // In a full implementation, this would show a modal or drawer with unmatched payment details
-            const payment = unmatchedPayments[0];
-            if (payment) {
-                showToast(`Unmatched: £${payment.amount} from ${payment.customerEmail} on ${formatPayoutDate(payment.paymentDate)}`);
-            }
-        }
-
-        // Open associate from payment table
-        function openAssociateFromPaymentTable(associateId) {
-            closeWealthModule();
-            showView('associates');
-            setTimeout(() => {
-                openPanel(associateId);
-            }, 300);
         }
 
         // ============================================
@@ -15845,205 +14714,67 @@ Sarah
         }
 
         // ============================================
-        // PAYOUT PIPELINE FUNCTIONS
+        // PAYOUT COCKPIT FUNCTIONS
         // ============================================
 
-        let selectedPipelineAssociate = null;
+        let currentPayoutFilter = 'all';
 
-        // Initialize Payout Pipeline
-        function initPayoutPipeline() {
-            updatePipelineSummary();
-            renderPayoutPipelineGrid();
-            renderRecentPayouts();
-            updatePayoutPipelineAlert();
+        function filterPayouts(filter) {
+            currentPayoutFilter = filter;
+
+            // Update active button
+            document.querySelectorAll('.payout-filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === filter) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Filter cards
+            document.querySelectorAll('.payout-card').forEach(card => {
+                const status = card.dataset.status;
+                if (filter === 'all' || status === filter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
 
-        // Update Pipeline Summary Hero
-        function updatePipelineSummary() {
-            const pipeline = getPayoutPipeline();
-            const totalAmount = pipeline.reduce((sum, a) => sum + a.totalAssociateShare, 0);
-            const totalSessions = pipeline.reduce((sum, a) => sum + a.sessions.length, 0);
-            const edenShare = pipeline.reduce((sum, a) => sum + (a.totalGross - a.totalAssociateShare), 0);
-
-            // Calculate paid this month from payouts data
-            const paidThisMonth = payouts
-                .filter(p => p.status === 'Paid' && p.paidDate && p.paidDate.startsWith('2026-01'))
-                .reduce((sum, p) => sum + p.associateAmount, 0);
-
-            document.getElementById('pipelineReadyCount').textContent = pipeline.length + ' associates';
-            document.getElementById('pipelineTotalAmount').textContent = '£' + totalAmount.toFixed(2);
-            document.getElementById('pipelineSessionCount').textContent = totalSessions;
-            document.getElementById('pipelineEdenShare').textContent = '£' + edenShare.toFixed(2);
-            document.getElementById('pipelinePaidThisMonth').textContent = '£' + paidThisMonth.toFixed(2);
-        }
-
-        // Render Payout Pipeline Grid
-        function renderPayoutPipelineGrid() {
-            const grid = document.getElementById('payoutPipelineGrid');
-            if (!grid) return;
-
-            const pipeline = getPayoutPipeline();
-
-            if (pipeline.length === 0) {
-                grid.innerHTML = `
-                    <div class="empty-state" style="grid-column: 1 / -1;">
-                        <svg class="empty-state-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                        <p class="empty-state-text">No sessions ready for payout. All caught up!</p>
-                    </div>
-                `;
-                return;
-            }
-
-            grid.innerHTML = pipeline.map(associate => {
-                const initials = associate.associateName.split(' ').map(n => n[0]).join('');
-                const edenShare = associate.totalGross - associate.totalAssociateShare;
-
-                return `
-                    <div class="payout-pipeline-card" data-associate-id="${associate.associateId}">
-                        <div class="payout-pipeline-header">
-                            <div class="payout-pipeline-avatar">${initials}</div>
-                            <div class="payout-pipeline-info">
-                                <div class="payout-pipeline-name">${associate.associateName}</div>
-                                <div class="payout-pipeline-sessions">${associate.sessions.length} sessions ready</div>
-                            </div>
-                        </div>
-                        <div class="payout-pipeline-amounts">
-                            <div class="payout-pipeline-amount">
-                                <div class="payout-pipeline-amount-value">£${associate.totalGross.toFixed(0)}</div>
-                                <div class="payout-pipeline-amount-label">Gross</div>
-                            </div>
-                            <div class="payout-pipeline-amount">
-                                <div class="payout-pipeline-amount-value">£${associate.totalAssociateShare.toFixed(2)}</div>
-                                <div class="payout-pipeline-amount-label">Associate (69%)</div>
-                            </div>
-                            <div class="payout-pipeline-amount">
-                                <div class="payout-pipeline-amount-value">£${edenShare.toFixed(2)}</div>
-                                <div class="payout-pipeline-amount-label">Eden (31%)</div>
-                            </div>
-                        </div>
-                        <div class="payout-pipeline-action">
-                            <button class="payout-pipeline-btn" onclick="openPayoutDetail('${associate.associateId}')">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                                    <circle cx="12" cy="12" r="3"/>
-                                </svg>
-                                Review & Create Payout
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Render Recent Payouts List
-        function renderRecentPayouts() {
-            const container = document.getElementById('recentPayoutsList');
-            if (!container) return;
-
-            const recentPayouts = payouts
-                .filter(p => p.status === 'Paid')
-                .sort((a, b) => new Date(b.paidDate) - new Date(a.paidDate))
-                .slice(0, 5);
-
-            if (recentPayouts.length === 0) {
-                container.innerHTML = '<p style="color: var(--eden-text-secondary); font-size: 13px;">No recent payouts</p>';
-                return;
-            }
-
-            container.innerHTML = recentPayouts.map(payout => `
-                <div class="payout-history-card">
-                    <div class="payout-history-header">
-                        <span class="payout-history-period">${payout.associateName}</span>
-                        <span class="payout-history-status paid">Paid</span>
-                    </div>
-                    <div class="payout-history-row">
-                        <span class="payout-history-sessions">${payout.sessionCount} sessions · ${formatPayoutPeriod(payout.periodStart, payout.periodEnd)}</span>
-                        <span class="payout-history-amount">£${payout.associateAmount.toFixed(2)}</span>
-                    </div>
-                    <div class="payout-history-paid-date">Paid ${formatPayoutDate(payout.paidDate)} · Ref: ${payout.paymentReference}</div>
-                </div>
-            `).join('');
-        }
-
-        // Update Payout Pipeline Alert Badge
-        function updatePayoutPipelineAlert() {
-            const alertBadge = document.getElementById('payoutPipelineAlert');
-            if (alertBadge) {
-                const pipeline = getPayoutPipeline();
-                const totalSessions = pipeline.reduce((sum, a) => sum + a.sessions.length, 0);
-                alertBadge.textContent = totalSessions + ' ready';
-            }
-        }
-
-        // Open Payout Detail for an Associate
         function openPayoutDetail(associateId) {
-            selectedPipelineAssociate = associateId;
-
-            // Get pipeline data for this associate
-            const pipeline = getPayoutPipeline();
-            const associatePipeline = pipeline.find(p => p.associateId === associateId);
-
-            if (!associatePipeline) {
-                showToast('No sessions ready for payout');
-                return;
-            }
-
-            // Update detail view
-            const initials = associatePipeline.associateName.split(' ').map(n => n[0]).join('');
-            document.getElementById('detailAvatar').textContent = initials;
-            document.getElementById('detailName').textContent = associatePipeline.associateName;
-            document.getElementById('detailId').textContent = associateId;
-            document.getElementById('detailAmount').textContent = '£' + associatePipeline.totalAssociateShare.toFixed(2);
-
-            // Update breakdown
-            const edenShare = associatePipeline.totalGross - associatePipeline.totalAssociateShare;
-            document.getElementById('detailBreakdown').innerHTML = `
-                <div class="section-title" style="margin-top: 20px;">Breakdown</div>
-                <div class="info-row">
-                    <span class="info-label">Gross Session Fees (${associatePipeline.sessions.length} sessions)</span>
-                    <span class="info-value">£${associatePipeline.totalGross.toFixed(2)}</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">Associate Share (69%)</span>
-                    <span class="info-value positive">£${associatePipeline.totalAssociateShare.toFixed(2)}</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">Eden Share (31%)</span>
-                    <span class="info-value">£${edenShare.toFixed(2)}</span>
-                </div>
-            `;
-
-            // Update sessions list
-            document.getElementById('detailSessionsList').innerHTML = associatePipeline.sessions.map(session => `
-                <div class="session-item">
-                    <div class="session-status-dot ready"></div>
-                    <div class="session-item-info">
-                        <div class="session-item-date">${formatSessionDate(session.sessionDate)}</div>
-                        <div class="session-item-client">${session.clientName} · ${session.sessionType}</div>
-                    </div>
-                    <div class="session-item-amounts">
-                        <div class="session-item-rate">£${session.rate}</div>
-                    </div>
-                </div>
-            `).join('');
-
-            // Show detail view
+            // Show detail view, hide overview
             document.getElementById('payoutOverviewContent').style.display = 'none';
             document.getElementById('payoutDetailContent').style.display = 'block';
+
+            // In a real app, you'd fetch data based on associateId
+            // For now, the mock data is already in the HTML
+            console.log('Opened payout detail for:', associateId);
         }
 
-        // Close Payout Detail
         function closePayoutDetail() {
-            selectedPipelineAssociate = null;
+            // Hide detail view, show overview
             document.getElementById('payoutDetailContent').style.display = 'none';
             document.getElementById('payoutOverviewContent').style.display = 'block';
         }
 
-        // Navigate to Associate from Payout Detail
         function navigateToAssociateFromPayoutDetail() {
-            const associateId = selectedPipelineAssociate || document.getElementById('detailId').textContent;
+            // Navigate to associate from payout detail view
+            // This uses a mapping since payout detail doesn't have real associate IDs
+            const nameEl = document.getElementById('detailName');
+            const name = nameEl ? nameEl.textContent : '';
+
+            // Map payout names to associate IDs (mock mapping)
+            const nameToId = {
+                'James Wilson': 'ASSOC-2403',
+                'Sarah Chen': 'ASSOC-2402',
+                'Emma Thompson': 'ASSOC-2404',
+                'Michael Brown': 'ASSOC-2405',
+                'Lisa Patel': 'ASSOC-2501',
+                'David Kim': 'ASSOC-2405',
+                'Rachel Green': 'ASSOC-2401'
+            };
+
+            const associateId = nameToId[name];
             if (associateId) {
                 closeWealthModule();
                 showView('associates');
@@ -16053,78 +14784,10 @@ Sarah
             }
         }
 
-        // Create Payout Batch
-        function createPayoutBatch() {
-            if (!selectedPipelineAssociate) return;
-
-            const pipeline = getPayoutPipeline();
-            const associatePipeline = pipeline.find(p => p.associateId === selectedPipelineAssociate);
-
-            if (!associatePipeline) return;
-
-            // In a real app, this would create a payout record in Airtable
-            // and potentially send to QuickBooks
-            showToast(`Payout batch created for ${associatePipeline.associateName}: £${associatePipeline.totalAssociateShare.toFixed(2)}`);
-
-            // Close detail and refresh
-            closePayoutDetail();
-            initPayoutPipeline();
-        }
-
-        // Open Associate from Payout card
-        function openAssociateFromPayout(associateId) {
-            closeWealthModule();
-            showView('associates');
-            setTimeout(() => {
-                openPanel(associateId);
-            }, 300);
-        }
-
         function markAsPaid() {
             // In a real app, this would make an API call
-            showToast('Payment marked as paid!');
+            alert('Payment marked as paid! (Demo only)');
             closePayoutDetail();
-        }
-
-        // ============================================
-        // TRUE CASH FUNCTIONS
-        // ============================================
-
-        // Initialize True Cash display with real data
-        function initTrueCash() {
-            const cashData = calculateTrueCash();
-
-            // Update values
-            const trueCashValue = document.getElementById('trueCashValue');
-            const bankBalanceValue = document.getElementById('bankBalanceValue');
-            const outstandingPayoutsValue = document.getElementById('outstandingPayoutsValue');
-            const taxReserveValue = document.getElementById('taxReserveValue');
-            const trueCashPulse = document.getElementById('trueCashPulse');
-            const trueCashStatus = document.getElementById('trueCashStatus');
-            const trueCashRunway = document.getElementById('trueCashRunway');
-
-            if (trueCashValue) trueCashValue.textContent = '£' + cashData.trueCash.toFixed(0).toLocaleString();
-            if (bankBalanceValue) bankBalanceValue.textContent = '£' + cashData.bankBalance.toFixed(0).toLocaleString();
-            if (outstandingPayoutsValue) outstandingPayoutsValue.textContent = '£' + cashData.outstandingPayouts.toFixed(0).toLocaleString();
-            if (taxReserveValue) taxReserveValue.textContent = '£' + cashData.taxReserve.toFixed(0).toLocaleString();
-
-            // Determine health status based on runway
-            let healthStatus = 'healthy';
-            let statusText = 'Healthy';
-            if (cashData.runway < 1) {
-                healthStatus = 'critical';
-                statusText = 'Critical';
-            } else if (cashData.runway < 3) {
-                healthStatus = 'caution';
-                statusText = 'Caution';
-            }
-
-            // Update pulse indicator
-            if (trueCashPulse) {
-                trueCashPulse.className = 'pulse-dot ' + healthStatus;
-            }
-            if (trueCashStatus) trueCashStatus.textContent = statusText;
-            if (trueCashRunway) trueCashRunway.textContent = '~' + cashData.runway.toFixed(1) + ' months runway';
         }
 
         // ============================================
@@ -18580,9 +17243,6 @@ Eden Relationships
 
             // Initialize Phase 2 modules
             initSimulator();
-
-            // Initialize Finance Integration (True Cash)
-            initTrueCash();
 
             // Initialize Role-Based Navigation (Phase 4)
             updateNavigationForRole();
