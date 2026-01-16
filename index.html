@@ -64,9 +64,6 @@
         /* Body scroll lock when panel is open */
         body.panel-open {
             overflow: hidden;
-            position: fixed;
-            width: 100%;
-            height: 100%;
         }
 
         /* ============================================
@@ -9141,9 +9138,6 @@
             border-bottom: 1px solid var(--eden-border);
             background: var(--eden-mint);
             flex-shrink: 0;
-            position: sticky;
-            top: 0;
-            z-index: 10;
         }
 
         .detail-panel-back {
@@ -9309,6 +9303,11 @@
             -webkit-overflow-scrolling: touch;
         }
 
+        /* Drag handle - hidden on desktop, shown on mobile */
+        .detail-panel-drag-handle {
+            display: none;
+        }
+
         /* Stage content sections */
         .stage-section {
             display: none;
@@ -9442,15 +9441,19 @@
             }
 
             .detail-panel-drag-handle {
+                display: block;
                 width: 40px;
                 height: 4px;
                 background: #d1d5db;
                 border-radius: 2px;
-                margin: 8px auto;
+                margin: 8px auto 4px auto;
+                flex-shrink: 0;
             }
 
             .detail-panel-header {
-                padding-top: 8px;
+                padding-top: 4px;
+                padding-bottom: 12px;
+                flex-shrink: 0;
             }
 
             .progress-stepper {
@@ -18577,11 +18580,12 @@ Eden Relationships
             if (panel) {
                 panel.classList.add('open');
                 renderDetailPanelContent();
+                // Ensure panel starts scrolled to top
+                panel.scrollTop = 0;
             }
 
-            // Lock body scroll using class-based approach
+            // Lock body scroll
             document.body.classList.add('panel-open');
-            document.body.style.top = `-${savedDetailPanelScrollPosition}px`;
 
             // Add keyboard listener for Escape key
             document.addEventListener('keydown', handleDetailPanelKeydown);
@@ -18596,8 +18600,6 @@ Eden Relationships
 
             // Restore body scroll
             document.body.classList.remove('panel-open');
-            document.body.style.top = '';
-            window.scrollTo(0, savedDetailPanelScrollPosition);
 
             currentDetailPanelData = null;
             currentDetailPanelType = null;
