@@ -9132,6 +9132,7 @@
             padding: 16px 20px;
             border-bottom: 1px solid var(--eden-border);
             background: var(--eden-mint);
+            flex-shrink: 0;
         }
 
         .detail-panel-back {
@@ -9192,6 +9193,12 @@
             padding: 0;
             border-bottom: 1px solid var(--eden-border);
             background: var(--pure-white);
+            flex-shrink: 0;
+        }
+
+        .detail-panel-drag-handle {
+            display: none;
+            flex-shrink: 0;
         }
 
         .detail-panel-content {
@@ -9333,11 +9340,13 @@
             }
 
             .detail-panel-drag-handle {
+                display: block;
                 width: 40px;
                 height: 4px;
                 background: #d1d5db;
                 border-radius: 2px;
                 margin: 8px auto;
+                flex-shrink: 0;
             }
 
             .detail-panel-header {
