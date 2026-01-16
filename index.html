@@ -9126,12 +9126,14 @@
         }
 
         .detail-panel-header {
-            display: flex;
+            display: flex !important;
             align-items: center;
             justify-content: space-between;
             padding: 16px 20px;
-            border-bottom: 1px solid var(--eden-border);
-            background: var(--eden-mint);
+            border-bottom: 3px solid red;
+            background: #ffff00;
+            flex-shrink: 0;
+            min-height: 80px;
         }
 
         .detail-panel-back {
@@ -9192,6 +9194,12 @@
             padding: 0;
             border-bottom: 1px solid var(--eden-border);
             background: var(--pure-white);
+            flex-shrink: 0;
+        }
+
+        .detail-panel-drag-handle {
+            display: none;
+            flex-shrink: 0;
         }
 
         .detail-panel-content {
@@ -9333,11 +9341,13 @@
             }
 
             .detail-panel-drag-handle {
+                display: block;
                 width: 40px;
                 height: 4px;
                 background: #d1d5db;
                 border-radius: 2px;
                 margin: 8px auto;
+                flex-shrink: 0;
             }
 
             .detail-panel-header {
