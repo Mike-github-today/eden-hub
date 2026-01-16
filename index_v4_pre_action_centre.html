@@ -3134,117 +3134,6 @@
             color: var(--eden-text-secondary);
         }
 
-        /* Action Centre Summary Cards */
-        .action-summary-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 24px;
-        }
-
-        .action-summary-card {
-            background-color: var(--pure-white);
-            border: 1px solid var(--eden-border);
-            border-radius: var(--radius-card);
-            padding: 20px;
-            position: relative;
-            cursor: pointer;
-            transition: all var(--transition-smooth);
-            text-align: center;
-        }
-
-        .action-summary-card:hover {
-            border-color: var(--eden-green);
-            box-shadow: 0 4px 12px rgba(45, 95, 77, 0.1);
-        }
-
-        .action-summary-card.active {
-            border-color: var(--eden-green);
-            box-shadow: 0 0 0 3px rgba(45, 95, 77, 0.15);
-        }
-
-        .action-summary-pulse {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        .action-summary-pulse.orange { background-color: #f97316; }
-        .action-summary-pulse.blue { background-color: #3b82f6; }
-        .action-summary-pulse.purple { background-color: #8b5cf6; }
-        .action-summary-pulse.green { background-color: #10b981; }
-
-        .action-summary-count {
-            font-size: 32px;
-            font-weight: 600;
-            color: var(--eden-text-primary);
-            margin-bottom: 4px;
-        }
-
-        .action-summary-count.zero {
-            color: var(--eden-text-muted);
-        }
-
-        .action-summary-icon {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 4px;
-        }
-
-        .action-summary-icon svg {
-            width: 18px;
-            height: 18px;
-            color: var(--eden-text-secondary);
-            stroke-width: 1.5;
-        }
-
-        .action-summary-label {
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--eden-text-secondary);
-        }
-
-        .action-filter-indicator {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 12px;
-            margin-bottom: 16px;
-            background-color: var(--eden-green-light);
-            border-radius: var(--radius-standard);
-        }
-
-        .action-filter-indicator span {
-            font-size: 13px;
-            color: var(--eden-text-secondary);
-        }
-
-        .action-filter-indicator span strong {
-            color: var(--eden-text);
-        }
-
-        .action-filter-clear {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--eden-green);
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px 8px;
-            border-radius: 4px;
-            transition: background-color var(--transition-smooth);
-        }
-
-        .action-filter-clear:hover {
-            background-color: rgba(45, 95, 77, 0.1);
-        }
-
         /* ============================================
            EARNINGS / FINANCE GATEWAY
            ============================================ */
@@ -8930,138 +8819,6 @@
             50% { opacity: 0.5; transform: scale(1.2); }
         }
 
-        /* Associate Card Kebab Menu */
-        .kebab-menu-container {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            z-index: 10;
-        }
-
-        .kebab-menu-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color var(--transition-smooth);
-        }
-
-        .kebab-menu-btn:hover {
-            background-color: var(--eden-green-light);
-        }
-
-        .kebab-menu-btn svg {
-            width: 18px;
-            height: 18px;
-            color: var(--eden-text-secondary);
-        }
-
-        .kebab-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 4px;
-            width: 220px;
-            background-color: var(--pure-white);
-            border: 1px solid var(--eden-border);
-            border-radius: var(--radius-card);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-8px);
-            transition: all 200ms ease;
-            z-index: 100;
-        }
-
-        .kebab-dropdown.open {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .kebab-dropdown-header {
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--eden-border);
-        }
-
-        .kebab-dropdown-label {
-            font-size: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--eden-text-muted);
-        }
-
-        .kebab-dropdown-name {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--eden-text);
-            margin-top: 2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .kebab-dropdown-options {
-            padding: 8px 0;
-        }
-
-        .kebab-option {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            text-align: left;
-            transition: background-color var(--transition-smooth);
-        }
-
-        .kebab-option:hover {
-            background-color: var(--eden-green-light);
-        }
-
-        .kebab-option-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            background-color: var(--eden-mint);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .kebab-option-icon svg {
-            width: 16px;
-            height: 16px;
-            color: var(--eden-green);
-            stroke-width: 1.5;
-        }
-
-        .kebab-option-text {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .kebab-option-title {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--eden-text);
-        }
-
-        .kebab-option-desc {
-            font-size: 11px;
-            color: var(--eden-text-secondary);
-        }
-
         /* ============================================
            ANIMATED CARD LIST
            ============================================ */
@@ -9818,6 +9575,60 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Weekly Analytics (Shared) -->
+                    <div class="analytics-section" style="margin-top: 24px;">
+                        <div class="analytics-section-header">
+                            <h2 class="analytics-section-title">This Week Overview</h2>
+                            <div class="analytics-period-toggle">
+                                <button class="analytics-period-btn active" onclick="setAnalyticsPeriod('week')">Week</button>
+                                <button class="analytics-period-btn" onclick="setAnalyticsPeriod('month')">Month</button>
+                                <button class="analytics-period-btn" onclick="setAnalyticsPeriod('quarter')">Quarter</button>
+                            </div>
+                        </div>
+                        <div class="analytics-metrics-grid">
+                            <div class="analytics-metric-card">
+                                <div class="analytics-metric-value">47</div>
+                                <div class="analytics-metric-label">Total Sessions</div>
+                                <span class="analytics-metric-change up">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="18 15 12 9 6 15"/>
+                                    </svg>
+                                    +12% vs last week
+                                </span>
+                            </div>
+                            <div class="analytics-metric-card">
+                                <div class="analytics-metric-value">£6,820</div>
+                                <div class="analytics-metric-label">Weekly Revenue</div>
+                                <span class="analytics-metric-change up">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="18 15 12 9 6 15"/>
+                                    </svg>
+                                    +8% vs last week
+                                </span>
+                            </div>
+                            <div class="analytics-metric-card">
+                                <div class="analytics-metric-value">92%</div>
+                                <div class="analytics-metric-label">Attendance Rate</div>
+                                <span class="analytics-metric-change up">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="18 15 12 9 6 15"/>
+                                    </svg>
+                                    +3% vs last week
+                                </span>
+                            </div>
+                            <div class="analytics-metric-card">
+                                <div class="analytics-metric-value">4.8</div>
+                                <div class="analytics-metric-label">Avg. Rating</div>
+                                <span class="analytics-metric-change up">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="18 15 12 9 6 15"/>
+                                    </svg>
+                                    +0.2 vs last week
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- ============================================
@@ -10013,64 +9824,6 @@
                     <h1 class="page-title">Action Centre</h1>
                     <p class="page-subtitle">Items requiring your attention</p>
                 </header>
-
-                <!-- Summary Cards Grid -->
-                <div class="action-summary-grid" id="actionSummaryGrid">
-                    <div class="action-summary-card" data-category="associates" onclick="filterActionsByCategory('associates')">
-                        <div class="action-summary-pulse orange" id="associatesPulse" style="display: none;"></div>
-                        <div class="action-summary-count" id="associatesCount">0</div>
-                        <div class="action-summary-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                <circle cx="12" cy="7" r="4"/>
-                            </svg>
-                        </div>
-                        <div class="action-summary-label">Associates</div>
-                    </div>
-                    <div class="action-summary-card" data-category="clients" onclick="filterActionsByCategory('clients')">
-                        <div class="action-summary-pulse blue" id="clientsPulse" style="display: none;"></div>
-                        <div class="action-summary-count" id="clientsActionCount">0</div>
-                        <div class="action-summary-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                            </svg>
-                        </div>
-                        <div class="action-summary-label">Clients</div>
-                    </div>
-                    <div class="action-summary-card" data-category="contracts" onclick="filterActionsByCategory('contracts')">
-                        <div class="action-summary-pulse purple" id="contractsPulse" style="display: none;"></div>
-                        <div class="action-summary-count" id="contractsCount">0</div>
-                        <div class="action-summary-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                <polyline points="14 2 14 8 20 8"/>
-                                <line x1="16" y1="13" x2="8" y2="13"/>
-                                <line x1="16" y1="17" x2="8" y2="17"/>
-                            </svg>
-                        </div>
-                        <div class="action-summary-label">Contracts</div>
-                    </div>
-                    <div class="action-summary-card" data-category="finance" onclick="filterActionsByCategory('finance')">
-                        <div class="action-summary-pulse green" id="financePulse" style="display: none;"></div>
-                        <div class="action-summary-count" id="financeCount">0</div>
-                        <div class="action-summary-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <line x1="12" y1="1" x2="12" y2="23"/>
-                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                            </svg>
-                        </div>
-                        <div class="action-summary-label">Finance</div>
-                    </div>
-                </div>
-
-                <!-- Filter Indicator (shown when filtered) -->
-                <div class="action-filter-indicator" id="actionFilterIndicator" style="display: none;">
-                    <span>Showing: <strong id="activeFilterLabel">All</strong></span>
-                    <button class="action-filter-clear" onclick="clearActionFilter()">Clear filter</button>
-                </div>
 
                 <div class="friction-feed" id="frictionFeed">
                     <!-- Friction items will be rendered here -->
@@ -13116,11 +12869,6 @@ Sarah
             if (viewName === 'referrals') {
                 renderReferrals();
             }
-
-            // Update Action Centre summary counts when showing action-centre
-            if (viewName === 'action-centre') {
-                renderFrictionFeed();
-            }
         }
 
         // Show access denied notification
@@ -13247,9 +12995,7 @@ Sarah
                     meta: [associate.specialisation, associate.pendingPayout],
                     pulseColour: pulseColour,
                     onClick: `openAssociateDetailPanel('${associate.id}')`,
-                    dataId: associate.id,
-                    showKebabMenu: true,
-                    kebabMenuData: { id: associate.id, name: associate.name }
+                    dataId: associate.id
                 });
             }).join('');
 
@@ -14647,7 +14393,6 @@ Sarah
             {
                 id: 'FRI-001',
                 type: 'amber',
-                category: 'associates',
                 icon: 'file-text',
                 title: 'Insurance renewal required',
                 description: 'Fatima Okafor\'s professional indemnity insurance expires in 14 days',
@@ -14658,7 +14403,6 @@ Sarah
             {
                 id: 'FRI-002',
                 type: 'amber',
-                category: 'contracts',
                 icon: 'file-signature',
                 title: 'Contract pending signature',
                 description: 'Amara Mensah has not signed the updated associate agreement',
@@ -14669,7 +14413,6 @@ Sarah
             {
                 id: 'FRI-003',
                 type: 'rose',
-                category: 'finance',
                 icon: 'alert-circle',
                 title: 'Overdue invoice #1042',
                 description: 'Client payment is 12 days overdue - Emma Stone (CLIENT-2516)',
@@ -14680,7 +14423,6 @@ Sarah
             {
                 id: 'FRI-004',
                 type: 'blue',
-                category: 'clients',
                 icon: 'calendar',
                 title: 'Session unconfirmed',
                 description: 'Tomorrow\'s 2pm session with Mark & Lisa Harris awaiting confirmation',
@@ -14690,108 +14432,13 @@ Sarah
             }
         ];
 
-        // Action Centre state
-        let activeActionFilter = null;
-
-        // Category labels mapping
-        const ACTION_CATEGORY_LABELS = {
-            associates: 'Associates',
-            clients: 'Clients',
-            contracts: 'Contracts',
-            finance: 'Finance'
-        };
-
-        // Count friction items by category
-        function countFrictionByCategory() {
-            const counts = {
-                associates: 0,
-                clients: 0,
-                contracts: 0,
-                finance: 0
-            };
-            frictionItems.forEach(item => {
-                if (counts.hasOwnProperty(item.category)) {
-                    counts[item.category]++;
-                }
-            });
-            return counts;
-        }
-
-        // Update Action Centre summary cards
-        function updateActionSummaryCounts() {
-            const counts = countFrictionByCategory();
-
-            // Update each category count and pulse indicator
-            Object.keys(counts).forEach(category => {
-                const countEl = document.getElementById(
-                    category === 'clients' ? 'clientsActionCount' : `${category}Count`
-                );
-                const pulseEl = document.getElementById(`${category}Pulse`);
-
-                if (countEl) {
-                    countEl.textContent = counts[category];
-                    countEl.classList.toggle('zero', counts[category] === 0);
-                }
-                if (pulseEl) {
-                    pulseEl.style.display = counts[category] > 0 ? 'block' : 'none';
-                }
-            });
-        }
-
-        // Filter actions by category
-        function filterActionsByCategory(category) {
-            const cards = document.querySelectorAll('.action-summary-card');
-            const filterIndicator = document.getElementById('actionFilterIndicator');
-            const filterLabel = document.getElementById('activeFilterLabel');
-
-            // Toggle filter if same category clicked
-            if (activeActionFilter === category) {
-                clearActionFilter();
-                return;
-            }
-
-            activeActionFilter = category;
-
-            // Update card active states
-            cards.forEach(card => {
-                card.classList.toggle('active', card.dataset.category === category);
-            });
-
-            // Show filter indicator
-            if (filterIndicator) {
-                filterIndicator.style.display = 'flex';
-                filterLabel.textContent = ACTION_CATEGORY_LABELS[category] || category;
-            }
-
-            // Re-render feed with filter
-            renderFrictionFeed(category);
-        }
-
-        // Clear action filter
-        function clearActionFilter() {
-            activeActionFilter = null;
-
-            const cards = document.querySelectorAll('.action-summary-card');
-            const filterIndicator = document.getElementById('actionFilterIndicator');
-
-            cards.forEach(card => card.classList.remove('active'));
-            if (filterIndicator) filterIndicator.style.display = 'none';
-
-            renderFrictionFeed();
-        }
-
-        function renderFrictionFeed(filterCategory = null) {
+        function renderFrictionFeed() {
             const feed = document.getElementById('frictionFeed');
             const allClear = document.getElementById('allClearState');
 
             if (!feed) return;
 
-            // Apply category filter if provided
-            const itemsToRender = filterCategory
-                ? frictionItems.filter(item => item.category === filterCategory)
-                : frictionItems;
-
-            if (itemsToRender.length === 0) {
+            if (frictionItems.length === 0) {
                 feed.style.display = 'none';
                 allClear.style.display = 'block';
                 return;
@@ -14800,7 +14447,7 @@ Sarah
             feed.style.display = 'flex';
             allClear.style.display = 'none';
 
-            feed.innerHTML = itemsToRender.map(item => `
+            feed.innerHTML = frictionItems.map(item => `
                 <div class="friction-item ${item.type}" onclick="openResolutionDrawer('${item.id}')">
                     <div class="friction-icon ${item.type}">
                         ${getFrictionIcon(item.icon)}
@@ -14818,9 +14465,6 @@ Sarah
                     <button class="friction-action" onclick="event.stopPropagation(); openResolutionDrawer('${item.id}')">${item.action}</button>
                 </div>
             `).join('');
-
-            // Update summary counts
-            updateActionSummaryCounts();
         }
 
         function getFrictionIcon(iconName) {
@@ -18246,87 +17890,14 @@ Eden Relationships
         // ============================================
 
         function renderStatusCard(config) {
-            const { reference, status, statusLabel, title, preview, meta, timestamp, pulseColour, onClick, dataId, showKebabMenu, kebabMenuData } = config;
+            const { reference, status, statusLabel, title, preview, meta, timestamp, pulseColour, onClick, dataId } = config;
 
             const statusClass = status.toLowerCase().replace(/\s+/g, '-');
             const metaChips = meta ? meta.map(m => `<span class="status-card-chip">${m}</span>`).join('') : '';
 
-            // Kebab menu HTML for associate cards
-            const kebabMenuHtml = showKebabMenu && kebabMenuData ? `
-                <div class="kebab-menu-container" onclick="event.stopPropagation();">
-                    <button class="kebab-menu-btn" onclick="toggleKebabMenu('${kebabMenuData.id}')" aria-label="Open menu">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="5" r="1"/>
-                            <circle cx="12" cy="12" r="1"/>
-                            <circle cx="12" cy="19" r="1"/>
-                        </svg>
-                    </button>
-                    <div class="kebab-dropdown" id="kebab-${kebabMenuData.id}">
-                        <div class="kebab-dropdown-header">
-                            <div class="kebab-dropdown-label">Quick Access</div>
-                            <div class="kebab-dropdown-name">${kebabMenuData.name}</div>
-                        </div>
-                        <div class="kebab-dropdown-options">
-                            <button class="kebab-option" onclick="navigateToAssociateView('${kebabMenuData.id}', 'sessions')">
-                                <div class="kebab-option-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                                        <line x1="16" y1="2" x2="16" y2="6"/>
-                                        <line x1="8" y1="2" x2="8" y2="6"/>
-                                        <line x1="3" y1="10" x2="21" y2="10"/>
-                                    </svg>
-                                </div>
-                                <div class="kebab-option-text">
-                                    <div class="kebab-option-title">Sessions</div>
-                                    <div class="kebab-option-desc">View client sessions</div>
-                                </div>
-                            </button>
-                            <button class="kebab-option" onclick="navigateToAssociateView('${kebabMenuData.id}', 'contracts')">
-                                <div class="kebab-option-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                        <polyline points="14 2 14 8 20 8"/>
-                                        <line x1="16" y1="13" x2="8" y2="13"/>
-                                        <line x1="16" y1="17" x2="8" y2="17"/>
-                                    </svg>
-                                </div>
-                                <div class="kebab-option-text">
-                                    <div class="kebab-option-title">Contracts</div>
-                                    <div class="kebab-option-desc">Active agreements</div>
-                                </div>
-                            </button>
-                            <button class="kebab-option" onclick="navigateToAssociateView('${kebabMenuData.id}', 'finance')">
-                                <div class="kebab-option-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <line x1="12" y1="1" x2="12" y2="23"/>
-                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                                    </svg>
-                                </div>
-                                <div class="kebab-option-text">
-                                    <div class="kebab-option-title">Finance</div>
-                                    <div class="kebab-option-desc">Earnings & payouts</div>
-                                </div>
-                            </button>
-                            <button class="kebab-option" onclick="navigateToAssociateView('${kebabMenuData.id}', 'inbox')">
-                                <div class="kebab-option-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                        <polyline points="22,6 12,13 2,6"/>
-                                    </svg>
-                                </div>
-                                <div class="kebab-option-text">
-                                    <div class="kebab-option-title">Inbox</div>
-                                    <div class="kebab-option-desc">Messages</div>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            ` : '';
-
             return `
                 <div class="status-card" onclick="${onClick}" data-id="${dataId || ''}">
-                    ${showKebabMenu ? kebabMenuHtml : (pulseColour ? `<div class="status-card-pulse ${pulseColour}"></div>` : '')}
+                    ${pulseColour ? `<div class="status-card-pulse ${pulseColour}"></div>` : ''}
                     ${timestamp ? `<span class="status-card-timestamp">${timestamp}</span>` : ''}
                     <div class="status-card-header">
                         <span class="status-card-ref">${reference}</span>
@@ -18337,129 +17908,6 @@ Eden Relationships
                     ${meta && meta.length > 0 ? `<div class="status-card-meta">${metaChips}</div>` : ''}
                 </div>
             `;
-        }
-
-        // ============================================
-        // KEBAB MENU FUNCTIONS
-        // ============================================
-
-        let activeKebabMenu = null;
-
-        function toggleKebabMenu(associateId) {
-            const dropdown = document.getElementById(`kebab-${associateId}`);
-            if (!dropdown) return;
-
-            const isOpen = dropdown.classList.contains('open');
-
-            // Close any open kebab menus first
-            closeAllKebabMenus();
-
-            if (!isOpen) {
-                dropdown.classList.add('open');
-                activeKebabMenu = associateId;
-
-                // Add click-outside listener
-                setTimeout(() => {
-                    document.addEventListener('click', handleKebabClickOutside);
-                }, 0);
-            }
-        }
-
-        function closeAllKebabMenus() {
-            document.querySelectorAll('.kebab-dropdown.open').forEach(menu => {
-                menu.classList.remove('open');
-            });
-            document.removeEventListener('click', handleKebabClickOutside);
-            activeKebabMenu = null;
-        }
-
-        function handleKebabClickOutside(e) {
-            if (!e.target.closest('.kebab-menu-container')) {
-                closeAllKebabMenus();
-            }
-        }
-
-        function navigateToAssociateView(associateId, viewType) {
-            // Close the kebab menu
-            closeAllKebabMenus();
-
-            // Find the associate
-            const associate = associates.find(a => a.id === associateId);
-            if (!associate) return;
-
-            // Store selected associate for context
-            selectedAssociate = associate;
-
-            // Navigate based on view type
-            switch (viewType) {
-                case 'sessions':
-                    // Open associate panel and show sessions/clients
-                    openAssociateDetailPanel(associateId);
-                    break;
-                case 'contracts':
-                    // Navigate to contracts view filtered by associate
-                    showView('contracts');
-                    // Note: Could add filter functionality here
-                    showNotification(`Viewing contracts for ${associate.name}`);
-                    break;
-                case 'finance':
-                    // Open associate panel and navigate to payout cockpit
-                    openAssociateDetailPanel(associateId);
-                    setTimeout(() => {
-                        navigatePanelTo('payout-cockpit');
-                    }, 300);
-                    break;
-                case 'inbox':
-                    // Open associate inbox view
-                    openAssociateInbox(associateId);
-                    break;
-                default:
-                    openAssociateDetailPanel(associateId);
-            }
-        }
-
-        // Show a brief notification toast
-        function showNotification(message) {
-            let toast = document.getElementById('notificationToast');
-            if (!toast) {
-                toast = document.createElement('div');
-                toast.id = 'notificationToast';
-                toast.style.cssText = `
-                    position: fixed;
-                    bottom: 80px;
-                    left: 50%;
-                    transform: translateX(-50%) translateY(20px);
-                    background: var(--eden-text);
-                    color: white;
-                    padding: 12px 24px;
-                    border-radius: 8px;
-                    font-size: 14px;
-                    opacity: 0;
-                    transition: all 300ms ease;
-                    z-index: 9999;
-                `;
-                document.body.appendChild(toast);
-            }
-            toast.textContent = message;
-            toast.style.opacity = '1';
-            toast.style.transform = 'translateX(-50%) translateY(0)';
-
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(-50%) translateY(20px)';
-            }, 2500);
-        }
-
-        // Open associate inbox (will be enhanced in Chunk 3)
-        function openAssociateInbox(associateId) {
-            const associate = associates.find(a => a.id === associateId);
-            if (!associate) return;
-
-            // Open associate panel and navigate to inbox
-            openAssociateDetailPanel(associateId);
-            setTimeout(() => {
-                navigatePanelTo('inbox');
-            }, 300);
         }
 
         // ============================================
