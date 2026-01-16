@@ -14450,6 +14450,9 @@ Sarah
         // PANEL FUNCTIONS
         // ============================================
 
+        // Saved scroll position for panel scroll lock
+        let savedPanelScrollPosition = 0;
+
         function openPanel(associateId) {
             selectedAssociate = associates.find(a => a.id === associateId);
             if (!selectedAssociate) return;
@@ -14459,12 +14462,19 @@ Sarah
             updatePanelContent(selectedAssociate);
 
             if (isMobile) {
+                // Save scroll position and lock body scroll (Bug Fix 1)
+                savedPanelScrollPosition = window.scrollY;
+                document.body.style.position = 'fixed';
+                document.body.style.top = `-${savedPanelScrollPosition}px`;
+                document.body.style.left = '0';
+                document.body.style.right = '0';
+                document.body.style.overflow = 'hidden';
+
                 const bottomSheet = document.getElementById('bottomSheet');
                 bottomSheet.style.transition = 'transform var(--transition-smooth)';
                 bottomSheet.style.transform = 'translateY(0)';
                 bottomSheet.classList.add('open');
                 document.getElementById('bottomSheetOverlay').classList.add('open');
-                document.body.style.overflow = 'hidden';
             } else {
                 document.getElementById('sidePanel').classList.add('open');
                 document.getElementById('mainContent').classList.add('panel-open');
@@ -14478,7 +14488,14 @@ Sarah
                 bottomSheet.style.transform = 'translateY(100%)';
                 bottomSheet.classList.remove('open');
                 document.getElementById('bottomSheetOverlay').classList.remove('open');
+
+                // Restore scroll position (Bug Fix 1)
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.left = '';
+                document.body.style.right = '';
                 document.body.style.overflow = '';
+                window.scrollTo(0, savedPanelScrollPosition);
             } else {
                 document.getElementById('sidePanel').classList.remove('open');
                 document.getElementById('mainContent').classList.remove('panel-open');
@@ -14624,45 +14641,62 @@ Sarah
         }
 
         // ============================================
-        // BOTTOM SHEET SWIPE HANDLING
+        // BOTTOM SHEET SWIPE HANDLING (Bug Fix 2)
         // ============================================
 
         let touchStartY = 0;
         let touchCurrentY = 0;
         let isDragging = false;
+        const SWIPE_THRESHOLD = 100;
 
         function initBottomSheetSwipe() {
             const handleArea = document.getElementById('bottomSheetHandleArea');
+            const standardHeader = document.getElementById('mobileStandardHeader');
+            const navHeader = document.getElementById('mobileNavHeader');
             const bottomSheet = document.getElementById('bottomSheet');
 
-            if (!handleArea) return;
+            if (!bottomSheet) return;
 
-            // Touch events
-            handleArea.addEventListener('touchstart', handleTouchStart, { passive: true });
-            handleArea.addEventListener('touchmove', handleTouchMove, { passive: false });
-            handleArea.addEventListener('touchend', handleTouchEnd);
+            // Attach swipe events to handle area, standard header, and nav header
+            const swipeTargets = [handleArea, standardHeader, navHeader].filter(el => el);
 
-            // Mouse events (for desktop testing)
-            handleArea.addEventListener('mousedown', handleMouseDown);
+            swipeTargets.forEach(target => {
+                // Touch events
+                target.addEventListener('touchstart', handleTouchStart, { passive: true });
+                target.addEventListener('touchmove', handleTouchMove, { passive: false });
+                target.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+                // Mouse events (for desktop testing)
+                target.addEventListener('mousedown', handleMouseDown);
+            });
+
             document.addEventListener('mousemove', handleMouseMove);
             document.addEventListener('mouseup', handleMouseUp);
         }
 
         function handleTouchStart(e) {
+            const bottomSheet = document.getElementById('bottomSheet');
+            if (!bottomSheet || !bottomSheet.classList.contains('open')) return;
+
             touchStartY = e.touches[0].clientY;
+            touchCurrentY = touchStartY;
             isDragging = true;
-            document.getElementById('bottomSheet').style.transition = 'none';
+            bottomSheet.style.transition = 'none';
         }
 
         function handleTouchMove(e) {
             if (!isDragging) return;
+
+            const bottomSheet = document.getElementById('bottomSheet');
+            if (!bottomSheet) return;
+
             touchCurrentY = e.touches[0].clientY;
             const deltaY = touchCurrentY - touchStartY;
 
-            // Only allow dragging down
+            // Only allow dragging down (positive deltaY)
             if (deltaY > 0) {
                 e.preventDefault();
-                document.getElementById('bottomSheet').style.transform = `translateY(${deltaY}px)`;
+                bottomSheet.style.transform = `translateY(${deltaY}px)`;
             }
         }
 
@@ -14671,15 +14705,17 @@ Sarah
             isDragging = false;
 
             const bottomSheet = document.getElementById('bottomSheet');
+            if (!bottomSheet) return;
+
             bottomSheet.style.transition = 'transform var(--transition-smooth)';
 
             const deltaY = touchCurrentY - touchStartY;
 
-            // If dragged more than 100px down, close the panel
-            if (deltaY > 100) {
+            // If dragged more than threshold, close the panel
+            if (deltaY > SWIPE_THRESHOLD) {
                 closePanel();
             } else {
-                // Snap back
+                // Snap back to open position
                 bottomSheet.style.transform = 'translateY(0)';
             }
 
@@ -14689,19 +14725,30 @@ Sarah
 
         // Mouse event handlers (for desktop testing)
         function handleMouseDown(e) {
+            const bottomSheet = document.getElementById('bottomSheet');
+            if (!bottomSheet || !bottomSheet.classList.contains('open')) return;
+
+            // Don't trigger drag on buttons
+            if (e.target.closest('button')) return;
+
             touchStartY = e.clientY;
+            touchCurrentY = touchStartY;
             isDragging = true;
-            document.getElementById('bottomSheet').style.transition = 'none';
+            bottomSheet.style.transition = 'none';
             e.preventDefault();
         }
 
         function handleMouseMove(e) {
             if (!isDragging) return;
+
+            const bottomSheet = document.getElementById('bottomSheet');
+            if (!bottomSheet) return;
+
             touchCurrentY = e.clientY;
             const deltaY = touchCurrentY - touchStartY;
 
             if (deltaY > 0) {
-                document.getElementById('bottomSheet').style.transform = `translateY(${deltaY}px)`;
+                bottomSheet.style.transform = `translateY(${deltaY}px)`;
             }
         }
 
@@ -14710,11 +14757,13 @@ Sarah
             isDragging = false;
 
             const bottomSheet = document.getElementById('bottomSheet');
+            if (!bottomSheet) return;
+
             bottomSheet.style.transition = 'transform var(--transition-smooth)';
 
             const deltaY = touchCurrentY - touchStartY;
 
-            if (deltaY > 100) {
+            if (deltaY > SWIPE_THRESHOLD) {
                 closePanel();
             } else {
                 bottomSheet.style.transform = 'translateY(0)';
