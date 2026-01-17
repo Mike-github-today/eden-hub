@@ -11197,6 +11197,93 @@
             color: var(--eden-green);
             margin-top: 8px;
         }
+
+        /* ===== MOBILE BOTTOM NAV ===== */
+
+        .mobile-bottom-nav {
+            display: none; /* Hidden by default, shown via media query */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: #FFFFFF;
+            border-top: 1px solid #e5e7eb;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.06);
+            z-index: 1000;
+            padding-bottom: env(safe-area-inset-bottom); /* iOS safe area */
+        }
+
+        /* Show on mobile only */
+        @media (max-width: 768px) {
+            .mobile-bottom-nav {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+            }
+
+            /* Add padding to main content so it doesn't hide behind nav */
+            body {
+                padding-bottom: calc(64px + env(safe-area-inset-bottom));
+            }
+        }
+
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            height: 100%;
+            padding: 8px 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #6b7280; /* Inactive grey */
+            transition: color 0.2s ease;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .bottom-nav-item:hover,
+        .bottom-nav-item:focus {
+            color: #4b5563;
+            outline: none;
+        }
+
+        .bottom-nav-item.active {
+            color: var(--eden-green); /* Eden Green */
+        }
+
+        .bottom-nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+        }
+
+        .bottom-nav-label {
+            font-size: 11px;
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        .bottom-nav-badge {
+            position: absolute;
+            top: 6px;
+            right: 50%;
+            transform: translateX(12px);
+            min-width: 18px;
+            height: 18px;
+            padding: 0 5px;
+            background: #f43f5e; /* Rose for alerts */
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -14767,6 +14854,11 @@ Sarah
 
             // Update referrals view for new role
             renderReferrals();
+
+            // Update mobile bottom nav for role change
+            if (typeof updateBottomNavForRole === 'function') {
+                updateBottomNavForRole();
+            }
         }
 
         // Check if current user can access a view
@@ -14821,6 +14913,11 @@ Sarah
             // Update Action Centre summary counts when showing action-centre
             if (viewName === 'action-centre') {
                 renderFrictionFeed();
+            }
+
+            // Sync mobile bottom nav active state
+            if (typeof syncBottomNavState === 'function') {
+                syncBottomNavState(viewName);
             }
         }
 
@@ -16322,6 +16419,12 @@ Sarah
                     pulseEl.style.display = counts[category] > 0 ? 'block' : 'none';
                 }
             });
+
+            // Update mobile bottom nav actions badge
+            const totalCount = Object.values(counts).reduce((sum, count) => sum + count, 0);
+            if (typeof updateActionsBadge === 'function') {
+                updateActionsBadge(totalCount);
+            }
         }
 
         // Filter actions by category
@@ -21992,6 +22095,176 @@ Eden Relationships
 
         // Start the application
         document.addEventListener('DOMContentLoaded', init);
+
+        // ============================================
+        // MOBILE BOTTOM NAV LOGIC
+        // ============================================
+
+        (function() {
+            // Wait for DOM to be ready
+            document.addEventListener('DOMContentLoaded', function() {
+                const bottomNav = document.getElementById('mobile-bottom-nav');
+                if (!bottomNav) return;
+
+                const navItems = bottomNav.querySelectorAll('.bottom-nav-item');
+                const peopleNavItem = document.getElementById('people-nav-item');
+                const peopleNavLabel = document.getElementById('people-nav-label');
+
+                // Update "People" nav item based on role
+                function updatePeopleNavForRole() {
+                    const isAdmin = currentUserRole === 'admin';
+                    if (isAdmin) {
+                        peopleNavLabel.textContent = 'Associates';
+                        peopleNavItem.setAttribute('data-destination', 'associates');
+                    } else {
+                        peopleNavLabel.textContent = 'My Clients';
+                        peopleNavItem.setAttribute('data-destination', 'my-clients');
+                    }
+                }
+
+                // Initialize role-specific label
+                updatePeopleNavForRole();
+
+                // Handle nav item clicks
+                navItems.forEach(function(item) {
+                    item.addEventListener('click', function() {
+                        const navTarget = this.getAttribute('data-nav');
+
+                        // Remove active class from all items
+                        navItems.forEach(function(nav) {
+                            nav.classList.remove('active');
+                            nav.removeAttribute('aria-current');
+                        });
+
+                        // Add active class to clicked item
+                        this.classList.add('active');
+                        this.setAttribute('aria-current', 'page');
+
+                        // Navigate to the appropriate view
+                        switch(navTarget) {
+                            case 'home':
+                                showView('dashboard');
+                                break;
+                            case 'actions':
+                                showView('action-centre');
+                                break;
+                            case 'people':
+                                // Navigate based on role
+                                if (currentUserRole === 'admin') {
+                                    showView('associates');
+                                } else {
+                                    showView('clients');
+                                }
+                                break;
+                            case 'earnings':
+                                showView('earnings');
+                                break;
+                        }
+                    });
+                });
+
+                // Update badge count for Actions
+                window.updateActionsBadge = function(count) {
+                    const badge = document.getElementById('actions-badge');
+                    if (badge) {
+                        if (count > 0) {
+                            badge.textContent = count > 99 ? '99+' : count;
+                            badge.style.display = 'flex';
+                        } else {
+                            badge.style.display = 'none';
+                        }
+                    }
+                };
+
+                // Sync active state with current view
+                window.syncBottomNavState = function(viewName) {
+                    navItems.forEach(function(item) {
+                        item.classList.remove('active');
+                        item.removeAttribute('aria-current');
+                    });
+
+                    let targetNav = null;
+                    switch(viewName) {
+                        case 'dashboard':
+                        case 'home':
+                            targetNav = 'home';
+                            break;
+                        case 'action-centre':
+                        case 'actions':
+                            targetNav = 'actions';
+                            break;
+                        case 'associates':
+                        case 'clients':
+                        case 'my-clients':
+                            targetNav = 'people';
+                            break;
+                        case 'earnings':
+                        case 'payout':
+                        case 'financial-vitality':
+                            targetNav = 'earnings';
+                            break;
+                    }
+
+                    if (targetNav) {
+                        const activeItem = bottomNav.querySelector('[data-nav="' + targetNav + '"]');
+                        if (activeItem) {
+                            activeItem.classList.add('active');
+                            activeItem.setAttribute('aria-current', 'page');
+                        }
+                    }
+                };
+
+                // Update bottom nav when role changes
+                window.updateBottomNavForRole = function() {
+                    updatePeopleNavForRole();
+                };
+
+                // Initialize action badge with current friction count
+                function initActionsBadge() {
+                    if (typeof frictionItems !== 'undefined') {
+                        window.updateActionsBadge(frictionItems.length);
+                    }
+                }
+                initActionsBadge();
+            });
+        })();
     </script>
+
+    <!-- Mobile Bottom Nav - Only visible on mobile (768px and below) -->
+    <nav id="mobile-bottom-nav" class="mobile-bottom-nav" aria-label="Mobile navigation">
+        <button class="bottom-nav-item active" data-nav="home" aria-current="page">
+            <svg class="bottom-nav-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span class="bottom-nav-label">Home</span>
+        </button>
+
+        <button class="bottom-nav-item" data-nav="actions">
+            <svg class="bottom-nav-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            <span class="bottom-nav-label">Actions</span>
+            <span id="actions-badge" class="bottom-nav-badge" style="display: none;">0</span>
+        </button>
+
+        <button class="bottom-nav-item" data-nav="people" id="people-nav-item">
+            <svg class="bottom-nav-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <span class="bottom-nav-label" id="people-nav-label">Associates</span>
+        </button>
+
+        <button class="bottom-nav-item" data-nav="earnings">
+            <svg class="bottom-nav-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+            <span class="bottom-nav-label">Earnings</span>
+        </button>
+    </nav>
 </body>
 </html>
