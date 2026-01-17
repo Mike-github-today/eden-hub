@@ -3486,7 +3486,7 @@
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
+            bottom: calc(64px + env(safe-area-inset-bottom, 0px)); /* Exclude bottom nav */
             background-color: var(--pure-white);
             z-index: 300;
             transform: translateX(100%);
@@ -15955,6 +15955,16 @@ Sarah
                 DetailView.close();
             }
 
+            // Close any open wealth panel (Earnings section)
+            if (typeof closeWealthModule === 'function') {
+                closeWealthModule();
+            }
+
+            // Close any old side panel/bottom sheet
+            if (typeof closePanel === 'function') {
+                closePanel();
+            }
+
             currentView = viewName;
 
             // Update view containers
@@ -23231,6 +23241,16 @@ Eden Relationships
                         // Close any open detail view first
                         if (typeof DetailView !== 'undefined' && DetailView.close) {
                             DetailView.close();
+                        }
+
+                        // Close any open wealth panel (Earnings section)
+                        if (typeof closeWealthModule === 'function') {
+                            closeWealthModule();
+                        }
+
+                        // Close any old side panel/bottom sheet
+                        if (typeof closePanel === 'function') {
+                            closePanel();
                         }
 
                         // Remove active class from all items
