@@ -15950,6 +15950,11 @@ Sarah
                 return;
             }
 
+            // Close any open detail views when navigating
+            if (typeof DetailView !== 'undefined' && DetailView.close) {
+                DetailView.close();
+            }
+
             currentView = viewName;
 
             // Update view containers
@@ -23222,6 +23227,11 @@ Eden Relationships
                 navItems.forEach(function(item) {
                     item.addEventListener('click', function() {
                         const navTarget = this.getAttribute('data-nav');
+
+                        // Close any open detail view first
+                        if (typeof DetailView !== 'undefined' && DetailView.close) {
+                            DetailView.close();
+                        }
 
                         // Remove active class from all items
                         navItems.forEach(function(nav) {
