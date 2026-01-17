@@ -1,97 +1,176 @@
 ================================================================================
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
-Last Updated: 14 January 2026
-Session: Progress Stepper Implementation
+Last Updated: 17 January 2026
+Session: Unified Detail View Pattern & Navigation Bug Fixes
+Branch: claude/unified-detail-view-7M7FK
 ================================================================================
 
-LATEST CHANGE: Progress Stepper & Onboarding Flow [COMPLETED]
+LATEST CHANGES: Chunk 3 - Unified Detail View Pattern [COMPLETED]
 ================================================================================
 
-Requested: Add gated onboarding flows with visual stepper UI to Client and
-Associate pages, inspired by It Takes a Village Play Cafe checkout flow.
+## Session Summary
+
+Implemented a unified detail view pattern to replace all existing panel variants,
+plus critical navigation bug fixes for bottom navigation responsiveness.
+
+--------------------------------------------------------------------------------
+CHANGE 1: Unified Detail View Pattern (Chunk 3)
+--------------------------------------------------------------------------------
+
+Requested: Replace all existing panel variants (side-panel, detail-panel,
+associate-detail-page, client-detail-page, associate-subpage) with a single,
+consistent detail view pattern.
 
 Implemented:
 
-## 1. Progress Stepper Component (CSS + JS)
-- Visual stepper with 32px circles, connecting lines, and labels
-- Three states: inactive (grey), active (green ring), complete (green fill + checkmark)
-- Smooth 300ms transitions between states
-- Completed steps are clickable (for review), future steps are not
-- Mobile-friendly with horizontal scroll if needed
+### 1. Unified Detail View HTML Structure
+- Single container with backdrop, header, tabs, and content areas
+- Steward anchor (Admin only - when viewing client's associate)
+- Three-dots dropdown menu with role-appropriate quick actions
+- Pipeline stepper for client entities
+- Tab bar with entity-specific tabs
 
-## 2. Onboarding Stages Configuration
-- Client stages (4): Enquiry -> Broadcasting -> Matching -> Onboarded
-  - Each stage validates required fields automatically
-  - Auto-advances when all fields are populated
-- Associate stages (4): Interest -> Documents -> Profile -> Ready
-  - Document upload tracking with verification status
-  - Profile approval workflow
+### 2. Unified Detail View CSS
+- Desktop: 450px side panel sliding from right
+- Mobile: Full-page view (above bottom nav)
+- Responsive design with proper safe area handling
+- Smooth transitions (300ms ease)
+- Proper z-index hierarchy (z-index: 900)
 
-## 3. Status Card Component
-- Unified card design matching Referral Command Centre style
-- Status badges with color-coded backgrounds
-- Pulse indicator dots (purple, blue, amber, green)
-- 2-line preview truncation
-- Meta chips for tags/categories
-- Hover effects: translateY(-2px) + shadow increase
-
-## 4. Animated Card List
-- Staggered entrance animation (fade in + slide up)
-- 300ms duration with ease-out easing
-- 75ms delay between each card
-- Applied to both Clients and Associates grids
-
-## 5. Detail Panel Component
-- Desktop: Side Panel (480px, slides from right)
-- Mobile: Bottom Sheet (90vh, slides from bottom, drag handle)
-- Header with back button, title, and actions menu
-- Progress stepper below header
-- Scrollable form content area
-- Activity timeline at bottom
+### 3. DetailView JavaScript Controller
+- Navigation stack for back button history
+- Tab configurations per entity type:
+  - Associate: Profile, Sessions, Finance, Inbox
+  - Client: Overview, Sessions, Finance, Notes
+  - Referral: Details, History
+- Role-based menu configurations (admin vs associate)
+- Client pipeline stepper with stage colors
 - Keyboard support (Escape to close)
-- Touch swipe to dismiss on mobile
+- Backdrop click to close (desktop)
 
-## 6. Client Page Integration
-- Cards now use StatusCard with animated list
-- Clicking card opens Detail Panel with onboarding stepper
-- Form fields for each stage (Enquiry, Broadcasting, Matching, Onboarded)
-- Auto-stage-advance when fields are completed
+### 4. Updated Click Handlers
+- openAssociateDetailPanel() -> DetailView.open('associate', ...)
+- openClientDetailPanel() -> DetailView.open('client', ...)
+- openReferralPanel() -> DetailView.open('referral', ...)
+- openDetailPanel() -> Delegates to DetailView for supported types
 
-## 7. Associate Page Integration
-- Cards now use StatusCard with animated list
-- Clicking card opens Detail Panel with onboarding stepper
-- Form fields for each stage (Interest, Documents, Profile, Ready)
-- Document upload simulation
-- Verification status tracking
+--------------------------------------------------------------------------------
+CHANGE 2: Navigation Bug Fix - Round 1 (CSS)
+--------------------------------------------------------------------------------
 
+Issue: Bottom navigation icons (Home, Actions, Associates, Earnings) did not
+respond when detail views were open on mobile.
+
+Root Cause Identified: The .unified-detail-view container had `bottom: 0`
+covering the entire viewport, with `pointer-events: auto` when open.
+
+Fix Applied:
+- Container excludes bottom nav: `bottom: calc(64px + env(safe-area-inset-bottom))`
+- Container pointer-events stays 'none' even when open
+- Only backdrop and panel have pointer-events: auto when visible
+- Mobile view maintains bottom nav exclusion
+
+--------------------------------------------------------------------------------
+CHANGE 3: Navigation Bug Fix - Round 2 (JavaScript)
+--------------------------------------------------------------------------------
+
+Issue: After CSS fix, navigation still appeared broken. Views were changing
+behind the detail panel, but panel remained open - user saw "nothing happened."
+
+Root Cause: showView() function did NOT close detail views when navigating.
+
+Fix Applied:
+- Added DetailView.close() in bottom nav click handler
+- Added DetailView.close() in showView() function
+- Both ensure detail views close when navigating via any method
+
+--------------------------------------------------------------------------------
+CHANGE 4: Navigation Bug Fix - Round 3 (Earnings Section)
+--------------------------------------------------------------------------------
+
+Issue: Earnings section panels (Payment Tracker, Wealth Lab, Tax Intelligence,
+Financial Vitality Hub) still blocked bottom navigation for BOTH Admin and
+Associate views.
+
+Root Cause: The .wealth-panel had `bottom: 0` covering entire viewport.
+
+Fix Applied:
+- CSS: Updated .wealth-panel to exclude bottom nav area
+- JS: Added closeWealthModule() in bottom nav click handler
+- JS: Added closeWealthModule() in showView() function
+- JS: Added closePanel() for old side panel/bottom sheet (defensive)
+
+--------------------------------------------------------------------------------
 FILES MODIFIED
-================================================================================
-- index.html:
-  - Added Progress Stepper CSS (~200 lines)
-  - Added StatusCard CSS (~100 lines)
-  - Added AnimatedCardList CSS (~20 lines)
-  - Added DetailPanel CSS (~250 lines)
-  - Added Onboarding Form CSS (~150 lines)
-  - Added Detail Panel HTML structure (overlay + panel)
-  - Added clientStages configuration (4 stages with validation)
-  - Added associateStages configuration (4 stages with validation)
-  - Added Progress Stepper JS (calculateCurrentStep, renderProgressStepper)
-  - Added StatusCard JS (renderStatusCard)
-  - Added AnimatedCardList JS (applyCardAnimation)
-  - Added DetailPanel JS (openDetailPanel, closeDetailPanel, renderDetailPanelContent)
-  - Added Onboarding Form JS (renderOnboardingForm, renderStageFields)
-  - Added Activity Timeline JS (renderActivityTimeline, formatTimeAgo)
-  - Updated renderAllClientsGrid() to use StatusCard + animation
-  - Updated renderCards() to use StatusCard + animation
-  - Added openClientDetailPanel() and openAssociateDetailPanel()
+--------------------------------------------------------------------------------
 
-BACKUP CREATED
-================================================================================
-- index_v2_pre_stepper.html (backup before changes)
+index.html:
+- Added Unified Detail View CSS (~400 lines at line 11309)
+- Added Unified Detail View HTML structure (after </main>, line 13340)
+- Added DetailView JavaScript controller (~550 lines at line 15275)
+- Updated openAssociateDetailPanel() to use DetailView
+- Updated openClientDetailPanel() to use DetailView
+- Updated openReferralPanel() to use DetailView
+- Updated openDetailPanel() to delegate to DetailView
+- Updated showView() to close all panel types when navigating
+- Updated bottom nav click handler to close all panel types
+- Updated .wealth-panel CSS to exclude bottom nav area
 
+--------------------------------------------------------------------------------
+BACKUPS CREATED
+--------------------------------------------------------------------------------
+
+- index_v7_pre_unified_detail.html (backup before Chunk 3 changes)
+
+--------------------------------------------------------------------------------
+GIT COMMITS (on branch: claude/unified-detail-view-7M7FK)
+--------------------------------------------------------------------------------
+
+1. 548b250 - feat: Chunk 3 - Unified Detail View Pattern
+2. c1a5c60 - fix: Bottom navigation responds when detail views are open
+3. a85b8bc - fix: Close detail view when bottom navigation is tapped
+4. d79a578 - fix: Extend navigation fix to Earnings section (both Admin and Associate views)
+
+================================================================================
+TESTING CHECKLIST
+================================================================================
+
+### Unified Detail View
+[ ] Desktop: Panel slides in from right (450px width)
+[ ] Desktop: Backdrop dims content behind panel
+[ ] Desktop: Clicking backdrop closes panel
+[ ] Mobile: Panel takes full screen (above bottom nav)
+[ ] Mobile: No backdrop visible
+[ ] Back button returns to previous view in stack
+[ ] Back button closes panel when stack is empty
+[ ] Tabs render correctly for each entity type
+[ ] Tab switching works and updates content
+[ ] Three-dots menu shows role-appropriate options
+[ ] Steward Anchor shows for Admin viewing client from associate context
+[ ] Steward Anchor hidden for Associates
+[ ] Escape key closes panel
+[ ] Client pipeline stepper shows correct stage
+
+### Bottom Navigation (CRITICAL)
+[ ] Open Associate card -> Tap Home -> Navigates to Home
+[ ] Open Associate card -> Tap Actions -> Navigates to Actions
+[ ] Open Client card -> Tap any nav icon -> Works
+[ ] Open Referral card -> Tap any nav icon -> Works
+[ ] Open Payment Tracker -> Tap any nav icon -> Works
+[ ] Open Wealth Lab -> Tap any nav icon -> Works
+[ ] Open Tax Intelligence -> Tap any nav icon -> Works
+[ ] Open Financial Vitality Hub -> Tap any nav icon -> Works
+
+### Both User Roles
+[ ] Admin: All above tests pass
+[ ] Associate: All above tests pass
+
+================================================================================
 PREVIOUS CHANGES
 ================================================================================
+
+- Progress Stepper Implementation [Jan 14, 2026]
 - Referral System Implementation [Jan 14, 2026]
 - Profile Tab (First Position) [Jan 11, 2026]
 - Collapsible Overview Section [Jan 11, 2026]
@@ -99,27 +178,32 @@ PREVIOUS CHANGES
 - Ivy Wallet-inspired UX Redesign [Jan 11, 2026]
 
 ================================================================================
-TESTING CHECKLIST
-================================================================================
-[ ] Stepper visually matches the It Takes a Village style
-[ ] Completed steps show checkmark icon
-[ ] Current step has green ring border
-[ ] Cannot click future steps (cursor: not-allowed)
-[ ] Can click completed steps to review that stage
-[ ] Cards animate in with stagger effect (75ms delay each)
-[ ] Opens as Bottom Sheet on mobile (< 768px)
-[ ] Opens as Side Panel on desktop (>= 768px)
-[ ] Back button closes panel
-[ ] Backdrop click closes panel
-[ ] Escape key closes panel (desktop)
-[ ] Stage auto-advances when all required fields are populated
-
-================================================================================
 NEXT STEPS
 ================================================================================
-1. Test stepper and panel flow end-to-end
-2. Verify mobile responsiveness
-3. Connect to Airtable for real data persistence
-4. Add form validation with error messages
+
+1. Test unified detail view across all entity types
+2. Test bottom navigation with all panel types open
+3. Verify fix works on actual iOS Safari device
+4. Consider implementing Chunk 4 (Action Centre) with same patterns
+5. Connect unified detail view to Airtable for real data
+
+================================================================================
+ARCHITECTURE NOTES
+================================================================================
+
+### Panel Hierarchy (z-index)
+- Bottom Navigation: z-index 1000 (always on top)
+- Unified Detail View: z-index 900
+- Wealth Panel: z-index 300
+- Side Panel: z-index 200
+- Overlays/Backdrops: z-index 299-301
+
+### Panel Close Pattern
+When navigating (via showView or bottom nav click):
+1. Close DetailView (unified detail view)
+2. Close WealthModule (Earnings panels)
+3. Close Panel (old side panel/bottom sheet)
+
+This ensures ALL panel types are closed before view transition.
 
 ================================================================================
