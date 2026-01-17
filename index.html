@@ -11313,16 +11313,16 @@
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
+            bottom: calc(64px + env(safe-area-inset-bottom, 0px)); /* Exclude bottom nav */
             z-index: 900;
-            pointer-events: none;
+            pointer-events: none; /* Container NEVER captures clicks */
             opacity: 0;
             transition: opacity 0.2s ease;
         }
 
         .unified-detail-view.open {
-            pointer-events: auto;
             opacity: 1;
+            /* NO pointer-events: auto here - keep it none on container */
         }
 
         /* Backdrop - Desktop only */
@@ -11334,11 +11334,13 @@
             bottom: 0;
             background: rgba(0, 0, 0, 0.3);
             opacity: 0;
+            pointer-events: none;
             transition: opacity 0.2s ease;
         }
 
         .unified-detail-view.open .unified-detail-backdrop {
             opacity: 1;
+            pointer-events: auto; /* Only backdrop captures clicks when open */
         }
 
         /* Detail Panel - Desktop (Side Panel) */
@@ -11355,14 +11357,20 @@
             flex-direction: column;
             transform: translateX(100%);
             transition: transform 0.3s ease;
+            pointer-events: none;
         }
 
         .unified-detail-view.open .unified-detail-panel {
             transform: translateX(0);
+            pointer-events: auto; /* Only panel captures clicks when open */
         }
 
-        /* Mobile: Full Page */
+        /* Mobile: Full Page (but above bottom nav) */
         @media (max-width: 768px) {
+            .unified-detail-view {
+                bottom: calc(64px + env(safe-area-inset-bottom, 0px)); /* Keep excluding bottom nav */
+            }
+
             .unified-detail-backdrop {
                 display: none;
             }
@@ -11372,7 +11380,7 @@
                 top: 0;
                 left: 0;
                 right: 0;
-                bottom: 0;
+                bottom: 0; /* Relative to parent which now excludes bottom nav */
                 transform: translateX(100%);
             }
 
