@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Eden Hub - Associates Portal</title>
     <style>
         /* ============================================
@@ -44,6 +44,12 @@
             --sidebar-width: 260px;
             --side-panel-width: 450px;
             --bottom-sheet-height: 85vh;
+
+            /* iOS Safe Area Support */
+            --safe-area-top: env(safe-area-inset-top, 0px);
+            --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+            --safe-area-left: env(safe-area-inset-left, 0px);
+            --safe-area-right: env(safe-area-inset-right, 0px);
         }
 
         /* Typography - System Fonts */
@@ -468,6 +474,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 20px 24px;
+            padding-top: calc(var(--safe-area-top) + 20px);
             border-bottom: 1px solid var(--eden-border);
             background-color: var(--eden-mint);
         }
@@ -2265,6 +2272,7 @@
 
         .bottom-sheet-handle-area {
             padding: 12px 0;
+            padding-top: calc(var(--safe-area-top) + 12px);
             cursor: grab;
             touch-action: none;
         }
@@ -2296,10 +2304,11 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 56px;
+            height: calc(var(--safe-area-top) + 56px);
             background-color: var(--eden-mint);
             border-bottom: 1px solid var(--eden-border);
             padding: 0 16px;
+            padding-top: var(--safe-area-top);
             align-items: center;
             justify-content: space-between;
             z-index: 99;
@@ -2355,7 +2364,7 @@
 
             .main-content {
                 margin-left: 0;
-                padding: 72px 16px 16px;
+                padding: calc(var(--safe-area-top) + 72px) 16px 16px;
             }
 
             .main-content.panel-open {
@@ -3475,6 +3484,7 @@
             align-items: center;
             gap: 16px;
             padding: 20px 24px;
+            padding-top: calc(var(--safe-area-top) + 20px);
             border-bottom: 1px solid var(--eden-border);
             background-color: var(--eden-mint);
         }
@@ -5137,6 +5147,7 @@
 
         .session-detail-header {
             padding: 20px;
+            padding-top: calc(var(--safe-area-top) + 20px);
             border-bottom: 1px solid var(--eden-border);
             background-color: var(--eden-mint);
         }
@@ -5351,6 +5362,7 @@
 
         .resolution-drawer-header {
             padding: 20px;
+            padding-top: calc(var(--safe-area-top) + 20px);
             border-bottom: 1px solid var(--eden-border);
         }
 
@@ -6069,6 +6081,7 @@
 
         .contract-detail-header {
             padding: 20px;
+            padding-top: calc(var(--safe-area-top) + 20px);
             border-bottom: 1px solid var(--eden-border);
             background-color: var(--eden-mint);
         }
@@ -7501,13 +7514,14 @@
 
         .referral-panel-header {
             padding: 20px 24px;
+            padding-top: calc(var(--safe-area-top) + 20px);
             background: var(--eden-mint);
             border-bottom: 1px solid var(--eden-border);
         }
 
         .referral-panel-header .close-btn {
             position: absolute;
-            top: 16px;
+            top: calc(var(--safe-area-top) + 16px);
             right: 16px;
         }
 
@@ -9135,6 +9149,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 16px 20px;
+            padding-top: calc(var(--safe-area-top) + 16px);
             border-bottom: 1px solid var(--eden-border);
             background: var(--eden-mint);
             flex-shrink: 0;
