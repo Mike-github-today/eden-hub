@@ -86,13 +86,37 @@
             width: var(--sidebar-width);
             background-color: var(--eden-mint);
             border-right: 1px solid var(--eden-border);
-            padding: 24px 16px;
             display: flex;
             flex-direction: column;
             position: fixed;
+            top: 0;
+            left: 0;
+            /* HEIGHT FIX - Use dvh with fallback for iOS Safari */
             height: 100vh;
+            height: 100dvh;
             z-index: 100;
             transition: transform var(--transition-smooth);
+            overflow: hidden;
+        }
+
+        .sidebar-header {
+            flex-shrink: 0;
+            padding: 24px 16px 16px;
+        }
+
+        .sidebar-nav-content {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 0 16px;
+            padding-bottom: calc(80px + env(safe-area-inset-bottom));
+        }
+
+        .sidebar-footer {
+            flex-shrink: 0;
+            padding: 16px;
+            border-top: 1px solid var(--eden-border);
+            background-color: var(--eden-mint);
         }
 
         .logo-container {
@@ -100,7 +124,6 @@
             align-items: center;
             gap: 12px;
             padding: 8px 12px;
-            margin-bottom: 32px;
         }
 
         .logo-icon {
@@ -181,9 +204,7 @@
 
         /* User Profile Section */
         .user-profile-section {
-            margin-top: auto;
-            padding: 16px 12px;
-            border-top: 1px solid var(--eden-border);
+            /* Now inside sidebar-footer, no need for margin-top: auto */
         }
 
         .user-profile-content {
@@ -11314,18 +11335,23 @@
 
         <!-- Sidebar Navigation -->
         <aside class="sidebar" id="sidebar">
-            <div class="logo-container">
-                <!-- Eden Leaf Logo (Outlined) -->
-                <svg class="logo-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M16 28 L16 12" stroke-linecap="round"/>
-                    <path d="M16 12 C16 12, 8 14, 6 20 C4 26, 10 28, 16 24 C22 28, 28 26, 26 20 C24 14, 16 12, 16 12" stroke-linejoin="round"/>
-                    <path d="M16 12 C16 16, 12 20, 10 22" stroke-linecap="round"/>
-                    <path d="M16 14 C17 16, 20 19, 22 20" stroke-linecap="round"/>
-                </svg>
-                <span class="logo-text">Eden Hub</span>
+            <!-- Sidebar Header (fixed, doesn't scroll) -->
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <!-- Eden Leaf Logo (Outlined) -->
+                    <svg class="logo-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M16 28 L16 12" stroke-linecap="round"/>
+                        <path d="M16 12 C16 12, 8 14, 6 20 C4 26, 10 28, 16 24 C22 28, 28 26, 26 20 C24 14, 16 12, 16 12" stroke-linejoin="round"/>
+                        <path d="M16 12 C16 16, 12 20, 10 22" stroke-linecap="round"/>
+                        <path d="M16 14 C17 16, 20 19, 22 20" stroke-linecap="round"/>
+                    </svg>
+                    <span class="logo-text">Eden Hub</span>
+                </div>
             </div>
 
-            <!-- Daily Pulse Section -->
+            <!-- Sidebar Nav Content (scrollable) -->
+            <div class="sidebar-nav-content">
+                <!-- Daily Pulse Section -->
             <nav class="nav-section">
                 <div class="nav-label">Daily Pulse</div>
                 <a href="#" class="nav-item active" data-view="dashboard" onclick="showView('dashboard')">
@@ -11413,22 +11439,25 @@
                 </a>
             </nav>
 
-            <!-- Support Section -->
-            <nav class="nav-section">
-                <div class="nav-label">Support</div>
-                <a href="#" class="nav-item" data-view="support" onclick="showView('support')">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                        <line x1="12" y1="17" x2="12.01" y2="17"/>
-                    </svg>
-                    <span>Resources</span>
-                </a>
-            </nav>
+                <!-- Support Section -->
+                <nav class="nav-section">
+                    <div class="nav-label">Support</div>
+                    <a href="#" class="nav-item" data-view="support" onclick="showView('support')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <span>Resources</span>
+                    </a>
+                </nav>
+            </div>
 
-            <!-- User Profile Section -->
-            <div class="user-profile-section" id="userProfileSection">
-                <!-- Populated by JavaScript -->
+            <!-- Sidebar Footer (fixed, doesn't scroll) -->
+            <div class="sidebar-footer">
+                <div class="user-profile-section" id="userProfileSection">
+                    <!-- Populated by JavaScript -->
+                </div>
             </div>
         </aside>
 
