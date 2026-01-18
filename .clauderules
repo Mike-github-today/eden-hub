@@ -1,12 +1,19 @@
 # .clauderules
 
 # Eden Hub Portal - AI Development Guardrails
+# Last Updated: 2026-01-18 | Version: 0.6.0
+
+## CURRENT STATUS
+
+- **Prototype:** Complete (~900KB single-file HTML)
+- **All core modules:** Implemented with mock data
+- **Next phase:** Airtable integration, Make.com webhooks, Auth
 
 ## IMPLEMENTATION WORKFLOW
 
 When given chunks or tasks:
 - Work through ALL chunks sequentially without stopping
-- Backup before each change (v1 → v2 → v3)
+- Backup before each change (index_vX_pre_feature.html)
 - Follow the spec exactly
 - Brief confirmation after each chunk (2-3 sentences)
 - Proceed immediately to next chunk
@@ -15,26 +22,28 @@ When given chunks or tasks:
 
 ## GIT WORKFLOW
 
-- Push directly to main branch (no feature branches)
+- Use feature branches for new work (claude/feature-name-sessionId)
 - Commit after completing chunks
 - Message format: "feat: Chunk X - [description]"
+- Push to designated branch
 
 ## ALWAYS
 
 - Read EDEN_STATUS.txt at session start
-- Use CSS variables from EDEN_MASTER.md, never hardcode colours
-- Create backup copies before editing files (v1 → v2)
+- Use CSS variables, never hardcode colours
+- Create backup copies before major edits
 - Use semantic HTML elements
 - Ensure 44px minimum touch targets on mobile
 - Add alt text to all images
-- Test responsive behaviour at 1024px breakpoint
+- Test responsive behaviour at 768px breakpoint
 - Update EDEN_STATUS.txt at session end
 
 ## NEVER
 
-- Hardcode colour hex values
+- Hardcode colour hex values (use CSS variables)
 - Use filled icons (Lucide 1.5px stroke only)
-- Add "dashboard theatre" (glowing charts, heat maps, excessive badges)
+- Use grey colours (use Eden Mint or Eden Border)
+- Add "dashboard theatre" (glowing charts, heat maps)
 - Block users with hard errors (soft enforcement only)
 - Store passwords or secrets in code
 - Overwrite working versions without backup
@@ -49,6 +58,43 @@ When given chunks or tasks:
 - Information on demand, not displayed by default
 - Soft enforcement: amber warnings, not red blocks
 
+## COLOUR PALETTE (NO GREY!)
+
+```css
+--pure-white: #FFFFFF;      /* Page backgrounds */
+--eden-mint: #F4F7F6;       /* Card surfaces */
+--eden-green: #2D5F4D;      /* Primary actions */
+--eden-green-hover: #245040; /* Hover states */
+--eden-green-light: #E8F0ED; /* Light tints */
+--eden-text: #1A3329;       /* Primary text */
+--eden-border: #D4E5DE;     /* Borders */
+```
+
+## ALERT COLOURS
+
+- Rose (#EF4444): Urgent/errors
+- Amber (#F59E0B): Warnings
+- Blue (#3B82F6): Information
+
+## PIPELINE COLOURS
+
+Client Journey (7 stages):
+- Inquiry: #F59E0B (Amber)
+- Engaged: #8B5CF6 (Purple)
+- Matched: #3B82F6 (Blue)
+- Booked: #14B8A6 (Teal)
+- Active: #10B981 (Green)
+- Follow-Up: #F97316 (Coral)
+- Ongoing: #EAB308 (Gold)
+
+## UCID FORMAT
+
+TYPE-YYSEQ (always monospace font)
+- Associates: ASSOC-2401
+- Clients: CLIENT-2507
+- Sessions: SES-2501
+- Referrals: REF-25003
+
 ## BEFORE IMPLEMENTING
 
 Ask yourself:
@@ -57,41 +103,33 @@ Ask yourself:
 3. Is this visible only when needed?
 4. Does it feel calm?
 
-## UCID FORMAT
-
-TYPE-YYSEQ
-- Associates: ASC-2401
-- Clients: CLI-2507
-- Sessions: SES-2501
-
-Always monospace font for UCIDs.
-
-## PIPELINE COLOURS
-
-Client Journey (7 stages):
-- Inquiry: #f59e0b (Amber)
-- Engaged: #8b5cf6 (Purple)
-- Matched: #3b82f6 (Blue)
-- Booked: #14b8a6 (Teal)
-- Active: #10b981 (Green)
-- Follow-Up: #f97316 (Coral)
-- Ongoing: #eab308 (Gold)
-
-## ALERT COLOURS
-
-- Rose (#f43f5e): Urgent/errors
-- Amber (#f59e0b): Warnings
-- Blue (#3b82f6): Information
-
 ## SESSION PROTOCOL
 
 START:
 1. Read EDEN_STATUS.txt
-2. Request any file uploads
-3. Confirm current phase/chunk
+2. Confirm current phase/task
+3. Review any new requirements
 
 END:
 1. Update EDEN_STATUS.txt
 2. List what was completed
 3. Note blockers or decisions
-4. Remind Mike to download
+4. Commit changes to git
+
+## COMPLETED FEATURES
+
+- Eden Calm design system
+- Associates (ID cards, 7-tab panels)
+- Clients (cards, 7-stage pipeline)
+- Schedule/Calendar
+- Action Centre (Friction Feed)
+- Financial Vitality Hub (Wealth Lab)
+- Referrals (admin workflow, associate interest)
+- Contracts
+- Messages/Inbox
+- Support/CPD
+- Empty states ("Garden in Bloom")
+- Unified detail view pattern
+- Menu standardisation (detail views only)
+- Role-based access (Admin vs Associate)
+- Responsive design (side panel/bottom sheet)

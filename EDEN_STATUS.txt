@@ -2,202 +2,145 @@
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
 Last Updated: 18 January 2026
-Session: Three-Dots Menu Standardisation (Chunk 6)
-Branch: claude/standardize-three-dots-menus-coxT1
+Session: Comprehensive Documentation Update
+Branch: claude/update-docs-github-hGp5g
 ================================================================================
 
-LATEST CHANGES: Chunk 6 - Three-Dots Menu Standardisation [COMPLETED]
+LATEST CHANGES: Documentation Update [COMPLETED]
 ================================================================================
 
 ## Session Summary
 
-Standardised all three-dots menus across the portal:
-1. Removed menus from list cards (status cards)
-2. Menus now appear ONLY in detail view headers
-3. Menu items are consistent per entity type
-4. Menu items are role-aware (Admin vs Associate)
+Comprehensive review of index.html and update of all documentation files to
+reflect the true current state of the project (v0.6.0).
 
 --------------------------------------------------------------------------------
-CHANGE 1: Removed Kebab Menus from Status Cards
+FILES UPDATED
 --------------------------------------------------------------------------------
 
-### What Was Removed
-- Kebab menu button and dropdown from status cards
-- `showKebabMenu` and `kebabMenuData` parameters from `renderStatusCard` function
-- All kebab menu CSS styles (.kebab-menu-container, .kebab-menu-btn, etc.)
-- Kebab menu JavaScript functions (toggleKebabMenu, closeAllKebabMenus, etc.)
+1. CHANGELOG.md
+   - Complete version history from 0.1.0 to 0.6.0
+   - Detailed feature lists per version
+   - Technical approach documentation
 
-### Rationale
-Per spec: "Menus should ONLY exist in detail view headers, not on list cards."
+2. PROJECT_CONTEXT.md
+   - Updated business status (7 associates, targeting 16)
+   - Complete list of implemented features
+   - Current technical approach
+   - Next phase priorities
 
---------------------------------------------------------------------------------
-CHANGE 2: Updated Unified Detail View MenuConfig
---------------------------------------------------------------------------------
+3. agents.md
+   - Updated colour palette reference
+   - Complete list of completed features
+   - Current session tracking
+   - Menu configuration pattern documentation
 
-### New Menu Configuration Structure
-Menu items are now role-aware with divider support:
+4. EDEN_HUB_FOUNDATION.md
+   - Version 2.0 with current implementation status
+   - Updated module status table (all complete)
+   - Refreshed technical approach section
 
-```javascript
-const menuConfigs = {
-    associate: {
-        admin: [...],      // View Profile, View Earnings, Send Message, View Contract
-        associate: []      // Associates don't see menus on other associates
-    },
-    client: {
-        admin: [...],      // View Details, View Sessions, Message Therapist, Update Stage, [divider], Reassign Associate
-        associate: [...]   // View Details, View Sessions, Send Message, Update Stage
-    },
-    referral: {
-        admin: [...],      // View Details, Assign Associate, [divider], Archive
-        associate: [...]   // View Details, [divider], Accept Referral, Decline Referral
-    },
-    contract: {
-        admin: [...],      // View Details, Download, Send Reminder
-        associate: [...]   // View Details, Download
-    }
-};
-```
+5. EDEN_MASTER.md
+   - Version 3.1, January 2026
+   - Added implementation status table
+   - Updated tech stack (current vs target)
 
-### New Icons Added
-- `download`: For contract download action
-- `bell`: For send reminder action
+6. README.md
+   - Current version 0.6.0
+   - Complete feature list
+   - Updated folder structure
+   - Architecture overview
 
---------------------------------------------------------------------------------
-CHANGE 3: Updated Associate Detail View Menu
---------------------------------------------------------------------------------
+7. CONTRIBUTING.md
+   - Current development approach
+   - Component patterns from index.html
+   - Testing checklists
+   - Naming conventions
 
-### Dynamic Menu Population
-- Added `populateAssociateDetailMenu()` function
-- Menus are populated based on `currentUserRole`
-- Admin sees: View Profile, View Earnings, Send Message, View Contract
-- Associate sees: Empty menu (button hidden)
+8. .clauderules
+   - Current status section
+   - Complete colour palette
+   - Completed features list
+   - Updated session protocol
 
-### HTML Changes
-- Replaced static menu items with dynamic container
-- Added id="associateDetailDropdownMenu" for JavaScript targeting
+9. EDEN_STATUS.txt
+   - This file - comprehensive project status
 
---------------------------------------------------------------------------------
-CHANGE 4: Updated Client Detail View Menu
---------------------------------------------------------------------------------
+================================================================================
+CURRENT PROJECT STATE (v0.6.0)
+================================================================================
 
-### Dynamic Menu Population
-- Added `populateClientDetailMenu(associate)` function
-- Menus differ between Admin and Associate roles
+PROTOTYPE STATUS
+----------------
+File: index.html (~900KB)
+Approach: Single-file HTML + CSS + JavaScript
+Data: Mock JavaScript arrays
 
-### Admin Menu Items:
-1. View Details - Client profile
-2. View Sessions - Session history
-3. Message Therapist - Contact associate
-4. Update Stage - Change pipeline
-5. [Divider]
-6. Reassign Associate - Change therapist
+COMPLETED FEATURES
+------------------
 
-### Associate Menu Items:
-1. View Details - Client profile
-2. View Sessions - Session history
-3. Send Message - Contact client
-4. Update Stage - Change pipeline
+Core System:
+- Eden Calm design system (CSS variables, no grey)
+- Responsive layout (768px breakpoint)
+- Role-based navigation (Admin vs Associate)
+- Role toggle for testing
 
-### CSS Added
-- `.client-detail-dropdown-divider` style
+Modules:
+- Associates (ID cards, 7-tab detail panels)
+- Clients (cards, 7-stage pipeline, detail panels)
+- Schedule/Calendar (monthly view, session detail)
+- Action Centre (Friction Feed, summary grid)
+- Financial Vitality Hub (Wealth Lab)
+- Referrals (admin workflow, associate interest)
+- Contracts (grid, detail panel)
+- Messages/Inbox (list, viewer)
+- Support/CPD (help links, activities)
 
---------------------------------------------------------------------------------
-CHANGE 5: Updated renderMenu Function
---------------------------------------------------------------------------------
+UX Enhancements:
+- Empty states ("Garden in Bloom")
+- Unified detail view pattern
+- Menu standardisation (detail views only)
+- Progress stepper component
+- Toast notifications
 
-### Enhancements
-- Now handles divider items (`{ type: 'divider' }`)
-- Hides menu button when no menu items for current role
-- Added CSS for `.unified-detail-dropdown-divider`
-
---------------------------------------------------------------------------------
-FILES MODIFIED
---------------------------------------------------------------------------------
-
-index.html:
-- Removed kebab menu CSS (~130 lines removed)
-- Removed kebab menu functions (~75 lines removed)
-- Simplified renderStatusCard function (~70 lines removed)
-- Updated menuConfigs with contract entity and role-aware items
-- Added download and bell icons to getIconSvg
-- Updated renderMenu to handle dividers and empty menus
-- Added populateAssociateDetailMenu function (~45 lines)
-- Added populateClientDetailMenu function (~55 lines)
-- Updated navigateFromClientDetail with new actions
-- Added .unified-detail-dropdown-divider CSS
-- Added .client-detail-dropdown-divider CSS
-
---------------------------------------------------------------------------------
-BACKUPS CREATED
---------------------------------------------------------------------------------
-
-- index_v10_pre_three_dots_menu.html (backup before Chunk 6 changes)
-
---------------------------------------------------------------------------------
-TESTING CHECKLIST
---------------------------------------------------------------------------------
-
-### Menu Location Tests
-[ ] No menus visible on list cards (Associates, Clients, Referrals)
-[ ] Menus appear in detail view headers only
-
-### Admin Role Tests
-[ ] Associate detail: Shows View Profile, View Earnings, Send Message, View Contract
-[ ] Client detail: Shows full menu with divider before Reassign Associate
-[ ] Referral detail: Shows View Details, Assign Associate, divider, Archive
-[ ] Contract detail: Shows View Details, Download, Send Reminder
-
-### Associate Role Tests
-[ ] Associate detail: Menu button hidden (no items)
-[ ] Client detail: Shows View Details, View Sessions, Send Message, Update Stage
-[ ] Referral detail: Shows View Details, divider, Accept/Decline Referral
-[ ] Contract detail: Shows View Details, Download
-
-### Visual Tests
-[ ] Icons display correctly (Lucide outline style, 1.5px stroke)
-[ ] Dividers appear as subtle horizontal lines
-[ ] Menu opens/closes correctly with animation
-[ ] Clicking outside closes dropdown
-
---------------------------------------------------------------------------------
-ARCHITECTURE NOTES
---------------------------------------------------------------------------------
-
-### Menu Configuration Pattern
-All detail views now use a consistent pattern:
-1. MenuConfig object defines items per entity type and role
-2. populateXxxMenu() function reads config and renders HTML
-3. Menu button visibility controlled by item count
-
-### Role Detection
-Uses global `currentUserRole` variable:
-- `'admin'` - Full menu access
-- `'associate'` - Limited menu items
-
-### Divider Support
-Menus support divider items with:
-```javascript
-{ id: 'divider', type: 'divider' }
-```
+MOCK DATA
+---------
+- 7 associates with full profiles
+- 20+ clients with stage assignments
+- 4 referrals with expression tracking
+- Session records (finance integration)
+- Friction items
+- Contracts
+- Messages
 
 ================================================================================
 PREVIOUS CHANGES
 ================================================================================
 
+- Chunk 6: Three-Dots Menu Standardisation [Jan 18, 2026]
 - Chunk 5: Empty States (Garden in Bloom) [Jan 18, 2026]
 - Chunk 4: Action Centre Summary Grid [Jan 18, 2026]
 - Chunk 3: Unified Detail View Pattern [Jan 17, 2026]
 - Navigation Bug Fixes [Jan 17, 2026]
 - Progress Stepper Implementation [Jan 14, 2026]
 - Referral System Implementation [Jan 14, 2026]
+- Financial Vitality Hub [Jan 10, 2026]
+- Core Design System [Jan 6, 2026]
 
 ================================================================================
-NEXT STEPS
+NEXT PRIORITIES
 ================================================================================
 
-1. Test menu standardisation across all detail views
-2. Verify role-switching updates menus correctly
-3. Connect menu actions to actual functionality
-4. Consider adding keyboard navigation for menus (Escape to close, etc.)
+1. Airtable live data integration
+2. Make.com webhook connections
+3. Squarespace authentication
+4. Mobile testing and refinement
+5. React migration (when appropriate)
+
+================================================================================
+BLOCKERS
+================================================================================
+
+None
 
 ================================================================================

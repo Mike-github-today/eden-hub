@@ -1,8 +1,8 @@
 # EDEN MASTER SPECIFICATION
 
-**Version:** 3.0  
-**Last Updated:** January 2025  
-**Status:** Active Development
+**Version:** 3.1
+**Last Updated:** January 2026
+**Status:** Prototype Complete (v0.6.0) - Ready for Integration
 
 ---
 
@@ -11,11 +11,27 @@
 | Item | Value |
 |------|-------|
 | **Project** | Eden Hub Portal |
-| **Tech Stack** | React 18 + TypeScript, Tailwind CSS, shadcn/ui |
-| **Database** | Airtable |
-| **Automation** | Make.com |
-| **Hosting** | Vercel |
+| **Current Stack** | Single-file HTML + CSS + JavaScript (~900KB) |
+| **Target Stack** | React 18 + TypeScript, Tailwind CSS, shadcn/ui |
+| **Database** | Airtable (planned integration) |
+| **Automation** | Make.com (planned integration) |
+| **Hosting** | Vercel (planned) |
 | **Auth** | Squarespace Member Areas (see ADR-001) |
+
+## Implementation Status
+
+| Module | Status |
+|--------|--------|
+| Core Design System | Complete |
+| Associates | Complete |
+| Clients | Complete |
+| Schedule/Calendar | Complete |
+| Action Centre | Complete |
+| Financial Hub | Complete |
+| Referrals | Complete |
+| Contracts | Complete |
+| Messages | Complete |
+| Support/CPD | Complete |
 
 ---
 

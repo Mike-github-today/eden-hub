@@ -4,15 +4,26 @@
 
 ---
 
+## Current Development Approach
+
+Eden Hub is currently a **single-file HTML prototype** (`index.html`, ~900KB). This approach ensures:
+
+- Complete understanding of every line of code
+- No "black box" components
+- Rapid iteration without build tooling
+- Clear migration path to React when ready
+
+---
+
 ## File Versioning
 
-**Always backup before editing:**
+**Always backup before major edits:**
 
 ```
-portal_v1.html → portal_v2.html → portal_v3.html
+index.html → index_v10_pre_feature.html → index_v11_post_feature.html
 ```
 
-Never overwrite working versions. Keep iterations until feature is complete.
+Use descriptive backup names that indicate what change follows.
 
 ---
 
@@ -21,6 +32,7 @@ Never overwrite working versions. Keep iterations until feature is complete.
 ### Branch Naming
 
 ```
+claude/feature-name-sessionId
 feature/friction-feed
 fix/pipeline-colour-alignment
 docs/update-status
@@ -32,6 +44,7 @@ docs/update-status
 feat: Add client pipeline tracker to detail panel
 fix: Correct amber colour hex value
 docs: Update EDEN_STATUS with session progress
+feat: Chunk X - [brief description]
 ```
 
 ---
@@ -40,60 +53,113 @@ docs: Update EDEN_STATUS with session progress
 
 ### CSS Variables
 
-Always use design tokens from EDEN_MASTER.md:
+Always use design tokens from the Eden Calm system:
 
 ```css
 /* ✓ Correct */
-background: var(--eden-whisper);
-color: var(--eden-deep);
+background: var(--eden-mint);
+color: var(--eden-green);
+border: 1px solid var(--eden-border);
 
 /* ✗ Wrong - hardcoded values */
 background: #f4f7f6;
 color: #2d5f4d;
+border: 1px solid #ccc;  /* NEVER use grey! */
 ```
 
-### Component Structure (React)
+### JavaScript Organisation
 
-```
-src/
-├── components/
-│   ├── ui/              ← shadcn components
-│   ├── panels/          ← Detail panels (Associate, Client)
-│   ├── cards/           ← Gateway cards, client cards
-│   └── shared/          ← Reusable (Pipeline tracker, etc.)
-├── context/             ← Auth context, etc.
-├── hooks/               ← Custom hooks
-└── lib/                 ← Utilities
+Functions are organised by section with comment headers:
+
+```javascript
+// ============================================
+// SECTION NAME
+// ============================================
+
+function functionName() {
+    // Implementation
+}
 ```
 
 ### Naming Conventions
 
 | Type | Convention | Example |
 |------|------------|---------|
-| Components | PascalCase | `ClientDetailPanel.tsx` |
-| Hooks | camelCase with 'use' prefix | `useAuth.ts` |
-| Utilities | camelCase | `formatUcid.ts` |
-| CSS variables | kebab-case | `--eden-deep` |
-| Airtable fields | Title_Case with underscores | `Portal_Access` |
+| Functions | camelCase | `renderAssociateCard()` |
+| Variables | camelCase | `currentUserRole` |
+| Constants | UPPER_SNAKE | `SPECIALISATIONS` |
+| CSS variables | kebab-case | `--eden-green` |
+| CSS classes | kebab-case | `.id-card-header` |
+| Mock data IDs | UPPER-YYSEQ | `ASSOC-2401`, `CLIENT-2501` |
 
 ---
 
-## Responsive Breakpoints
+## Component Patterns
+
+### ID Cards
+
+```html
+<div class="id-card" onclick="openPanel(id)">
+    <div class="id-card-header">
+        <div class="avatar">XX</div>
+        <div class="id-card-info">
+            <div class="id-card-name">Name</div>
+            <div class="id-card-ucid">UCID-XXXX</div>
+        </div>
+        <span class="support-badge independent">✓ Independent</span>
+    </div>
+    <div class="id-card-stats">
+        <!-- Stats content -->
+    </div>
+</div>
+```
+
+### Detail Panels
+
+Panels use the unified detail view pattern:
+
+```javascript
+function open(entityType, entity, fromContext) {
+    // Render header with avatar, name, UCID
+    // Render tabs based on entity type
+    // Render menu (role-aware)
+    // Render tab content
+}
+```
+
+### Empty States
+
+```html
+<div class="eden-empty-state">
+    <div class="eden-empty-illustration">
+        <!-- Garden in Bloom SVG -->
+    </div>
+    <p class="eden-empty-message">Role-aware message</p>
+    <button class="eden-empty-action">Action Button</button>
+</div>
+```
+
+---
+
+## Responsive Design
+
+### Breakpoints
 
 ```css
 /* Mobile first */
-@media (min-width: 640px)  { /* sm */ }
-@media (min-width: 768px)  { /* md */ }
-@media (min-width: 1024px) { /* lg - side panel kicks in */ }
-@media (min-width: 1280px) { /* xl */ }
+@media (max-width: 768px) {
+    .sidebar { transform: translateX(-100%); }
+    .side-panel { display: none; }
+    .bottom-sheet { display: flex; }
+}
 ```
 
 ### Panel Patterns
 
 | Breakpoint | Pattern |
 |------------|---------|
-| < 1024px | Bottom Sheet (slides from bottom) |
-| ≥ 1024px | Side Panel (slides from right) |
+| ≤ 768px | Bottom Sheet (slides from bottom, 85vh) |
+| > 768px | Side Panel (slides from right, 450px) |
 
 ---
 
@@ -106,6 +172,7 @@ src/
 - [ ] Touch targets are 44px minimum
 - [ ] No information conveyed by colour alone
 - [ ] Semantic HTML elements used
+- [ ] ARIA labels where needed
 
 ---
 
@@ -118,14 +185,14 @@ src/
 - [ ] Mobile Safari (iPhone)
 - [ ] Mobile Chrome (Android)
 - [ ] Keyboard navigation only
-- [ ] Screen reader (VoiceOver)
+- [ ] Role switching (Admin ↔ Associate)
 
-### Before Merging
+### Before Committing
 
-1. All chunks work independently
-2. No console errors
-3. Responsive behaviour verified
-4. Accessibility checklist passed
+1. Test in both Admin and Associate roles
+2. Verify responsive behaviour at 768px
+3. Check for console errors
+4. Verify all panels open/close correctly
 
 ---
 
@@ -135,7 +202,7 @@ When completing work:
 
 1. Update `EDEN_STATUS.txt` with session summary
 2. Add changelog entry if significant
-3. Update EDEN_MASTER.md if specs change
+3. Update `agents.md` with completed features
 4. Create ADR for architectural decisions
 
 ---
@@ -146,8 +213,10 @@ Use `.env.example` as template. Never commit real credentials.
 
 ```
 # .env.example
-AIRTABLE_API_KEY=your_key_here
-MAKE_WEBHOOK_URL=your_webhook_here
+AIRTABLE_API_KEY=your_api_key_here
+AIRTABLE_BASE_ID=your_base_id_here
+MAKE_GENERATE_TOKEN_URL=https://hook.eu1.make.com/your_token_scenario
+MAKE_VERIFY_ACCESS_URL=https://hook.eu1.make.com/your_verify_scenario
 ```
 
 ---
@@ -155,9 +224,9 @@ MAKE_WEBHOOK_URL=your_webhook_here
 ## Performance Guidelines
 
 - Lazy load panels (don't render until opened)
-- Optimise images before upload
-- Minimise JavaScript bundle size
 - Use CSS transitions, not JS animation where possible
+- Minimise DOM manipulation in loops
+- Use event delegation where appropriate
 
 ---
 
@@ -170,18 +239,25 @@ Use Eden Calm styling:
 - Clear next action
 - Eden green accent on retry button
 
-### Logging
+### Console Logging
 
-Console errors should include:
-- What was attempted
-- What failed
-- Suggested resolution
+Use sparingly, primarily for debugging:
+
+```javascript
+console.log('currentView:', currentView);
+console.log('isInSubView:', isInSubView);
+```
 
 ---
 
 ## Dependencies
 
-### Approved Packages
+### Current (Prototype)
+
+- None (vanilla HTML/CSS/JS)
+- Lucide icons embedded as inline SVG
+
+### Future (React Migration)
 
 | Purpose | Package |
 |---------|---------|
@@ -189,16 +265,9 @@ Console errors should include:
 | Icons | lucide-react |
 | Date handling | date-fns |
 | Form validation | zod |
-| State management | React Context (keep simple) |
-
-### Adding New Dependencies
-
-1. Check if existing package covers need
-2. Evaluate bundle size impact
-3. Verify maintenance status
-4. Document reason in commit message
+| State management | React Context |
 
 ---
 
-*For design specifications, see EDEN_MASTER.md*  
+*For design specifications, see EDEN_MASTER.md*
 *For philosophy and context, see PROJECT_CONTEXT.md*
