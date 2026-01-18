@@ -1,175 +1,177 @@
 ================================================================================
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
-Last Updated: 17 January 2026
-Session: Unified Detail View Pattern & Navigation Bug Fixes
-Branch: claude/unified-detail-view-7M7FK
+Last Updated: 18 January 2026
+Session: Action Centre Summary Grid Implementation
+Branch: claude/action-centre-summary-grid-TS32U
 ================================================================================
 
-LATEST CHANGES: Chunk 3 - Unified Detail View Pattern [COMPLETED]
+LATEST CHANGES: Chunk 4 - Action Centre Summary Grid [COMPLETED]
 ================================================================================
 
 ## Session Summary
 
-Implemented a unified detail view pattern to replace all existing panel variants,
-plus critical navigation bug fixes for bottom navigation responsiveness.
+Implemented the Action Centre Summary Grid pattern to match the Referral Command
+Centre design. Added role-based filtering (Admin sees 4 cards, Associate sees 3),
+filter tabs, and a new empty state with Eden leaf breathing animation.
 
 --------------------------------------------------------------------------------
-CHANGE 1: Unified Detail View Pattern (Chunk 3)
+CHANGE 1: Action Centre HTML Structure
 --------------------------------------------------------------------------------
 
-Requested: Replace all existing panel variants (side-panel, detail-panel,
-associate-detail-page, client-detail-page, associate-subpage) with a single,
-consistent detail view pattern.
+Replaced static HTML structure with dynamic JavaScript-rendered components:
 
-Implemented:
-
-### 1. Unified Detail View HTML Structure
-- Single container with backdrop, header, tabs, and content areas
-- Steward anchor (Admin only - when viewing client's associate)
-- Three-dots dropdown menu with role-appropriate quick actions
-- Pipeline stepper for client entities
-- Tab bar with entity-specific tabs
-
-### 2. Unified Detail View CSS
-- Desktop: 450px side panel sliding from right
-- Mobile: Full-page view (above bottom nav)
-- Responsive design with proper safe area handling
-- Smooth transitions (300ms ease)
-- Proper z-index hierarchy (z-index: 900)
-
-### 3. DetailView JavaScript Controller
-- Navigation stack for back button history
-- Tab configurations per entity type:
-  - Associate: Profile, Sessions, Finance, Inbox
-  - Client: Overview, Sessions, Finance, Notes
-  - Referral: Details, History
-- Role-based menu configurations (admin vs associate)
-- Client pipeline stepper with stage colors
-- Keyboard support (Escape to close)
-- Backdrop click to close (desktop)
-
-### 4. Updated Click Handlers
-- openAssociateDetailPanel() -> DetailView.open('associate', ...)
-- openClientDetailPanel() -> DetailView.open('client', ...)
-- openReferralPanel() -> DetailView.open('referral', ...)
-- openDetailPanel() -> Delegates to DetailView for supported types
+### Updated Elements
+- Summary grid container (rendered dynamically based on role)
+- Filter tabs (All, plus category-specific tabs based on role)
+- Action feed (items with category badges)
+- New empty state with Eden leaf SVG and breathing animation
+- Role-appropriate empty state messages
 
 --------------------------------------------------------------------------------
-CHANGE 2: Navigation Bug Fix - Round 1 (CSS)
+CHANGE 2: Action Centre CSS Styles
 --------------------------------------------------------------------------------
 
-Issue: Bottom navigation icons (Home, Actions, Associates, Earnings) did not
-respond when detail views were open on mobile.
+Added new styles for the summary grid pattern:
 
-Root Cause Identified: The .unified-detail-view container had `bottom: 0`
-covering the entire viewport, with `pointer-events: auto` when open.
+### Summary Cards
+- 2-column grid layout
+- Category-colored left border when has items
+- Pulse animation for cards with pending actions
+- Active state with Eden green border
 
-Fix Applied:
-- Container excludes bottom nav: `bottom: calc(64px + env(safe-area-inset-bottom))`
-- Container pointer-events stays 'none' even when open
-- Only backdrop and panel have pointer-events: auto when visible
-- Mobile view maintains bottom nav exclusion
+### Filter Tabs
+- Horizontal scrolling pill-style tabs
+- Active state with Eden green background
+- Smooth transitions
+
+### Action Items
+- Card-based layout with category badge
+- Entity name and description display
+- Hover states for interactivity
+
+### Empty State
+- Eden leaf SVG with 4-second breathing animation
+- Role-appropriate messaging
+- Centered layout
+
+### Category Colors
+- Associates: Purple (#8b5cf6)
+- Clients: Blue (#3b82f6)
+- Contracts: Amber (#f59e0b)
+- Finance: Rose (#f43f5e)
 
 --------------------------------------------------------------------------------
-CHANGE 3: Navigation Bug Fix - Round 2 (JavaScript)
+CHANGE 3: ActionCentre JavaScript Controller
 --------------------------------------------------------------------------------
 
-Issue: After CSS fix, navigation still appeared broken. Views were changing
-behind the detail panel, but panel remained open - user saw "nothing happened."
+Implemented IIFE pattern controller with:
 
-Root Cause: showView() function did NOT close detail views when navigating.
+### Role Detection
+- getRole() - returns 'admin' or 'associate' from currentUserRole
+- isAdmin() - boolean helper
+- getCategoriesForRole() - filters categories (Associates is admin-only)
 
-Fix Applied:
-- Added DetailView.close() in bottom nav click handler
-- Added DetailView.close() in showView() function
-- Both ensure detail views close when navigating via any method
+### Rendering Functions
+- renderSummaryGrid() - builds category cards based on role
+- renderFilterTabs() - builds filter pill buttons
+- renderFeed() - renders action items with category badges
+- render() - full re-render of all components
+
+### State Management
+- allActions array - stores action items
+- currentFilter - tracks active filter ('all' or category)
+- loadActions() - initializes data and triggers render
+
+### Event Handling
+- Summary card clicks toggle category filter
+- Filter tab clicks set active filter
+- Action item clicks open resolution drawer
+
+### Role-Based Behavior
+- Admin: 4 summary cards (Associates, Clients, Contracts, Finance)
+- Associate: 3 summary cards (no Associates card)
+- Empty state text differs by role
+
+### Integration
+- Legacy function wrappers (renderFrictionFeed, filterActionsByCategory, etc.)
+- Re-renders on role toggle via toggleRole()
+- Re-renders when action-centre view is shown
+- Updates mobile nav badge count
 
 --------------------------------------------------------------------------------
-CHANGE 4: Navigation Bug Fix - Round 3 (Earnings Section)
+CHANGE 4: Data Structure Enhancement
 --------------------------------------------------------------------------------
 
-Issue: Earnings section panels (Payment Tracker, Wealth Lab, Tax Intelligence,
-Financial Vitality Hub) still blocked bottom navigation for BOTH Admin and
-Associate views.
-
-Root Cause: The .wealth-panel had `bottom: 0` covering entire viewport.
-
-Fix Applied:
-- CSS: Updated .wealth-panel to exclude bottom nav area
-- JS: Added closeWealthModule() in bottom nav click handler
-- JS: Added closeWealthModule() in showView() function
-- JS: Added closePanel() for old side panel/bottom sheet (defensive)
+Updated frictionItems array with additional fields:
+- entityName: Display name for the action item
+- associateUcid: Associate UCID for filtering (future use)
 
 --------------------------------------------------------------------------------
 FILES MODIFIED
 --------------------------------------------------------------------------------
 
 index.html:
-- Added Unified Detail View CSS (~400 lines at line 11309)
-- Added Unified Detail View HTML structure (after </main>, line 13340)
-- Added DetailView JavaScript controller (~550 lines at line 15275)
-- Updated openAssociateDetailPanel() to use DetailView
-- Updated openClientDetailPanel() to use DetailView
-- Updated openReferralPanel() to use DetailView
-- Updated openDetailPanel() to delegate to DetailView
-- Updated showView() to close all panel types when navigating
-- Updated bottom nav click handler to close all panel types
-- Updated .wealth-panel CSS to exclude bottom nav area
+- Lines 12518-12567: Updated Action Centre HTML structure
+- Lines 3172-3422: Updated Action Centre CSS styles (~250 lines)
+- Lines 17522-17861: Added ActionCentre IIFE controller (~340 lines)
+- Line 16040-16043: Added ActionCentre.render() to toggleRole()
+- Line 16115-16120: Updated showView() to call ActionCentre.render()
+- Line 23438: Changed init() to call initActionCentre()
+- Lines 18042-18078: Updated snoozeItem() and markAsResolved() to use ActionCentre
 
 --------------------------------------------------------------------------------
 BACKUPS CREATED
 --------------------------------------------------------------------------------
 
-- index_v7_pre_unified_detail.html (backup before Chunk 3 changes)
+- index_v8_pre_action_centre_grid.html (backup before Chunk 4 changes)
 
 --------------------------------------------------------------------------------
-GIT COMMITS (on branch: claude/unified-detail-view-7M7FK)
---------------------------------------------------------------------------------
-
-1. 548b250 - feat: Chunk 3 - Unified Detail View Pattern
-2. c1a5c60 - fix: Bottom navigation responds when detail views are open
-3. a85b8bc - fix: Close detail view when bottom navigation is tapped
-4. d79a578 - fix: Extend navigation fix to Earnings section (both Admin and Associate views)
-
-================================================================================
 TESTING CHECKLIST
-================================================================================
+--------------------------------------------------------------------------------
 
-### Unified Detail View
-[ ] Desktop: Panel slides in from right (450px width)
-[ ] Desktop: Backdrop dims content behind panel
-[ ] Desktop: Clicking backdrop closes panel
-[ ] Mobile: Panel takes full screen (above bottom nav)
-[ ] Mobile: No backdrop visible
-[ ] Back button returns to previous view in stack
-[ ] Back button closes panel when stack is empty
-[ ] Tabs render correctly for each entity type
-[ ] Tab switching works and updates content
-[ ] Three-dots menu shows role-appropriate options
-[ ] Steward Anchor shows for Admin viewing client from associate context
-[ ] Steward Anchor hidden for Associates
-[ ] Escape key closes panel
-[ ] Client pipeline stepper shows correct stage
+### Admin View (4-card grid)
+[ ] Summary grid shows 4 cards: Associates, Clients, Contracts, Finance
+[ ] Each card shows correct count
+[ ] Cards with items have colored left border
+[ ] Cards with items show pulse animation
+[ ] Clicking a card filters the feed to that category
+[ ] Clicking an active card clears filter (shows all)
+[ ] Filter tabs show: All, Associates, Clients, Contracts, Finance
+[ ] Tab selection matches card selection
+[ ] Feed shows all 4 action items when "All" is selected
+[ ] Feed filters correctly when category is selected
 
-### Bottom Navigation (CRITICAL)
-[ ] Open Associate card -> Tap Home -> Navigates to Home
-[ ] Open Associate card -> Tap Actions -> Navigates to Actions
-[ ] Open Client card -> Tap any nav icon -> Works
-[ ] Open Referral card -> Tap any nav icon -> Works
-[ ] Open Payment Tracker -> Tap any nav icon -> Works
-[ ] Open Wealth Lab -> Tap any nav icon -> Works
-[ ] Open Tax Intelligence -> Tap any nav icon -> Works
-[ ] Open Financial Vitality Hub -> Tap any nav icon -> Works
+### Associate View (3-card grid)
+[ ] Summary grid shows 3 cards: Clients, Contracts, Finance
+[ ] Associates card is NOT shown
+[ ] Associates category items are NOT shown in feed
+[ ] Filter tabs show: All, Clients, Contracts, Finance
+[ ] No Associates filter tab
 
-### Both User Roles
-[ ] Admin: All above tests pass
-[ ] Associate: All above tests pass
+### Empty State
+[ ] Shows when all items are resolved/snoozed
+[ ] Shows Eden leaf SVG with breathing animation
+[ ] Admin message: "The Garden is in Bloom. All associates are thriving."
+[ ] Associate message: "The Garden is in Bloom. Your practice is at peace."
+
+### Role Toggle
+[ ] Toggling from Admin to Associate updates grid from 4 to 3 cards
+[ ] Toggling from Associate to Admin updates grid from 3 to 4 cards
+[ ] Counts update correctly after toggle
+
+### Action Items
+[ ] Clicking action item opens resolution drawer
+[ ] Snoozing item removes it and updates counts
+[ ] Marking resolved removes item and updates counts
+[ ] Mobile nav badge updates with visible action count
 
 ================================================================================
 PREVIOUS CHANGES
 ================================================================================
 
+- Chunk 3: Unified Detail View Pattern [Jan 17, 2026]
+- Navigation Bug Fixes [Jan 17, 2026]
 - Progress Stepper Implementation [Jan 14, 2026]
 - Referral System Implementation [Jan 14, 2026]
 - Profile Tab (First Position) [Jan 11, 2026]
@@ -181,29 +183,30 @@ PREVIOUS CHANGES
 NEXT STEPS
 ================================================================================
 
-1. Test unified detail view across all entity types
-2. Test bottom navigation with all panel types open
-3. Verify fix works on actual iOS Safari device
-4. Consider implementing Chunk 4 (Action Centre) with same patterns
-5. Connect unified detail view to Airtable for real data
+1. Test Action Centre across both roles
+2. Verify filter tabs work correctly
+3. Test empty state displays correctly
+4. Consider adding category-specific action detail views
+5. Connect to Airtable for real action items data
 
 ================================================================================
 ARCHITECTURE NOTES
 ================================================================================
 
-### Panel Hierarchy (z-index)
-- Bottom Navigation: z-index 1000 (always on top)
-- Unified Detail View: z-index 900
-- Wealth Panel: z-index 300
-- Side Panel: z-index 200
-- Overlays/Backdrops: z-index 299-301
+### ActionCentre Controller Pattern
+The ActionCentre uses the IIFE (Immediately Invoked Function Expression) pattern,
+similar to the DetailView controller. This provides:
+- Encapsulated state (allActions, currentFilter)
+- Private helper functions
+- Clean public API (loadActions, setFilter, render)
+- Easy integration with existing code via legacy wrapper functions
 
-### Panel Close Pattern
-When navigating (via showView or bottom nav click):
-1. Close DetailView (unified detail view)
-2. Close WealthModule (Earnings panels)
-3. Close Panel (old side panel/bottom sheet)
+### Role-Based Rendering
+Categories are defined with an `adminOnly` flag:
+- associates: adminOnly: true (only shown to admin)
+- clients, contracts, finance: adminOnly: false (shown to all)
 
-This ensures ALL panel types are closed before view transition.
+The getCategoriesForRole() function filters categories based on the current role,
+ensuring associates only see 3 categories while admins see all 4.
 
 ================================================================================
