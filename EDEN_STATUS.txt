@@ -2,211 +2,225 @@
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
 Last Updated: 18 January 2026
-Session: Action Centre Summary Grid Implementation
-Branch: claude/action-centre-summary-grid-TS32U
+Session: Empty States (Garden in Bloom) Implementation
+Branch: claude/add-empty-states-BdUq1
 ================================================================================
 
-LATEST CHANGES: Chunk 4 - Action Centre Summary Grid [COMPLETED]
+LATEST CHANGES: Chunk 5 - Empty States (Garden in Bloom) [COMPLETED]
 ================================================================================
 
 ## Session Summary
 
-Implemented the Action Centre Summary Grid pattern to match the Referral Command
-Centre design. Added role-based filtering (Admin sees 4 cards, Associate sees 3),
-filter tabs, and a new empty state with Eden leaf breathing animation.
+Implemented the "Garden in Bloom" empty state pattern across all sections of the
+portal. When a section has no items, it now displays a consistent branded empty
+state with the breathing Eden Leaf animation and role-appropriate messaging.
 
 --------------------------------------------------------------------------------
-CHANGE 1: Action Centre HTML Structure
+CHANGE 1: Empty State CSS Styles (Lines 3358-3431)
 --------------------------------------------------------------------------------
 
-Replaced static HTML structure with dynamic JavaScript-rendered components:
+Updated and expanded empty state styles:
 
-### Updated Elements
-- Summary grid container (rendered dynamically based on role)
-- Filter tabs (All, plus category-specific tabs based on role)
-- Action feed (items with category badges)
-- New empty state with Eden leaf SVG and breathing animation
-- Role-appropriate empty state messages
+### New CSS Classes
+- .eden-empty-state - Main container (flex, centered, min-height 200px)
+- .eden-empty-icon - Icon container with margin
+- .eden-leaf-breathing - Breathing animation (4s ease-in-out infinite)
+- .eden-empty-message - Text styling (16px, font-weight 500, max-width 280px)
+- .eden-empty-action - Optional action button (Eden green background)
 
---------------------------------------------------------------------------------
-CHANGE 2: Action Centre CSS Styles
---------------------------------------------------------------------------------
-
-Added new styles for the summary grid pattern:
-
-### Summary Cards
-- 2-column grid layout
-- Category-colored left border when has items
-- Pulse animation for cards with pending actions
-- Active state with Eden green border
-
-### Filter Tabs
-- Horizontal scrolling pill-style tabs
-- Active state with Eden green background
-- Smooth transitions
-
-### Action Items
-- Card-based layout with category badge
-- Entity name and description display
-- Hover states for interactivity
-
-### Empty State
-- Eden leaf SVG with 4-second breathing animation
-- Role-appropriate messaging
-- Centered layout
-
-### Category Colors
-- Associates: Purple (#8b5cf6)
-- Clients: Blue (#3b82f6)
-- Contracts: Amber (#f59e0b)
-- Finance: Rose (#f43f5e)
+### Animation Updates
+- New keyframes: eden-breathe (scale 1.0 to 1.08, opacity 0.7 to 1.0)
+- Respects prefers-reduced-motion: animation disabled, static opacity 0.85
 
 --------------------------------------------------------------------------------
-CHANGE 3: ActionCentre JavaScript Controller
+CHANGE 2: EmptyState Controller (Lines 15440-15652)
 --------------------------------------------------------------------------------
 
-Implemented IIFE pattern controller with:
+Added comprehensive EmptyState controller IIFE with:
 
-### Role Detection
-- getRole() - returns 'admin' or 'associate' from currentUserRole
-- isAdmin() - boolean helper
-- getCategoriesForRole() - filters categories (Associates is admin-only)
+### Message Configuration (EmptyStateMessages)
+- action-centre: Admin/Associate bloom messages
+- referrals: "The garden rests" / "No referrals awaiting"
+- clients: "The first seed awaits"
+- inbox: "All clear. No messages need attention."
+- associates: "Your team awaits" (Admin only)
+- contracts: "No contracts requiring attention"
+- sessions: "No sessions scheduled"
+- schedule: "Schedule/Your schedule is clear"
 
-### Rendering Functions
-- renderSummaryGrid() - builds category cards based on role
-- renderFilterTabs() - builds filter pill buttons
-- renderFeed() - renders action items with category badges
-- render() - full re-render of all components
+### Action Button Configuration (EmptyStateActions)
+- clients: "Add First Client" button (Admin only)
+- associates: "Add First Associate" button (Admin only)
 
-### State Management
-- allActions array - stores action items
-- currentFilter - tracks active filter ('all' or category)
-- loadActions() - initializes data and triggers render
+### EmptyState Controller Methods
+- getLeafSvg() - Returns Eden Leaf SVG with breathing animation
+- createEmptyStateHtml(sectionId) - Generates complete empty state HTML
+- show(sectionId, container) - Shows empty state in container
+- hide(container) - Hides empty state in container
+- toggle(sectionId, itemCount, container, contentElement) - Toggle based on count
 
-### Event Handling
-- Summary card clicks toggle category filter
-- Filter tab clicks set active filter
-- Action item clicks open resolution drawer
-
-### Role-Based Behavior
-- Admin: 4 summary cards (Associates, Clients, Contracts, Finance)
-- Associate: 3 summary cards (no Associates card)
-- Empty state text differs by role
-
-### Integration
-- Legacy function wrappers (renderFrictionFeed, filterActionsByCategory, etc.)
-- Re-renders on role toggle via toggleRole()
-- Re-renders when action-centre view is shown
-- Updates mobile nav badge count
+### Event Delegation
+- Click handler for .eden-empty-action buttons
+- handleEmptyStateAction() switch for addClient, addAssociate actions
 
 --------------------------------------------------------------------------------
-CHANGE 4: Data Structure Enhancement
+CHANGE 3: Sections Updated with Garden in Bloom
 --------------------------------------------------------------------------------
 
-Updated frictionItems array with additional fields:
-- entityName: Display name for the action item
-- associateUcid: Associate UCID for filtering (future use)
+### Associates View (renderCards function)
+- Uses EmptyState.createHtml('associates')
+- Filter-aware messaging for non-'all' filters
+
+### Clients View (renderAllClientsGrid function)
+- Uses EmptyState.createHtml('clients')
+- Filter-aware messaging for non-'all' filters
+
+### Referrals Admin View (renderAdminReferrals function)
+- Uses EmptyState.createHtml('referrals')
+- Filter-aware messaging for filtered states
+
+### Referrals Associate View (renderAssociateReferrals function)
+- Uses EmptyState.createHtml('referrals')
+- Shows when no available referrals
+
+### Inbox (populateInboxView function)
+- Uses EmptyState.createHtml('inbox')
+- Handles empty email list
+
+### Contracts View (renderContractsGrid function)
+- Uses EmptyState.createHtml('contracts')
+- Filter-aware messaging for non-'all' filters
+
+### Schedule View (renderTodaysSessions function)
+- Uses EmptyState.createHtml('schedule')
+- Shows when no sessions for today
+
+### Session Detail (openSessionDetail function)
+- Uses EmptyState.createHtml('sessions')
+- Shows when selected day has no sessions
 
 --------------------------------------------------------------------------------
 FILES MODIFIED
 --------------------------------------------------------------------------------
 
 index.html:
-- Lines 12518-12567: Updated Action Centre HTML structure
-- Lines 3172-3422: Updated Action Centre CSS styles (~250 lines)
-- Lines 17522-17861: Added ActionCentre IIFE controller (~340 lines)
-- Line 16040-16043: Added ActionCentre.render() to toggleRole()
-- Line 16115-16120: Updated showView() to call ActionCentre.render()
-- Line 23438: Changed init() to call initActionCentre()
-- Lines 18042-18078: Updated snoozeItem() and markAsResolved() to use ActionCentre
+- Lines 3358-3431: Updated Eden Empty State CSS styles (~73 lines)
+- Lines 15440-15652: Added EmptyState controller, messages, and actions (~212 lines)
+- Line 16456-16468: Updated Associates renderCards() empty state
+- Line 18730-18742: Updated Clients renderAllClientsGrid() empty state
+- Line 18473-18485: Updated Contracts renderContractsGrid() empty state
+- Line 18934-18937: Updated Schedule renderTodaysSessions() empty state
+- Line 18977-18979: Updated Session detail openSessionDetail() empty state
+- Line 20627-20638: Updated Admin Referrals renderAdminReferrals() empty state
+- Line 20733-20735: Updated Associate Referrals renderAssociateReferrals() empty state
+- Line 17026-17030: Added Inbox empty state in populateInboxView()
 
 --------------------------------------------------------------------------------
 BACKUPS CREATED
 --------------------------------------------------------------------------------
 
-- index_v8_pre_action_centre_grid.html (backup before Chunk 4 changes)
+- index_v9_pre_empty_states.html (backup before Chunk 5 changes)
 
 --------------------------------------------------------------------------------
 TESTING CHECKLIST
 --------------------------------------------------------------------------------
 
-### Admin View (4-card grid)
-[ ] Summary grid shows 4 cards: Associates, Clients, Contracts, Finance
-[ ] Each card shows correct count
-[ ] Cards with items have colored left border
-[ ] Cards with items show pulse animation
-[ ] Clicking a card filters the feed to that category
-[ ] Clicking an active card clears filter (shows all)
-[ ] Filter tabs show: All, Associates, Clients, Contracts, Finance
-[ ] Tab selection matches card selection
-[ ] Feed shows all 4 action items when "All" is selected
-[ ] Feed filters correctly when category is selected
+### Empty State Display
+[ ] Eden leaf SVG displays correctly
+[ ] Breathing animation plays smoothly (4s cycle)
+[ ] Animation respects prefers-reduced-motion
 
-### Associate View (3-card grid)
-[ ] Summary grid shows 3 cards: Clients, Contracts, Finance
-[ ] Associates card is NOT shown
-[ ] Associates category items are NOT shown in feed
-[ ] Filter tabs show: All, Clients, Contracts, Finance
-[ ] No Associates filter tab
+### Role-Appropriate Messages
+[ ] Admin sees admin-specific messages
+[ ] Associate sees associate-specific messages
+[ ] Messages update when role is toggled
 
-### Empty State
-[ ] Shows when all items are resolved/snoozed
-[ ] Shows Eden leaf SVG with breathing animation
-[ ] Admin message: "The Garden is in Bloom. All associates are thriving."
-[ ] Associate message: "The Garden is in Bloom. Your practice is at peace."
+### Section-Specific Testing
 
-### Role Toggle
-[ ] Toggling from Admin to Associate updates grid from 4 to 3 cards
-[ ] Toggling from Associate to Admin updates grid from 3 to 4 cards
-[ ] Counts update correctly after toggle
+Action Centre:
+[ ] "The Garden is in Bloom. All associates are thriving." (Admin)
+[ ] "The Garden is in Bloom. Your practice is at peace." (Associate)
 
-### Action Items
-[ ] Clicking action item opens resolution drawer
-[ ] Snoozing item removes it and updates counts
-[ ] Marking resolved removes item and updates counts
-[ ] Mobile nav badge updates with visible action count
+Referrals:
+[ ] Admin: "No new referrals. The garden rests."
+[ ] Associate: "No referrals awaiting your response."
+[ ] Filter-specific: "No referrals match this filter."
+
+Clients:
+[ ] "No clients yet. The first seed awaits." (Admin)
+[ ] "No clients yet. Your first client awaits." (Associate)
+[ ] "Add First Client" button appears for Admin
+[ ] Filter-specific: "No clients match this filter."
+
+Associates (Admin only):
+[ ] "No associates yet. Your team awaits."
+[ ] "Add First Associate" button appears
+[ ] Filter-specific: "No associates match this filter."
+
+Contracts:
+[ ] "No contracts requiring attention."
+[ ] Filter-specific: "No contracts match this filter."
+
+Schedule:
+[ ] "Schedule is clear." (Admin)
+[ ] "Your schedule is clear." (Associate)
+
+Sessions:
+[ ] "No sessions scheduled."
+
+Inbox:
+[ ] "All clear. No messages need attention."
+
+### Action Buttons
+[ ] Buttons appear when configured
+[ ] Click events trigger handleEmptyStateAction()
+[ ] Console logs action type
+
+--------------------------------------------------------------------------------
+ARCHITECTURE NOTES
+--------------------------------------------------------------------------------
+
+### Eden Leaf SVG Design
+The Eden Leaf SVG uses:
+- Outlined style (no fill, stroke only)
+- Main outline path: curved leaf shape
+- Central vein: vertical line
+- Side veins: curved lines at 0.3 opacity
+- All strokes: #2d5f4d (Eden Deep)
+- Stroke width: 1.5px main, 1px details
+
+### Breathing Animation
+The eden-breathe animation:
+- Duration: 4 seconds
+- Easing: ease-in-out
+- Scale: 1.0 -> 1.08 -> 1.0
+- Opacity: 0.7 -> 1.0 -> 0.7
+- Infinite loop
+
+### Role Detection
+EmptyState uses the global currentUserRole variable:
+- getRole() returns 'admin' or 'associate'
+- Messages automatically update based on role
+- Action buttons respect role permissions
 
 ================================================================================
 PREVIOUS CHANGES
 ================================================================================
 
+- Chunk 4: Action Centre Summary Grid [Jan 18, 2026]
 - Chunk 3: Unified Detail View Pattern [Jan 17, 2026]
 - Navigation Bug Fixes [Jan 17, 2026]
 - Progress Stepper Implementation [Jan 14, 2026]
 - Referral System Implementation [Jan 14, 2026]
-- Profile Tab (First Position) [Jan 11, 2026]
-- Collapsible Overview Section [Jan 11, 2026]
-- Role-Based Navigation [Jan 11, 2026]
-- Ivy Wallet-inspired UX Redesign [Jan 11, 2026]
 
 ================================================================================
 NEXT STEPS
 ================================================================================
 
-1. Test Action Centre across both roles
-2. Verify filter tabs work correctly
-3. Test empty state displays correctly
-4. Consider adding category-specific action detail views
-5. Connect to Airtable for real action items data
-
-================================================================================
-ARCHITECTURE NOTES
-================================================================================
-
-### ActionCentre Controller Pattern
-The ActionCentre uses the IIFE (Immediately Invoked Function Expression) pattern,
-similar to the DetailView controller. This provides:
-- Encapsulated state (allActions, currentFilter)
-- Private helper functions
-- Clean public API (loadActions, setFilter, render)
-- Easy integration with existing code via legacy wrapper functions
-
-### Role-Based Rendering
-Categories are defined with an `adminOnly` flag:
-- associates: adminOnly: true (only shown to admin)
-- clients, contracts, finance: adminOnly: false (shown to all)
-
-The getCategoriesForRole() function filters categories based on the current role,
-ensuring associates only see 3 categories while admins see all 4.
+1. Test empty states across all sections and roles
+2. Verify breathing animation performance
+3. Test prefers-reduced-motion preference
+4. Consider adding fade-in animation for empty state appearance
+5. Connect action buttons to actual forms/modals when implemented
 
 ================================================================================
