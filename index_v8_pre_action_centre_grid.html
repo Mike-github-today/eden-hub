@@ -3169,223 +3169,82 @@
             color: var(--eden-text-secondary);
         }
 
-        /* ===== ACTION CENTRE SUMMARY GRID ===== */
-
-        /* Summary Grid */
+        /* Action Centre Summary Cards */
         .action-summary-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
-            padding: 0 0 16px 0;
+            margin-bottom: 24px;
         }
 
         .action-summary-card {
-            background: #FFFFFF;
-            border-radius: 12px;
-            padding: 16px;
-            text-align: center;
+            background-color: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 20px;
+            position: relative;
             cursor: pointer;
-            border: 1px solid #e5e7eb;
-            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+            transition: all var(--transition-smooth);
+            text-align: center;
         }
 
         .action-summary-card:hover {
-            border-color: #2d5f4d;
+            border-color: var(--eden-green);
+            box-shadow: 0 4px 12px rgba(45, 95, 77, 0.1);
         }
 
         .action-summary-card.active {
-            border-color: #2d5f4d;
-            box-shadow: 0 0 0 1px #2d5f4d;
+            border-color: var(--eden-green);
+            box-shadow: 0 0 0 3px rgba(45, 95, 77, 0.15);
         }
 
-        .action-summary-card.has-items {
-            border-left: 3px solid var(--category-color, #6b7280);
+        .action-summary-pulse {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
         }
 
-        .summary-card-count {
+        .action-summary-pulse.orange { background-color: #f97316; }
+        .action-summary-pulse.blue { background-color: #3b82f6; }
+        .action-summary-pulse.purple { background-color: #8b5cf6; }
+        .action-summary-pulse.green { background-color: #10b981; }
+
+        .action-summary-count {
             font-size: 32px;
-            font-weight: 700;
-            color: #111827;
-            line-height: 1;
+            font-weight: 600;
+            color: var(--eden-text-primary);
             margin-bottom: 4px;
         }
 
-        .summary-card-label {
-            font-size: 14px;
-            font-weight: 500;
-            color: #6b7280;
+        .action-summary-count.zero {
+            color: var(--eden-text-muted);
         }
 
-        /* Pulse indicator for cards with items */
-        .summary-card-pulse {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--category-color, #6b7280);
-            margin-left: 6px;
-            animation: actionPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes actionPulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.1); }
-        }
-
-        /* Category colours */
-        .action-summary-card[data-category="associates"] {
-            --category-color: #8b5cf6; /* Purple */
-        }
-
-        .action-summary-card[data-category="clients"] {
-            --category-color: #3b82f6; /* Blue */
-        }
-
-        .action-summary-card[data-category="contracts"] {
-            --category-color: #f59e0b; /* Amber */
-        }
-
-        .action-summary-card[data-category="finance"] {
-            --category-color: #f43f5e; /* Rose */
-        }
-
-        /* Filter Tabs */
-        .action-filter-tabs {
+        .action-summary-icon {
             display: flex;
-            gap: 8px;
-            padding: 0 0 16px 0;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
+            justify-content: center;
+            margin-bottom: 4px;
         }
 
-        .action-filter-tab {
-            padding: 8px 16px;
-            background: #FFFFFF;
-            border: 1px solid #e5e7eb;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #6b7280;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.15s ease;
+        .action-summary-icon svg {
+            width: 18px;
+            height: 18px;
+            color: var(--eden-text-secondary);
+            stroke-width: 1.5;
         }
 
-        .action-filter-tab:hover {
-            border-color: #d1d5db;
-            color: #374151;
-        }
-
-        .action-filter-tab.active {
-            background: #2d5f4d;
-            border-color: #2d5f4d;
-            color: #FFFFFF;
-        }
-
-        /* Action Feed */
-        .action-feed {
-            padding: 0 0 16px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .action-item {
-            background: #FFFFFF;
-            border-radius: 12px;
-            padding: 16px;
-            border: 1px solid #e5e7eb;
-            cursor: pointer;
-            transition: border-color 0.15s ease;
-        }
-
-        .action-item:hover {
-            border-color: #d1d5db;
-        }
-
-        .action-item-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-
-        .action-item-category {
-            display: inline-flex;
-            align-items: center;
-            padding: 4px 8px;
-            border-radius: 4px;
+        .action-summary-label {
             font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.03em;
-            background: var(--category-bg, #f3f4f6);
-            color: var(--category-color, #6b7280);
+            letter-spacing: 0.5px;
+            color: var(--eden-text-secondary);
         }
 
-        .action-item[data-category="associates"] .action-item-category {
-            --category-bg: #ede9fe;
-            --category-color: #7c3aed;
-        }
-
-        .action-item[data-category="clients"] .action-item-category {
-            --category-bg: #dbeafe;
-            --category-color: #2563eb;
-        }
-
-        .action-item[data-category="contracts"] .action-item-category {
-            --category-bg: #fef3c7;
-            --category-color: #d97706;
-        }
-
-        .action-item[data-category="finance"] .action-item-category {
-            --category-bg: #fee2e2;
-            --category-color: #dc2626;
-        }
-
-        .action-item-entity {
-            font-size: 16px;
-            font-weight: 600;
-            color: #111827;
-            margin-bottom: 4px;
-        }
-
-        .action-item-description {
-            font-size: 14px;
-            color: #6b7280;
-        }
-
-        /* Empty State */
-        .action-empty-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 48px 24px;
-            text-align: center;
-        }
-
-        .empty-state-icon {
-            margin-bottom: 16px;
-        }
-
-        .eden-leaf-breathing {
-            animation: breathe 4s ease-in-out infinite;
-        }
-
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 1; }
-        }
-
-        .empty-state-text {
-            font-size: 16px;
-            color: #6b7280;
-            max-width: 280px;
-            line-height: 1.5;
-        }
-
-        /* Legacy filter indicator (kept for compatibility) */
         .action-filter-indicator {
             display: flex;
             align-items: center;
@@ -12660,51 +12519,80 @@
             <div class="view-container" id="action-centreView">
                 <header class="page-header">
                     <h1 class="page-title">Action Centre</h1>
-                    <p class="page-subtitle" id="actionCentreSubtitle">Items requiring your attention</p>
+                    <p class="page-subtitle">Items requiring your attention</p>
                 </header>
 
-                <!-- Summary Grid (rendered by JavaScript based on role) -->
+                <!-- Summary Cards Grid -->
                 <div class="action-summary-grid" id="actionSummaryGrid">
-                    <!-- Cards will be rendered by JavaScript based on role -->
+                    <div class="action-summary-card" data-category="associates" onclick="filterActionsByCategory('associates')">
+                        <div class="action-summary-pulse orange" id="associatesPulse" style="display: none;"></div>
+                        <div class="action-summary-count" id="associatesCount">0</div>
+                        <div class="action-summary-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <div class="action-summary-label">Associates</div>
+                    </div>
+                    <div class="action-summary-card" data-category="clients" onclick="filterActionsByCategory('clients')">
+                        <div class="action-summary-pulse blue" id="clientsPulse" style="display: none;"></div>
+                        <div class="action-summary-count" id="clientsActionCount">0</div>
+                        <div class="action-summary-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <div class="action-summary-label">Clients</div>
+                    </div>
+                    <div class="action-summary-card" data-category="contracts" onclick="filterActionsByCategory('contracts')">
+                        <div class="action-summary-pulse purple" id="contractsPulse" style="display: none;"></div>
+                        <div class="action-summary-count" id="contractsCount">0</div>
+                        <div class="action-summary-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <div class="action-summary-label">Contracts</div>
+                    </div>
+                    <div class="action-summary-card" data-category="finance" onclick="filterActionsByCategory('finance')">
+                        <div class="action-summary-pulse green" id="financePulse" style="display: none;"></div>
+                        <div class="action-summary-count" id="financeCount">0</div>
+                        <div class="action-summary-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <div class="action-summary-label">Finance</div>
+                    </div>
                 </div>
 
-                <!-- Filter Tabs -->
-                <div class="action-filter-tabs" id="actionFilterTabs">
-                    <button class="action-filter-tab active" data-filter="all">All</button>
-                    <!-- Additional filter tabs rendered by JavaScript -->
+                <!-- Filter Indicator (shown when filtered) -->
+                <div class="action-filter-indicator" id="actionFilterIndicator" style="display: none;">
+                    <span>Showing: <strong id="activeFilterLabel">All</strong></span>
+                    <button class="action-filter-clear" onclick="clearActionFilter()">Clear filter</button>
                 </div>
 
-                <!-- Action Items Feed -->
-                <div class="action-feed" id="actionFeed">
-                    <!-- Items rendered by JavaScript -->
+                <div class="friction-feed" id="frictionFeed">
+                    <!-- Friction items will be rendered here -->
                 </div>
 
-                <!-- Empty State -->
-                <div class="action-empty-state" id="actionEmptyState" style="display: none;">
-                    <div class="empty-state-icon">
-                        <!-- Eden Leaf SVG with breathing animation -->
-                        <svg class="eden-leaf-breathing" viewBox="0 0 100 100" width="80" height="80">
-                            <path d="M50 10 C25 25, 15 50, 25 75 C35 90, 50 95, 50 95 C50 95, 65 90, 75 75 C85 50, 75 25, 50 10"
-                                  fill="none"
-                                  stroke="#2d5f4d"
-                                  stroke-width="2"/>
-                            <path d="M50 25 L50 85"
-                                  fill="none"
-                                  stroke="#2d5f4d"
-                                  stroke-width="1.5"/>
-                            <path d="M50 40 C40 45, 35 55, 38 65"
-                                  fill="none"
-                                  stroke="#2d5f4d"
-                                  stroke-width="1"/>
-                            <path d="M50 50 C60 55, 65 65, 62 75"
-                                  fill="none"
-                                  stroke="#2d5f4d"
-                                  stroke-width="1"/>
+                <div class="all-clear-state" id="allClearState" style="display: none;">
+                    <div class="all-clear-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--eden-green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
                         </svg>
                     </div>
-                    <p class="empty-state-text" id="emptyStateText">
-                        The Garden is in Bloom. All associates are thriving.
-                    </p>
+                    <h2 class="all-clear-title">All Clear!</h2>
+                    <p class="all-clear-text">No pending actions. Everything is running smoothly.</p>
                 </div>
 
                 <!-- Resolution Drawer -->
@@ -16037,11 +15925,6 @@ Sarah
             // Update referrals view for new role
             renderReferrals();
 
-            // Update Action Centre for new role
-            if (typeof ActionCentre !== 'undefined' && ActionCentre.render) {
-                ActionCentre.render();
-            }
-
             // Update mobile bottom nav for role change
             if (typeof updateBottomNavForRole === 'function') {
                 updateBottomNavForRole();
@@ -16112,11 +15995,9 @@ Sarah
                 renderReferrals();
             }
 
-            // Update Action Centre when showing action-centre view
+            // Update Action Centre summary counts when showing action-centre
             if (viewName === 'action-centre') {
-                if (typeof ActionCentre !== 'undefined' && ActionCentre.render) {
-                    ActionCentre.render();
-                }
+                renderFrictionFeed();
             }
 
             // Sync mobile bottom nav active state
@@ -17527,10 +17408,9 @@ Sarah
         }
 
         // ============================================
-        // ACTION CENTRE CONTROLLER (CHUNK 4)
+        // FRICTION FEED DATA & FUNCTIONS
         // ============================================
 
-        // Action items data array
         const frictionItems = [
             {
                 id: 'FRI-001',
@@ -17539,9 +17419,7 @@ Sarah
                 icon: 'file-text',
                 title: 'Insurance renewal required',
                 description: 'Fatima Okafor\'s professional indemnity insurance expires in 14 days',
-                entityName: 'Fatima Okafor',
                 associate: 'Fatima Okafor',
-                associateUcid: 'ASC-2402',
                 dueDate: '22 Jan 2026',
                 action: 'Send Reminder'
             },
@@ -17552,9 +17430,7 @@ Sarah
                 icon: 'file-signature',
                 title: 'Contract pending signature',
                 description: 'Amara Mensah has not signed the updated associate agreement',
-                entityName: 'Amara Mensah',
                 associate: 'Amara Mensah',
-                associateUcid: 'ASC-2403',
                 dueDate: '15 Jan 2026',
                 action: 'Resend Contract'
             },
@@ -17564,10 +17440,8 @@ Sarah
                 category: 'finance',
                 icon: 'alert-circle',
                 title: 'Overdue invoice #1042',
-                description: 'Client payment is 12 days overdue - Emma Stone (CLI-2516)',
-                entityName: 'Emma Stone',
+                description: 'Client payment is 12 days overdue - Emma Stone (CLIENT-2516)',
                 client: 'Emma Stone',
-                associateUcid: 'ASC-2401',
                 amount: '£85',
                 action: 'View Invoice'
             },
@@ -17578,293 +17452,149 @@ Sarah
                 icon: 'calendar',
                 title: 'Session unconfirmed',
                 description: 'Tomorrow\'s 2pm session with Mark & Lisa Harris awaiting confirmation',
-                entityName: 'Mark & Lisa Harris',
                 client: 'Mark & Lisa Harris',
                 associate: 'Sarah Johnson',
-                associateUcid: 'ASC-2401',
                 action: 'Send Reminder'
             }
         ];
 
-        // Action Centre IIFE Controller
-        const ActionCentre = (function() {
-            // DOM references
-            const summaryGrid = document.getElementById('actionSummaryGrid');
-            const filterTabs = document.getElementById('actionFilterTabs');
-            const feed = document.getElementById('actionFeed');
-            const emptyState = document.getElementById('actionEmptyState');
-            const emptyText = document.getElementById('emptyStateText');
-            const subtitle = document.getElementById('actionCentreSubtitle');
+        // Action Centre state
+        let activeActionFilter = null;
 
-            // State
-            let allActions = [];
-            let currentFilter = 'all';
+        // Category labels mapping
+        const ACTION_CATEGORY_LABELS = {
+            associates: 'Associates',
+            clients: 'Clients',
+            contracts: 'Contracts',
+            finance: 'Finance'
+        };
 
-            // Get current role from global variable
-            function getRole() {
-                return typeof currentUserRole !== 'undefined' ? currentUserRole : 'admin';
-            }
-
-            function isAdmin() {
-                return getRole() === 'admin';
-            }
-
-            // Category definitions
-            const categories = {
-                associates: { label: 'Associates', color: '#8b5cf6', adminOnly: true },
-                clients: { label: 'Clients', color: '#3b82f6', adminOnly: false },
-                contracts: { label: 'Contracts', color: '#f59e0b', adminOnly: false },
-                finance: { label: 'Finance', color: '#f43f5e', adminOnly: false }
+        // Count friction items by category
+        function countFrictionByCategory() {
+            const counts = {
+                associates: 0,
+                clients: 0,
+                contracts: 0,
+                finance: 0
             };
-
-            // Get categories for current role
-            function getCategoriesForRole() {
-                const role = getRole();
-                return Object.entries(categories)
-                    .filter(function(entry) {
-                        return role === 'admin' || !entry[1].adminOnly;
-                    })
-                    .map(function(entry) {
-                        return { id: entry[0], label: entry[1].label, color: entry[1].color, adminOnly: entry[1].adminOnly };
-                    });
-            }
-
-            // Count actions by category
-            function countByCategory(actions) {
-                const counts = { associates: 0, clients: 0, contracts: 0, finance: 0 };
-                actions.forEach(function(action) {
-                    if (counts.hasOwnProperty(action.category)) {
-                        counts[action.category]++;
-                    }
-                });
-                return counts;
-            }
-
-            // Render summary grid
-            function renderSummaryGrid() {
-                if (!summaryGrid) return;
-
-                const roleCategories = getCategoriesForRole();
-                const counts = countByCategory(allActions);
-
-                summaryGrid.innerHTML = roleCategories.map(function(cat) {
-                    const count = counts[cat.id] || 0;
-                    const hasItems = count > 0;
-                    const isActive = currentFilter === cat.id;
-
-                    return '<div class="action-summary-card' +
-                           (hasItems ? ' has-items' : '') +
-                           (isActive ? ' active' : '') + '" ' +
-                           'data-category="' + cat.id + '">' +
-                           '<div class="summary-card-count">' + count +
-                           (hasItems ? '<span class="summary-card-pulse"></span>' : '') +
-                           '</div>' +
-                           '<div class="summary-card-label">' + cat.label + '</div>' +
-                           '</div>';
-                }).join('');
-            }
-
-            // Render filter tabs
-            function renderFilterTabs() {
-                if (!filterTabs) return;
-
-                const roleCategories = getCategoriesForRole();
-
-                let html = '<button class="action-filter-tab' +
-                           (currentFilter === 'all' ? ' active' : '') +
-                           '" data-filter="all">All</button>';
-
-                roleCategories.forEach(function(cat) {
-                    html += '<button class="action-filter-tab' +
-                            (currentFilter === cat.id ? ' active' : '') +
-                            '" data-filter="' + cat.id + '">' + cat.label + '</button>';
-                });
-
-                filterTabs.innerHTML = html;
-            }
-
-            // Get filtered actions based on role and category
-            function getFilteredActions() {
-                let filteredActions = allActions.slice();
-
-                // If not admin, filter out 'associates' category
-                if (!isAdmin()) {
-                    filteredActions = filteredActions.filter(function(action) {
-                        return action.category !== 'associates';
-                    });
+            frictionItems.forEach(item => {
+                if (counts.hasOwnProperty(item.category)) {
+                    counts[item.category]++;
                 }
-
-                // Apply category filter
-                if (currentFilter !== 'all') {
-                    filteredActions = filteredActions.filter(function(action) {
-                        return action.category === currentFilter;
-                    });
-                }
-
-                return filteredActions;
-            }
-
-            // Render action items feed
-            function renderFeed() {
-                if (!feed) return;
-
-                const filteredActions = getFilteredActions();
-
-                // Show/hide empty state
-                if (filteredActions.length === 0) {
-                    feed.style.display = 'none';
-                    if (emptyState) emptyState.style.display = 'flex';
-
-                    // Set role-appropriate empty message
-                    if (emptyText) {
-                        if (isAdmin()) {
-                            emptyText.textContent = 'The Garden is in Bloom. All associates are thriving.';
-                        } else {
-                            emptyText.textContent = 'The Garden is in Bloom. Your practice is at peace.';
-                        }
-                    }
-                    return;
-                }
-
-                if (emptyState) emptyState.style.display = 'none';
-                feed.style.display = 'flex';
-
-                // Render items with new structure
-                feed.innerHTML = filteredActions.map(function(action) {
-                    const categoryLabel = categories[action.category] ? categories[action.category].label : action.category;
-                    const entityName = action.entityName || action.associate || action.client || 'Unknown';
-
-                    return '<div class="action-item" data-category="' + action.category + '" data-id="' + action.id + '">' +
-                           '<div class="action-item-header">' +
-                           '<span class="action-item-category">' + categoryLabel + '</span>' +
-                           '</div>' +
-                           '<div class="action-item-entity">' + entityName + '</div>' +
-                           '<div class="action-item-description">' + (action.description || action.title || '') + '</div>' +
-                           '</div>';
-                }).join('');
-            }
-
-            // Set filter
-            function setFilter(filter) {
-                currentFilter = filter;
-                renderSummaryGrid();
-                renderFilterTabs();
-                renderFeed();
-            }
-
-            // Load actions data
-            function loadActions(actions) {
-                allActions = actions || [];
-                currentFilter = 'all';
-                render();
-
-                // Update badge on mobile nav if available
-                if (typeof updateActionsBadge === 'function') {
-                    // Count only actions visible to current role
-                    let visibleCount = allActions.length;
-                    if (!isAdmin()) {
-                        visibleCount = allActions.filter(function(a) {
-                            return a.category !== 'associates';
-                        }).length;
-                    }
-                    updateActionsBadge(visibleCount);
-                }
-            }
-
-            // Full render
-            function render() {
-                renderSummaryGrid();
-                renderFilterTabs();
-                renderFeed();
-
-                // Update subtitle based on role
-                if (subtitle) {
-                    if (isAdmin()) {
-                        subtitle.textContent = 'Items requiring your attention';
-                    } else {
-                        subtitle.textContent = 'Items requiring your attention';
-                    }
-                }
-            }
-
-            // Event listeners
-            function init() {
-                if (!summaryGrid) return;
-
-                // Summary card clicks
-                summaryGrid.addEventListener('click', function(e) {
-                    const card = e.target.closest('.action-summary-card');
-                    if (card) {
-                        const category = card.dataset.category;
-                        // Toggle filter: if already active, show all
-                        if (currentFilter === category) {
-                            setFilter('all');
-                        } else {
-                            setFilter(category);
-                        }
-                    }
-                });
-
-                // Filter tab clicks
-                if (filterTabs) {
-                    filterTabs.addEventListener('click', function(e) {
-                        if (e.target.classList.contains('action-filter-tab')) {
-                            setFilter(e.target.dataset.filter);
-                        }
-                    });
-                }
-
-                // Action item clicks
-                if (feed) {
-                    feed.addEventListener('click', function(e) {
-                        const item = e.target.closest('.action-item');
-                        if (item) {
-                            const actionId = item.dataset.id;
-                            // Open resolution drawer
-                            if (typeof openResolutionDrawer === 'function') {
-                                openResolutionDrawer(actionId);
-                            }
-                        }
-                    });
-                }
-            }
-
-            // Initialize
-            init();
-
-            // Public API
-            return {
-                loadActions: loadActions,
-                setFilter: setFilter,
-                render: render,
-                getFilteredActions: getFilteredActions
-            };
-        })();
-
-        // Legacy function wrappers for backward compatibility
-        function renderFrictionFeed(filterCategory) {
-            if (filterCategory) {
-                ActionCentre.setFilter(filterCategory);
-            } else {
-                ActionCentre.setFilter('all');
-            }
+            });
+            return counts;
         }
 
-        function filterActionsByCategory(category) {
-            ActionCentre.setFilter(category);
-        }
-
-        function clearActionFilter() {
-            ActionCentre.setFilter('all');
-        }
-
+        // Update Action Centre summary cards
         function updateActionSummaryCounts() {
-            ActionCentre.render();
+            const counts = countFrictionByCategory();
+
+            // Update each category count and pulse indicator
+            Object.keys(counts).forEach(category => {
+                const countEl = document.getElementById(
+                    category === 'clients' ? 'clientsActionCount' : `${category}Count`
+                );
+                const pulseEl = document.getElementById(`${category}Pulse`);
+
+                if (countEl) {
+                    countEl.textContent = counts[category];
+                    countEl.classList.toggle('zero', counts[category] === 0);
+                }
+                if (pulseEl) {
+                    pulseEl.style.display = counts[category] > 0 ? 'block' : 'none';
+                }
+            });
+
+            // Update mobile bottom nav actions badge
+            const totalCount = Object.values(counts).reduce((sum, count) => sum + count, 0);
+            if (typeof updateActionsBadge === 'function') {
+                updateActionsBadge(totalCount);
+            }
         }
 
-        // Initialize Action Centre with friction items on load
-        function initActionCentre() {
-            ActionCentre.loadActions(frictionItems);
+        // Filter actions by category
+        function filterActionsByCategory(category) {
+            const cards = document.querySelectorAll('.action-summary-card');
+            const filterIndicator = document.getElementById('actionFilterIndicator');
+            const filterLabel = document.getElementById('activeFilterLabel');
+
+            // Toggle filter if same category clicked
+            if (activeActionFilter === category) {
+                clearActionFilter();
+                return;
+            }
+
+            activeActionFilter = category;
+
+            // Update card active states
+            cards.forEach(card => {
+                card.classList.toggle('active', card.dataset.category === category);
+            });
+
+            // Show filter indicator
+            if (filterIndicator) {
+                filterIndicator.style.display = 'flex';
+                filterLabel.textContent = ACTION_CATEGORY_LABELS[category] || category;
+            }
+
+            // Re-render feed with filter
+            renderFrictionFeed(category);
+        }
+
+        // Clear action filter
+        function clearActionFilter() {
+            activeActionFilter = null;
+
+            const cards = document.querySelectorAll('.action-summary-card');
+            const filterIndicator = document.getElementById('actionFilterIndicator');
+
+            cards.forEach(card => card.classList.remove('active'));
+            if (filterIndicator) filterIndicator.style.display = 'none';
+
+            renderFrictionFeed();
+        }
+
+        function renderFrictionFeed(filterCategory = null) {
+            const feed = document.getElementById('frictionFeed');
+            const allClear = document.getElementById('allClearState');
+
+            if (!feed) return;
+
+            // Apply category filter if provided
+            const itemsToRender = filterCategory
+                ? frictionItems.filter(item => item.category === filterCategory)
+                : frictionItems;
+
+            if (itemsToRender.length === 0) {
+                feed.style.display = 'none';
+                allClear.style.display = 'block';
+                return;
+            }
+
+            feed.style.display = 'flex';
+            allClear.style.display = 'none';
+
+            feed.innerHTML = itemsToRender.map(item => `
+                <div class="friction-item ${item.type}" onclick="openResolutionDrawer('${item.id}')">
+                    <div class="friction-icon ${item.type}">
+                        ${getFrictionIcon(item.icon)}
+                    </div>
+                    <div class="friction-content">
+                        <div class="friction-title">${item.title}</div>
+                        <div class="friction-description">${item.description}</div>
+                        <div class="friction-meta">
+                            ${item.associate ? `<span>Associate: ${item.associate}</span>` : ''}
+                            ${item.client ? `<span>Client: ${item.client}</span>` : ''}
+                            ${item.dueDate ? `<span>Due: ${item.dueDate}</span>` : ''}
+                            ${item.amount ? `<span>Amount: ${item.amount}</span>` : ''}
+                        </div>
+                    </div>
+                    <button class="friction-action" onclick="event.stopPropagation(); openResolutionDrawer('${item.id}')">${item.action}</button>
+                </div>
+            `).join('');
+
+            // Update summary counts
+            updateActionSummaryCounts();
         }
 
         function getFrictionIcon(iconName) {
@@ -18053,8 +17783,8 @@ Sarah
             // Close drawer
             closeResolutionDrawer();
 
-            // Re-render the feed with updated data
-            ActionCentre.loadActions(frictionItems);
+            // Re-render the feed
+            renderFrictionFeed();
 
             // Show feedback
             showToast('Snoozed for 7 days');
@@ -18072,8 +17802,8 @@ Sarah
             // Close drawer
             closeResolutionDrawer();
 
-            // Re-render the feed with updated data
-            ActionCentre.loadActions(frictionItems);
+            // Re-render the feed
+            renderFrictionFeed();
 
             // Show feedback
             showToast('Marked as resolved');
@@ -23442,7 +23172,7 @@ Eden Relationships
             initBottomSheetSwipe();
 
             // Initialize new views
-            initActionCentre();
+            renderFrictionFeed();
             renderAllClientsGrid();
             renderContractsGrid();
             renderCalendar();
