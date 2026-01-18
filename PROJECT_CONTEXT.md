@@ -110,12 +110,46 @@ Data in the portal helps associates understand their practice:
 
 ---
 
-## Current State (January 2025)
+## Current State (January 2026)
 
+### Business Status
 - 7 active associates
 - Growth target: 16 associates
 - Revenue managed under VAT threshold (£85k)
-- Portal in active development
+
+### Portal Implementation Status
+
+**Completed Features:**
+- Full Eden Calm design system (CSS variables, no grey palette)
+- Associates module with 7-tab detail panels
+- Clients module with 7-stage pipeline tracker
+- Action Centre with Friction Feed and summary grid
+- Financial Vitality Hub (Wealth Lab) with:
+  - True Cash calculation
+  - Cash Density projections
+  - Tax Intelligence (Pre-VAT mode)
+  - Payout Cockpit
+  - Wealth Lab Simulator
+- Schedule/Calendar module
+- Referral system with admin workflow and associate interest expression
+- Contracts module
+- Messages/Inbox system
+- Support and CPD modules
+- Role-based access (Admin vs Associate views)
+- Responsive design (desktop side panels, mobile bottom sheets)
+- Empty states with "Garden in Bloom" illustrations
+
+**Current Approach:**
+- Single-file HTML prototype (~900KB)
+- Mock data for all entities (7 associates, 20+ clients, 4 referrals)
+- Vanilla JavaScript (no framework dependencies)
+- Ready for React migration when appropriate
+
+**Next Phase:**
+- Airtable live data integration
+- Make.com automation connections
+- Squarespace authentication
+- Mobile testing and refinement
 
 ---
 

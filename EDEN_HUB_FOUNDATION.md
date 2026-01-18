@@ -1,9 +1,9 @@
 # EDEN HUB — FOUNDATION DOCUMENT
 
-**Version:** 1.0  
-**Date:** 6 January 2026  
-**Purpose:** Master specification for fresh Eden Hub repository  
-**Context:** Replacing previous "eden-admin-portal" iterations
+**Version:** 2.0
+**Date:** 18 January 2026
+**Purpose:** Master specification for Eden Hub Portal
+**Status:** Prototype Complete - Ready for Integration
 
 ---
 
@@ -15,9 +15,44 @@ Eden Hub is the Associates Portal for Eden Relationships Ltd — a therapy pract
 
 ---
 
-## 2. DESIGN PHILOSOPHY
+## 2. CURRENT IMPLEMENTATION STATUS
 
-### 2.1 Stewardship Principles
+### 2.1 Completed Features (v0.6.0)
+
+| Module | Status | Description |
+|--------|--------|-------------|
+| **Core Design System** | Complete | Eden Calm CSS variables, no grey palette |
+| **Associates** | Complete | ID cards, 7-tab detail panels, capacity tracking |
+| **Clients** | Complete | Cards, 7-stage pipeline, detail panels |
+| **Schedule** | Complete | Monthly calendar, session management |
+| **Action Centre** | Complete | Friction Feed, summary grid, resolution drawer |
+| **Financial Hub** | Complete | True Cash, Cash Density, Tax Intelligence, Payout Cockpit, Wealth Lab |
+| **Referrals** | Complete | Admin workflow, associate interest, specialisation matching |
+| **Contracts** | Complete | Document grid, status tracking |
+| **Messages** | Complete | Inbox, message viewer, compose |
+| **Support** | Complete | Help links, emergency contacts |
+| **CPD** | Placeholder | Activities list structure |
+
+### 2.2 Technical Approach
+
+- **Single-file HTML prototype** (~900KB)
+- **Mock data** for all entities (7 associates, 20+ clients, 4 referrals)
+- **Vanilla JavaScript** (no framework dependencies)
+- **Responsive design** (768px breakpoint)
+
+### 2.3 Next Phase
+
+- Airtable live data integration
+- Make.com automation connections
+- Squarespace authentication
+- Mobile testing and refinement
+- React migration (when appropriate)
+
+---
+
+## 3. DESIGN PHILOSOPHY
+
+### 3.1 Stewardship Principles
 
 | Principle | What It Means | How It's Implemented |
 |-----------|---------------|----------------------|
@@ -27,15 +62,15 @@ Eden Hub is the Associates Portal for Eden Relationships Ltd — a therapy pract
 | **Soft Enforcement** | Warnings, not blocks | Credits flag as "overdue" but don't prevent work |
 | **Silent Admin** | Goal is invisible administration | Associates focus on clients, not paperwork |
 
-### 2.2 The "Maps-Style" Navigation Pattern
+### 3.2 The "Maps-Style" Navigation Pattern
 
 The portal follows the Google Maps interaction paradigm:
 
 **Surface View → Drill-Down → Detail**
 
 When you tap a card:
-- **On iPhone:** A Bottom Sheet slides up from the bottom (85% screen height)
-- **On Laptop:** A Side Panel slides in from the right (450px width)
+- **On Desktop:** A Side Panel slides in from the right (450px width)
+- **On Mobile:** A Bottom Sheet slides up from the bottom (85% screen height)
 
 This prevents users getting "lost" in nested screens while maintaining context.
 
@@ -43,9 +78,9 @@ This prevents users getting "lost" in nested screens while maintaining context.
 
 ---
 
-## 3. EDEN CALM DESIGN SYSTEM
+## 4. EDEN CALM DESIGN SYSTEM
 
-### 3.1 Colour Palette
+### 4.1 Colour Palette
 
 The palette deliberately **avoids grey** to maintain warmth and approachability.
 
@@ -60,37 +95,28 @@ The palette deliberately **avoids grey** to maintain warmth and approachability.
 | Eden Text Secondary | `#4A6259` | Secondary text |
 | Eden Border | `#D4E5DE` | Borders (green-tinted, NOT grey) |
 
-### 3.2 Alert Colours (Friction Feed Only)
+### 4.2 Alert Colours (Friction Feed Only)
 
 | Colour | Hex | When Used |
 |--------|-----|-----------|
 | Amber | `#F59E0B` | Pending items, soft warnings |
-| Rose/Red | `#EF4444` | Urgent items, overdue actions |
+| Rose | `#EF4444` | Urgent items, overdue actions |
 | Blue | `#3B82F6` | Informational |
 
-### 3.3 Logo
+### 4.3 Logo
 
 **Simple Outlined Leaf** — single elegant leaf with stem, 1.5px stroke, no fill.
 
-```svg
-<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5">
-  <path d="M16 28 L16 12" stroke-linecap="round"/>
-  <path d="M16 12 C16 12, 8 14, 6 20 C4 26, 10 28, 16 24 C22 28, 28 26, 26 20 C24 14, 16 12, 16 12" stroke-linejoin="round"/>
-  <path d="M16 12 C16 16, 12 20, 10 22" stroke-linecap="round"/>
-  <path d="M16 14 C17 16, 20 19, 22 20" stroke-linecap="round"/>
-</svg>
-```
-
 **DO NOT USE:** The "ER" monogram from earlier iterations.
 
-### 3.4 Typography
+### 4.4 Typography
 
 - **Font Family:** System fonts (`-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif`)
 - **Base Size:** 16px
 - **Line Height:** 1.6
-- **Icons:** 1.5px thin-stroke outlined style throughout
+- **Icons:** 1.5px thin-stroke outlined style throughout (Lucide)
 
-### 3.5 Component Styling
+### 4.5 Component Styling
 
 - **Border Radius:** 8px standard, 12px for cards
 - **Shadows:** Subtle, used sparingly
@@ -98,9 +124,9 @@ The palette deliberately **avoids grey** to maintain warmth and approachability.
 
 ---
 
-## 4. DATA ARCHITECTURE
+## 5. DATA ARCHITECTURE
 
-### 4.1 UCID System
+### 5.1 UCID System
 
 Every entity has a **Unique Client ID** in the format:
 
@@ -114,10 +140,12 @@ TYPE-YYSEQ
 | `CLIENT` | `CLIENT-2501` | Client (2025, sequence 01) |
 | `SESSION` | `SESSION-2501` | Session record |
 | `TXN` | `TXN-2501` | Transaction |
+| `REF` | `REF-25003` | Referral |
+| `CON` | `CON-001` | Contract |
 
 **UCID is the primary key** across all Airtable tables.
 
-### 4.2 Key Formulas
+### 5.2 Key Formulas
 
 **True Cash** (lead metric for Financial Vitality Hub):
 ```
@@ -129,7 +157,13 @@ Bank Balance - Unspent Credits - Associate Payouts Owed - 25% Tax Reserve
 (Active Clients / Max Capacity) × 100
 ```
 
-### 4.3 Support Modes
+**Revenue Split:**
+```
+Associate: 69%
+Eden: 31%
+```
+
+### 5.3 Support Modes
 
 Associates operate in one of two modes:
 
@@ -140,33 +174,43 @@ Associates operate in one of two modes:
 
 ---
 
-## 5. PORTAL STRUCTURE
+## 6. PORTAL STRUCTURE
 
-### 5.1 Navigation Modules
+### 6.1 Navigation Modules (Admin View)
 
 | Module | Purpose | View Type |
 |--------|---------|-----------|
-| **Action Centre** | Friction Feed — exceptions only | List |
+| **Action Centre** | Friction Feed — exceptions only | Summary + List |
 | **Associates** | ID cards for all associates | Grid |
 | **Clients** | ID cards for all clients | Grid |
-| **Earnings** | Financial Vitality Hub entry | Gateway card |
 | **Schedule** | Session calendar | Calendar |
-| **CPD** | Continuing Professional Development | Tracker |
-| **Support** | Help and resources | Documentation |
+| **Finance** | Financial Vitality Hub | Gateway cards |
+| **Referrals** | Client allocation workflow | Stats + List |
+| **Contracts** | Document tracking | Grid |
+| **Messages** | Communications | List |
+| **Support** | Help resources | Links |
+| **CPD** | Professional development | List |
 
-### 5.2 ID Card Structure
+### 6.2 Detail Panel Architecture
 
-Each Associate or Client ID Card opens a detail panel with **5 tabs**:
+**Associate Detail Panel (7 Tabs)**
+1. Overview - Quick stats, client count, earnings
+2. Contact - Email, phone, address, emergency
+3. Sessions - Upcoming and past (timeline)
+4. Contracts - Agreement status
+5. Finance - Earnings, invoices, payout history
+6. Inbox - Direct messages
+7. Clients - Pipeline strip + client list
 
-| Tab | Contents |
-|-----|----------|
-| **Contact** | Name, email, phone, address, emergency contact |
-| **Sessions** | Session history, upcoming appointments, journey timeline |
-| **Contracts** | Signed agreements, pending documents |
-| **Finance** | Payment history, outstanding credits, 69/31 split breakdown |
-| **Inbox** | Messages, communications history |
+**Client Detail Panel (5 Tabs + Pipeline)**
+1. Contact - Email, phone, referral source
+2. Sessions - History and upcoming
+3. Finance - Payments, credits
+4. Notes - Internal notes
+5. Timeline - Activity log
++ Pipeline tracker at top (7-stage journey)
 
-### 5.3 Adaptive Layout Behaviour
+### 6.3 Adaptive Layout Behaviour
 
 | Breakpoint | Layout |
 |------------|--------|
@@ -175,177 +219,112 @@ Each Associate or Client ID Card opens a detail panel with **5 tabs**:
 
 ---
 
-## 6. FINANCIAL VITALITY HUB
+## 7. CLIENT JOURNEY PIPELINE (7 Stages)
 
-The Finance section is an **intelligence layer**, not an accounting tool.
+```
+INQUIRY → ENGAGED → MATCHED → BOOKED → ACTIVE → FOLLOW-UP → ONGOING
+ Amber    Purple     Blue      Teal     Green     Coral       Gold
+```
 
-### 6.1 Finance Gateway
-
-The "Earnings" card in the Command Centre shows:
-- **True Cash** total (the lead metric)
-- **VAT Progress Ring** (subtle visual)
-
-Tapping opens the Wealth Hub.
-
-### 6.2 Wealth Hub Modules
-
-| Module | Purpose | Key Features |
-|--------|---------|--------------|
-| **Cash Density** | 3-month cash flow projection | Safe vs Growth scenario toggle, Runway indicator |
-| **Tax Intelligence** | VAT tracking (pre and post threshold) | Progress ring, Days to Threshold, Reclaim tracker |
-| **Payout Cockpit** | Associate payment summary | Individual cards, 69/31 split, payment status |
-| **Wealth Lab Simulator** | Strategic planning tool | Dividend vs Pension sliders, ISA Bridge Gap tracker |
-| **System Health** | Integration status | QuickBooks/Stripe sync monitoring |
-
-### 6.3 Tax Intelligence Modes
-
-**Pre-VAT (Revenue < £85k):**
-- Circular progress ring (% of threshold)
-- Days to Threshold estimate
-- Scenario modelling (+5/+10/+15 clients)
-- VAT Cliff warning at 80%+
-
-**Post-VAT (Revenue ≥ £85k):**
-- VAT Collected / Reclaimable / Net Position cards
-- Quarterly Return countdown
-- Reclaim Opportunities panel
-- Categories: Software, Insurance, Accountancy, Training
+| Stage | Meaning | Colour |
+|-------|---------|--------|
+| **Inquiry** | Lead received, not yet responded | #F59E0B |
+| **Engaged** | Eden has responded, building trust | #8B5CF6 |
+| **Matched** | Suitable associate assigned | #3B82F6 |
+| **Booked** | Session scheduled, payment received | #14B8A6 |
+| **Active** | Ongoing therapeutic relationship | #10B981 |
+| **Follow-Up** | Post-session check-in | #F97316 |
+| **Ongoing** | Retained client, referral source | #EAB308 |
 
 ---
 
-## 7. FRICTION FEED SYSTEM
+## 8. REFERRAL SYSTEM
 
-The Action Centre uses a "Friction Feed" — it shows **nothing** when everything is fine.
+### 8.1 Referral Workflow
 
-### 7.1 Friction Types
+```
+NEW → TRIAGE → BROADCAST → PENDING → ALLOCATED → ACCEPTED
+```
 
-| Type | Trigger | Alert Level |
-|------|---------|-------------|
-| **Overdue Invoice** | 7+ days unpaid | Amber |
-| **Failed Payment** | Card declined | Rose |
-| **Payout Pending** | Approval required | Amber |
-| **Sync Error** | QuickBooks/Stripe failed | Rose |
-| **VAT Warning** | 80%+ of threshold | Amber |
-| **Contract Pending** | Unsigned > 3 days | Amber |
-| **Session Unconfirmed** | 24h before, no confirmation | Blue |
+1. **New** - Inquiry received via website form
+2. **Triage** - Admin reviews, assigns pseudonym, selects specialisations
+3. **Broadcast** - Sent to matching associates (24hr window)
+4. **Pending** - Associates have expressed interest, awaiting allocation
+5. **Allocated** - Admin selects associate
+6. **Accepted** - Associate confirms, client becomes their responsibility
 
-### 7.2 Alert Dot Behaviour
+### 8.2 Specialisations (24 Categories)
 
-- Dots **pulse** only when active
-- Dots **glow** based on urgency level
-- No alerts = "All clear!" message
+Anxiety & Stress, Depression, Trauma & PTSD, Grief & Loss, Relationships & Intimacy, Couples & Marriage, Pre-Marital Preparation, Family Dynamics, Workplace & Career, Burnout & Work Stress, Leadership & Executive Performance, Identity & Self-Worth, Cultural & Minority Identity, Men's Issues, Women's Issues, Impostor Syndrome, Neurodiversity, Eating Disorders, Addictions, Loneliness & Isolation, Life Transitions, Parenting, Chronic Illness & Health, Faith & Spirituality
 
 ---
 
-## 8. AUTHENTICATION STRATEGY
+## 9. FINANCIAL VITALITY HUB
 
-### 8.1 Overview
+### 9.1 Wealth Hub Modules
 
-Authentication via **Squarespace Member Areas** integrated with **Make.com** workflows.
+| Module | Purpose | Status |
+|--------|---------|--------|
+| **Cash Density** | 3-month cash flow projection | Complete |
+| **Tax Intelligence** | VAT tracking (pre-threshold mode) | Complete |
+| **Payout Cockpit** | Associate payment management | Complete |
+| **Wealth Lab Simulator** | Dividend vs pension planning | Complete |
+| **System Health** | Integration status | Placeholder |
 
-### 8.2 Session Flow
+### 9.2 True Cash Pulse Indicator
 
-1. Associate logs in via Squarespace Member Areas
-2. Make.com webhook captures login event
-3. Session token generated and stored in Airtable
-4. Portal validates token on each request
-5. Token expires after inactivity (configurable)
-
-### 8.3 Portal Entry Points
-
-- **Primary:** Squarespace Member Areas (for associates)
-- **Admin:** Direct portal access (for Mike/Maryanne)
+| Status | Colour | Meaning |
+|--------|--------|---------|
+| Healthy | Green | >3 months runway |
+| Caution | Amber | 1-3 months runway |
+| Critical | Red | <1 month runway |
 
 ---
 
-## 9. TECHNICAL STACK
+## 10. TECHNICAL STACK
 
-### 9.1 Production Stack
+### 10.1 Current (Prototype)
+
+| Layer | Technology |
+|-------|------------|
+| **Frontend** | Single-file HTML + CSS + JavaScript |
+| **Styling** | CSS Custom Properties |
+| **Icons** | Lucide (inline SVG, 1.5px stroke) |
+| **Data** | Mock JavaScript arrays |
+
+### 10.2 Target (Production)
 
 | Layer | Technology |
 |-------|------------|
 | **Frontend** | React 18 + TypeScript |
 | **Styling** | Tailwind CSS |
 | **Components** | shadcn/ui |
-| **Icons** | Lucide (1.5px stroke weight) |
+| **Icons** | Lucide React |
 | **Backend** | Airtable (database) |
 | **Automation** | Make.com (workflows) |
 | **Payments** | Stripe |
 | **Accounting** | QuickBooks |
 | **Auth** | Squarespace Member Areas |
 
-### 9.2 Development Approach
-
-**Single-file HTML prototypes first** — understand and approve each component before migrating to React.
-
-This ensures:
-- Mike understands every line of code
-- No "black box" components
-- Clear migration path
-
 ---
 
-## 10. IMPLEMENTATION ROADMAP
-
-### Phase 1 (Week 1-2): Foundation
-- [ ] Set up Eden Hub repository
-- [ ] Create base HTML prototype with Eden Calm styling
-- [ ] Implement ID Card grid (mock data)
-- [ ] Implement adaptive UI (Bottom Sheet / Side Panel)
-- [ ] Implement 5-tab detail panels
-
-### Phase 2 (Week 3-4): Financial Vitality Hub
-- [ ] Finance Gateway card
-- [ ] Cash Density module
-- [ ] Tax Intelligence (Pre-VAT mode)
-- [ ] Payout Cockpit
-
-### Phase 3 (Week 5-6): Advanced Features
-- [ ] Tax Intelligence (Post-VAT mode)
-- [ ] Wealth Lab Simulator
-- [ ] System Health monitoring
-- [ ] Friction Feed integration
-
-### Phase 4 (Week 7-8): Integration & Polish
-- [ ] Airtable connection (live data)
-- [ ] Make.com webhook setup
-- [ ] Squarespace authentication
-- [ ] Mobile optimisation
-- [ ] User testing with associates
-
----
-
-## 11. FILE NAMING CONVENTIONS
-
-| File Type | Pattern | Example |
-|-----------|---------|---------|
-| **Prototypes** | `eden-hub-[module]-v[n].html` | `eden-hub-dashboard-v1.html` |
-| **Status Files** | `EDEN_STATUS.txt` | Always this name |
-| **Specifications** | `EDEN_[NAME]_SPEC.md` | `EDEN_AUTH_SPEC.md` |
-| **Handover Docs** | `EDEN_[MODULE]_HANDOVER.md` | `EDEN_FINANCE_HANDOVER.md` |
-
----
-
-## 12. SESSION PROTOCOL
+## 11. SESSION PROTOCOL
 
 ### Start of Every Session
 
-1. Upload `EDEN_STATUS.txt`
-2. Upload any relevant specification documents
-3. State which module/phase you want to work on
-4. Claude will read context before proceeding
+1. Read `EDEN_STATUS.txt` for current state
+2. Confirm which features/chunks to work on
+3. Review any new requirements
 
 ### End of Every Session
 
-1. Claude updates `EDEN_STATUS.txt`
-2. Claude provides download link
-3. Mike downloads to OneDrive before closing chat
-
-This eliminates context drift between sessions.
+1. Update `EDEN_STATUS.txt` with progress
+2. Commit changes to git
+3. Note any blockers or decisions made
 
 ---
 
-## 13. GLOSSARY
+## 12. GLOSSARY
 
 | Term | Definition |
 |------|------------|
@@ -363,7 +342,7 @@ This eliminates context drift between sessions.
 
 ---
 
-## 14. CONTACT & OWNERSHIP
+## 13. CONTACT & OWNERSHIP
 
 **Eden Relationships Ltd**
 - **Co-Founders:** Mike & Maryanne
