@@ -3355,9 +3355,7 @@
             color: #6b7280;
         }
 
-        /* ===== EDEN EMPTY STATES (Garden in Bloom) ===== */
-
-        .eden-empty-state,
+        /* Empty State */
         .action-empty-state {
             display: flex;
             flex-direction: column;
@@ -3365,69 +3363,26 @@
             justify-content: center;
             padding: 48px 24px;
             text-align: center;
-            min-height: 200px;
         }
 
-        .eden-empty-icon,
         .empty-state-icon {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
 
-        /* Breathing animation for the leaf */
         .eden-leaf-breathing {
-            animation: eden-breathe 4s ease-in-out infinite;
+            animation: breathe 4s ease-in-out infinite;
         }
 
-        @keyframes eden-breathe {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 0.7;
-            }
-            50% {
-                transform: scale(1.08);
-                opacity: 1;
-            }
-        }
-
-        /* Legacy keyframes for backward compatibility */
         @keyframes breathe {
             0%, 100% { transform: scale(1); opacity: 0.8; }
             50% { transform: scale(1.05); opacity: 1; }
         }
 
-        .eden-empty-message,
         .empty-state-text {
             font-size: 16px;
-            font-weight: 500;
             color: #6b7280;
             max-width: 280px;
             line-height: 1.5;
-            margin: 0;
-        }
-
-        .eden-empty-action {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: var(--eden-green, #2d5f4d);
-            color: #FFFFFF;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.15s ease;
-        }
-
-        .eden-empty-action:hover {
-            background: var(--eden-green-hover, #245242);
-        }
-
-        /* Reduced motion preference */
-        @media (prefers-reduced-motion: reduce) {
-            .eden-leaf-breathing {
-                animation: none;
-                opacity: 0.85;
-            }
         }
 
         /* Legacy filter indicator (kept for compatibility) */
@@ -15438,220 +15393,6 @@ Sarah
         };
 
         // ============================================
-        // EMPTY STATE CONTROLLER (Garden in Bloom)
-        // ============================================
-
-        /* Empty State Messages by section and role */
-        const EmptyStateMessages = {
-            'action-centre': {
-                admin: 'The Garden is in Bloom. All associates are thriving.',
-                associate: 'The Garden is in Bloom. Your practice is at peace.'
-            },
-            'referrals': {
-                admin: 'No new referrals. The garden rests.',
-                associate: 'No referrals awaiting your response.'
-            },
-            'clients': {
-                admin: 'No clients yet. The first seed awaits.',
-                associate: 'No clients yet. Your first client awaits.'
-            },
-            'inbox': {
-                admin: 'All clear. No messages need attention.',
-                associate: 'All clear. No messages need attention.'
-            },
-            'associates': {
-                admin: 'No associates yet. Your team awaits.',
-                associate: null  // Associates don't see this section
-            },
-            'contracts': {
-                admin: 'No contracts requiring attention.',
-                associate: 'No contracts requiring attention.'
-            },
-            'sessions': {
-                admin: 'No sessions scheduled.',
-                associate: 'No sessions scheduled.'
-            },
-            'schedule': {
-                admin: 'Schedule is clear.',
-                associate: 'Your schedule is clear.'
-            }
-        };
-
-        /* Optional action buttons for empty states */
-        const EmptyStateActions = {
-            'clients': {
-                admin: { text: 'Add First Client', action: 'addClient' },
-                associate: null
-            },
-            'associates': {
-                admin: { text: 'Add First Associate', action: 'addAssociate' },
-                associate: null
-            }
-        };
-
-        /* EmptyState Controller IIFE */
-        const EmptyState = (function() {
-
-            // Get current role from global variable
-            function getRole() {
-                return typeof currentUserRole !== 'undefined' ? currentUserRole : 'admin';
-            }
-
-            /**
-             * Get the Eden Leaf SVG HTML
-             * @returns {string} SVG markup
-             */
-            function getLeafSvg() {
-                return `<svg class="eden-leaf-breathing" viewBox="0 0 64 64" width="64" height="64" aria-hidden="true">
-                    <path d="M32 4 C12 20, 8 44, 32 60 C56 44, 52 20, 32 4"
-                          fill="none"
-                          stroke="#2d5f4d"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"/>
-                    <path d="M32 12 L32 52"
-                          fill="none"
-                          stroke="#2d5f4d"
-                          stroke-width="1"
-                          stroke-linecap="round"
-                          opacity="0.5"/>
-                    <path d="M32 24 L22 32 M32 32 L20 42 M32 40 L24 48"
-                          fill="none"
-                          stroke="#2d5f4d"
-                          stroke-width="1"
-                          stroke-linecap="round"
-                          opacity="0.3"/>
-                    <path d="M32 24 L42 32 M32 32 L44 42 M32 40 L40 48"
-                          fill="none"
-                          stroke="#2d5f4d"
-                          stroke-width="1"
-                          stroke-linecap="round"
-                          opacity="0.3"/>
-                </svg>`;
-            }
-
-            /**
-             * Create empty state HTML for a section
-             * @param {string} sectionId - The section identifier
-             * @returns {string} HTML markup
-             */
-            function createEmptyStateHtml(sectionId) {
-                const role = getRole();
-                const messages = EmptyStateMessages[sectionId] || {};
-                const message = messages[role] || messages.admin || 'No items to display.';
-
-                const actions = EmptyStateActions[sectionId] || {};
-                const actionConfig = actions[role];
-
-                let actionHtml = '';
-                if (actionConfig) {
-                    actionHtml = `<button class="eden-empty-action" data-action="${actionConfig.action}">${actionConfig.text}</button>`;
-                }
-
-                return `
-                    <div class="eden-empty-state" id="${sectionId}-empty-state">
-                        <div class="eden-empty-icon">
-                            ${getLeafSvg()}
-                        </div>
-                        <p class="eden-empty-message">${message}</p>
-                        ${actionHtml}
-                    </div>
-                `;
-            }
-
-            /**
-             * Show empty state for a section
-             * @param {string} sectionId - The section identifier
-             * @param {HTMLElement} container - The container to show empty state in
-             */
-            function show(sectionId, container) {
-                if (!container) {
-                    console.warn('EmptyState: No container provided for', sectionId);
-                    return;
-                }
-
-                // Check if empty state already exists
-                let emptyState = container.querySelector('.eden-empty-state');
-                if (!emptyState) {
-                    // Create and insert empty state
-                    container.insertAdjacentHTML('beforeend', createEmptyStateHtml(sectionId));
-                    emptyState = container.querySelector('.eden-empty-state');
-                }
-
-                // Update message for current role
-                const role = getRole();
-                const messages = EmptyStateMessages[sectionId] || {};
-                const message = messages[role] || messages.admin || 'No items to display.';
-                const messageEl = emptyState.querySelector('.eden-empty-message');
-                if (messageEl) {
-                    messageEl.textContent = message;
-                }
-
-                emptyState.style.display = 'flex';
-            }
-
-            /**
-             * Hide empty state for a section
-             * @param {HTMLElement} container - The container with empty state
-             */
-            function hide(container) {
-                if (!container) return;
-                const emptyState = container.querySelector('.eden-empty-state');
-                if (emptyState) {
-                    emptyState.style.display = 'none';
-                }
-            }
-
-            /**
-             * Toggle empty state based on item count
-             * @param {string} sectionId - The section identifier
-             * @param {number} itemCount - Number of items in the section
-             * @param {HTMLElement} container - The container element
-             * @param {HTMLElement} contentElement - Optional element to hide when empty
-             */
-            function toggle(sectionId, itemCount, container, contentElement) {
-                if (itemCount === 0) {
-                    if (contentElement) contentElement.style.display = 'none';
-                    show(sectionId, container);
-                } else {
-                    if (contentElement) contentElement.style.display = '';
-                    hide(container);
-                }
-            }
-
-            return {
-                show: show,
-                hide: hide,
-                toggle: toggle,
-                createHtml: createEmptyStateHtml,
-                getLeafSvg: getLeafSvg
-            };
-        })();
-
-        /* Event delegation for empty state action buttons */
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('eden-empty-action')) {
-                const action = e.target.dataset.action;
-                handleEmptyStateAction(action);
-            }
-        });
-
-        function handleEmptyStateAction(action) {
-            switch(action) {
-                case 'addClient':
-                    console.log('Add client action triggered');
-                    // TODO: Open add client form/modal
-                    break;
-                case 'addAssociate':
-                    console.log('Add associate action triggered');
-                    // TODO: Open add associate form/modal
-                    break;
-                default:
-                    console.log('Unknown empty state action:', action);
-            }
-        }
-
-        // ============================================
         // UNIFIED DETAIL VIEW CONTROLLER
         // ============================================
 
@@ -16477,17 +16218,17 @@ Sarah
             updateAssociateStats();
 
             if (filteredAssociates.length === 0) {
-                // Use Garden in Bloom empty state
-                grid.innerHTML = EmptyState.createHtml('associates');
-                const emptyState = grid.querySelector('.eden-empty-state');
-                if (emptyState) {
-                    emptyState.style.gridColumn = '1 / -1';
-                    // Update message for filter context
-                    const messageEl = emptyState.querySelector('.eden-empty-message');
-                    if (messageEl && filter !== 'all') {
-                        messageEl.textContent = 'No associates match this filter.';
-                    }
-                }
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--eden-text-secondary)" stroke-width="1.5" style="margin-bottom: 16px;">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        <p style="color: var(--eden-text-secondary);">No associates match this filter</p>
+                    </div>
+                `;
                 return;
             }
 
@@ -17043,13 +16784,6 @@ Sarah
             console.log('inboxMessagesList container:', container);
             if (!container) {
                 console.error('inboxMessagesList container NOT FOUND');
-                return;
-            }
-
-            // Handle empty inbox state with Garden in Bloom
-            if (mockEmails.length === 0) {
-                container.innerHTML = EmptyState.createHtml('inbox');
-                console.log('Inbox empty state displayed');
                 return;
             }
 
@@ -18494,17 +18228,15 @@ Sarah
             updateContractStats();
 
             if (filteredContracts.length === 0) {
-                // Use Garden in Bloom empty state
-                grid.innerHTML = EmptyState.createHtml('contracts');
-                const emptyState = grid.querySelector('.eden-empty-state');
-                if (emptyState) {
-                    emptyState.style.gridColumn = '1 / -1';
-                    // Update message for filter context
-                    const messageEl = emptyState.querySelector('.eden-empty-message');
-                    if (messageEl && filter !== 'all') {
-                        messageEl.textContent = 'No contracts match this filter.';
-                    }
-                }
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--eden-text-secondary)" stroke-width="1.5" style="margin-bottom: 16px;">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                        </svg>
+                        <p style="color: var(--eden-text-secondary);">No contracts match this filter</p>
+                    </div>
+                `;
                 return;
             }
 
@@ -18760,17 +18492,15 @@ Sarah
             updateAllClientsCounts();
 
             if (filteredClients.length === 0) {
-                // Use Garden in Bloom empty state
-                grid.innerHTML = EmptyState.createHtml('clients');
-                const emptyState = grid.querySelector('.eden-empty-state');
-                if (emptyState) {
-                    emptyState.style.gridColumn = '1 / -1';
-                    // Update message for filter context
-                    const messageEl = emptyState.querySelector('.eden-empty-message');
-                    if (messageEl && filter !== 'all') {
-                        messageEl.textContent = 'No clients match this filter.';
-                    }
-                }
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--eden-text-secondary)" stroke-width="1.5" style="margin-bottom: 16px;">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                        </svg>
+                        <p style="color: var(--eden-text-secondary);">No clients match this filter</p>
+                    </div>
+                `;
                 return;
             }
 
@@ -18955,8 +18685,12 @@ Sarah
             );
 
             if (todaysSessions.length === 0) {
-                // Use Garden in Bloom empty state
-                list.innerHTML = EmptyState.createHtml('schedule');
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-title">No sessions today</div>
+                        <div class="empty-state-text">Enjoy your day off!</div>
+                    </div>
+                `;
                 return;
             }
 
@@ -18998,8 +18732,18 @@ Sarah
             const content = document.getElementById('sessionDetailContent');
 
             if (daySessions.length === 0) {
-                // Use Garden in Bloom empty state
-                content.innerHTML = EmptyState.createHtml('sessions');
+                content.innerHTML = `
+                    <div class="session-detail-empty">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        <div style="font-size: 16px; font-weight: 500; margin-bottom: 4px;">No sessions scheduled</div>
+                        <div style="font-size: 14px;">This day is free</div>
+                    </div>
+                `;
             } else {
                 content.innerHTML = daySessions.map(session => `
                     <div class="session-detail-card ${session.status}">
@@ -20643,16 +20387,18 @@ Eden Relationships
             const container = document.getElementById('referralListAdmin');
 
             if (filteredReferrals.length === 0) {
-                // Use Garden in Bloom empty state
-                container.innerHTML = EmptyState.createHtml('referrals');
-                const emptyState = container.querySelector('.eden-empty-state');
-                if (emptyState) {
-                    // Update message for filter context
-                    const messageEl = emptyState.querySelector('.eden-empty-message');
-                    if (messageEl && currentReferralFilter !== 'all') {
-                        messageEl.textContent = 'No referrals match this filter.';
-                    }
-                }
+                container.innerHTML = `
+                    <div class="referral-empty-state">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <line x1="19" y1="8" x2="19" y2="14"/>
+                            <line x1="22" y1="11" x2="16" y2="11"/>
+                        </svg>
+                        <h3>No referrals</h3>
+                        <p>No referrals match the current filter.</p>
+                    </div>
+                `;
                 return;
             }
 
@@ -20749,8 +20495,16 @@ Eden Relationships
             const container = document.getElementById('referralListAssociate');
 
             if (availableReferrals.length === 0) {
-                // Use Garden in Bloom empty state
-                container.innerHTML = EmptyState.createHtml('referrals');
+                container.innerHTML = `
+                    <div class="referral-empty-state">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <h3>All caught up!</h3>
+                        <p>No referrals matching your availability right now.</p>
+                    </div>
+                `;
             } else {
                 container.innerHTML = availableReferrals.map(ref => {
                     const hoursRemaining = Math.max(0, Math.floor((ref.broadcastExpiresAt - Date.now()) / (1000 * 60 * 60)));
