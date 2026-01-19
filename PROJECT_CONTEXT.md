@@ -135,19 +135,25 @@ Data in the portal helps associates understand their practice:
 - Contracts module
 - Messages/Inbox system
 - Support and CPD modules
+- Clinical Governance module ("Silent Auditor") with:
+  - Supervision Tracker (Current/Due Soon/Overdue status)
+  - DBS Update Service tracking (annual or 3-year cycle)
+  - ICO Registration tracking with onboarding gate
+  - Compliance cards in Associate Profile
+  - Friction Feed integration for compliance items
 - Role-based access (Admin vs Associate views)
 - Responsive design (desktop side panels, mobile bottom sheets)
 - Empty states with "Garden in Bloom" illustrations
 
 **Current Approach:**
-- Single-file HTML prototype (~900KB)
-- Mock data for all entities (7 associates, 20+ clients, 4 referrals)
+- Single-file HTML prototype (~960KB)
+- Mock data for all entities (7 associates, 20+ clients, 4 referrals, 10 friction items)
 - Vanilla JavaScript (no framework dependencies)
 - Ready for React migration when appropriate
 
 **Next Phase:**
-- Airtable live data integration
-- Make.com automation connections
+- Airtable live data integration (including clinical governance fields)
+- Make.com automation connections for compliance tracking
 - Squarespace authentication
 - Mobile testing and refinement
 

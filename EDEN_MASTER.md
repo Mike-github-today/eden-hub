@@ -1,8 +1,8 @@
 # EDEN MASTER SPECIFICATION
 
-**Version:** 3.1
+**Version:** 3.2
 **Last Updated:** January 2026
-**Status:** Prototype Complete (v0.6.0) - Ready for Integration
+**Status:** Prototype Complete (v0.7.0) - Ready for Integration
 
 ---
 
@@ -11,7 +11,7 @@
 | Item | Value |
 |------|-------|
 | **Project** | Eden Hub Portal |
-| **Current Stack** | Single-file HTML + CSS + JavaScript (~900KB) |
+| **Current Stack** | Single-file HTML + CSS + JavaScript (~960KB) |
 | **Target Stack** | React 18 + TypeScript, Tailwind CSS, shadcn/ui |
 | **Database** | Airtable (planned integration) |
 | **Automation** | Make.com (planned integration) |
@@ -32,6 +32,7 @@
 | Contracts | Complete |
 | Messages | Complete |
 | Support/CPD | Complete |
+| Clinical Governance | Complete |
 
 ---
 
@@ -306,10 +307,74 @@ The Friction Feed shows **only exceptions** requiring attention. When everything
 | Inquiry >24hrs no response | Amber |
 | Client inactive >30 days | Amber |
 | Unread message >48hrs | Blue |
+| Supervision overdue | Rose |
+| Supervision due soon (7 days) | Amber |
+| DBS check overdue | Rose |
+| DBS check due soon (30 days) | Amber |
+| ICO not registered | Rose |
+| ICO renewal due (30 days) | Amber |
 
 ---
 
-## 8. WEALTH LAB (Financial Hub)
+## 8. CLINICAL GOVERNANCE ("Silent Auditor")
+
+Eden bears vicarious responsibility under BACP, UKCP, and HCPC guidelines. The Clinical Governance module tracks compliance without surveillance.
+
+### Supervision Tracker
+
+| Field | Type | Notes |
+|-------|------|-------|
+| Supervisor_Name | Text | Required |
+| Supervisor_Accreditation | Text | e.g., "BACP Registered" |
+| Supervision_Frequency | Select | Weekly, Fortnightly, Monthly |
+| Last_Supervision_Confirmed | Date | Updated by associate |
+| Supervision_Due_Date | Formula | Calculated from frequency |
+| Supervision_Status | Formula | Current, Due Soon, Overdue |
+
+**Status Logic:**
+- **Current**: Due date is >7 days away
+- **Due Soon**: Due date is within 7 days
+- **Overdue**: Due date has passed
+
+### DBS Update Service
+
+| Field | Type | Notes |
+|-------|------|-------|
+| DBS_Certificate_Number | Text | Original certificate number |
+| DBS_Certificate_Date | Date | Date of original certificate |
+| DBS_Update_Service_ID | Text | Subscription ID (if enrolled) |
+| DBS_Update_Service_Enrolled | Checkbox | True if subscribed (£13/year) |
+| DBS_Last_Checked | Date | Last annual check date |
+| DBS_Next_Check_Due | Formula | Annual (if enrolled) or 3-year |
+| DBS_Status | Formula | Valid, Renewal Soon, Expired |
+
+**Status Logic:**
+- **Valid**: Check due date is >30 days away
+- **Renewal Soon**: Check due within 30 days
+- **Expired/Check Due**: Check due date has passed
+
+### ICO Registration
+
+| Field | Type | Notes |
+|-------|------|-------|
+| ICO_Registration_Number | Text | Format: ZA****** or ZB****** |
+| ICO_Registration_Verified | Checkbox | Manually verified by admin |
+| ICO_Expiry_Date | Date | Annual renewal date |
+| ICO_Status | Formula | Valid, Renewal Due, Expired, Not Registered, Pending |
+
+**Onboarding Gate:** ICO Registration is REQUIRED in Stage 2 (Documents). Associates cannot progress without providing their ICO number.
+
+### Visual States
+
+| Status | Card Background | Icon Background | Friction Feed |
+|--------|-----------------|-----------------|---------------|
+| Current/Valid | Mint | Eden Green light | Not shown |
+| Due Soon/Renewal Soon | Mint + amber border | Amber light | Amber item |
+| Overdue/Expired | Soft red (#FEF2F2) | Rose light | Rose item |
+
+---
+
+## 9. WEALTH LAB (Financial Hub)
 
 The Wealth Lab provides financial simulations for associates:
 
@@ -377,6 +442,11 @@ Eden operates a **69/31 split**:
 | Document verified | Confirm to associate |
 | Document expiring (30 days) | Reminder email |
 | Document expired | Create friction item |
+| Supervision confirmed | Update Last_Supervision_Confirmed |
+| Supervision overdue | Create friction item, soft reminder |
+| DBS check marked | Update DBS_Last_Checked (admin only) |
+| DBS renewal due (30 days) | Reminder email |
+| ICO expiring (30 days) | Reminder email |
 
 ---
 
@@ -399,6 +469,18 @@ Eden operates a **69/31 split**:
 | Associates | Status | Active/Paused/Offboarded |
 | Associates | Onboarding_Stage | 1-6 (Welcome to Active) |
 | Associates | Capacity_Percent | Availability indicator |
+| Associates | Supervisor_Name | Clinical supervision contact |
+| Associates | Supervision_Frequency | Weekly/Fortnightly/Monthly |
+| Associates | Last_Supervision_Confirmed | Date of last confirmed supervision |
+| Associates | Supervision_Status | Formula: Current/Due Soon/Overdue |
+| Associates | DBS_Certificate_Number | Enhanced DBS certificate |
+| Associates | DBS_Update_Service_Enrolled | Boolean: using annual service |
+| Associates | DBS_Last_Checked | Date of last check |
+| Associates | DBS_Status | Formula: Valid/Renewal Soon/Expired |
+| Associates | ICO_Registration_Number | ICO data controller registration |
+| Associates | ICO_Registration_Verified | Boolean: admin verified |
+| Associates | ICO_Expiry_Date | Annual renewal date |
+| Associates | ICO_Status | Formula: Valid/Renewal Due/Expired/Not Registered |
 | Clients | Pipeline_Stage | 1-7 (Inquiry to Ongoing) |
 | Clients | Assigned_Associate | Link to Associates |
 
