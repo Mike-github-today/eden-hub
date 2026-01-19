@@ -23310,38 +23310,38 @@ Eden Relationships
 
             const showConfirmBtn = status !== 'Current';
 
-            return \`
-                <div class="compliance-card compliance-card--\${statusLower}" onclick="openSupervisionPanel('\${data.id}')">
+            return `
+                <div class="compliance-card compliance-card--${statusLower}" onclick="openSupervisionPanel('${data.id}')">
                     <div class="compliance-card-header">
-                        <div class="compliance-card-icon compliance-card-icon--\${statusLower}">
-                            \${calendarIcon}
+                        <div class="compliance-card-icon compliance-card-icon--${statusLower}">
+                            ${calendarIcon}
                         </div>
-                        <span class="compliance-card-status compliance-status--\${statusLower}">
-                            \${status === 'Due Soon' ? '<span class="compliance-pulse"></span> ' : ''}\${status}
+                        <span class="compliance-card-status compliance-status--${statusLower}">
+                            ${status === 'Due Soon' ? '<span class="compliance-pulse"></span> ' : ''}${status}
                         </span>
                     </div>
                     <div class="compliance-card-content">
                         <div class="compliance-card-title">Supervision</div>
                         <div class="compliance-card-meta">
-                            <span>\${data.supervisorName || 'Not set'}</span>
-                            <span>\${data.supervisionFrequency || 'Not set'}</span>
+                            <span>${data.supervisorName || 'Not set'}</span>
+                            <span>${data.supervisionFrequency || 'Not set'}</span>
                         </div>
                         <div class="compliance-card-meta" style="margin-top: 4px;">
-                            <span>Last confirmed: \${formatGovernanceDate(data.lastSupervisionConfirmed)}</span>
+                            <span>Last confirmed: ${formatGovernanceDate(data.lastSupervisionConfirmed)}</span>
                         </div>
                         <div class="compliance-card-meta" style="margin-top: 2px;">
-                            <span>Due: \${formatGovernanceDate(data.supervisionDueDate)}</span>
+                            <span>Due: ${formatGovernanceDate(data.supervisionDueDate)}</span>
                         </div>
                     </div>
-                    \${showConfirmBtn ? \`
+                    ${showConfirmBtn ? `
                     <div class="compliance-card-action">
-                        <button class="compliance-confirm-btn compliance-confirm-btn--primary" onclick="event.stopPropagation(); confirmSupervision('\${data.id}')">
+                        <button class="compliance-confirm-btn compliance-confirm-btn--primary" onclick="event.stopPropagation(); confirmSupervision('${data.id}')">
                             Confirm Supervision
                         </button>
                     </div>
-                    \` : ''}
+                    ` : ''}
                 </div>
-            \`;
+            `;
         }
 
         function renderDbsCard(data) {
@@ -23355,35 +23355,35 @@ Eden Relationships
             const isAdmin = typeof currentUserRole !== 'undefined' && currentUserRole === 'admin';
             const showCheckBtn = isAdmin && status !== 'Valid';
 
-            return \`
-                <div class="compliance-card compliance-card--\${statusLower}" onclick="openDbsPanel('\${data.id}')">
+            return `
+                <div class="compliance-card compliance-card--${statusLower}" onclick="openDbsPanel('${data.id}')">
                     <div class="compliance-card-header">
-                        <div class="compliance-card-icon compliance-card-icon--\${statusLower}">
-                            \${shieldIcon}
+                        <div class="compliance-card-icon compliance-card-icon--${statusLower}">
+                            ${shieldIcon}
                         </div>
-                        <span class="compliance-card-status compliance-status--\${statusLower}">
-                            \${status === 'Renewal Soon' ? '<span class="compliance-pulse"></span> ' : ''}\${status}
+                        <span class="compliance-card-status compliance-status--${statusLower}">
+                            ${status === 'Renewal Soon' ? '<span class="compliance-pulse"></span> ' : ''}${status}
                         </span>
                     </div>
                     <div class="compliance-card-content">
                         <div class="compliance-card-title">DBS Certificate</div>
                         <div class="compliance-card-meta">
-                            <span>Cert: \${maskNumber(data.dbsCertificateNumber)}</span>
-                            <span>\${data.dbsUpdateServiceEnrolled ? 'Update Service' : '3-Year Cycle'}</span>
+                            <span>Cert: ${maskNumber(data.dbsCertificateNumber)}</span>
+                            <span>${data.dbsUpdateServiceEnrolled ? 'Update Service' : '3-Year Cycle'}</span>
                         </div>
                         <div class="compliance-card-meta" style="margin-top: 4px;">
-                            <span>Next check due: \${formatGovernanceDate(data.dbsNextCheckDue)}</span>
+                            <span>Next check due: ${formatGovernanceDate(data.dbsNextCheckDue)}</span>
                         </div>
                     </div>
-                    \${showCheckBtn ? \`
+                    ${showCheckBtn ? `
                     <div class="compliance-card-action">
-                        <button class="compliance-confirm-btn compliance-confirm-btn--secondary" onclick="event.stopPropagation(); markDbsChecked('\${data.id}')">
+                        <button class="compliance-confirm-btn compliance-confirm-btn--secondary" onclick="event.stopPropagation(); markDbsChecked('${data.id}')">
                             Mark as Checked
                         </button>
                     </div>
-                    \` : ''}
+                    ` : ''}
                 </div>
-            \`;
+            `;
         }
 
         function renderIcoCard(data) {
@@ -23398,36 +23398,36 @@ Eden Relationships
 
             const showAction = status !== 'Valid';
 
-            return \`
-                <div class="compliance-card compliance-card--\${statusLower}" onclick="openIcoPanel('\${data.id}')">
+            return `
+                <div class="compliance-card compliance-card--${statusLower}" onclick="openIcoPanel('${data.id}')">
                     <div class="compliance-card-header">
-                        <div class="compliance-card-icon compliance-card-icon--\${statusLower}">
-                            \${docIcon}
+                        <div class="compliance-card-icon compliance-card-icon--${statusLower}">
+                            ${docIcon}
                         </div>
-                        <span class="compliance-card-status compliance-status--\${status === 'Pending Verification' ? 'pending' : statusLower}">
-                            \${status === 'Renewal Due' ? '<span class="compliance-pulse"></span> ' : ''}\${status}
+                        <span class="compliance-card-status compliance-status--${status === 'Pending Verification' ? 'pending' : statusLower}">
+                            ${status === 'Renewal Due' ? '<span class="compliance-pulse"></span> ' : ''}${status}
                         </span>
                     </div>
                     <div class="compliance-card-content">
                         <div class="compliance-card-title">ICO Registration</div>
                         <div class="compliance-card-meta">
-                            <span>Reg: \${data.icoRegistrationNumber || 'Not registered'}</span>
+                            <span>Reg: ${data.icoRegistrationNumber || 'Not registered'}</span>
                         </div>
-                        \${data.icoExpiryDate ? \`
+                        ${data.icoExpiryDate ? `
                         <div class="compliance-card-meta" style="margin-top: 4px;">
-                            <span>Expires: \${formatGovernanceDate(data.icoExpiryDate)}</span>
+                            <span>Expires: ${formatGovernanceDate(data.icoExpiryDate)}</span>
                         </div>
-                        \` : ''}
+                        ` : ''}
                     </div>
-                    \${showAction ? \`
+                    ${showAction ? `
                     <div class="compliance-card-action">
-                        <button class="compliance-confirm-btn compliance-confirm-btn--secondary" onclick="event.stopPropagation(); openIcoPanel('\${data.id}')">
+                        <button class="compliance-confirm-btn compliance-confirm-btn--secondary" onclick="event.stopPropagation(); openIcoPanel('${data.id}')">
                             Update Details
                         </button>
                     </div>
-                    \` : ''}
+                    ` : ''}
                 </div>
-            \`;
+            `;
         }
 
         // ============================================
