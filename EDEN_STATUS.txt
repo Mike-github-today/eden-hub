@@ -1,78 +1,96 @@
 ================================================================================
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
-Last Updated: 18 January 2026
-Session: Comprehensive Documentation Update
-Branch: claude/update-docs-github-hGp5g
+Last Updated: 19 January 2026
+Session: Clinical Governance Implementation
+Branch: claude/clinical-governance-features-CPQyN
 ================================================================================
 
-LATEST CHANGES: Documentation Update [COMPLETED]
+LATEST CHANGES: Clinical Governance ("Silent Auditor") [COMPLETED]
 ================================================================================
 
 ## Session Summary
 
-Comprehensive review of index.html and update of all documentation files to
-reflect the true current state of the project (v0.6.0).
+Implementation of clinical governance features to support Eden's vicarious
+responsibility under BACP, UKCP, and HCPC guidelines. This enables tracking of
+supervision, DBS, and ICO registration compliance for associates.
+
+--------------------------------------------------------------------------------
+FEATURES IMPLEMENTED
+--------------------------------------------------------------------------------
+
+1. Supervision Tracker
+   - Added supervision fields to associates (supervisor name, accreditation,
+     frequency, last confirmed date)
+   - Status calculation: Current, Due Soon, Overdue
+   - Supervision Card in Associate Profile > Compliance Section
+   - "Confirm Supervision" button updates last confirmed date
+   - Friction Feed integration for Due Soon/Overdue items
+
+2. DBS Update Service
+   - Added DBS fields (certificate number, certificate date, Update Service ID,
+     enrolled status, last checked date)
+   - Support for both Update Service (annual) and legacy 3-year cycle
+   - Status calculation: Valid, Renewal Soon, Expired/Check Due
+   - DBS Card in Associate Profile > Compliance Section
+   - "Mark as Checked" button (Admin only)
+   - Friction Feed integration for renewal reminders
+
+3. ICO Registration
+   - Added ICO fields (registration number, verified status, expiry date)
+   - Status calculation: Valid, Renewal Due, Expired, Not Registered, Pending
+   - ICO Card in Associate Profile > Compliance Section
+   - Friction Feed integration for non-compliant states
+   - Stage 2 onboarding gate: ICO registration now required
 
 --------------------------------------------------------------------------------
 FILES UPDATED
 --------------------------------------------------------------------------------
 
-1. CHANGELOG.md
-   - Complete version history from 0.1.0 to 0.6.0
-   - Detailed feature lists per version
-   - Technical approach documentation
+1. index.html
+   - Added clinical governance CSS styles (compliance cards)
+   - Extended associates data with governance fields
+   - Added helper functions for status calculations
+   - Added Compliance Section to Associate Profile page
+   - Added compliance card renderers (Supervision, DBS, ICO)
+   - Added panel handlers and confirmation functions
+   - Added 6 new friction items for compliance issues
+   - Updated onboarding stages to require ICO registration
 
-2. PROJECT_CONTEXT.md
-   - Updated business status (7 associates, targeting 16)
-   - Complete list of implemented features
-   - Current technical approach
-   - Next phase priorities
+2. index_v11_pre_clinical_governance.html (backup)
+   - Created backup before changes
 
-3. agents.md
-   - Updated colour palette reference
-   - Complete list of completed features
-   - Current session tracking
-   - Menu configuration pattern documentation
+3. EDEN_STATUS.txt
+   - This file - updated with implementation details
 
-4. EDEN_HUB_FOUNDATION.md
-   - Version 2.0 with current implementation status
-   - Updated module status table (all complete)
-   - Refreshed technical approach section
+--------------------------------------------------------------------------------
+MOCK DATA SCENARIOS
+--------------------------------------------------------------------------------
 
-5. EDEN_MASTER.md
-   - Version 3.1, January 2026
-   - Added implementation status table
-   - Updated tech stack (current vs target)
+Associates configured with different compliance states:
+- Sarah Johnson: All current/valid
+- David Okonkwo: Supervision due soon (weekly, 5 days ago)
+- Amara Williams: Supervision overdue (monthly, 35 days ago), no Update Service
+- Marcus Thompson: DBS renewal soon, ICO renewal due
+- Fatima Ahmed: ICO not registered (new associate)
+- Kofi Mensah: All current/valid
+- Zara Patel: ICO pending verification
 
-6. README.md
-   - Current version 0.6.0
-   - Complete feature list
-   - Updated folder structure
-   - Architecture overview
-
-7. CONTRIBUTING.md
-   - Current development approach
-   - Component patterns from index.html
-   - Testing checklists
-   - Naming conventions
-
-8. .clauderules
-   - Current status section
-   - Complete colour palette
-   - Completed features list
-   - Updated session protocol
-
-9. EDEN_STATUS.txt
-   - This file - comprehensive project status
+Friction Feed items added:
+- FRI-SUP-ASSOC-2403: Supervision Overdue (Amara Williams)
+- FRI-SUP-ASSOC-2402: Supervision Due Soon (David Okonkwo)
+- FRI-DBS-ASSOC-2404: DBS Check Due Soon (Marcus Thompson)
+- FRI-ICO-ASSOC-2501: ICO Not Registered (Fatima Ahmed)
+- FRI-ICO-ASSOC-2406: ICO Pending Verification (Zara Patel)
+- FRI-ICO-ASSOC-2404: ICO Renewal Due (Marcus Thompson)
 
 ================================================================================
-CURRENT PROJECT STATE (v0.6.0)
+CURRENT PROJECT STATE (v0.7.0)
 ================================================================================
 
 PROTOTYPE STATUS
 ----------------
-File: index.html (~900KB)
+File: index.html (~960KB)
 Approach: Single-file HTML + CSS + JavaScript
 Data: Mock JavaScript arrays
 
@@ -95,6 +113,7 @@ Modules:
 - Contracts (grid, detail panel)
 - Messages/Inbox (list, viewer)
 - Support/CPD (help links, activities)
+- Clinical Governance (Supervision, DBS, ICO tracking) [NEW]
 
 UX Enhancements:
 - Empty states ("Garden in Bloom")
@@ -102,14 +121,15 @@ UX Enhancements:
 - Menu standardisation (detail views only)
 - Progress stepper component
 - Toast notifications
+- Compliance cards with status indicators [NEW]
 
 MOCK DATA
 ---------
-- 7 associates with full profiles
+- 7 associates with full profiles + clinical governance data
 - 20+ clients with stage assignments
 - 4 referrals with expression tracking
 - Session records (finance integration)
-- Friction items
+- 10 friction items (4 original + 6 compliance)
 - Contracts
 - Messages
 
@@ -117,6 +137,8 @@ MOCK DATA
 PREVIOUS CHANGES
 ================================================================================
 
+- Clinical Governance Implementation [Jan 19, 2026]
+- Documentation Update [Jan 18, 2026]
 - Chunk 6: Three-Dots Menu Standardisation [Jan 18, 2026]
 - Chunk 5: Empty States (Garden in Bloom) [Jan 18, 2026]
 - Chunk 4: Action Centre Summary Grid [Jan 18, 2026]
@@ -131,8 +153,8 @@ PREVIOUS CHANGES
 NEXT PRIORITIES
 ================================================================================
 
-1. Airtable live data integration
-2. Make.com webhook connections
+1. Airtable live data integration (including governance fields)
+2. Make.com webhook connections for governance updates
 3. Squarespace authentication
 4. Mobile testing and refinement
 5. React migration (when appropriate)

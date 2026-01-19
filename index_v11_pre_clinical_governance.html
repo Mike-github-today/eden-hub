@@ -9952,190 +9952,6 @@
         }
 
         /* ============================================
-           COMPLIANCE CARDS (Clinical Governance)
-           ============================================ */
-
-        .compliance-cards-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .compliance-card {
-            background: var(--eden-surface);
-            border-radius: 16px;
-            padding: 16px;
-            cursor: pointer;
-            transition: all 200ms ease;
-            border: 1px solid transparent;
-        }
-
-        .compliance-card:hover {
-            background: var(--eden-green-light);
-        }
-
-        .compliance-card--current {
-            background: var(--eden-surface);
-        }
-
-        .compliance-card--due-soon {
-            background: var(--eden-surface);
-            border-color: var(--alert-amber);
-        }
-
-        .compliance-card--overdue,
-        .compliance-card--expired,
-        .compliance-card--not-registered {
-            background: #FEF2F2;
-            border-color: var(--alert-rose);
-        }
-
-        .compliance-card-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-
-        .compliance-card-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .compliance-card-icon--current {
-            background: var(--eden-green-light);
-            color: var(--eden-green);
-        }
-
-        .compliance-card-icon--due-soon {
-            background: #FEF3C7;
-            color: var(--alert-amber);
-        }
-
-        .compliance-card-icon--overdue,
-        .compliance-card-icon--expired,
-        .compliance-card-icon--not-registered {
-            background: #FEE2E2;
-            color: var(--alert-rose);
-        }
-
-        .compliance-card-icon svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        .compliance-card-status {
-            font-size: 12px;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        .compliance-status--current {
-            background: var(--eden-green-light);
-            color: var(--eden-green);
-        }
-
-        .compliance-status--due-soon {
-            background: #FEF3C7;
-            color: #B45309;
-        }
-
-        .compliance-status--overdue,
-        .compliance-status--expired {
-            background: #FEE2E2;
-            color: #DC2626;
-        }
-
-        .compliance-status--not-registered,
-        .compliance-status--pending {
-            background: #FEE2E2;
-            color: #DC2626;
-        }
-
-        .compliance-card-content {
-            flex: 1;
-        }
-
-        .compliance-card-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--eden-text-primary);
-            margin-bottom: 4px;
-        }
-
-        .compliance-card-meta {
-            font-size: 13px;
-            color: var(--eden-text-secondary);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px 12px;
-        }
-
-        .compliance-card-meta span {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .compliance-card-action {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid var(--eden-border);
-        }
-
-        .compliance-confirm-btn {
-            width: 100%;
-            padding: 10px 16px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 200ms ease;
-        }
-
-        .compliance-confirm-btn--primary {
-            background: var(--eden-green);
-            color: white;
-        }
-
-        .compliance-confirm-btn--primary:hover {
-            background: var(--eden-green-hover);
-        }
-
-        .compliance-confirm-btn--secondary {
-            background: var(--eden-green-light);
-            color: var(--eden-green);
-        }
-
-        .compliance-confirm-btn--secondary:hover {
-            background: var(--eden-border);
-        }
-
-        /* Pulse animation for due soon indicator */
-        .compliance-pulse {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--alert-amber);
-            animation: compliancePulse 2s ease-in-out infinite;
-        }
-
-        @keyframes compliancePulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
-        }
-
-        /* ============================================
            SESSIONS PAGE STYLES
            ============================================ */
 
@@ -14892,22 +14708,7 @@ Sarah
                 joinDate: 'January 2024',
                 specialisation: 'Couples Therapy',
                 totalEarnings: '£8,420',
-                pendingPayout: '£1,240',
-                // Clinical Governance - Supervision
-                supervisorName: 'Dr Rachel Green',
-                supervisorAccreditation: 'BACP Registered',
-                supervisionFrequency: 'Fortnightly',
-                lastSupervisionConfirmed: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000), // 10 days ago
-                // Clinical Governance - DBS
-                dbsCertificateNumber: '001234567890',
-                dbsCertificateDate: new Date('2023-06-15'),
-                dbsUpdateServiceId: 'DBS-UPD-12345',
-                dbsUpdateServiceEnrolled: true,
-                dbsLastChecked: new Date('2025-06-15'),
-                // Clinical Governance - ICO
-                icoRegistrationNumber: 'ZA123456',
-                icoRegistrationVerified: true,
-                icoExpiryDate: new Date('2026-06-15')
+                pendingPayout: '£1,240'
             },
             {
                 id: 'ASSOC-2402',
@@ -14925,22 +14726,7 @@ Sarah
                 joinDate: 'February 2024',
                 specialisation: 'Individual Therapy',
                 totalEarnings: '£9,180',
-                pendingPayout: '£980',
-                // Clinical Governance - Supervision
-                supervisorName: 'Dr James Mitchell',
-                supervisorAccreditation: 'UKCP Registered',
-                supervisionFrequency: 'Weekly',
-                lastSupervisionConfirmed: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), // 5 days ago - Due Soon
-                // Clinical Governance - DBS
-                dbsCertificateNumber: '001234567891',
-                dbsCertificateDate: new Date('2024-01-20'),
-                dbsUpdateServiceId: 'DBS-UPD-12346',
-                dbsUpdateServiceEnrolled: true,
-                dbsLastChecked: new Date('2025-01-20'),
-                // Clinical Governance - ICO
-                icoRegistrationNumber: 'ZA234567',
-                icoRegistrationVerified: true,
-                icoExpiryDate: new Date('2026-02-28')
+                pendingPayout: '£980'
             },
             {
                 id: 'ASSOC-2403',
@@ -14958,22 +14744,7 @@ Sarah
                 joinDate: 'March 2024',
                 specialisation: 'Family Therapy',
                 totalEarnings: '£5,640',
-                pendingPayout: '£720',
-                // Clinical Governance - Supervision (Overdue - Monthly, 35 days ago)
-                supervisorName: 'Dr Susan Clarke',
-                supervisorAccreditation: 'BACP Registered',
-                supervisionFrequency: 'Monthly',
-                lastSupervisionConfirmed: new Date(Date.now() - 35 * 24 * 60 * 60 * 1000), // 35 days ago - Overdue
-                // Clinical Governance - DBS
-                dbsCertificateNumber: '001234567892',
-                dbsCertificateDate: new Date('2023-03-10'),
-                dbsUpdateServiceId: null,
-                dbsUpdateServiceEnrolled: false, // Not enrolled - 3 year cycle
-                dbsLastChecked: null,
-                // Clinical Governance - ICO
-                icoRegistrationNumber: 'ZA345678',
-                icoRegistrationVerified: true,
-                icoExpiryDate: new Date('2026-03-10')
+                pendingPayout: '£720'
             },
             {
                 id: 'ASSOC-2404',
@@ -14991,22 +14762,7 @@ Sarah
                 joinDate: 'January 2024',
                 specialisation: 'Trauma Therapy',
                 totalEarnings: '£7,320',
-                pendingPayout: '£1,560',
-                // Clinical Governance - Supervision
-                supervisorName: 'Dr Helen Foster',
-                supervisorAccreditation: 'HCPC Registered',
-                supervisionFrequency: 'Fortnightly',
-                lastSupervisionConfirmed: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 days ago
-                // Clinical Governance - DBS (Check due soon)
-                dbsCertificateNumber: '001234567893',
-                dbsCertificateDate: new Date('2022-02-01'),
-                dbsUpdateServiceId: 'DBS-UPD-12348',
-                dbsUpdateServiceEnrolled: true,
-                dbsLastChecked: new Date('2025-01-25'), // Check due soon
-                // Clinical Governance - ICO
-                icoRegistrationNumber: 'ZA456789',
-                icoRegistrationVerified: true,
-                icoExpiryDate: new Date('2026-01-25') // Due very soon
+                pendingPayout: '£1,560'
             },
             {
                 id: 'ASSOC-2501',
@@ -15024,22 +14780,7 @@ Sarah
                 joinDate: 'January 2025',
                 specialisation: 'Anxiety & Depression',
                 totalEarnings: '£3,480',
-                pendingPayout: '£480',
-                // Clinical Governance - Supervision
-                supervisorName: 'Dr Omar Hassan',
-                supervisorAccreditation: 'BACP Registered',
-                supervisionFrequency: 'Weekly',
-                lastSupervisionConfirmed: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000), // 4 days ago
-                // Clinical Governance - DBS
-                dbsCertificateNumber: '001234567894',
-                dbsCertificateDate: new Date('2025-01-05'),
-                dbsUpdateServiceId: 'DBS-UPD-12349',
-                dbsUpdateServiceEnrolled: true,
-                dbsLastChecked: new Date('2025-01-05'),
-                // Clinical Governance - ICO (Not registered yet - new associate)
-                icoRegistrationNumber: null,
-                icoRegistrationVerified: false,
-                icoExpiryDate: null
+                pendingPayout: '£480'
             },
             {
                 id: 'ASSOC-2405',
@@ -15057,22 +14798,7 @@ Sarah
                 joinDate: 'April 2024',
                 specialisation: 'Relationship Issues',
                 totalEarnings: '£7,890',
-                pendingPayout: '£1,100',
-                // Clinical Governance - Supervision
-                supervisorName: 'Dr Patricia Boateng',
-                supervisorAccreditation: 'BACP Registered',
-                supervisionFrequency: 'Fortnightly',
-                lastSupervisionConfirmed: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000), // 8 days ago
-                // Clinical Governance - DBS
-                dbsCertificateNumber: '001234567895',
-                dbsCertificateDate: new Date('2024-04-01'),
-                dbsUpdateServiceId: 'DBS-UPD-12350',
-                dbsUpdateServiceEnrolled: true,
-                dbsLastChecked: new Date('2025-04-01'),
-                // Clinical Governance - ICO
-                icoRegistrationNumber: 'ZA567890',
-                icoRegistrationVerified: true,
-                icoExpiryDate: new Date('2026-04-01')
+                pendingPayout: '£1,100'
             },
             {
                 id: 'ASSOC-2406',
@@ -15090,22 +14816,7 @@ Sarah
                 joinDate: 'May 2024',
                 specialisation: 'Couples Therapy',
                 totalEarnings: '£8,950',
-                pendingPayout: '£1,320',
-                // Clinical Governance - Supervision
-                supervisorName: 'Dr Anita Sharma',
-                supervisorAccreditation: 'UKCP Registered',
-                supervisionFrequency: 'Monthly',
-                lastSupervisionConfirmed: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000), // 15 days ago
-                // Clinical Governance - DBS
-                dbsCertificateNumber: '001234567896',
-                dbsCertificateDate: new Date('2024-05-15'),
-                dbsUpdateServiceId: 'DBS-UPD-12351',
-                dbsUpdateServiceEnrolled: true,
-                dbsLastChecked: new Date('2025-05-15'),
-                // Clinical Governance - ICO (Pending verification)
-                icoRegistrationNumber: 'ZA678901',
-                icoRegistrationVerified: false, // Pending verification
-                icoExpiryDate: new Date('2026-05-15')
+                pendingPayout: '£1,320'
             }
         ];
 
@@ -17966,93 +17677,6 @@ Sarah
                 associate: 'Sarah Johnson',
                 associateUcid: 'ASC-2401',
                 action: 'Send Reminder'
-            },
-            // Clinical Governance - Supervision Items
-            {
-                id: 'FRI-SUP-ASSOC-2403',
-                type: 'rose',
-                category: 'associates',
-                icon: 'calendar',
-                title: 'Supervision Overdue',
-                description: 'Amara Williams has not confirmed supervision in over 30 days',
-                entityName: 'Amara Williams',
-                associate: 'Amara Williams',
-                associateId: 'ASSOC-2403',
-                dueDate: 'Overdue',
-                action: 'Send Reminder',
-                complianceType: 'supervision'
-            },
-            {
-                id: 'FRI-SUP-ASSOC-2402',
-                type: 'amber',
-                category: 'associates',
-                icon: 'calendar',
-                title: 'Supervision Due Soon',
-                description: 'David Okonkwo supervision due in 2 days',
-                entityName: 'David Okonkwo',
-                associate: 'David Okonkwo',
-                associateId: 'ASSOC-2402',
-                dueDate: '21 Jan 2026',
-                action: 'Send Reminder',
-                complianceType: 'supervision'
-            },
-            // Clinical Governance - DBS Items
-            {
-                id: 'FRI-DBS-ASSOC-2404',
-                type: 'amber',
-                category: 'associates',
-                icon: 'shield',
-                title: 'DBS Check Due Soon',
-                description: 'Marcus Thompson annual DBS check due within 30 days',
-                entityName: 'Marcus Thompson',
-                associate: 'Marcus Thompson',
-                associateId: 'ASSOC-2404',
-                dueDate: '25 Jan 2026',
-                action: 'View Details',
-                complianceType: 'dbs'
-            },
-            // Clinical Governance - ICO Items
-            {
-                id: 'FRI-ICO-ASSOC-2501',
-                type: 'rose',
-                category: 'associates',
-                icon: 'file-text',
-                title: 'ICO Registration Required',
-                description: 'Fatima Ahmed has not registered with the ICO',
-                entityName: 'Fatima Ahmed',
-                associate: 'Fatima Ahmed',
-                associateId: 'ASSOC-2501',
-                dueDate: 'Action required',
-                action: 'Update Details',
-                complianceType: 'ico'
-            },
-            {
-                id: 'FRI-ICO-ASSOC-2406',
-                type: 'amber',
-                category: 'associates',
-                icon: 'file-text',
-                title: 'ICO Pending Verification',
-                description: 'Zara Patel ICO registration awaiting verification',
-                entityName: 'Zara Patel',
-                associate: 'Zara Patel',
-                associateId: 'ASSOC-2406',
-                dueDate: 'Pending',
-                action: 'Verify',
-                complianceType: 'ico'
-            },
-            {
-                id: 'FRI-ICO-ASSOC-2404',
-                type: 'amber',
-                category: 'associates',
-                icon: 'file-text',
-                title: 'ICO Renewal Due',
-                description: 'Marcus Thompson ICO registration expiring in 6 days',
-                entityName: 'Marcus Thompson',
-                associate: 'Marcus Thompson',
-                associateId: 'ASSOC-2404',
-                dueDate: '25 Jan 2026',
-                action: 'Update Details',
-                complianceType: 'ico'
             }
         ];
 
@@ -21543,13 +21167,10 @@ Eden Relationships
             {
                 id: 'documents',
                 label: 'Documents',
-                requiredFields: ['insuranceDoc', 'dbsDoc', 'certificateDocs', 'icoRegistrationNumber', 'allDocsVerified'],
+                requiredFields: ['insuranceDoc', 'dbsDoc', 'certificateDocs', 'allDocsVerified'],
                 validate: (data) => {
-                    // ICO Registration is required for Stage 2 completion
-                    // Helper text: "Most private practitioners must register with the ICO. Check ico.org.uk if unsure."
                     return data.insuranceDoc && data.dbsDoc &&
                            data.certificateDocs && data.certificateDocs.length > 0 &&
-                           data.icoRegistrationNumber &&
                            data.allDocsVerified === true;
                 }
             },
@@ -22396,90 +22017,6 @@ Eden Relationships
         }
 
         // Enhanced associate data with onboarding fields
-        // ============================================
-        // CLINICAL GOVERNANCE HELPER FUNCTIONS
-        // ============================================
-
-        // Calculate supervision due date based on frequency
-        function calculateSupervisionDueDate(lastConfirmed, frequency) {
-            if (!lastConfirmed) return null;
-            const daysToAdd = frequency === 'Weekly' ? 7 : frequency === 'Fortnightly' ? 14 : 30;
-            const dueDate = new Date(lastConfirmed);
-            dueDate.setDate(dueDate.getDate() + daysToAdd);
-            return dueDate;
-        }
-
-        // Calculate supervision status
-        function calculateSupervisionStatus(dueDate) {
-            if (!dueDate) return 'Unknown';
-            const today = new Date();
-            const sevenDaysFromNow = new Date(today);
-            sevenDaysFromNow.setDate(today.getDate() + 7);
-
-            if (dueDate < today) return 'Overdue';
-            if (dueDate < sevenDaysFromNow) return 'Due Soon';
-            return 'Current';
-        }
-
-        // Calculate DBS next check due date
-        function calculateDbsNextCheckDue(associate) {
-            if (associate.dbsUpdateServiceEnrolled && associate.dbsLastChecked) {
-                // Annual check for Update Service subscribers
-                const nextCheck = new Date(associate.dbsLastChecked);
-                nextCheck.setFullYear(nextCheck.getFullYear() + 1);
-                return nextCheck;
-            } else if (associate.dbsCertificateDate) {
-                // 3-year cycle for non-subscribers
-                const nextCheck = new Date(associate.dbsCertificateDate);
-                nextCheck.setFullYear(nextCheck.getFullYear() + 3);
-                return nextCheck;
-            }
-            return null;
-        }
-
-        // Calculate DBS status
-        function calculateDbsStatus(nextCheckDue) {
-            if (!nextCheckDue) return 'Unknown';
-            const today = new Date();
-            const thirtyDaysFromNow = new Date(today);
-            thirtyDaysFromNow.setDate(today.getDate() + 30);
-
-            if (nextCheckDue < today) return 'Expired/Check Due';
-            if (nextCheckDue < thirtyDaysFromNow) return 'Renewal Soon';
-            return 'Valid';
-        }
-
-        // Calculate ICO status
-        function calculateIcoStatus(associate) {
-            if (!associate.icoRegistrationNumber) return 'Not Registered';
-            if (!associate.icoRegistrationVerified) return 'Pending Verification';
-            if (!associate.icoExpiryDate) return 'Unknown';
-
-            const today = new Date();
-            const thirtyDaysFromNow = new Date(today);
-            thirtyDaysFromNow.setDate(today.getDate() + 30);
-            const expiryDate = new Date(associate.icoExpiryDate);
-
-            if (expiryDate < today) return 'Expired';
-            if (expiryDate < thirtyDaysFromNow) return 'Renewal Due';
-            return 'Valid';
-        }
-
-        // Format date for display
-        function formatGovernanceDate(date) {
-            if (!date) return '—';
-            const d = new Date(date);
-            return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-        }
-
-        // Mask certificate/ID numbers for display
-        function maskNumber(number, visibleChars = 4) {
-            if (!number) return '—';
-            const str = String(number);
-            if (str.length <= visibleChars) return str;
-            return '****' + str.slice(-visibleChars);
-        }
-
         function getEnhancedAssociateData(associate) {
             const enhanced = { ...associate };
 
@@ -22496,20 +22033,6 @@ Eden Relationships
             enhanced.bankDetails = '12345678';
             enhanced.agreementSigned = true;
             enhanced.createdAt = new Date(associate.joinDate);
-
-            // Clinical Governance - Supervision
-            enhanced.supervisionDueDate = calculateSupervisionDueDate(
-                associate.lastSupervisionConfirmed,
-                associate.supervisionFrequency
-            );
-            enhanced.supervisionStatus = calculateSupervisionStatus(enhanced.supervisionDueDate);
-
-            // Clinical Governance - DBS
-            enhanced.dbsNextCheckDue = calculateDbsNextCheckDue(associate);
-            enhanced.dbsStatus = calculateDbsStatus(enhanced.dbsNextCheckDue);
-
-            // Clinical Governance - ICO
-            enhanced.icoStatus = calculateIcoStatus(associate);
 
             return enhanced;
         }
@@ -23281,236 +22804,8 @@ Eden Relationships
                             </div>
                         </div>
                     </section>
-
-                    <!-- Compliance Section (Clinical Governance) -->
-                    <section class="profile-section">
-                        <h2 class="profile-section-label">Compliance</h2>
-                        <div class="compliance-cards-grid">
-                            ${renderSupervisionCard(data)}
-                            ${renderDbsCard(data)}
-                            ${renderIcoCard(data)}
-                        </div>
-                    </section>
                 </div>
             `;
-        }
-
-        // ============================================
-        // COMPLIANCE CARD RENDERERS
-        // ============================================
-
-        function renderSupervisionCard(data) {
-            const status = data.supervisionStatus || 'Unknown';
-            const statusClass = status === 'Current' ? 'current' : status === 'Due Soon' ? 'due-soon' : 'overdue';
-            const statusLower = statusClass;
-
-            // Icons
-            const calendarIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
-            const checkIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg>';
-
-            const showConfirmBtn = status !== 'Current';
-
-            return \`
-                <div class="compliance-card compliance-card--\${statusLower}" onclick="openSupervisionPanel('\${data.id}')">
-                    <div class="compliance-card-header">
-                        <div class="compliance-card-icon compliance-card-icon--\${statusLower}">
-                            \${calendarIcon}
-                        </div>
-                        <span class="compliance-card-status compliance-status--\${statusLower}">
-                            \${status === 'Due Soon' ? '<span class="compliance-pulse"></span> ' : ''}\${status}
-                        </span>
-                    </div>
-                    <div class="compliance-card-content">
-                        <div class="compliance-card-title">Supervision</div>
-                        <div class="compliance-card-meta">
-                            <span>\${data.supervisorName || 'Not set'}</span>
-                            <span>\${data.supervisionFrequency || 'Not set'}</span>
-                        </div>
-                        <div class="compliance-card-meta" style="margin-top: 4px;">
-                            <span>Last confirmed: \${formatGovernanceDate(data.lastSupervisionConfirmed)}</span>
-                        </div>
-                        <div class="compliance-card-meta" style="margin-top: 2px;">
-                            <span>Due: \${formatGovernanceDate(data.supervisionDueDate)}</span>
-                        </div>
-                    </div>
-                    \${showConfirmBtn ? \`
-                    <div class="compliance-card-action">
-                        <button class="compliance-confirm-btn compliance-confirm-btn--primary" onclick="event.stopPropagation(); confirmSupervision('\${data.id}')">
-                            Confirm Supervision
-                        </button>
-                    </div>
-                    \` : ''}
-                </div>
-            \`;
-        }
-
-        function renderDbsCard(data) {
-            const status = data.dbsStatus || 'Unknown';
-            const statusClass = status === 'Valid' ? 'current' : status === 'Renewal Soon' ? 'due-soon' : 'expired';
-            const statusLower = statusClass;
-
-            // Shield icon
-            const shieldIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
-
-            const isAdmin = typeof currentUserRole !== 'undefined' && currentUserRole === 'admin';
-            const showCheckBtn = isAdmin && status !== 'Valid';
-
-            return \`
-                <div class="compliance-card compliance-card--\${statusLower}" onclick="openDbsPanel('\${data.id}')">
-                    <div class="compliance-card-header">
-                        <div class="compliance-card-icon compliance-card-icon--\${statusLower}">
-                            \${shieldIcon}
-                        </div>
-                        <span class="compliance-card-status compliance-status--\${statusLower}">
-                            \${status === 'Renewal Soon' ? '<span class="compliance-pulse"></span> ' : ''}\${status}
-                        </span>
-                    </div>
-                    <div class="compliance-card-content">
-                        <div class="compliance-card-title">DBS Certificate</div>
-                        <div class="compliance-card-meta">
-                            <span>Cert: \${maskNumber(data.dbsCertificateNumber)}</span>
-                            <span>\${data.dbsUpdateServiceEnrolled ? 'Update Service' : '3-Year Cycle'}</span>
-                        </div>
-                        <div class="compliance-card-meta" style="margin-top: 4px;">
-                            <span>Next check due: \${formatGovernanceDate(data.dbsNextCheckDue)}</span>
-                        </div>
-                    </div>
-                    \${showCheckBtn ? \`
-                    <div class="compliance-card-action">
-                        <button class="compliance-confirm-btn compliance-confirm-btn--secondary" onclick="event.stopPropagation(); markDbsChecked('\${data.id}')">
-                            Mark as Checked
-                        </button>
-                    </div>
-                    \` : ''}
-                </div>
-            \`;
-        }
-
-        function renderIcoCard(data) {
-            const status = data.icoStatus || 'Unknown';
-            let statusClass = 'current';
-            if (status === 'Renewal Due') statusClass = 'due-soon';
-            else if (status === 'Expired' || status === 'Not Registered' || status === 'Pending Verification') statusClass = 'not-registered';
-            const statusLower = statusClass;
-
-            // Document badge icon
-            const docIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>';
-
-            const showAction = status !== 'Valid';
-
-            return \`
-                <div class="compliance-card compliance-card--\${statusLower}" onclick="openIcoPanel('\${data.id}')">
-                    <div class="compliance-card-header">
-                        <div class="compliance-card-icon compliance-card-icon--\${statusLower}">
-                            \${docIcon}
-                        </div>
-                        <span class="compliance-card-status compliance-status--\${status === 'Pending Verification' ? 'pending' : statusLower}">
-                            \${status === 'Renewal Due' ? '<span class="compliance-pulse"></span> ' : ''}\${status}
-                        </span>
-                    </div>
-                    <div class="compliance-card-content">
-                        <div class="compliance-card-title">ICO Registration</div>
-                        <div class="compliance-card-meta">
-                            <span>Reg: \${data.icoRegistrationNumber || 'Not registered'}</span>
-                        </div>
-                        \${data.icoExpiryDate ? \`
-                        <div class="compliance-card-meta" style="margin-top: 4px;">
-                            <span>Expires: \${formatGovernanceDate(data.icoExpiryDate)}</span>
-                        </div>
-                        \` : ''}
-                    </div>
-                    \${showAction ? \`
-                    <div class="compliance-card-action">
-                        <button class="compliance-confirm-btn compliance-confirm-btn--secondary" onclick="event.stopPropagation(); openIcoPanel('\${data.id}')">
-                            Update Details
-                        </button>
-                    </div>
-                    \` : ''}
-                </div>
-            \`;
-        }
-
-        // ============================================
-        // COMPLIANCE PANEL HANDLERS
-        // ============================================
-
-        function openSupervisionPanel(associateId) {
-            const associate = associates.find(a => a.id === associateId);
-            if (!associate) return;
-            const data = getEnhancedAssociateData(associate);
-
-            showToast('Supervision details for ' + data.name, 'info');
-            // In full implementation, this would open a side panel/bottom sheet
-        }
-
-        function openDbsPanel(associateId) {
-            const associate = associates.find(a => a.id === associateId);
-            if (!associate) return;
-            const data = getEnhancedAssociateData(associate);
-
-            showToast('DBS details for ' + data.name, 'info');
-            // In full implementation, this would open a side panel/bottom sheet
-        }
-
-        function openIcoPanel(associateId) {
-            const associate = associates.find(a => a.id === associateId);
-            if (!associate) return;
-            const data = getEnhancedAssociateData(associate);
-
-            showToast('ICO details for ' + data.name, 'info');
-            // In full implementation, this would open a side panel/bottom sheet
-        }
-
-        function confirmSupervision(associateId) {
-            const associate = associates.find(a => a.id === associateId);
-            if (!associate) return;
-
-            // Update the last supervision confirmed date
-            associate.lastSupervisionConfirmed = new Date();
-
-            // Refresh the profile page
-            showAssociateProfilePage(associateId);
-
-            // Remove from friction feed if present
-            removeComplianceFrictionItem(associateId, 'supervision');
-
-            showToast('Supervision confirmed for today', 'success');
-        }
-
-        function markDbsChecked(associateId) {
-            const associate = associates.find(a => a.id === associateId);
-            if (!associate) return;
-
-            // Admin-only action - update the last checked date
-            associate.dbsLastChecked = new Date();
-
-            // Refresh the profile page
-            showAssociateProfilePage(associateId);
-
-            // Remove from friction feed if present
-            removeComplianceFrictionItem(associateId, 'dbs');
-
-            showToast('DBS marked as checked', 'success');
-        }
-
-        function removeComplianceFrictionItem(associateId, complianceType) {
-            // Find and remove compliance-related friction items
-            const prefix = complianceType === 'supervision' ? 'FRI-SUP-' :
-                          complianceType === 'dbs' ? 'FRI-DBS-' : 'FRI-ICO-';
-            const itemId = prefix + associateId;
-
-            if (typeof frictionItems !== 'undefined') {
-                const index = frictionItems.findIndex(i => i.id === itemId);
-                if (index !== -1) {
-                    frictionItems.splice(index, 1);
-                    if (typeof ActionCentre !== 'undefined') {
-                        ActionCentre.loadActions(frictionItems);
-                    }
-                    if (typeof window.updateActionsBadge === 'function') {
-                        window.updateActionsBadge(frictionItems.length);
-                    }
-                }
-            }
         }
 
         // ============================================
