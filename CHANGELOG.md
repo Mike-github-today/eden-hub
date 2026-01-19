@@ -14,6 +14,31 @@ All notable changes to Eden Hub Portal.
 
 ---
 
+## [0.7.0] - 2026-01-19
+
+### Added
+- **Clinical Governance Module ("Silent Auditor")**
+  - Supervision Tracker with status calculation (Current/Due Soon/Overdue)
+  - DBS Update Service tracking (supports annual Update Service and 3-year cycle)
+  - ICO Registration tracking with expiry alerts
+  - Compliance Section in Associate Profile page
+  - Three compliance cards with visual status indicators
+  - "Confirm Supervision" button for associates
+  - "Mark as Checked" button for admin DBS updates
+  - 6 new friction items for compliance issues
+
+### Changed
+- Associate onboarding Stage 2 (Documents) now requires ICO Registration Number
+- Associates data model extended with clinical governance fields
+- Friction Feed now includes compliance category items
+
+### Technical
+- Added clinical governance helper functions for status calculations
+- Added CSS for compliance cards (visual states: current, due soon, overdue)
+- Status formulas mirror planned Airtable implementation
+
+---
+
 ## [0.6.0] - 2026-01-18
 
 ### Added
