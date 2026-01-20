@@ -2,72 +2,90 @@
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
 Last Updated: 20 January 2026
-Session: Documentation Update - Frontend-Design Skill Integration
-Branch: claude/update-eden-docs-nUcwv
+Session: Associate Action Centre Implementation
+Branch: claude/associate-action-centre-9lxml
 ================================================================================
 
-LATEST CHANGES: Documentation Update [VERIFIED COMPLETE]
+LATEST CHANGES: Associate Action Centre [COMPLETE]
 ================================================================================
 
 ## Session Summary
 
-Verified that all documentation files contain the Frontend-Design Skill
-integration and Anthropic resources content as specified in CLAUDE_CODE_INSTRUCTIONS.md.
+Implemented the Associate-Specific Action Centre feature. When an associate
+(non-admin user) navigates to the Action Centre, they now see personalised
+friction items filtered by their UCID, with descriptions transformed to
+first-person perspective.
 
 --------------------------------------------------------------------------------
 WHAT WAS REQUESTED
 --------------------------------------------------------------------------------
 
-Complete Tasks 1-8 from CLAUDE_CODE_INSTRUCTIONS.md:
-1. Update CLAUDE.md with typography and animation standards
-2. Update EDEN_MASTER.md with Anthropic Resources section
-3. Update .clauderules with typography and animation guardrails
-4. Update CONTRIBUTING.md with design standards
-5. Update PROJECT_CONTEXT.md with design philosophy
-6. Create docs/DESIGN_SYSTEM.md
-7. Create docs/ANTHROPIC_RESOURCES.md
-8. Commit and push all changes
+Transform the Action Centre to show associate-specific friction items:
+1. Add 'action-centre' to associate's allowed views
+2. Filter friction items by associate's UCID when role is 'associate'
+3. Transform descriptions from third-person admin view to first-person
+4. Add 'compliance' category for associates (maps from admin's 'associates')
+5. Update badge count to reflect only the associate's items
+6. Show "Garden in Bloom" empty state when associate has zero actions
 
 --------------------------------------------------------------------------------
 WHAT WAS COMPLETED
 --------------------------------------------------------------------------------
 
-All tasks verified as already complete:
-
-| Task | File | Status |
-|------|------|--------|
-| 1 | CLAUDE.md | Contains typography, animation, Frontend-Design Skill section |
-| 2 | EDEN_MASTER.md | Contains Anthropic Resources section (lines 511-589) |
-| 3 | .clauderules | Contains typography rules, animation rules (lines 137-183) |
-| 4 | CONTRIBUTING.md | Contains Design Standards section (lines 271-325) |
-| 5 | PROJECT_CONTEXT.md | Contains Design Philosophy section (lines 182-243) |
-| 6 | docs/DESIGN_SYSTEM.md | Complete v2.0 design system documentation |
-| 7 | docs/ANTHROPIC_RESOURCES.md | Complete Anthropic resources guide |
-| 8 | Git push | Branch pushed to origin/claude/update-eden-docs-nUcwv |
+| Step | Change | Location |
+|------|--------|----------|
+| 1 | Added 'action-centre' to associate allowedViews | Line ~16717 |
+| 2 | Added 'compliance' category with associateOnly flag | Line ~19472-19478 |
+| 3 | Added getCurrentUserId() function | Line ~19363 |
+| 4 | Added getAssociateActions() for UCID filtering | Line ~19369 |
+| 5 | Added transformToAssociatePerspective() for first-person | Line ~19402 |
+| 6 | Updated getCategoriesForRole() for admin/associate views | Line ~19483 |
+| 7 | Updated countByCategory() to include compliance | Line ~19510 |
+| 8 | Updated loadActions() to filter for associates | Line ~19629 |
+| 9 | Updated subtitle text for associates | Line ~19663 |
+| 10 | Added 4 sample friction items for Sarah Johnson (ASSOC-2401) | Line ~19326 |
 
 --------------------------------------------------------------------------------
-KEY DOCUMENTATION STANDARDS
+KEY FEATURES
 --------------------------------------------------------------------------------
 
-**Typography:**
-- Display: Fraunces (Georgia fallback)
-- Body: DM Sans (system-ui fallback)
-- Never use: Inter, Roboto, Arial as primary
+**Admin View (unchanged):**
+- Sees all friction items (not filtered)
+- Categories: Associates, Clients, Contracts, Finance
+- Descriptions remain third-person
 
-**Animation:**
-- Easing: cubic-bezier(0.23, 1, 0.32, 1)
-- Duration: 150ms (fast), 300ms (normal), 500ms (slow)
-- Stagger: 100ms between cards
-- No bounce or elastic effects
+**Associate View (new):**
+- Sees ONLY their items (filtered by UCID)
+- Categories: Compliance, Clients, Contracts, Finance
+- Descriptions transformed to first-person:
+  - "Sarah's insurance expires" → "Your insurance expires"
+  - "Sarah has not confirmed" → "You have not confirmed"
+- Entity name shows "You" for self-referential items
 
-**Philosophy:**
-- "Refined minimalism with botanical warmth"
-- Friction Feed shows exceptions only
-- "Garden in Bloom" as unforgettable element
+**UCID Normalisation:**
+- Handles both 'ASC-XXXX' and 'ASSOC-XXXX' formats
+- Consistent comparison across all items
+
+--------------------------------------------------------------------------------
+TESTING
+--------------------------------------------------------------------------------
+
+To test associate view, change these variables (around line 16700):
+```javascript
+let currentUserRole = 'associate';
+let currentUserId = 'ASSOC-2401';  // Sarah Johnson
+let currentUserName = 'Sarah';
+```
+
+Sample items added for Sarah Johnson (ASSOC-2401):
+- Insurance renewal required (Compliance)
+- Supervision confirmation needed (Compliance)
+- Session reminder needed (Clients)
+- Payment overdue (Finance)
 
 ================================================================================
 
-PREVIOUS SESSION: Swiss Clinic Micro-Interactions [COMPLETED]
+PREVIOUS SESSION: Documentation Update - Frontend-Design Skill Integration [COMPLETED]
 ================================================================================
 
 ## Session Summary
