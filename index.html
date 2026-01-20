@@ -9055,6 +9055,171 @@
         }
 
         /* ============================================
+           ASSOCIATE ACTIONS NEEDED CARD
+           Friction items specific to this associate
+           ============================================ */
+
+        .associate-actions-card {
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .actions-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid var(--eden-border);
+        }
+
+        .actions-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .actions-count-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 6px;
+            border-radius: 10px;
+            background: var(--alert-amber);
+            color: var(--pure-white);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .actions-count-badge.zero {
+            background: var(--eden-green);
+        }
+
+        .actions-card-link {
+            font-size: 12px;
+            color: var(--eden-green);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .actions-card-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Action items list */
+        .actions-list {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .action-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--eden-mint);
+            cursor: pointer;
+            transition: background-color var(--transition-smooth);
+        }
+
+        .action-item:last-child {
+            border-bottom: none;
+        }
+
+        .action-item:hover {
+            background: var(--eden-mint);
+        }
+
+        .action-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        .action-dot.urgent { background: var(--alert-rose); }
+        .action-dot.warning { background: var(--alert-amber); }
+        .action-dot.info { background: var(--alert-blue); }
+
+        .action-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .action-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--eden-text);
+            margin-bottom: 2px;
+        }
+
+        .action-subtitle {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .action-meta {
+            font-size: 11px;
+            color: var(--eden-text-muted);
+            margin-top: 4px;
+        }
+
+        .action-arrow {
+            color: var(--eden-text-muted);
+            flex-shrink: 0;
+        }
+
+        .action-arrow svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* All Clear State */
+        .actions-all-clear {
+            padding: 32px 16px;
+            text-align: center;
+        }
+
+        .all-clear-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 12px;
+            color: var(--eden-green);
+        }
+
+        .all-clear-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-green);
+            margin-bottom: 4px;
+        }
+
+        .all-clear-subtitle {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        /* Mobile responsive for actions card */
+        @media (max-width: 768px) {
+            .action-item {
+                padding: 12px 16px;
+            }
+
+            .action-title {
+                font-size: 14px;
+            }
+        }
+
+        /* ============================================
            ADMIN HOME SCREEN
            ============================================ */
 
@@ -13353,6 +13518,72 @@
                             </div>
                         </div>
 
+                    </div>
+
+                    <!-- Actions Needed Card -->
+                    <div class="associate-actions-card" id="associateActionsCard">
+                        <div class="actions-card-header">
+                            <span class="actions-card-title">
+                                Actions Needed
+                                <span class="actions-count-badge" id="actionsCountBadge">3</span>
+                            </span>
+                            <a class="actions-card-link" onclick="navigateToAssociateView('action-centre')">View All</a>
+                        </div>
+
+                        <ul class="actions-list" id="associateActionsList">
+                            <!-- Populated by JavaScript - placeholder items shown -->
+                            <li class="action-item" onclick="handleActionItem('compliance', 'insurance-expiry')">
+                                <span class="action-dot warning"></span>
+                                <div class="action-content">
+                                    <div class="action-title">Professional indemnity expires soon</div>
+                                    <div class="action-subtitle">Upload renewed certificate</div>
+                                    <div class="action-meta">Due in 14 days</div>
+                                </div>
+                                <span class="action-arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <polyline points="9 18 15 12 9 6"/>
+                                    </svg>
+                                </span>
+                            </li>
+                            <li class="action-item" onclick="handleActionItem('clients', 'enquiry-response')">
+                                <span class="action-dot warning"></span>
+                                <div class="action-content">
+                                    <div class="action-title">2 enquiries awaiting response</div>
+                                    <div class="action-subtitle">New clients in your pipeline</div>
+                                    <div class="action-meta">Oldest: 3 days ago</div>
+                                </div>
+                                <span class="action-arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <polyline points="9 18 15 12 9 6"/>
+                                    </svg>
+                                </span>
+                            </li>
+                            <li class="action-item" onclick="handleActionItem('schedule', 'availability-gap')">
+                                <span class="action-dot info"></span>
+                                <div class="action-content">
+                                    <div class="action-title">Availability update needed</div>
+                                    <div class="action-subtitle">No slots showing for next week</div>
+                                    <div class="action-meta">Update your calendar</div>
+                                </div>
+                                <span class="action-arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <polyline points="9 18 15 12 9 6"/>
+                                    </svg>
+                                </span>
+                            </li>
+                        </ul>
+
+                        <!-- All Clear State (hidden by default) -->
+                        <div class="actions-all-clear" id="actionsAllClear" style="display: none;">
+                            <div class="all-clear-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                            </div>
+                            <div class="all-clear-title">Garden in Bloom</div>
+                            <div class="all-clear-subtitle">No actions needed right now</div>
+                        </div>
                     </div>
                 </div>
 
@@ -18190,6 +18421,11 @@ Sarah
             if (typeof updateBottomNavForRole === 'function') {
                 updateBottomNavForRole();
             }
+
+            // Initialize associate dashboard when switching to associate role
+            if (currentUserRole === 'associate' && currentView === 'dashboard') {
+                setTimeout(initializeAssociateDashboard, 100);
+            }
         }
 
         // Check if current user can access a view
@@ -18261,6 +18497,11 @@ Sarah
                 if (typeof ActionCentre !== 'undefined' && ActionCentre.render) {
                     ActionCentre.render();
                 }
+            }
+
+            // Initialize associate dashboard when switching to dashboard view
+            if (viewName === 'dashboard' && currentUserRole === 'associate') {
+                initializeAssociateDashboard();
             }
 
             // Sync mobile bottom nav active state
@@ -22084,6 +22325,9 @@ Sarah
 
             // Update hero financial card
             updateAssociateHeroCard();
+
+            // Update actions needed card
+            updateAssociateActions(currentUserId);
         }
 
         // Update associate hero financial card with earnings data
@@ -22171,6 +22415,461 @@ Sarah
                 // If earnings view not accessible, show a brief notification
                 showAccessDeniedNotification('earnings');
             }
+        }
+
+        // ============================================
+        // ASSOCIATE ACTION ITEM HANDLER
+        // Routes clicks on friction items to appropriate views
+        // ============================================
+
+        function handleActionItem(category, itemType) {
+            console.log('Action item clicked:', category, itemType);
+
+            switch(category) {
+                case 'compliance':
+                    // Navigate to contracts/documents tab in their profile
+                    if (canAccessView('contracts')) {
+                        showView('contracts');
+                    } else {
+                        navigateToAssociateView('support');
+                    }
+                    break;
+                case 'clients':
+                    // Navigate to pipeline with focus on relevant stage
+                    if (itemType === 'enquiry-response') {
+                        navigateToAssociateView('clients');
+                    } else {
+                        navigateToAssociateView('clients');
+                    }
+                    break;
+                case 'schedule':
+                    // Navigate to availability/calendar
+                    navigateToAssociateView('schedule');
+                    break;
+                case 'finance':
+                    // Open payout cockpit
+                    openAssociatePayoutDetail();
+                    break;
+                default:
+                    console.log('Opening ' + category);
+            }
+        }
+
+        // ============================================
+        // ASSOCIATE ACTIONS UPDATER
+        // Transforms admin friction items to associate perspective
+        // ============================================
+
+        function updateAssociateActions(associateId) {
+            const actionsList = document.getElementById('associateActionsList');
+            const allClearState = document.getElementById('actionsAllClear');
+            const countBadge = document.getElementById('actionsCountBadge');
+
+            if (!actionsList || !associateId) return;
+
+            // Get friction items for this associate
+            const associateActions = getAssociateActionItems(associateId);
+
+            // Update badge count
+            if (countBadge) {
+                countBadge.textContent = associateActions.length;
+                countBadge.classList.toggle('zero', associateActions.length === 0);
+            }
+
+            // Show all-clear state if no actions
+            if (associateActions.length === 0) {
+                actionsList.style.display = 'none';
+                if (allClearState) allClearState.style.display = 'block';
+                return;
+            }
+
+            // Show actions list
+            actionsList.style.display = 'block';
+            if (allClearState) allClearState.style.display = 'none';
+
+            // Render action items (limit to 3 most important)
+            const itemsToShow = associateActions.slice(0, 3);
+            actionsList.innerHTML = itemsToShow.map(item => `
+                <li class="action-item" onclick="handleActionItem('${item.category}', '${item.type}')">
+                    <span class="action-dot ${item.severity}"></span>
+                    <div class="action-content">
+                        <div class="action-title">${item.title}</div>
+                        <div class="action-subtitle">${item.subtitle}</div>
+                        ${item.meta ? `<div class="action-meta">${item.meta}</div>` : ''}
+                    </div>
+                    <span class="action-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                    </span>
+                </li>
+            `).join('');
+        }
+
+        // ============================================
+        // GET ASSOCIATE ACTION ITEMS
+        // Filters and transforms friction items for this associate
+        // ============================================
+
+        function getAssociateActionItems(associateId) {
+            const actions = [];
+
+            // Find the associate record
+            const associate = associates.find(a => a.id === associateId);
+            if (!associate) return actions;
+
+            // Check compliance items
+            // (These would come from associate record or a compliance table)
+            const insuranceExpiry = associate.insuranceExpiry ? new Date(associate.insuranceExpiry) : null;
+            if (insuranceExpiry) {
+                const daysUntilExpiry = Math.floor((insuranceExpiry - new Date()) / (1000 * 60 * 60 * 24));
+                if (daysUntilExpiry <= 30 && daysUntilExpiry > 0) {
+                    actions.push({
+                        category: 'compliance',
+                        type: 'insurance-expiry',
+                        severity: daysUntilExpiry <= 14 ? 'urgent' : 'warning',
+                        title: 'Professional indemnity expires soon',
+                        subtitle: 'Upload renewed certificate',
+                        meta: `Due in ${daysUntilExpiry} days`
+                    });
+                }
+            }
+
+            // Check for enquiries awaiting response (from clients table)
+            const myEnquiries = clients.filter(c =>
+                c.associateId === associateId &&
+                c.pipelineStage === 'Enquiry'
+            );
+            const oldEnquiries = myEnquiries.filter(c => {
+                const daysSinceCreated = Math.floor((new Date() - new Date(c.createdDate)) / (1000 * 60 * 60 * 24));
+                return daysSinceCreated >= 2;
+            });
+
+            if (oldEnquiries.length > 0) {
+                const oldestDays = Math.max(...oldEnquiries.map(c =>
+                    Math.floor((new Date() - new Date(c.createdDate)) / (1000 * 60 * 60 * 24))
+                ));
+                actions.push({
+                    category: 'clients',
+                    type: 'enquiry-response',
+                    severity: oldestDays >= 5 ? 'urgent' : 'warning',
+                    title: `${oldEnquiries.length} enquir${oldEnquiries.length === 1 ? 'y' : 'ies'} awaiting response`,
+                    subtitle: 'New clients in your pipeline',
+                    meta: `Oldest: ${oldestDays} days ago`
+                });
+            }
+
+            // Check availability gaps (simplified check)
+            // In real implementation, would check against availability table
+            const availableSlots = associate.availableSlots || 0;
+            if (availableSlots === 0) {
+                actions.push({
+                    category: 'schedule',
+                    type: 'availability-gap',
+                    severity: 'info',
+                    title: 'Availability update needed',
+                    subtitle: 'No slots showing for next week',
+                    meta: 'Update your calendar'
+                });
+            }
+
+            // Sort by severity (urgent first, then warning, then info)
+            const severityOrder = { urgent: 0, warning: 1, info: 2 };
+            actions.sort((a, b) => severityOrder[a.severity] - severityOrder[b.severity]);
+
+            return actions;
+        }
+
+        // ============================================
+        // ASSOCIATE DASHBOARD DATA WIRING
+        // Functions to populate all dashboard sections
+        // ============================================
+
+        /**
+         * Initialize the associate dashboard with real data
+         * Called when switching to associate role or loading dashboard view
+         */
+        function initializeAssociateDashboard() {
+            console.log('=== initializeAssociateDashboard called ===');
+
+            // Get current associate ID (from login or role simulation)
+            const associateId = getCurrentAssociateId();
+
+            if (!associateId) {
+                console.warn('No associate ID found - cannot populate dashboard');
+                return;
+            }
+
+            console.log('Populating dashboard for associate:', associateId);
+
+            // Populate each section
+            updateAssociateHeroCard();
+            populateAssociateSessions(associateId);
+            updateAssociateCapacity(associateId);
+            renderEarningsSparkline(associateId);
+            updateAssociateActions(associateId);
+            updateAssociatePipeline(associateId);
+        }
+
+        /**
+         * Get current associate ID based on role/login
+         */
+        function getCurrentAssociateId() {
+            // If we're in associate role, use the currentUserId
+            if (typeof currentUserRole !== 'undefined' && currentUserRole === 'associate') {
+                if (typeof currentUserId !== 'undefined' && currentUserId) {
+                    return currentUserId;
+                }
+            }
+
+            // Fallback to first associate for testing
+            if (associates && associates.length > 0) {
+                return associates[0].id;
+            }
+
+            return null;
+        }
+
+        /**
+         * Populate Sessions This Week list
+         */
+        function populateAssociateSessions(associateId) {
+            const listContainer = document.getElementById('sessionsWeekList');
+            if (!listContainer) return;
+
+            // Get sessions for this associate
+            const allSessions = typeof getSessionsForAssociate === 'function'
+                ? getSessionsForAssociate(associateId)
+                : sessionRecords.filter(s => s.associateId === associateId);
+
+            // Filter to this week's upcoming sessions
+            const today = new Date();
+            const endOfWeek = new Date(today);
+            endOfWeek.setDate(today.getDate() + (7 - today.getDay()));
+
+            const thisWeekSessions = allSessions.filter(session => {
+                const sessionDate = new Date(session.sessionDate);
+                return sessionDate >= today && sessionDate <= endOfWeek &&
+                       session.sessionStatus !== 'Cancelled';
+            }).sort((a, b) => new Date(a.sessionDate) - new Date(b.sessionDate));
+
+            // Limit to 4 sessions max
+            const sessionsToShow = thisWeekSessions.slice(0, 4);
+
+            if (sessionsToShow.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="sessions-empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        <div>No sessions scheduled this week</div>
+                    </div>
+                `;
+                return;
+            }
+
+            // Render session items
+            listContainer.innerHTML = sessionsToShow.map(session => {
+                const sessionDate = new Date(session.sessionDate);
+                const dayName = sessionDate.toLocaleDateString('en-GB', { weekday: 'short' });
+                const clientInitials = getClientInitials(session.clientName);
+                const sessionTypeShort = getSessionTypeShort(session.sessionType);
+
+                return `
+                    <div class="session-preview-item">
+                        <span class="session-preview-day">${dayName}</span>
+                        <span class="session-preview-time">${session.sessionTime || '—'}</span>
+                        <span class="session-preview-client">${clientInitials}</span>
+                        <span class="session-preview-type">${sessionTypeShort}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        /**
+         * Get client initials from full name (privacy)
+         */
+        function getClientInitials(fullName) {
+            if (!fullName) return '—';
+            const parts = fullName.trim().split(' ');
+            if (parts.length === 1) return parts[0].charAt(0) + '.';
+            return parts[0] + ' ' + parts[parts.length - 1].charAt(0) + '.';
+        }
+
+        /**
+         * Get short session type label
+         */
+        function getSessionTypeShort(sessionType) {
+            if (!sessionType) return 'Session';
+            if (sessionType.toLowerCase().includes('couple')) return 'Couple';
+            if (sessionType.toLowerCase().includes('individual')) return 'Individual';
+            if (sessionType.toLowerCase().includes('coaching')) return 'Coaching';
+            return sessionType.split(' ')[0];
+        }
+
+        /**
+         * Update capacity display
+         */
+        function updateAssociateCapacity(associateId) {
+            const capacityValueEl = document.getElementById('capacityValue');
+            const capacitySubtext = document.getElementById('capacitySubtext');
+            const capacityBarFill = document.getElementById('capacityBarFill');
+
+            // Find associate record
+            const associate = associates.find(a => a.id === associateId);
+
+            // Calculate capacity (sessions booked vs available slots)
+            let totalSlots = associate?.totalSlots || 20;
+            let bookedSlots = 0;
+
+            // Count sessions this week as "booked"
+            const sessions = typeof getSessionsForAssociate === 'function'
+                ? getSessionsForAssociate(associateId)
+                : sessionRecords.filter(s => s.associateId === associateId);
+
+            const today = new Date();
+            const startOfWeek = new Date(today);
+            startOfWeek.setDate(today.getDate() - today.getDay());
+            const endOfWeek = new Date(startOfWeek);
+            endOfWeek.setDate(startOfWeek.getDate() + 7);
+
+            bookedSlots = sessions.filter(s => {
+                const d = new Date(s.sessionDate);
+                return d >= startOfWeek && d <= endOfWeek && s.sessionStatus !== 'Cancelled';
+            }).length;
+
+            const capacityPercent = totalSlots > 0 ? Math.round((bookedSlots / totalSlots) * 100) : 0;
+
+            if (capacityValueEl) capacityValueEl.textContent = capacityPercent + '%';
+            if (capacitySubtext) capacitySubtext.textContent = `${bookedSlots} of ${totalSlots} slots filled`;
+            if (capacityBarFill) capacityBarFill.style.width = Math.min(capacityPercent, 100) + '%';
+        }
+
+        /**
+         * Render earnings sparkline (4-month trend)
+         */
+        function renderEarningsSparkline(associateId) {
+            const container = document.getElementById('earningsSparkline');
+            const trendValue = document.getElementById('earningsTrendValue');
+
+            if (!container) return;
+
+            // Get monthly earnings
+            const monthlyData = calculateMonthlyEarnings(associateId);
+
+            if (monthlyData.length < 2) {
+                container.innerHTML = '<div style="font-size: 11px; color: var(--eden-text-muted); text-align: center; padding: 10px;">Not enough history</div>';
+                return;
+            }
+
+            // Update trend value and indicator
+            if (trendValue && monthlyData.length >= 2) {
+                const currentMonth = monthlyData[monthlyData.length - 1];
+                const prevMonth = monthlyData[monthlyData.length - 2];
+                const change = prevMonth > 0 ? ((currentMonth - prevMonth) / prevMonth) * 100 : 0;
+
+                trendValue.innerHTML = `£${currentMonth.toFixed(0)} ` +
+                    `<span class="trend-indicator ${change >= 0 ? 'up' : 'down'}">` +
+                    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">` +
+                    (change >= 0
+                        ? `<polyline points="18 15 12 9 6 15"/>`
+                        : `<polyline points="6 9 12 15 18 9"/>`) +
+                    `</svg>${change >= 0 ? '+' : ''}${change.toFixed(0)}%</span>`;
+            }
+
+            // Generate sparkline SVG
+            const width = container.offsetWidth || 100;
+            const height = 40;
+            const padding = 4;
+
+            const maxVal = Math.max(...monthlyData);
+            const minVal = Math.min(...monthlyData);
+            const range = maxVal - minVal || 1;
+
+            // Calculate points
+            const points = monthlyData.map((val, i) => {
+                const x = padding + (i / (monthlyData.length - 1)) * (width - padding * 2);
+                const y = height - padding - ((val - minVal) / range) * (height - padding * 2);
+                return `${x},${y}`;
+            }).join(' ');
+
+            // Area path (for fill)
+            const areaPath = `M${padding},${height - padding} ` +
+                monthlyData.map((val, i) => {
+                    const x = padding + (i / (monthlyData.length - 1)) * (width - padding * 2);
+                    const y = height - padding - ((val - minVal) / range) * (height - padding * 2);
+                    return `L${x},${y}`;
+                }).join(' ') +
+                ` L${width - padding},${height - padding} Z`;
+
+            container.innerHTML = `
+                <svg class="sparkline-svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">
+                    <path class="sparkline-area" d="${areaPath}"/>
+                    <polyline class="sparkline-path" points="${points}" fill="none"/>
+                </svg>
+            `;
+        }
+
+        /**
+         * Calculate monthly earnings for sparkline
+         * Returns array of last 4 months' earnings
+         */
+        function calculateMonthlyEarnings(associateId) {
+            const sessions = typeof getSessionsForAssociate === 'function'
+                ? getSessionsForAssociate(associateId)
+                : sessionRecords.filter(s => s.associateId === associateId);
+
+            const today = new Date();
+            const monthlyTotals = [];
+
+            // Calculate for last 4 months
+            for (let i = 3; i >= 0; i--) {
+                const monthStart = new Date(today.getFullYear(), today.getMonth() - i, 1);
+                const monthEnd = new Date(today.getFullYear(), today.getMonth() - i + 1, 0);
+
+                const monthSessions = sessions.filter(s => {
+                    const d = new Date(s.sessionDate);
+                    return d >= monthStart && d <= monthEnd && s.paymentStatus === 'Paid';
+                });
+
+                const monthTotal = monthSessions.reduce((sum, s) => sum + (s.rate * 0.69), 0);
+                monthlyTotals.push(monthTotal);
+            }
+
+            return monthlyTotals;
+        }
+
+        /**
+         * Update pipeline counts for associate
+         */
+        function updateAssociatePipeline(associateId) {
+            // Filter clients for this associate
+            const myClients = clients.filter(c => c.associateId === associateId);
+
+            // Count by pipeline stage
+            const stageCounts = {
+                enquiry: myClients.filter(c => c.pipelineStage === 'Enquiry').length,
+                consultation: myClients.filter(c => c.pipelineStage === 'Consultation').length,
+                onboarding: myClients.filter(c => c.pipelineStage === 'Onboarding').length,
+                active: myClients.filter(c => c.pipelineStage === 'Active').length
+            };
+
+            // Update DOM
+            const elements = {
+                stageEnquiry: stageCounts.enquiry,
+                stageConsultation: stageCounts.consultation,
+                stageOnboarding: stageCounts.onboarding,
+                stageActive: stageCounts.active,
+                totalClientsCount: `${stageCounts.active} active`
+            };
+
+            Object.entries(elements).forEach(([id, value]) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = value;
+            });
         }
 
         function updateAssociateStats() {
@@ -26295,6 +26994,11 @@ Eden Relationships
 
             // Initialize Swiss Clinic Animations
             EdenAnimations.init();
+
+            // Initialize associate dashboard if starting in associate role
+            if (currentUserRole === 'associate') {
+                setTimeout(initializeAssociateDashboard, 100);
+            }
 
             // Handle window resize
             window.addEventListener('resize', handleResize);

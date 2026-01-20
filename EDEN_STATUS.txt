@@ -2,77 +2,140 @@
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
 Last Updated: 20 January 2026
-Session: Associate Dashboard Redesign - Hero Financial Card
+Session: Associate Dashboard Redesign - All Chunks Complete
 Branch: claude/eden-dashboard-redesign-7dzZK
 ================================================================================
 
-LATEST CHANGES: Associate Dashboard Redesign - Chunk 1 [COMPLETE]
+LATEST CHANGES: Associate Dashboard Redesign [ALL 4 CHUNKS COMPLETE]
 ================================================================================
 
 ## Session Summary
 
-Implemented the Hero Financial Card for the Associate Dashboard. Associates now
-see a prominent green financial panel at the top of their dashboard, showing
-earnings, payout status breakdown, and a "Ready for Payout" callout.
+Implemented a complete Associate Dashboard redesign transforming it from a simple
+greeting + pipeline card into a first-class financial command centre. The new
+dashboard mirrors the quality of the admin's "Practice Overview" panel, with
+earnings visualization, sessions preview, capacity tracking, and friction items.
 
 --------------------------------------------------------------------------------
-WHAT WAS REQUESTED
+CHUNKS COMPLETED
 --------------------------------------------------------------------------------
 
-Transform the Associate view dashboard from a simple greeting + pipeline card
-into a first-class financial command centre with:
-1. Big green hero card matching admin's "Practice Overview" aesthetic
-2. Large earnings display showing 69% associate share
-3. Three-segment progress bar (Paid / Ready / Awaiting)
-4. "Ready for Payout" callout that navigates to earnings view
+### Chunk 1: Hero Financial Card [COMPLETE]
+- Big green gradient panel with 42px earnings display
+- Three-segment progress bar (Paid / Ready / Awaiting)
+- "Ready for Payout" callout with session count
+- Mobile responsive (full-width on mobile)
 
---------------------------------------------------------------------------------
-WHAT WAS COMPLETED
---------------------------------------------------------------------------------
+### Chunk 2: Supporting Cards Grid [COMPLETE]
+- Sessions This Week card (full width) with preview items
+- Earnings Trend card with sparkline container
+- Capacity Pulse card with progress bar
+- 2-column grid (stacks on mobile)
 
-| Step | Change | Location |
-|------|--------|----------|
-| 1 | Created index_backup_20260120.html | Root directory |
-| 2 | Added .associate-hero-card CSS styles (~180 lines) | After .pipeline-connector |
-| 3 | Added mobile responsive styles for hero card | @media (max-width: 768px) |
-| 4 | Replaced associate home HTML with hero card structure | Lines ~12718-12876 |
-| 5 | Added updateAssociateHeroCard() function | After updateAssociateHomeData() |
-| 6 | Added openAssociatePayoutDetail() function | After updateAssociateHeroCard() |
-| 7 | Updated updateAssociateHomeData() to call hero card update | Line ~21760 |
+### Chunk 3: Actions Needed Card [COMPLETE]
+- Friction items filtered for this associate
+- Severity dots (urgent/warning/info)
+- "Garden in Bloom" all-clear state
+- JavaScript handlers for routing clicks
+
+### Chunk 4: JavaScript Data Wiring [COMPLETE]
+- initializeAssociateDashboard() master function
+- populateAssociateSessions() for weekly sessions
+- renderEarningsSparkline() with SVG generation
+- updateAssociateCapacity() with progress bar
+- updateAssociatePipeline() for client counts
+- Hooks into role toggle, view display, and page load
 
 --------------------------------------------------------------------------------
 KEY FEATURES
 --------------------------------------------------------------------------------
 
-**Hero Financial Card Components:**
-- Big earnings number (42px font, white on green gradient)
-- "Your 69% share" subtitle with gross amount
-- Three-segment horizontal bar showing payout states
-- Legend with Paid/Ready/Awaiting amounts
-- "Ready for Payout" callout box with session count and arrow
+**Financial Visualization:**
+- Large earnings display with 69% share context
+- Progress bar showing Paid/Ready/Awaiting proportions
+- Ready for Payout callout navigates to earnings view
+- 4-month earnings sparkline with trend indicator
+
+**Upcoming Sessions:**
+- Sessions This Week card with day/time/client preview
+- Client names shown as initials for privacy
+- Session type badges (Individual/Couple/Coaching)
+- Empty state when no sessions scheduled
+
+**Capacity Tracking:**
+- Percentage utilization display
+- Progress bar with target marker (80%)
+- Slots filled count
+
+**Actions Needed:**
+- Filtered friction items for this associate
+- Compliance (insurance expiry, DBS)
+- Client follow-ups (old enquiries)
+- Availability gaps
+- Severity-based sorting
 
 **Data Integration:**
-- Uses existing calculateAssociateEarnings() helper function
-- Formats currency using Intl.NumberFormat for consistency
-- Progress bar widths calculated from actual earnings data
-- Callout click navigates to 'earnings' view
+- Uses existing calculateAssociateEarnings() helper
+- Filters sessionRecords and clients by associateId
+- All data updates on role toggle and view change
 
-**Responsive Design:**
-- Desktop: 24px padding, 12px border-radius, 42px font
-- Mobile: Full-width (negative margins), 36px font, no border-radius
+--------------------------------------------------------------------------------
+NEW JAVASCRIPT FUNCTIONS
+--------------------------------------------------------------------------------
+
+| Function | Purpose |
+|----------|---------|
+| initializeAssociateDashboard() | Master init, calls all updaters |
+| getCurrentAssociateId() | Gets ID from role/login |
+| populateAssociateSessions() | Renders sessions this week |
+| getClientInitials() | Privacy helper for names |
+| getSessionTypeShort() | Short session type labels |
+| updateAssociateCapacity() | Updates capacity bar |
+| renderEarningsSparkline() | Draws SVG sparkline |
+| calculateMonthlyEarnings() | 4-month earnings array |
+| updateAssociatePipeline() | Updates pipeline counts |
+| handleActionItem() | Routes action clicks |
+| updateAssociateActions() | Renders friction items |
+| getAssociateActionItems() | Filters/transforms actions |
 
 --------------------------------------------------------------------------------
 FILES CHANGED
 --------------------------------------------------------------------------------
 
 1. index.html
-   - Added ~180 lines CSS for hero card styles
-   - Replaced associate home HTML (~60 lines → ~110 lines)
-   - Added 2 new JavaScript functions (~70 lines)
-   - Modified updateAssociateHomeData() to call hero card update
+   - Added ~530 lines CSS (hero card, supporting cards, actions card)
+   - Added ~180 lines HTML (new dashboard structure)
+   - Added ~350 lines JavaScript (data wiring functions)
+   - Modified toggleRole(), showView(), init() with hooks
 
 2. index_backup_20260120.html (created)
    - Pre-implementation backup
+
+--------------------------------------------------------------------------------
+ARCHITECTURE DECISIONS
+--------------------------------------------------------------------------------
+
+### Associate Dashboard (Jan 2026)
+- Decision: Reuse existing helper functions (calculateAssociateEarnings, etc.)
+- Decision: Hero card mirrors admin "Practice Overview" aesthetic
+- Decision: Progress bar uses rgba white at different opacities (0.9/0.6/0.3)
+- Decision: Sparkline uses inline SVG, no external library
+- Decision: Client names shown as initials for privacy (Emma T. not Emma Thompson)
+- Decision: Action items limited to 3 on dashboard, full list via "View All"
+- Decision: "Garden in Bloom" state when no actions needed
+
+--------------------------------------------------------------------------------
+POST-IMPLEMENTATION TESTING CHECKLIST
+--------------------------------------------------------------------------------
+
+- [ ] Role toggle refreshes dashboard correctly
+- [ ] Earnings match between hero card and payout cockpit
+- [ ] Sparkline renders with real monthly data
+- [ ] Sessions show correct client initials
+- [ ] Action items filter to current associate only
+- [ ] Mobile responsive at 375px width
+- [ ] Admin dashboard still functions unchanged
+- [ ] Console shows no errors
 
 ================================================================================
 
