@@ -40,24 +40,6 @@
             --radius-card: 12px;
             --transition-smooth: 300ms ease-out;
 
-            /* ===== SWISS CLINIC ANIMATION TOKENS ===== */
-            /* Duration */
-            --duration-fast: 150ms;
-            --duration-normal: 250ms;
-            --duration-slow: 400ms;
-            --duration-panel: 350ms;
-
-            /* Easing - "Low Friction" feel */
-            --ease-default: cubic-bezier(0.25, 0.1, 0.25, 1);
-            --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
-            --ease-sharp: cubic-bezier(0.4, 0, 0.2, 1);
-            --ease-out-soft: cubic-bezier(0.23, 1, 0.32, 1);
-            --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-            /* Shadows for lift effect */
-            --shadow-lift: 0 4px 12px rgba(45, 95, 77, 0.08);
-            --shadow-lift-hover: 0 8px 24px rgba(45, 95, 77, 0.12);
-
             /* Layout */
             --sidebar-width: 260px;
             --side-panel-width: 450px;
@@ -3447,306 +3429,6 @@
             .eden-logo-breathing {
                 animation: none;
                 opacity: 0.85;
-            }
-        }
-
-        /* ============================================
-           SWISS CLINIC MICRO-INTERACTIONS
-           ============================================ */
-
-        /* ===== ENHANCED EMPTY STATE (All Clear) ===== */
-        .eden-all-clear {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 48px 24px;
-            text-align: center;
-            min-height: 240px;
-        }
-
-        .eden-all-clear-circle {
-            position: relative;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: var(--eden-mint);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .eden-all-clear-circle svg {
-            width: 32px;
-            height: 32px;
-            color: var(--eden-green);
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Pulsing ring animation */
-        .eden-all-clear-pulse {
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            background: var(--eden-mint);
-            animation: eden-pulse-ring 3s ease-in-out infinite;
-        }
-
-        @keyframes eden-pulse-ring {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 0.4;
-            }
-            50% {
-                transform: scale(1.3);
-                opacity: 0;
-            }
-        }
-
-        /* Second pulse ring (delayed) */
-        .eden-all-clear-pulse-delayed {
-            animation-delay: 1.5s;
-        }
-
-        .eden-all-clear h3 {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--eden-green);
-            margin-bottom: 8px;
-            animation: eden-fade-up 0.4s var(--ease-out-soft) 0.1s both;
-        }
-
-        .eden-all-clear p {
-            font-size: 14px;
-            color: var(--eden-text-secondary);
-            max-width: 260px;
-            line-height: 1.5;
-            animation: eden-fade-up 0.4s var(--ease-out-soft) 0.2s both;
-        }
-
-        @keyframes eden-fade-up {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ===== CARD INTERACTIONS ===== */
-        .eden-card-animated {
-            transition: transform var(--duration-fast) var(--ease-out-soft),
-                        box-shadow var(--duration-fast) var(--ease-out-soft);
-            will-change: transform;
-        }
-
-        .eden-card-animated:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lift-hover);
-        }
-
-        .eden-card-animated:active {
-            transform: translateY(0) scale(0.98);
-            transition-duration: 80ms;
-        }
-
-        /* Mobile tap state */
-        @media (hover: none) {
-            .eden-card-animated:hover {
-                transform: none;
-                box-shadow: none;
-            }
-            .eden-card-animated:active {
-                transform: scale(0.97);
-            }
-        }
-
-        /* ===== STAGGERED LIST ANIMATION ===== */
-        .eden-stagger-item {
-            opacity: 0;
-            transform: translateY(12px);
-            animation: eden-stagger-in 0.35s var(--ease-out-soft) forwards;
-        }
-
-        .eden-stagger-item:nth-child(1) { animation-delay: 0ms; }
-        .eden-stagger-item:nth-child(2) { animation-delay: 50ms; }
-        .eden-stagger-item:nth-child(3) { animation-delay: 100ms; }
-        .eden-stagger-item:nth-child(4) { animation-delay: 150ms; }
-        .eden-stagger-item:nth-child(5) { animation-delay: 200ms; }
-        .eden-stagger-item:nth-child(6) { animation-delay: 250ms; }
-        .eden-stagger-item:nth-child(7) { animation-delay: 300ms; }
-        .eden-stagger-item:nth-child(8) { animation-delay: 350ms; }
-        .eden-stagger-item:nth-child(9) { animation-delay: 400ms; }
-        .eden-stagger-item:nth-child(10) { animation-delay: 450ms; }
-
-        @keyframes eden-stagger-in {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ===== SUCCESS FEEDBACK TOAST ===== */
-        .eden-success-toast {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            background: var(--eden-green);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            box-shadow: 0 4px 20px rgba(45, 95, 77, 0.3);
-            opacity: 0;
-            visibility: hidden;
-            z-index: 9999;
-            pointer-events: none;
-            transition: opacity var(--duration-normal) var(--ease-out-soft),
-                        transform var(--duration-slow) var(--ease-spring),
-                        visibility var(--duration-normal);
-        }
-
-        .eden-success-toast.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .eden-success-toast.hide {
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(0.9) translateY(-10px);
-        }
-
-        .eden-success-toast svg {
-            width: 18px;
-            height: 18px;
-            animation: eden-check-pop 0.3s var(--ease-bounce) 0.1s both;
-        }
-
-        @keyframes eden-check-pop {
-            from {
-                transform: scale(0);
-            }
-            to {
-                transform: scale(1);
-            }
-        }
-
-        /* ===== ENHANCED PANEL ANIMATIONS ===== */
-        .side-panel {
-            transition: transform var(--duration-panel) var(--ease-out-soft);
-        }
-
-        .side-panel.open {
-            transform: translateX(0);
-        }
-
-        /* Panel backdrop */
-        .panel-backdrop {
-            position: fixed;
-            inset: 0;
-            background: rgba(26, 51, 41, 0.2);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity var(--duration-fast) var(--ease-default),
-                        visibility var(--duration-fast);
-            z-index: 199;
-        }
-
-        .panel-backdrop.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Panel content fade-in */
-        .panel-content-animated {
-            opacity: 0;
-            transform: translateY(8px);
-            transition: opacity var(--duration-normal) var(--ease-default),
-                        transform var(--duration-normal) var(--ease-out-soft);
-            transition-delay: 100ms;
-        }
-
-        .side-panel.open .panel-content-animated,
-        .bottom-sheet.open .panel-content-animated {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Enhanced bottom sheet with spring-like motion */
-        .bottom-sheet {
-            transition: transform var(--duration-panel) var(--ease-out-soft);
-        }
-
-        .bottom-sheet.dragging {
-            transition: none;
-        }
-
-        .bottom-sheet.closing {
-            transition: transform var(--duration-normal) var(--ease-sharp);
-        }
-
-        /* ===== BUTTON TAP FEEDBACK ===== */
-        .eden-btn-tap {
-            transition: transform var(--duration-fast) var(--ease-out-soft);
-        }
-
-        .eden-btn-tap:active {
-            transform: scale(0.95);
-        }
-
-        /* ===== LOADING SHIMMER ===== */
-        .eden-shimmer {
-            background: linear-gradient(
-                90deg,
-                var(--eden-mint) 0%,
-                var(--eden-pale, #e8f2ed) 50%,
-                var(--eden-mint) 100%
-            );
-            background-size: 200% 100%;
-            animation: eden-shimmer 1.5s ease-in-out infinite;
-        }
-
-        @keyframes eden-shimmer {
-            0% {
-                background-position: 200% 0;
-            }
-            100% {
-                background-position: -200% 0;
-            }
-        }
-
-        /* ===== REDUCED MOTION - GLOBAL ===== */
-        @media (prefers-reduced-motion: reduce) {
-            .eden-card-animated,
-            .eden-stagger-item,
-            .eden-success-toast,
-            .side-panel,
-            .bottom-sheet,
-            .panel-content-animated,
-            .eden-btn-tap {
-                transition-duration: 0ms !important;
-                animation-duration: 0ms !important;
-            }
-
-            .eden-all-clear-pulse,
-            .eden-shimmer {
-                animation: none !important;
-            }
-
-            .eden-stagger-item {
-                opacity: 1;
-                transform: none;
             }
         }
 
@@ -13281,20 +12963,18 @@
                     <!-- Items rendered by JavaScript -->
                 </div>
 
-                <!-- Empty State - "All Clear" with Swiss Clinic Animation -->
-                <div class="action-empty-state eden-all-clear" id="actionEmptyState" style="display: none;">
-                    <div class="eden-all-clear-circle">
-                        <!-- Pulsing rings -->
-                        <div class="eden-all-clear-pulse"></div>
-                        <div class="eden-all-clear-pulse eden-all-clear-pulse-delayed"></div>
-                        <!-- Checkmark icon -->
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12"></polyline>
+                <!-- Empty State -->
+                <div class="action-empty-state" id="actionEmptyState" style="display: none;">
+                    <div class="empty-state-icon">
+                        <!-- Eden Garden Logo with breathing animation -->
+                        <svg class="eden-logo-breathing" viewBox="0 0 100 100" width="80" height="80">
+                            <circle cx="25" cy="55" r="18" fill="#2d5f4d" opacity="0.3"/>
+                            <circle cx="50" cy="40" r="22" fill="#2d5f4d" opacity="0.5"/>
+                            <circle cx="65" cy="55" r="15" fill="#2d5f4d" opacity="0.8"/>
                         </svg>
                     </div>
-                    <h3>All Clear</h3>
-                    <p id="emptyStateText">
-                        Nothing needs your attention right now. Your practice is running smoothly.
+                    <p class="empty-state-text" id="emptyStateText">
+                        The Garden is in Bloom. All associates are thriving.
                     </p>
                 </div>
 
@@ -14114,9 +13794,6 @@
 
             </div>
         </div>
-
-        <!-- Panel Backdrop (Desktop) -->
-        <div class="panel-backdrop" id="panelBackdrop" onclick="closePanel()"></div>
 
         <!-- Side Panel (Desktop) -->
         <aside class="side-panel" id="sidePanel">
@@ -15444,288 +15121,6 @@ Sarah
     </div>
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // ============================================
-        // EDEN ANIMATIONS MODULE
-        // "Swiss Clinic" Micro-Interactions
-        // ============================================
-
-        const EdenAnimations = (function() {
-            // Check for reduced motion preference
-            const prefersReducedMotion = () => {
-                if (typeof window === 'undefined') return false;
-                return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            };
-
-            // Haptic feedback patterns (duration in ms)
-            const hapticPatterns = {
-                success: [10],           // Short, crisp
-                warning: [10, 50, 10],   // Double tap
-                error: [50, 30, 50],     // Longer, alerting
-                light: [5],              // Barely there
-                tap: [8]                 // Button tap
-            };
-
-            // Trigger haptic feedback (Vibration API)
-            function triggerHaptic(type = 'light') {
-                if (prefersReducedMotion()) return;
-                if (!navigator.vibrate) return;
-
-                const pattern = hapticPatterns[type] || hapticPatterns.light;
-                try {
-                    navigator.vibrate(pattern);
-                } catch (e) {
-                    // Silently fail - not all devices support vibration
-                }
-            }
-
-            // Success toast element
-            let successToast = null;
-            let toastTimeout = null;
-
-            function createSuccessToast() {
-                if (successToast) return successToast;
-
-                successToast = document.createElement('div');
-                successToast.className = 'eden-success-toast';
-                successToast.setAttribute('role', 'status');
-                successToast.setAttribute('aria-live', 'polite');
-                successToast.innerHTML = `
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
-                    <span>Done</span>
-                `;
-                document.body.appendChild(successToast);
-                return successToast;
-            }
-
-            // Show success feedback
-            function showSuccess(message = 'Done', duration = 1800) {
-                if (prefersReducedMotion()) {
-                    duration = 800; // Shorter for reduced motion
-                }
-
-                const toast = createSuccessToast();
-                const textSpan = toast.querySelector('span');
-                if (textSpan) textSpan.textContent = message;
-
-                // Clear any existing timeout
-                if (toastTimeout) {
-                    clearTimeout(toastTimeout);
-                    toast.classList.remove('show', 'hide');
-                }
-
-                // Trigger haptic
-                triggerHaptic('success');
-
-                // Show toast
-                requestAnimationFrame(() => {
-                    toast.classList.add('show');
-                });
-
-                // Hide after duration
-                toastTimeout = setTimeout(() => {
-                    toast.classList.add('hide');
-                    setTimeout(() => {
-                        toast.classList.remove('show', 'hide');
-                    }, 300);
-                }, duration);
-            }
-
-            // Apply stagger animation to a list of elements
-            function staggerIn(elements, options = {}) {
-                if (prefersReducedMotion()) {
-                    elements.forEach(el => {
-                        el.style.opacity = '1';
-                        el.style.transform = 'none';
-                    });
-                    return;
-                }
-
-                const { delay = 50, baseDelay = 0 } = options;
-
-                elements.forEach((el, index) => {
-                    el.classList.remove('eden-stagger-item');
-                    el.style.opacity = '0';
-                    el.style.transform = 'translateY(12px)';
-
-                    // Force reflow
-                    void el.offsetWidth;
-
-                    el.style.animationDelay = `${baseDelay + (index * delay)}ms`;
-                    el.classList.add('eden-stagger-item');
-                });
-            }
-
-            // Add card animation class
-            function enableCardAnimation(card) {
-                if (!card || prefersReducedMotion()) return;
-                card.classList.add('eden-card-animated');
-            }
-
-            // Enable card animations on multiple cards
-            function enableCardAnimations(cards) {
-                if (prefersReducedMotion()) return;
-                cards.forEach(card => card.classList.add('eden-card-animated'));
-            }
-
-            // Create the "All Clear" empty state HTML
-            function createAllClearHTML(options = {}) {
-                const {
-                    title = 'All Clear',
-                    message = 'Nothing needs your attention right now. Your practice is running smoothly.',
-                    showAction = false,
-                    actionText = '',
-                    actionHandler = ''
-                } = options;
-
-                const actionButton = showAction ? `
-                    <button class="eden-empty-action eden-btn-tap" onclick="${actionHandler}">
-                        ${actionText}
-                    </button>
-                ` : '';
-
-                return `
-                    <div class="eden-all-clear">
-                        <div class="eden-all-clear-circle">
-                            <div class="eden-all-clear-pulse"></div>
-                            <div class="eden-all-clear-pulse eden-all-clear-pulse-delayed"></div>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                        </div>
-                        <h3>${title}</h3>
-                        <p>${message}</p>
-                        ${actionButton}
-                    </div>
-                `;
-            }
-
-            // Spring animation for panels (using Web Animations API)
-            function animatePanelOpen(panel, direction = 'right') {
-                if (prefersReducedMotion() || !panel) return;
-
-                const isRight = direction === 'right';
-                const startX = isRight ? '100%' : '-100%';
-
-                panel.animate([
-                    { transform: `translateX(${startX})` },
-                    { transform: 'translateX(0)' }
-                ], {
-                    duration: 350,
-                    easing: 'cubic-bezier(0.23, 1, 0.32, 1)',
-                    fill: 'forwards'
-                });
-            }
-
-            function animatePanelClose(panel, direction = 'right') {
-                if (prefersReducedMotion() || !panel) return Promise.resolve();
-
-                const isRight = direction === 'right';
-                const endX = isRight ? '100%' : '-100%';
-
-                const animation = panel.animate([
-                    { transform: 'translateX(0)' },
-                    { transform: `translateX(${endX})` }
-                ], {
-                    duration: 250,
-                    easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
-                    fill: 'forwards'
-                });
-
-                return animation.finished;
-            }
-
-            // Bottom sheet animation with spring physics
-            function animateBottomSheetOpen(sheet) {
-                if (prefersReducedMotion() || !sheet) return;
-
-                sheet.animate([
-                    { transform: 'translateY(100%)' },
-                    { transform: 'translateY(0)' }
-                ], {
-                    duration: 400,
-                    easing: 'cubic-bezier(0.23, 1, 0.32, 1)',
-                    fill: 'forwards'
-                });
-            }
-
-            function animateBottomSheetClose(sheet) {
-                if (prefersReducedMotion() || !sheet) return Promise.resolve();
-
-                const animation = sheet.animate([
-                    { transform: 'translateY(0)' },
-                    { transform: 'translateY(100%)' }
-                ], {
-                    duration: 250,
-                    easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
-                    fill: 'forwards'
-                });
-
-                return animation.finished;
-            }
-
-            // Animate backdrop opacity
-            function animateBackdrop(backdrop, show = true) {
-                if (prefersReducedMotion() || !backdrop) return;
-
-                backdrop.animate([
-                    { opacity: show ? 0 : 1 },
-                    { opacity: show ? 1 : 0 }
-                ], {
-                    duration: 150,
-                    easing: 'ease-out',
-                    fill: 'forwards'
-                });
-            }
-
-            // Button tap feedback
-            function addTapFeedback(button) {
-                if (!button) return;
-
-                button.classList.add('eden-btn-tap');
-
-                button.addEventListener('touchstart', () => {
-                    triggerHaptic('tap');
-                }, { passive: true });
-            }
-
-            // Initialize animations on page load
-            function init() {
-                // Create success toast element
-                createSuccessToast();
-
-                // Add card animations to all gateway cards
-                const gatewayCards = document.querySelectorAll('.gateway-card');
-                enableCardAnimations(gatewayCards);
-
-                // Add tap feedback to primary buttons
-                const primaryButtons = document.querySelectorAll('.primary-btn, .eden-green-btn, .action-btn');
-                primaryButtons.forEach(addTapFeedback);
-
-                console.log('[Eden Animations] Module initialized' +
-                    (prefersReducedMotion() ? ' (reduced motion enabled)' : ''));
-            }
-
-            // Public API
-            return {
-                init,
-                triggerHaptic,
-                showSuccess,
-                staggerIn,
-                enableCardAnimation,
-                enableCardAnimations,
-                createAllClearHTML,
-                animatePanelOpen,
-                animatePanelClose,
-                animateBottomSheetOpen,
-                animateBottomSheetClose,
-                animateBackdrop,
-                addTapFeedback,
-                prefersReducedMotion
-            };
-        })();
-
         // ============================================
         // SECURITY & GDPR MODULE
         // Eden Portal - Data Protection Compliance
@@ -18783,9 +18178,6 @@ Sarah
             resetPanelNavigation();
             updatePanelContent(selectedAssociate);
 
-            // Trigger haptic feedback on mobile
-            EdenAnimations.triggerHaptic('light');
-
             if (isMobile) {
                 // Save scroll position and lock body scroll (Bug Fix 1)
                 savedPanelScrollPosition = window.scrollY;
@@ -18796,69 +18188,34 @@ Sarah
                 document.body.style.overflow = 'hidden';
 
                 const bottomSheet = document.getElementById('bottomSheet');
-                const overlay = document.getElementById('bottomSheetOverlay');
-
-                // Use enhanced spring animation
-                bottomSheet.classList.remove('dragging', 'closing');
-                bottomSheet.style.transition = '';
-                bottomSheet.style.transform = '';
+                bottomSheet.style.transition = 'transform var(--transition-smooth)';
+                bottomSheet.style.transform = 'translateY(0)';
                 bottomSheet.classList.add('open');
-                overlay.classList.add('open');
-
-                // Animate with Web Animations API for spring feel
-                EdenAnimations.animateBottomSheetOpen(bottomSheet);
-                EdenAnimations.animateBackdrop(overlay, true);
+                document.getElementById('bottomSheetOverlay').classList.add('open');
             } else {
-                const sidePanel = document.getElementById('sidePanel');
-                const backdrop = document.getElementById('panelBackdrop');
-
-                sidePanel.classList.add('open');
-                backdrop.classList.add('open');
+                document.getElementById('sidePanel').classList.add('open');
                 document.getElementById('mainContent').classList.add('panel-open');
-
-                // Animate with spring feel
-                EdenAnimations.animatePanelOpen(sidePanel, 'right');
-                EdenAnimations.animateBackdrop(backdrop, true);
             }
         }
 
         function closePanel() {
-            // Trigger haptic feedback
-            EdenAnimations.triggerHaptic('light');
-
             if (isMobile) {
                 const bottomSheet = document.getElementById('bottomSheet');
-                const overlay = document.getElementById('bottomSheetOverlay');
-
-                bottomSheet.classList.add('closing');
-                bottomSheet.style.transition = '';
-                bottomSheet.style.transform = '';
+                bottomSheet.style.transition = 'transform var(--transition-smooth)';
+                bottomSheet.style.transform = 'translateY(100%)';
                 bottomSheet.classList.remove('open');
-                overlay.classList.remove('open');
+                document.getElementById('bottomSheetOverlay').classList.remove('open');
 
-                // Animate close
-                EdenAnimations.animateBackdrop(overlay, false);
-
-                // Restore scroll position after animation (Bug Fix 1)
-                setTimeout(() => {
-                    bottomSheet.classList.remove('closing');
-                    document.body.style.position = '';
-                    document.body.style.top = '';
-                    document.body.style.left = '';
-                    document.body.style.right = '';
-                    document.body.style.overflow = '';
-                    window.scrollTo(0, savedPanelScrollPosition);
-                }, 250);
+                // Restore scroll position (Bug Fix 1)
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.left = '';
+                document.body.style.right = '';
+                document.body.style.overflow = '';
+                window.scrollTo(0, savedPanelScrollPosition);
             } else {
-                const sidePanel = document.getElementById('sidePanel');
-                const backdrop = document.getElementById('panelBackdrop');
-
-                sidePanel.classList.remove('open');
-                backdrop.classList.remove('open');
+                document.getElementById('sidePanel').classList.remove('open');
                 document.getElementById('mainContent').classList.remove('panel-open');
-
-                // Animate backdrop
-                EdenAnimations.animateBackdrop(backdrop, false);
             }
 
             // Reset navigation stack
@@ -19769,8 +19126,8 @@ Sarah
             // Re-render the feed with updated data
             ActionCentre.loadActions(frictionItems);
 
-            // Show Swiss Clinic success feedback with haptic
-            EdenAnimations.showSuccess('Resolved');
+            // Show feedback
+            showToast('Marked as resolved');
         }
 
         function showToast(message) {
@@ -22951,14 +22308,9 @@ Eden Relationships
         // ============================================
 
         function applyCardAnimation(container) {
-            const cards = Array.from(container.children);
-
-            // Apply staggered entrance animation
-            EdenAnimations.staggerIn(cards, { delay: 50, baseDelay: 0 });
-
-            // Add hover/tap interactions to each card
-            cards.forEach(card => {
-                EdenAnimations.enableCardAnimation(card);
+            const cards = container.children;
+            Array.from(cards).forEach((card, index) => {
+                card.style.animationDelay = `${index * 75}ms`;
             });
         }
 
@@ -24703,8 +24055,7 @@ Eden Relationships
             // Remove from friction feed if present
             removeComplianceFrictionItem(associateId, 'supervision');
 
-            // Swiss Clinic success feedback
-            EdenAnimations.showSuccess('Confirmed');
+            showToast('Supervision confirmed for today', 'success');
         }
 
         function markDbsChecked(associateId) {
@@ -24720,8 +24071,7 @@ Eden Relationships
             // Remove from friction feed if present
             removeComplianceFrictionItem(associateId, 'dbs');
 
-            // Swiss Clinic success feedback
-            EdenAnimations.showSuccess('Checked');
+            showToast('DBS marked as checked', 'success');
         }
 
         function removeComplianceFrictionItem(associateId, complianceType) {
@@ -25426,9 +24776,6 @@ Eden Relationships
 
             // Initialize Referral System
             renderReferrals();
-
-            // Initialize Swiss Clinic Animations
-            EdenAnimations.init();
 
             // Handle window resize
             window.addEventListener('resize', handleResize);
