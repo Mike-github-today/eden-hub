@@ -16596,7 +16596,7 @@ Sarah
                     preview: `${associate.specialisation} • ${associate.clients}/${associate.maxCapacity} clients`,
                     meta: [associate.specialisation, associate.pendingPayout],
                     pulseColour: pulseColour,
-                    onClick: `openAssociateDetailPanel('${associate.id}')`,
+                    onClick: `showAssociateDetail('${associate.id}')`,
                     dataId: associate.id
                 });
             }).join('');
@@ -21687,7 +21687,7 @@ Eden Relationships
             if (!associate) return;
 
             // Open associate panel and navigate to inbox
-            openAssociateDetailPanel(associateId);
+            showAssociateDetail(associateId);
             setTimeout(() => {
                 navigatePanelTo('inbox');
             }, 300);
