@@ -9763,6 +9763,235 @@
             }
         }
 
+        /* ============================================
+           TEAM AT A GLANCE CARD
+           ============================================ */
+
+        .team-glance-card {
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .team-glance-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--eden-border);
+        }
+
+        .team-glance-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .team-glance-count {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+            margin-left: 8px;
+        }
+
+        .team-glance-link {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            color: var(--eden-green);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .team-glance-link:hover {
+            text-decoration: underline;
+        }
+
+        .team-glance-link svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .team-avatar-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 20px;
+            justify-content: flex-start;
+        }
+
+        .team-avatar-chip {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 8px;
+            border-radius: var(--radius-standard);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            min-width: 64px;
+        }
+
+        .team-avatar-chip:hover {
+            background: var(--eden-mint);
+        }
+
+        .team-avatar-ring {
+            position: relative;
+            width: 48px;
+            height: 48px;
+        }
+
+        .team-avatar-ring svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .team-avatar-ring-bg {
+            fill: none;
+            stroke: var(--eden-border);
+            stroke-width: 3;
+        }
+
+        .team-avatar-ring-progress {
+            fill: none;
+            stroke-width: 3;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 0.8s ease-out, stroke 0.3s ease;
+        }
+
+        .team-avatar-ring-progress.capacity-low {
+            stroke: var(--eden-green);
+        }
+
+        .team-avatar-ring-progress.capacity-medium {
+            stroke: #F59E0B;
+        }
+
+        .team-avatar-ring-progress.capacity-high {
+            stroke: #EF4444;
+        }
+
+        .team-avatar-ring-progress.capacity-full {
+            stroke: #9CA3AF;
+        }
+
+        .team-avatar-circle {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-green);
+        }
+
+        .team-avatar-status {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--pure-white);
+        }
+
+        .team-avatar-status.accepting {
+            background: var(--eden-green);
+        }
+
+        .team-avatar-status.not-accepting {
+            background: #9CA3AF;
+        }
+
+        .team-avatar-name {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--eden-text);
+            text-align: center;
+            max-width: 64px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .team-avatar-capacity {
+            font-size: 10px;
+            color: var(--eden-text-secondary);
+        }
+
+        .team-glance-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: var(--eden-mint);
+            border-top: 1px solid var(--eden-border);
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        .team-summary-stat {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .team-summary-stat strong {
+            color: var(--eden-text);
+            font-weight: 600;
+        }
+
+        .team-summary-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .team-summary-dot.green { background: var(--eden-green); }
+
+        @media (max-width: 768px) {
+            .team-avatar-grid {
+                padding: 16px;
+                gap: 8px;
+                justify-content: center;
+            }
+
+            .team-avatar-chip {
+                min-width: 56px;
+                padding: 6px;
+            }
+
+            .team-avatar-ring {
+                width: 44px;
+                height: 44px;
+            }
+
+            .team-avatar-circle {
+                width: 36px;
+                height: 36px;
+                font-size: 12px;
+            }
+
+            .team-glance-summary {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+            }
+        }
+
         /* Responsive adjustments for home screens */
         @media (max-width: 768px) {
             .quick-stat-row {
@@ -14086,6 +14315,35 @@
                             </div>
                             <div class="steward-clear-title">Practice Thriving</div>
                             <div class="steward-clear-subtitle">No steward actions needed right now</div>
+                        </div>
+                    </div>
+
+                    <!-- Team at a Glance Card -->
+                    <div class="team-glance-card" id="teamGlanceCard">
+                        <div class="team-glance-header">
+                            <div>
+                                <span class="team-glance-title">Team</span>
+                                <span class="team-glance-count" id="teamGlanceCount">7 associates</span>
+                            </div>
+                            <a class="team-glance-link" onclick="showView('associates')">
+                                View all
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="9 18 15 12 9 6"/>
+                                </svg>
+                            </a>
+                        </div>
+
+                        <div class="team-avatar-grid" id="teamAvatarGrid">
+                        </div>
+
+                        <div class="team-glance-summary">
+                            <div class="team-summary-stat">
+                                <span class="team-summary-dot green"></span>
+                                <span><strong id="teamAcceptingCount">5</strong> accepting referrals</span>
+                            </div>
+                            <div class="team-summary-stat">
+                                <span>Practice capacity: <strong id="teamCapacityPercent">78%</strong></span>
+                            </div>
                         </div>
                     </div>
 
@@ -23415,6 +23673,9 @@ Sarah
 
             // Initialize steward actions
             initStewardActions();
+
+            // Initialize team at a glance
+            initTeamGlance();
         }
 
         // ============================================
@@ -23687,6 +23948,127 @@ Sarah
 
         function initStewardActions() {
             renderStewardActions();
+        }
+
+        // ============================================
+        // TEAM AT A GLANCE FUNCTIONS
+        // ============================================
+
+        function calculateAssociateCapacity(associate) {
+            if (!associate.maxCapacity || associate.maxCapacity === 0) return 0;
+            return Math.round((associate.clients / associate.maxCapacity) * 100);
+        }
+
+        function getCapacityClass(capacity) {
+            if (capacity >= 100) return 'capacity-full';
+            if (capacity >= 85) return 'capacity-high';
+            if (capacity >= 70) return 'capacity-medium';
+            return 'capacity-low';
+        }
+
+        function getAssociateReferralStatus(associateId) {
+            var settings = associateReferralSettings[associateId];
+            if (!settings) return 'not-accepting';
+
+            if (!settings.acceptingReferrals) return 'not-accepting';
+            if (settings.capacitySlots === 0) return 'not-accepting';
+
+            return 'accepting';
+        }
+
+        function generateCapacityRing(capacity) {
+            var radius = 21;
+            var circumference = 2 * Math.PI * radius;
+            var offset = circumference * (1 - Math.min(capacity, 100) / 100);
+            var capacityClass = getCapacityClass(capacity);
+
+            return '<svg viewBox="0 0 48 48">' +
+                '<circle class="team-avatar-ring-bg" cx="24" cy="24" r="' + radius + '"/>' +
+                '<circle class="team-avatar-ring-progress ' + capacityClass + '" ' +
+                        'cx="24" cy="24" r="' + radius + '" ' +
+                        'stroke-dasharray="' + circumference + '" ' +
+                        'stroke-dashoffset="' + offset + '"/>' +
+            '</svg>';
+        }
+
+        function renderTeamAvatarGrid() {
+            var grid = document.getElementById('teamAvatarGrid');
+            var countEl = document.getElementById('teamGlanceCount');
+            var acceptingEl = document.getElementById('teamAcceptingCount');
+            var capacityEl = document.getElementById('teamCapacityPercent');
+
+            if (!grid) return;
+
+            var totalClients = 0;
+            var totalCapacity = 0;
+            var acceptingCount = 0;
+
+            associates.forEach(function(associate) {
+                totalClients += associate.clients || 0;
+                totalCapacity += associate.maxCapacity || 0;
+
+                var status = getAssociateReferralStatus(associate.id);
+                if (status === 'accepting') acceptingCount++;
+            });
+
+            var overallCapacity = totalCapacity > 0
+                ? Math.round((totalClients / totalCapacity) * 100)
+                : 0;
+
+            if (countEl) countEl.textContent = associates.length + ' associates';
+            if (acceptingEl) acceptingEl.textContent = acceptingCount;
+            if (capacityEl) capacityEl.textContent = overallCapacity + '%';
+
+            grid.innerHTML = associates.map(function(associate) {
+                var capacity = calculateAssociateCapacity(associate);
+                var status = getAssociateReferralStatus(associate.id);
+                var initials = associate.initials || associate.name.split(' ').map(function(n) { return n[0]; }).join('');
+                var firstName = associate.name.split(' ')[0];
+
+                return '<div class="team-avatar-chip" onclick="openAssociateFromTeamGlance(\'' + associate.id + '\')" title="' + associate.name + ' - ' + capacity + '% capacity">' +
+                    '<div class="team-avatar-ring">' +
+                        generateCapacityRing(capacity) +
+                        '<div class="team-avatar-circle">' + initials + '</div>' +
+                        '<div class="team-avatar-status ' + status + '"></div>' +
+                    '</div>' +
+                    '<div class="team-avatar-name">' + firstName + '</div>' +
+                    '<div class="team-avatar-capacity">' + capacity + '%</div>' +
+                '</div>';
+            }).join('');
+
+            setTimeout(animateTeamCapacityRings, 100);
+        }
+
+        function animateTeamCapacityRings() {
+            var rings = document.querySelectorAll('.team-avatar-ring-progress');
+
+            rings.forEach(function(ring) {
+                var finalOffset = ring.getAttribute('stroke-dashoffset');
+                var dashArray = ring.getAttribute('stroke-dasharray');
+
+                ring.style.strokeDashoffset = dashArray;
+
+                requestAnimationFrame(function() {
+                    ring.style.transition = 'stroke-dashoffset 0.8s ease-out';
+                    ring.style.strokeDashoffset = finalOffset;
+                });
+            });
+        }
+
+        function openAssociateFromTeamGlance(associateId) {
+            if (typeof DetailView !== 'undefined' && DetailView.open) {
+                var associate = associates.find(function(a) { return a.id === associateId; });
+                if (associate) {
+                    DetailView.open('associate', associate);
+                }
+            } else {
+                showView('associates');
+                showToast('Viewing ' + associateId);
+            }
+        }
+
+        function initTeamGlance() {
+            renderTeamAvatarGrid();
         }
 
         // Animate Cash Density Ring
