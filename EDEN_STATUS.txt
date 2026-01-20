@@ -2,11 +2,96 @@
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
 Last Updated: 20 January 2026
-Session: Associate Dashboard Redesign - All Chunks Complete
-Branch: claude/eden-dashboard-redesign-7dzZK
+Session: Associate Dashboard Animations
+Branch: claude/associate-dashboard-animations-MD3rZ
 ================================================================================
 
-LATEST CHANGES: Associate Dashboard Redesign [ALL 4 CHUNKS COMPLETE]
+LATEST CHANGES: Associate Dashboard Animations [COMPLETE]
+================================================================================
+
+## Session Summary
+
+Added "alive" animations to the Associate Dashboard to create psychological
+reward feedback when associates interact with the portal. The animations make
+the dashboard feel responsive and rewarding, reinforcing good behaviour.
+
+--------------------------------------------------------------------------------
+ANIMATIONS IMPLEMENTED
+--------------------------------------------------------------------------------
+
+### Progress Bar Grow-In Animation
+- Three segments animate from 0% to actual width on load
+- Staggered delays: Paid (0ms) → Ready (150ms) → Awaiting (300ms)
+- Duration: 1.2s with ease-out-soft easing
+- CSS class: .hero-payout-bar.animate
+
+### Earnings Counter Animation
+- Main earnings (heroEarningsAmount) counts up from £0.00
+- Ready for Payout amount counts up from £0.00
+- Duration: 1.8s (main) / 1.5s (ready)
+- Glow effect during counting via .counting class
+- Ease-out cubic for satisfying deceleration
+
+### Sparkline Draw Animation
+- SVG line draws itself left-to-right
+- Uses stroke-dashoffset technique (like admin cash ring)
+- Area fill fades in after line draws
+- Duration: 1.5s draw + 0.8s area fade
+
+### Capacity Bar Animation
+- Bar grows from 0% to actual percentage
+- Duration: 1s with 0.5s delay
+- CSS class: .capacity-bar-fill.animate
+
+--------------------------------------------------------------------------------
+NEW JAVASCRIPT FUNCTIONS
+--------------------------------------------------------------------------------
+
+| Function | Purpose |
+|----------|---------|
+| animateHeroProgressBar() | Triggers segment grow animation |
+| animateSparkline() | Triggers line draw animation |
+| animateCounter(id, value, duration, prefix, decimals) | Number counter animation |
+| animateCapacityBar() | Triggers capacity grow animation |
+| triggerAssociateDashboardAnimations(earnings) | Master trigger function |
+
+--------------------------------------------------------------------------------
+CSS ADDED
+--------------------------------------------------------------------------------
+
+- @keyframes segment-grow (progress bar)
+- @keyframes sparkline-draw (line draw)
+- @keyframes sparkline-area-fade (area fill)
+- @keyframes capacity-grow (capacity bar)
+- .counting class with text-shadow glow effect
+- Animation classes for .hero-payout-bar.animate, .sparkline-svg.animate
+
+--------------------------------------------------------------------------------
+ANIMATION TIMING SUMMARY
+--------------------------------------------------------------------------------
+
+| Element | Duration | Delay | Easing |
+|---------|----------|-------|--------|
+| Progress Bar (Paid) | 1.2s | 0ms | ease-out-soft |
+| Progress Bar (Ready) | 1.2s | 150ms | ease-out-soft |
+| Progress Bar (Awaiting) | 1.2s | 300ms | ease-out-soft |
+| Main Earnings Counter | 1.8s | 100ms | cubic ease-out |
+| Ready Amount Counter | 1.5s | 100ms | cubic ease-out |
+| Sparkline Draw | 1.5s | 300ms | ease-out-soft |
+| Sparkline Area Fade | 0.8s | 1000ms | ease-out-soft |
+| Capacity Bar | 1.0s | 500ms | ease-out-soft |
+
+--------------------------------------------------------------------------------
+BEHAVIOURAL PSYCHOLOGY GOAL
+--------------------------------------------------------------------------------
+
+When an associate confirms a session correctly and returns to the dashboard,
+they SEE the number climb to its new value — direct visual reinforcement of
+good behaviour. This creates a dopamine hit similar to game mechanics.
+
+================================================================================
+
+PREVIOUS CHANGES: Associate Dashboard Redesign [ALL 4 CHUNKS COMPLETE]
 ================================================================================
 
 ## Session Summary
