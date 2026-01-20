@@ -9992,6 +9992,246 @@
             }
         }
 
+        /* ============================================
+           REFERRALS NEEDING ATTENTION
+           ============================================ */
+
+        .referrals-attention-section {
+            margin-bottom: 20px;
+        }
+
+        .referrals-attention-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 0 4px;
+        }
+
+        .referrals-attention-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .referrals-attention-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 6px;
+            border-radius: 10px;
+            background: var(--referral-new);
+            color: var(--pure-white);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .referrals-attention-link {
+            font-size: 13px;
+            color: var(--eden-green);
+            text-decoration: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .referrals-attention-link:hover {
+            text-decoration: underline;
+        }
+
+        .referral-attention-card {
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: all var(--transition-smooth);
+        }
+
+        .referral-attention-card:hover {
+            border-color: var(--eden-green);
+            box-shadow: 0 4px 12px rgba(45, 95, 77, 0.1);
+        }
+
+        .referral-attention-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .referral-attention-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 16px 16px 12px;
+        }
+
+        .referral-attention-id {
+            font-size: 12px;
+            font-family: monospace;
+            color: var(--eden-text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .referral-attention-issue {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .referral-attention-status {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .referral-attention-status.new {
+            background: rgba(155, 89, 182, 0.15);
+            color: var(--referral-new);
+        }
+
+        .referral-attention-status.broadcasting {
+            background: rgba(52, 152, 219, 0.15);
+            color: var(--referral-broadcasting);
+        }
+
+        .referral-attention-status.pending {
+            background: rgba(243, 156, 18, 0.15);
+            color: var(--referral-pending);
+        }
+
+        .referral-attention-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 0 16px 12px;
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .referral-attention-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .referral-attention-meta-item svg {
+            width: 14px;
+            height: 14px;
+            color: var(--eden-text-muted);
+        }
+
+        .referral-attention-enquiry {
+            padding: 0 16px 12px;
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .referral-attention-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--eden-mint);
+            border-top: 1px solid var(--eden-border);
+        }
+
+        .referral-attention-responses {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .referral-attention-responses strong {
+            color: var(--eden-green);
+            font-weight: 600;
+        }
+
+        .referral-quick-match-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: var(--radius-standard);
+            border: none;
+            background: var(--eden-green);
+            color: var(--pure-white);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .referral-quick-match-btn:hover {
+            background: var(--eden-green-hover);
+        }
+
+        .referral-quick-match-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .referral-quick-match-btn.secondary {
+            background: var(--pure-white);
+            color: var(--eden-green);
+            border: 1px solid var(--eden-green);
+        }
+
+        .referral-quick-match-btn.secondary:hover {
+            background: var(--eden-green-light);
+        }
+
+        .referrals-attention-empty {
+            background: var(--eden-mint);
+            border: 1px dashed var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 32px 20px;
+            text-align: center;
+        }
+
+        .referrals-empty-icon {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 12px;
+            color: var(--eden-green);
+        }
+
+        .referrals-empty-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-green);
+            margin-bottom: 4px;
+        }
+
+        .referrals-empty-subtitle {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .referral-attention-footer {
+                flex-direction: column;
+                gap: 10px;
+                padding: 12px 14px;
+            }
+
+            .referral-quick-match-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
         /* Responsive adjustments for home screens */
         @media (max-width: 768px) {
             .quick-stat-row {
@@ -14344,6 +14584,25 @@
                             <div class="team-summary-stat">
                                 <span>Practice capacity: <strong id="teamCapacityPercent">78%</strong></span>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Referrals Needing Attention -->
+                    <div class="referrals-attention-section" id="referralsAttentionSection">
+                        <div class="referrals-attention-header">
+                            <div class="referrals-attention-title">
+                                <span>Referrals Needing Attention</span>
+                                <span class="referrals-attention-badge" id="referralsAttentionBadge">0</span>
+                            </div>
+                            <a class="referrals-attention-link" onclick="showView('referrals')">
+                                View all
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="9 18 15 12 9 6"/>
+                                </svg>
+                            </a>
+                        </div>
+
+                        <div id="referralsAttentionList">
                         </div>
                     </div>
 
@@ -23676,6 +23935,9 @@ Sarah
 
             // Initialize team at a glance
             initTeamGlance();
+
+            // Initialize referrals needing attention
+            initReferralsAttention();
         }
 
         // ============================================
@@ -24069,6 +24331,179 @@ Sarah
 
         function initTeamGlance() {
             renderTeamAvatarGrid();
+        }
+
+        // ============================================
+        // REFERRALS NEEDING ATTENTION FUNCTIONS
+        // ============================================
+
+        function getReferralsNeedingAttention() {
+            var attentionStatuses = ['New', 'Broadcasting', 'Pending Allocation'];
+
+            return referrals
+                .filter(function(r) { return attentionStatuses.indexOf(r.status) !== -1; })
+                .sort(function(a, b) {
+                    var priority = { 'Pending Allocation': 0, 'New': 1, 'Broadcasting': 2 };
+                    return (priority[a.status] || 3) - (priority[b.status] || 3);
+                });
+        }
+
+        function getReferralInterestCount(referralId) {
+            return referralExpressions.filter(function(e) {
+                return e.referralId === referralId && e.status === 'Interested';
+            }).length;
+        }
+
+        function formatTimeAgo(date) {
+            if (!date) return '';
+
+            var now = new Date();
+            var diffMs = now - new Date(date);
+            var diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+            var diffDays = Math.floor(diffHours / 24);
+
+            if (diffHours < 1) return 'Just now';
+            if (diffHours < 24) return diffHours + 'h ago';
+            if (diffDays === 1) return 'Yesterday';
+            return diffDays + ' days ago';
+        }
+
+        function getReferralStatusClass(status) {
+            var statusMap = {
+                'New': 'new',
+                'Broadcasting': 'broadcasting',
+                'Pending Allocation': 'pending'
+            };
+            return statusMap[status] || 'new';
+        }
+
+        function renderReferralsNeedingAttention() {
+            var container = document.getElementById('referralsAttentionList');
+            var badge = document.getElementById('referralsAttentionBadge');
+
+            if (!container) return;
+
+            var attentionReferrals = getReferralsNeedingAttention();
+
+            if (badge) {
+                badge.textContent = attentionReferrals.length;
+                badge.style.display = attentionReferrals.length > 0 ? 'inline-flex' : 'none';
+            }
+
+            if (attentionReferrals.length === 0) {
+                container.innerHTML = '<div class="referrals-attention-empty">' +
+                    '<svg class="referrals-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">' +
+                        '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>' +
+                        '<polyline points="22 4 12 14.01 9 11.01"/>' +
+                    '</svg>' +
+                    '<div class="referrals-empty-title">All Referrals Handled</div>' +
+                    '<div class="referrals-empty-subtitle">No referrals need your attention right now</div>' +
+                '</div>';
+                return;
+            }
+
+            var displayReferrals = attentionReferrals.slice(0, 3);
+
+            container.innerHTML = displayReferrals.map(function(referral) {
+                var interestCount = getReferralInterestCount(referral.id);
+                var statusClass = getReferralStatusClass(referral.status);
+                var timeAgo = formatTimeAgo(referral.createdAt);
+                var issue = referral.presentingIssue || 'General Enquiry';
+
+                var buttonHtml = '';
+                if (referral.status === 'New') {
+                    buttonHtml = '<button class="referral-quick-match-btn secondary" onclick="openReferralForBroadcast(\'' + referral.id + '\')">' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                            '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>' +
+                            '<path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>' +
+                        '</svg>' +
+                        'Broadcast' +
+                    '</button>';
+                } else {
+                    buttonHtml = '<button class="referral-quick-match-btn" onclick="openQuickMatch(\'' + referral.id + '\')">' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                            '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>' +
+                            '<circle cx="9" cy="7" r="4"/>' +
+                            '<line x1="19" y1="8" x2="19" y2="14"/>' +
+                            '<line x1="22" y1="11" x2="16" y2="11"/>' +
+                        '</svg>' +
+                        'Quick Match' +
+                    '</button>';
+                }
+
+                var responseHtml = '';
+                if (referral.status === 'Broadcasting') {
+                    responseHtml = '<strong>' + interestCount + '</strong> response' + (interestCount !== 1 ? 's' : '') + ' so far';
+                } else if (referral.status === 'Pending Allocation') {
+                    responseHtml = '<strong>' + interestCount + '</strong> interested · Ready to allocate';
+                } else {
+                    responseHtml = 'Awaiting review';
+                }
+
+                var preferredTimesHtml = '';
+                if (referral.preferredTimes && referral.preferredTimes.length > 0) {
+                    preferredTimesHtml = '<span class="referral-attention-meta-item">' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                            '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>' +
+                            '<line x1="16" y1="2" x2="16" y2="6"/>' +
+                            '<line x1="8" y1="2" x2="8" y2="6"/>' +
+                            '<line x1="3" y1="10" x2="21" y2="10"/>' +
+                        '</svg>' +
+                        referral.preferredTimes.join(', ') +
+                    '</span>';
+                }
+
+                return '<div class="referral-attention-card" data-referral-id="' + referral.id + '">' +
+                    '<div class="referral-attention-header">' +
+                        '<div>' +
+                            '<div class="referral-attention-id">' + referral.id + '</div>' +
+                            '<div class="referral-attention-issue">' + issue + '</div>' +
+                        '</div>' +
+                        '<span class="referral-attention-status ' + statusClass + '">' + referral.status + '</span>' +
+                    '</div>' +
+                    '<div class="referral-attention-meta">' +
+                        '<span class="referral-attention-meta-item">' +
+                            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                                '<circle cx="12" cy="12" r="10"/>' +
+                                '<polyline points="12 6 12 12 16 14"/>' +
+                            '</svg>' +
+                            timeAgo +
+                        '</span>' +
+                        preferredTimesHtml +
+                    '</div>' +
+                    '<div class="referral-attention-enquiry">"' + referral.enquiryText + '"</div>' +
+                    '<div class="referral-attention-footer">' +
+                        '<span class="referral-attention-responses">' + responseHtml + '</span>' +
+                        buttonHtml +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        function openReferralForBroadcast(referralId) {
+            showView('referrals');
+            setTimeout(function() {
+                if (typeof openReferralPanel === 'function') {
+                    openReferralPanel(referralId);
+                } else {
+                    showToast('Opening referral ' + referralId);
+                }
+            }, 100);
+        }
+
+        function openQuickMatch(referralId) {
+            // Phase 2 implementation - for now navigate to referrals
+            showView('referrals');
+            setTimeout(function() {
+                if (typeof openReferralPanel === 'function') {
+                    openReferralPanel(referralId);
+                }
+            }, 100);
+            showToast('Quick Match for ' + referralId);
+        }
+
+        function initReferralsAttention() {
+            renderReferralsNeedingAttention();
         }
 
         // Animate Cash Density Ring

@@ -6,75 +6,114 @@ Session: Admin Vitality Hero Enhancement
 Branch: claude/enhance-admin-vitality-uD5Si
 ================================================================================
 
-LATEST CHANGES: Team at a Glance Card - Chunk 3 [COMPLETE]
+LATEST CHANGES: Referrals Needing Attention - Chunk 4 [COMPLETE]
 ================================================================================
 
 ## Session Summary
 
-Added Team at a Glance Card showing all 7 associates as avatar chips with
-animated capacity rings and referral status indicators. Gives stewards instant
-visibility into who's available and who's at capacity.
+Added Referrals Needing Attention section showing the top 3 referrals that
+require steward action (New, Broadcasting, Pending Allocation). Each card has
+action buttons for Broadcast or Quick Match depending on status.
 
 --------------------------------------------------------------------------------
 FEATURES IMPLEMENTED
 --------------------------------------------------------------------------------
 
-### Team at a Glance Card
-- Header with associate count and "View all" link
-- Avatar grid with all 7 associates
-- Each avatar has: initials, capacity ring, referral status dot
-- Summary footer: accepting count and overall practice capacity
+### Referrals Needing Attention Section
+- Header with badge count and "View all" link
+- Up to 3 referral cards sorted by priority
+- Priority order: Pending Allocation → New → Broadcasting
+- Empty state when all referrals are handled
 
-### Avatar Chip Features
-- 48px ring with capacity progress (animated on load)
-- Ring colours: green (<70%), amber (70-84%), red (85-99%), grey (100%)
-- Status dot: green (accepting referrals), grey (not accepting)
-- First name and percentage displayed below
+### Referral Card Features
+- UCID in monospace font
+- Presenting issue as title
+- Status badge with colour coding (purple/blue/amber)
+- Time ago indicator
+- Enquiry text (truncated to 2 lines)
+- Response count (for Broadcasting/Pending)
+- Action button: "Broadcast" (New) or "Quick Match" (others)
 
-### Animated Capacity Rings
-- SVG circles with stroke-dasharray/offset technique
-- Rings animate from 0 to actual capacity on render
-- 0.8s ease-out transition
+### Action Buttons
+- "Broadcast" (secondary style) for New referrals
+- "Quick Match" (primary green) for Broadcasting/Pending
+- Both navigate to referrals view and open panel
 
 --------------------------------------------------------------------------------
-CSS ADDED (~200 lines)
+CSS ADDED (~220 lines)
 --------------------------------------------------------------------------------
 
 | Class | Purpose |
 |-------|---------|
-| .team-glance-card | Main container card |
-| .team-glance-header | Header with title and count |
-| .team-avatar-grid | Flexbox grid for avatar chips |
-| .team-avatar-chip | Individual associate chip |
-| .team-avatar-ring | 48px ring container |
-| .team-avatar-ring-progress | Animated capacity ring |
-| .team-avatar-circle | Initials circle inside ring |
-| .team-avatar-status | Referral status dot |
-| .team-glance-summary | Footer with stats |
+| .referrals-attention-section | Main section container |
+| .referrals-attention-header | Header with title and badge |
+| .referrals-attention-badge | Purple count badge |
+| .referral-attention-card | Individual referral card |
+| .referral-attention-status | Status pill (new/broadcasting/pending) |
+| .referral-attention-meta | Time and preferences row |
+| .referral-attention-enquiry | Truncated enquiry text |
+| .referral-quick-match-btn | Action button (primary/secondary) |
+| .referrals-attention-empty | Empty state container |
 
 --------------------------------------------------------------------------------
-JAVASCRIPT ADDED (~120 lines)
+JAVASCRIPT ADDED (~180 lines)
 --------------------------------------------------------------------------------
 
 | Function | Purpose |
 |----------|---------|
-| calculateAssociateCapacity() | Returns capacity % for associate |
-| getCapacityClass() | Returns CSS class based on capacity |
-| getAssociateReferralStatus() | Checks referral settings |
-| generateCapacityRing() | Creates SVG ring markup |
-| renderTeamAvatarGrid() | Renders all avatar chips |
-| animateTeamCapacityRings() | Triggers ring animations |
-| openAssociateFromTeamGlance() | Click handler for avatars |
-| initTeamGlance() | Master init called from updateAdminHomeData() |
+| getReferralsNeedingAttention() | Filters and sorts referrals |
+| getReferralInterestCount() | Counts interested expressions |
+| formatTimeAgo() | Formats date as "2h ago", "Yesterday" |
+| getReferralStatusClass() | Maps status to CSS class |
+| renderReferralsNeedingAttention() | Renders referral cards |
+| openReferralForBroadcast() | Opens referral for broadcast |
+| openQuickMatch() | Opens Quick Match (Phase 2) |
+| initReferralsAttention() | Master init called from updateAdminHomeData() |
 
 --------------------------------------------------------------------------------
-HTML ADDED (~30 lines)
+HTML ADDED (~20 lines)
 --------------------------------------------------------------------------------
 
-Added between steward-actions-card and admin-cards-row:
-- team-glance-card container
-- Header with count and "View all" link
-- Empty avatar grid (populated by JS)
+Added between team-glance-card and admin-cards-row:
+- referrals-attention-section container
+- Header with badge and "View all" link
+- Empty referralsAttentionList div (populated by JS)
+
+================================================================================
+
+PHASE 1 ADMIN UPGRADE COMPLETE - ALL 4 CHUNKS DONE
+================================================================================
+
+Chunk 1: Enhanced Practice Vitality Hero
+- Sparkline row with month-over-month comparison
+- Trend badge showing percentage change
+- At-Risk alert for clients needing follow-up
+
+Chunk 2: Steward Actions Card (Admin Debt)
+- Friction items: payout, DBS, ICO, referrals, contracts
+- Priority sorting with severity indicators
+- "Practice Thriving" all-clear state
+
+Chunk 3: Team at a Glance Card
+- Avatar grid with capacity rings (animated)
+- Referral status dots (accepting/not)
+- Summary footer with counts
+
+Chunk 4: Referrals Needing Attention
+- Top 3 referrals needing action
+- Broadcast/Quick Match buttons
+- "All Referrals Handled" empty state
+
+================================================================================
+
+PREVIOUS CHANGES: Team at a Glance Card - Chunk 3 [COMPLETE]
+================================================================================
+
+Added Team at a Glance Card showing all 7 associates as avatar chips with
+animated capacity rings and referral status indicators.
+
+- Avatar grid with initials, capacity ring, status dot
+- Ring colours based on utilisation percentage
 - Summary footer with accepting count and capacity
 
 ================================================================================
@@ -82,29 +121,20 @@ Added between steward-actions-card and admin-cards-row:
 PREVIOUS CHANGES: Steward Actions Card - Chunk 2 [COMPLETE]
 ================================================================================
 
-Added Steward Actions Card (Admin Debt) below the admin hero. This card surfaces
-admin-specific friction items: expired documents, unsigned contracts, payout due,
-new referrals, and pending allocations.
+Added Steward Actions Card (Admin Debt) below the admin hero.
 
-- Payout due (urgent) - cleared sessions awaiting payment
-- DBS renewal (warning) - expires within 30 days
-- ICO missing (warning) - GDPR compliance
-- New referrals (info) - awaiting review
-- Pending allocation (warning) - broadcast ended
-- Contracts pending (info) - onboarding clients
+- Payout due, DBS renewal, ICO missing
+- New referrals, pending allocation, contracts pending
 
 ================================================================================
 
 PREVIOUS CHANGES: Enhanced Admin Vitality Hero - Chunk 1 [COMPLETE]
 ================================================================================
 
-Added At-Risk metric and month-over-month sparkline comparison to the Admin
-Practice Overview header. The Cash Density Ring animation is preserved, with
-new visual elements that provide deeper insight into practice health.
+Added At-Risk metric and sparkline to Admin Practice Overview header.
 
-- Sparkline row with current vs previous month comparison
-- Trend badge showing percentage change
-- At-Risk alert for clients without upcoming appointments
+- Sparkline with current vs previous month
+- Trend badge, At-Risk alert
 
 ================================================================================
 
