@@ -2,11 +2,58 @@
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
 Last Updated: 20 January 2026
-Session: Logo Update - Concept 11: Garden Abstract
-Branch: claude/update-eden-logos-Qkv9a
+Session: Associate Detail View Fix
+Branch: claude/fix-associate-detail-view-pCGA0
 ================================================================================
 
-LATEST CHANGES: Logo Update - Concept 11: Garden Abstract [COMPLETED]
+LATEST CHANGES: Associate Detail View Fix [COMPLETED]
+================================================================================
+
+## Session Summary
+
+Fixed the Associates tab to open the same full-page detail view as Practice Health,
+and fixed dropdown menu click handling.
+
+--------------------------------------------------------------------------------
+WHAT WAS REQUESTED
+--------------------------------------------------------------------------------
+
+1. Make Associates tab cards open full-page detail view (not side panel)
+2. Fix dropdown menu items not responding to clicks
+
+--------------------------------------------------------------------------------
+WHAT WAS COMPLETED
+--------------------------------------------------------------------------------
+
+Change 1: onClick Handler (line 22543)
+- Changed from: openAssociateDetailPanel('${associate.id}')
+- Changed to:   showAssociateDetail('${associate.id}')
+- Location: renderAssociateStatusCards() function
+
+Change 2: CSS Pointer Events (line 9712-9714)
+- Added: .associate-detail-dropdown-item > * { pointer-events: none; }
+- Allows clicks to pass through child elements to parent button handler
+
+--------------------------------------------------------------------------------
+KEY OUTCOMES
+--------------------------------------------------------------------------------
+
+| Before | After |
+|--------|-------|
+| Side panel/bottom sheet | Full-page view with back button |
+| Missing progress stepper | Onboarding stepper visible |
+| Wrong menu icons | Correct icons (Profile, Earnings, Message, Contract) |
+| Menu clicks not working | Menu items now clickable |
+
+--------------------------------------------------------------------------------
+COMMITS
+--------------------------------------------------------------------------------
+
+1. d48753a - fix: Update Associates tab to use full-page detail view
+2. 975ef28 - fix: Add pointer-events fix for associate dropdown menu items
+
+--------------------------------------------------------------------------------
+PREVIOUS SESSION: Logo Update - Concept 11: Garden Abstract [COMPLETED]
 ================================================================================
 
 ## Session Summary
