@@ -3591,6 +3591,93 @@
             }
         }
 
+        /* ============================================
+           ASSOCIATE DASHBOARD ANIMATIONS
+           Progress bar grow, sparkline draw, counter
+           ============================================ */
+
+        /* Progress Bar Segment Grow Animation */
+        @keyframes segment-grow {
+            from {
+                width: 0%;
+            }
+        }
+
+        .hero-payout-bar.animate .payout-segment {
+            animation: segment-grow 1.2s var(--ease-out-soft) forwards;
+        }
+
+        .hero-payout-bar.animate .payout-segment.payout-paid {
+            animation-delay: 0ms;
+        }
+
+        .hero-payout-bar.animate .payout-segment.payout-ready {
+            animation-delay: 150ms;
+        }
+
+        .hero-payout-bar.animate .payout-segment.payout-awaiting {
+            animation-delay: 300ms;
+        }
+
+        /* Sparkline Draw Animation */
+        @keyframes sparkline-draw {
+            from {
+                stroke-dashoffset: var(--sparkline-length, 200);
+            }
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes sparkline-area-fade {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 0.5;
+            }
+        }
+
+        .sparkline-svg.animate .sparkline-path {
+            stroke-dasharray: var(--sparkline-length, 200);
+            stroke-dashoffset: var(--sparkline-length, 200);
+            animation: sparkline-draw 1.5s var(--ease-out-soft) 0.3s forwards;
+        }
+
+        .sparkline-svg.animate .sparkline-area {
+            opacity: 0;
+            animation: sparkline-area-fade 0.8s var(--ease-out-soft) 1s forwards;
+        }
+
+        /* Counter Number Animation - uses JS, but add glow effect */
+        .hero-callout .callout-amount {
+            transition: text-shadow 0.3s ease;
+        }
+
+        .hero-callout .callout-amount.counting {
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Hero Amount Animation */
+        .hero-amount {
+            transition: text-shadow 0.3s ease;
+        }
+
+        .hero-amount.counting {
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+        }
+
+        /* Capacity Bar Grow Animation */
+        @keyframes capacity-grow {
+            from {
+                width: 0%;
+            }
+        }
+
+        .capacity-bar-fill.animate {
+            animation: capacity-grow 1s var(--ease-out-soft) 0.5s forwards;
+        }
+
         /* ===== SUCCESS FEEDBACK TOAST ===== */
         .eden-success-toast {
             position: fixed;
@@ -22354,8 +22441,9 @@ Sarah
             const heroEarningsAmount = document.getElementById('heroEarningsAmount');
             const heroGrossAmount = document.getElementById('heroGrossAmount');
 
+            // Set initial value to £0.00 - animation will count up to real value
             if (heroEarningsAmount) {
-                heroEarningsAmount.textContent = formatCurrency(earnings.associateShare);
+                heroEarningsAmount.textContent = '£0.00';
             }
             if (heroGrossAmount) {
                 heroGrossAmount.textContent = `(${formatCurrency(earnings.grossEarnings)} gross)`;
@@ -22380,9 +22468,17 @@ Sarah
             const heroReadySegment = document.getElementById('heroReadySegment');
             const heroAwaitingSegment = document.getElementById('heroAwaitingSegment');
 
-            if (heroPaidSegment) heroPaidSegment.style.width = `${paidPercent}%`;
-            if (heroReadySegment) heroReadySegment.style.width = `${readyPercent}%`;
-            if (heroAwaitingSegment) heroAwaitingSegment.style.width = `${awaitingPercent}%`;
+            // Reset to 0% first for animation
+            if (heroPaidSegment) heroPaidSegment.style.width = '0%';
+            if (heroReadySegment) heroReadySegment.style.width = '0%';
+            if (heroAwaitingSegment) heroAwaitingSegment.style.width = '0%';
+
+            // Small delay then set actual values (animation will handle the transition)
+            setTimeout(() => {
+                if (heroPaidSegment) heroPaidSegment.style.width = `${paidPercent}%`;
+                if (heroReadySegment) heroReadySegment.style.width = `${readyPercent}%`;
+                if (heroAwaitingSegment) heroAwaitingSegment.style.width = `${awaitingPercent}%`;
+            }, 50);
 
             // Update legend labels
             const heroPaidLabel = document.getElementById('heroPaidLabel');
@@ -22397,13 +22493,17 @@ Sarah
             const heroReadyAmount = document.getElementById('heroReadyAmount');
             const heroReadyNote = document.getElementById('heroReadyNote');
 
+            // Set initial value to £0.00 - animation will count up to real value
             if (heroReadyAmount) {
-                heroReadyAmount.textContent = formatCurrency(earnings.readyForPayoutTotal);
+                heroReadyAmount.textContent = '£0.00';
             }
             if (heroReadyNote) {
                 const sessionText = earnings.readyForPayoutCount === 1 ? 'session' : 'sessions';
                 heroReadyNote.textContent = `${earnings.readyForPayoutCount} ${sessionText} · Expected in next payout run`;
             }
+
+            // Trigger animations with earnings data
+            triggerAssociateDashboardAnimations(earnings);
         }
 
         // Open associate payout detail panel
@@ -22602,11 +22702,16 @@ Sarah
 
             console.log('Populating dashboard for associate:', associateId);
 
-            // Populate each section
-            updateAssociateHeroCard();
-            populateAssociateSessions(associateId);
+            // Populate each section (order matters for animations)
+            // 1. Set capacity data first (before hero card triggers animations)
             updateAssociateCapacity(associateId);
+            // 2. Populate sessions
+            populateAssociateSessions(associateId);
+            // 3. Render sparkline (has its own animation trigger)
             renderEarningsSparkline(associateId);
+            // 4. Hero card triggers all animations via triggerAssociateDashboardAnimations()
+            updateAssociateHeroCard();
+            // 5. Update remaining sections
             updateAssociateActions(associateId);
             updateAssociatePipeline(associateId);
         }
@@ -22805,12 +22910,19 @@ Sarah
                 }).join(' ') +
                 ` L${width - padding},${height - padding} Z`;
 
+            // Calculate approximate path length for animation
+            const approxPathLength = monthlyData.length * 30; // Rough estimate
+
             container.innerHTML = `
-                <svg class="sparkline-svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">
+                <svg class="sparkline-svg" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none"
+                     style="--sparkline-length: ${approxPathLength}">
                     <path class="sparkline-area" d="${areaPath}"/>
                     <polyline class="sparkline-path" points="${points}" fill="none"/>
                 </svg>
             `;
+
+            // Trigger animation after render
+            setTimeout(animateSparkline, 50);
         }
 
         /**
@@ -22949,6 +23061,153 @@ Sarah
             setTimeout(() => {
                 ring.style.transition = 'stroke-dashoffset 1.5s ease-out';
                 ring.style.strokeDashoffset = targetOffset;
+            }, 100);
+        }
+
+        // ============================================
+        // ASSOCIATE DASHBOARD ANIMATIONS
+        // Progress bar, sparkline, and counter animations
+        // ============================================
+
+        /**
+         * Animate the hero progress bar segments growing in
+         * Called after data is populated
+         */
+        function animateHeroProgressBar() {
+            const progressBar = document.querySelector('.hero-payout-bar');
+            if (!progressBar) return;
+
+            // Remove animate class first (reset)
+            progressBar.classList.remove('animate');
+
+            // Force reflow to restart animation
+            void progressBar.offsetWidth;
+
+            // Add animate class to trigger CSS animation
+            progressBar.classList.add('animate');
+
+            console.log('Hero progress bar animation triggered');
+        }
+
+        /**
+         * Animate the sparkline drawing itself
+         * Called after sparkline SVG is rendered
+         */
+        function animateSparkline() {
+            const sparklineSvg = document.querySelector('.sparkline-svg');
+            if (!sparklineSvg) return;
+
+            const path = sparklineSvg.querySelector('.sparkline-path');
+            if (!path) return;
+
+            // Calculate path length for accurate animation
+            const pathLength = path.getTotalLength ? path.getTotalLength() : 200;
+
+            // Set CSS variable for path length
+            sparklineSvg.style.setProperty('--sparkline-length', pathLength);
+
+            // Remove and re-add animate class
+            sparklineSvg.classList.remove('animate');
+            void sparklineSvg.offsetWidth;
+            sparklineSvg.classList.add('animate');
+
+            console.log('Sparkline animation triggered, path length:', pathLength);
+        }
+
+        /**
+         * Animate a number counting up from 0 to target value
+         * Creates the psychological reward effect
+         *
+         * @param {string} elementId - ID of the element to animate
+         * @param {number} targetValue - Final value to count to
+         * @param {number} duration - Animation duration in ms (default 1500)
+         * @param {string} prefix - Prefix string (default '£')
+         * @param {number} decimals - Decimal places (default 2)
+         */
+        function animateCounter(elementId, targetValue, duration = 1500, prefix = '£', decimals = 2) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+
+            // Add counting class for glow effect
+            element.classList.add('counting');
+
+            const startTime = performance.now();
+            const startValue = 0;
+
+            function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Ease out cubic for satisfying deceleration
+                const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+                const currentValue = startValue + (targetValue - startValue) * easedProgress;
+                element.textContent = prefix + currentValue.toFixed(decimals);
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    // Animation complete - remove glow
+                    element.classList.remove('counting');
+                    // Ensure final value is exact
+                    element.textContent = prefix + targetValue.toFixed(decimals);
+                    console.log('Counter animation complete:', elementId, targetValue);
+                }
+            }
+
+            requestAnimationFrame(updateCounter);
+        }
+
+        /**
+         * Animate capacity bar growing
+         */
+        function animateCapacityBar() {
+            const capacityFill = document.getElementById('capacityBarFill');
+            if (!capacityFill) return;
+
+            // Store target width
+            const targetWidth = capacityFill.style.width;
+
+            // Reset to 0
+            capacityFill.style.width = '0%';
+            capacityFill.classList.remove('animate');
+
+            // Force reflow
+            void capacityFill.offsetWidth;
+
+            // Set target and trigger animation
+            capacityFill.style.width = targetWidth;
+            capacityFill.classList.add('animate');
+        }
+
+        /**
+         * Master function to trigger all associate dashboard animations
+         * Called after data population is complete
+         */
+        function triggerAssociateDashboardAnimations(earnings) {
+            console.log('=== Triggering associate dashboard animations ===');
+
+            // Small delay to ensure DOM is ready
+            setTimeout(() => {
+                // 1. Animate the main earnings amount counting up
+                if (earnings && earnings.associateShare !== undefined) {
+                    animateCounter('heroEarningsAmount', earnings.associateShare, 1800, '£', 2);
+                }
+
+                // 2. Animate the "Ready for Payout" amount counting up
+                if (earnings && earnings.readyForPayoutTotal !== undefined) {
+                    animateCounter('heroReadyAmount', earnings.readyForPayoutTotal, 1500, '£', 2);
+                }
+
+                // 3. Animate progress bar segments growing in
+                animateHeroProgressBar();
+
+                // 4. Animate capacity bar
+                animateCapacityBar();
+
+                // 5. Animate sparkline after it's rendered (slightly delayed)
+                setTimeout(animateSparkline, 200);
+
             }, 100);
         }
 
