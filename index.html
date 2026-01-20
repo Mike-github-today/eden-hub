@@ -9055,6 +9055,171 @@
         }
 
         /* ============================================
+           ASSOCIATE ACTIONS NEEDED CARD
+           Friction items specific to this associate
+           ============================================ */
+
+        .associate-actions-card {
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .actions-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            border-bottom: 1px solid var(--eden-border);
+        }
+
+        .actions-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .actions-count-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 6px;
+            border-radius: 10px;
+            background: var(--alert-amber);
+            color: var(--pure-white);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .actions-count-badge.zero {
+            background: var(--eden-green);
+        }
+
+        .actions-card-link {
+            font-size: 12px;
+            color: var(--eden-green);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .actions-card-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Action items list */
+        .actions-list {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .action-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--eden-mint);
+            cursor: pointer;
+            transition: background-color var(--transition-smooth);
+        }
+
+        .action-item:last-child {
+            border-bottom: none;
+        }
+
+        .action-item:hover {
+            background: var(--eden-mint);
+        }
+
+        .action-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        .action-dot.urgent { background: var(--alert-rose); }
+        .action-dot.warning { background: var(--alert-amber); }
+        .action-dot.info { background: var(--alert-blue); }
+
+        .action-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .action-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--eden-text);
+            margin-bottom: 2px;
+        }
+
+        .action-subtitle {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .action-meta {
+            font-size: 11px;
+            color: var(--eden-text-muted);
+            margin-top: 4px;
+        }
+
+        .action-arrow {
+            color: var(--eden-text-muted);
+            flex-shrink: 0;
+        }
+
+        .action-arrow svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* All Clear State */
+        .actions-all-clear {
+            padding: 32px 16px;
+            text-align: center;
+        }
+
+        .all-clear-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 12px;
+            color: var(--eden-green);
+        }
+
+        .all-clear-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-green);
+            margin-bottom: 4px;
+        }
+
+        .all-clear-subtitle {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        /* Mobile responsive for actions card */
+        @media (max-width: 768px) {
+            .action-item {
+                padding: 12px 16px;
+            }
+
+            .action-title {
+                font-size: 14px;
+            }
+        }
+
+        /* ============================================
            ADMIN HOME SCREEN
            ============================================ */
 
@@ -13353,6 +13518,72 @@
                             </div>
                         </div>
 
+                    </div>
+
+                    <!-- Actions Needed Card -->
+                    <div class="associate-actions-card" id="associateActionsCard">
+                        <div class="actions-card-header">
+                            <span class="actions-card-title">
+                                Actions Needed
+                                <span class="actions-count-badge" id="actionsCountBadge">3</span>
+                            </span>
+                            <a class="actions-card-link" onclick="navigateToAssociateView('action-centre')">View All</a>
+                        </div>
+
+                        <ul class="actions-list" id="associateActionsList">
+                            <!-- Populated by JavaScript - placeholder items shown -->
+                            <li class="action-item" onclick="handleActionItem('compliance', 'insurance-expiry')">
+                                <span class="action-dot warning"></span>
+                                <div class="action-content">
+                                    <div class="action-title">Professional indemnity expires soon</div>
+                                    <div class="action-subtitle">Upload renewed certificate</div>
+                                    <div class="action-meta">Due in 14 days</div>
+                                </div>
+                                <span class="action-arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <polyline points="9 18 15 12 9 6"/>
+                                    </svg>
+                                </span>
+                            </li>
+                            <li class="action-item" onclick="handleActionItem('clients', 'enquiry-response')">
+                                <span class="action-dot warning"></span>
+                                <div class="action-content">
+                                    <div class="action-title">2 enquiries awaiting response</div>
+                                    <div class="action-subtitle">New clients in your pipeline</div>
+                                    <div class="action-meta">Oldest: 3 days ago</div>
+                                </div>
+                                <span class="action-arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <polyline points="9 18 15 12 9 6"/>
+                                    </svg>
+                                </span>
+                            </li>
+                            <li class="action-item" onclick="handleActionItem('schedule', 'availability-gap')">
+                                <span class="action-dot info"></span>
+                                <div class="action-content">
+                                    <div class="action-title">Availability update needed</div>
+                                    <div class="action-subtitle">No slots showing for next week</div>
+                                    <div class="action-meta">Update your calendar</div>
+                                </div>
+                                <span class="action-arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <polyline points="9 18 15 12 9 6"/>
+                                    </svg>
+                                </span>
+                            </li>
+                        </ul>
+
+                        <!-- All Clear State (hidden by default) -->
+                        <div class="actions-all-clear" id="actionsAllClear" style="display: none;">
+                            <div class="all-clear-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                            </div>
+                            <div class="all-clear-title">Garden in Bloom</div>
+                            <div class="all-clear-subtitle">No actions needed right now</div>
+                        </div>
                     </div>
                 </div>
 
@@ -22084,6 +22315,9 @@ Sarah
 
             // Update hero financial card
             updateAssociateHeroCard();
+
+            // Update actions needed card
+            updateAssociateActions(currentUserId);
         }
 
         // Update associate hero financial card with earnings data
@@ -22171,6 +22405,169 @@ Sarah
                 // If earnings view not accessible, show a brief notification
                 showAccessDeniedNotification('earnings');
             }
+        }
+
+        // ============================================
+        // ASSOCIATE ACTION ITEM HANDLER
+        // Routes clicks on friction items to appropriate views
+        // ============================================
+
+        function handleActionItem(category, itemType) {
+            console.log('Action item clicked:', category, itemType);
+
+            switch(category) {
+                case 'compliance':
+                    // Navigate to contracts/documents tab in their profile
+                    if (canAccessView('contracts')) {
+                        showView('contracts');
+                    } else {
+                        navigateToAssociateView('support');
+                    }
+                    break;
+                case 'clients':
+                    // Navigate to pipeline with focus on relevant stage
+                    if (itemType === 'enquiry-response') {
+                        navigateToAssociateView('clients');
+                    } else {
+                        navigateToAssociateView('clients');
+                    }
+                    break;
+                case 'schedule':
+                    // Navigate to availability/calendar
+                    navigateToAssociateView('schedule');
+                    break;
+                case 'finance':
+                    // Open payout cockpit
+                    openAssociatePayoutDetail();
+                    break;
+                default:
+                    console.log('Opening ' + category);
+            }
+        }
+
+        // ============================================
+        // ASSOCIATE ACTIONS UPDATER
+        // Transforms admin friction items to associate perspective
+        // ============================================
+
+        function updateAssociateActions(associateId) {
+            const actionsList = document.getElementById('associateActionsList');
+            const allClearState = document.getElementById('actionsAllClear');
+            const countBadge = document.getElementById('actionsCountBadge');
+
+            if (!actionsList || !associateId) return;
+
+            // Get friction items for this associate
+            const associateActions = getAssociateActionItems(associateId);
+
+            // Update badge count
+            if (countBadge) {
+                countBadge.textContent = associateActions.length;
+                countBadge.classList.toggle('zero', associateActions.length === 0);
+            }
+
+            // Show all-clear state if no actions
+            if (associateActions.length === 0) {
+                actionsList.style.display = 'none';
+                if (allClearState) allClearState.style.display = 'block';
+                return;
+            }
+
+            // Show actions list
+            actionsList.style.display = 'block';
+            if (allClearState) allClearState.style.display = 'none';
+
+            // Render action items (limit to 3 most important)
+            const itemsToShow = associateActions.slice(0, 3);
+            actionsList.innerHTML = itemsToShow.map(item => `
+                <li class="action-item" onclick="handleActionItem('${item.category}', '${item.type}')">
+                    <span class="action-dot ${item.severity}"></span>
+                    <div class="action-content">
+                        <div class="action-title">${item.title}</div>
+                        <div class="action-subtitle">${item.subtitle}</div>
+                        ${item.meta ? `<div class="action-meta">${item.meta}</div>` : ''}
+                    </div>
+                    <span class="action-arrow">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                    </span>
+                </li>
+            `).join('');
+        }
+
+        // ============================================
+        // GET ASSOCIATE ACTION ITEMS
+        // Filters and transforms friction items for this associate
+        // ============================================
+
+        function getAssociateActionItems(associateId) {
+            const actions = [];
+
+            // Find the associate record
+            const associate = associates.find(a => a.id === associateId);
+            if (!associate) return actions;
+
+            // Check compliance items
+            // (These would come from associate record or a compliance table)
+            const insuranceExpiry = associate.insuranceExpiry ? new Date(associate.insuranceExpiry) : null;
+            if (insuranceExpiry) {
+                const daysUntilExpiry = Math.floor((insuranceExpiry - new Date()) / (1000 * 60 * 60 * 24));
+                if (daysUntilExpiry <= 30 && daysUntilExpiry > 0) {
+                    actions.push({
+                        category: 'compliance',
+                        type: 'insurance-expiry',
+                        severity: daysUntilExpiry <= 14 ? 'urgent' : 'warning',
+                        title: 'Professional indemnity expires soon',
+                        subtitle: 'Upload renewed certificate',
+                        meta: `Due in ${daysUntilExpiry} days`
+                    });
+                }
+            }
+
+            // Check for enquiries awaiting response (from clients table)
+            const myEnquiries = clients.filter(c =>
+                c.associateId === associateId &&
+                c.pipelineStage === 'Enquiry'
+            );
+            const oldEnquiries = myEnquiries.filter(c => {
+                const daysSinceCreated = Math.floor((new Date() - new Date(c.createdDate)) / (1000 * 60 * 60 * 24));
+                return daysSinceCreated >= 2;
+            });
+
+            if (oldEnquiries.length > 0) {
+                const oldestDays = Math.max(...oldEnquiries.map(c =>
+                    Math.floor((new Date() - new Date(c.createdDate)) / (1000 * 60 * 60 * 24))
+                ));
+                actions.push({
+                    category: 'clients',
+                    type: 'enquiry-response',
+                    severity: oldestDays >= 5 ? 'urgent' : 'warning',
+                    title: `${oldEnquiries.length} enquir${oldEnquiries.length === 1 ? 'y' : 'ies'} awaiting response`,
+                    subtitle: 'New clients in your pipeline',
+                    meta: `Oldest: ${oldestDays} days ago`
+                });
+            }
+
+            // Check availability gaps (simplified check)
+            // In real implementation, would check against availability table
+            const availableSlots = associate.availableSlots || 0;
+            if (availableSlots === 0) {
+                actions.push({
+                    category: 'schedule',
+                    type: 'availability-gap',
+                    severity: 'info',
+                    title: 'Availability update needed',
+                    subtitle: 'No slots showing for next week',
+                    meta: 'Update your calendar'
+                });
+            }
+
+            // Sort by severity (urgent first, then warning, then info)
+            const severityOrder = { urgent: 0, warning: 1, info: 2 };
+            actions.sort((a, b) => severityOrder[a.severity] - severityOrder[b.severity]);
+
+            return actions;
         }
 
         function updateAssociateStats() {
