@@ -508,4 +508,86 @@ Eden operates a **69/31 split**:
 
 ---
 
+## 15. ANTHROPIC RESOURCES FOR EDEN DEVELOPMENT
+
+These Anthropic GitHub repositories inform how we build Eden Portal.
+
+### Primary Resources
+
+#### 1. Frontend-Design Skill
+**Location:** `/mnt/skills/public/frontend-design/SKILL.md` (in Claude environment)
+**Purpose:** Guides creation of distinctive, production-grade interfaces that avoid generic "AI slop" aesthetics.
+
+**How we use it:**
+- Typography selection (Fraunces + DM Sans)
+- Animation patterns (staggered reveals, meaningful motion)
+- The "unforgettable element" concept (Garden in Bloom)
+- Spatial composition (generous negative space, glassmorphism)
+
+**Eden adaptation:** We interpret the skill's "bold aesthetic direction" as "refined minimalism with botanical warmth" — intentional restraint rather than maximalism.
+
+#### 2. Claude Code
+**Repository:** `github.com/anthropics/claude-code`
+**Documentation:** `code.claude.com/docs`
+
+**How we use it:**
+- Codebase-wide understanding for multi-file refactoring
+- Git workflow automation (backup protocols, commit management)
+- Debugging mobile viewport issues
+- Test-driven development with agentic loops
+
+**Best practices document:** `anthropic.com/engineering/claude-code-best-practices`
+
+#### 3. Anthropic Courses
+**Repository:** `github.com/anthropics/courses`
+
+**Relevant courses:**
+| Course | Relevance to Eden |
+|--------|-------------------|
+| Prompt Engineering Tutorial | Improving prompts for Claude Chat sessions |
+| Tool Use | Patterns for Make.com webhook integrations |
+| Real World Prompting | Complex prompt patterns for future AI features |
+
+#### 4. Skills Repository
+**Repository:** `github.com/anthropics/skills`
+
+**Potential uses:**
+- Create custom "Eden Portal" skill encoding our design system
+- Reference document creation skills (PDF, DOCX) for associate reports
+- Template for building Eden-specific automation skills
+
+**Example Eden skill structure:**
+```yaml
+---
+name: eden-portal-component
+description: Creates React components following Eden's design system
+---
+# Eden Component Skill
+When creating UI components for Eden:
+1. Use Eden Calm palette (#FFF, #f4f7f6, #2d5f4d)
+2. Apply glassmorphism with backdrop-blur
+3. Mobile: Bottom Sheet pattern
+4. Desktop: Side Panel + 3-column grid
+5. Typography: Fraunces (display) + DM Sans (body)
+```
+
+### Secondary Resources
+
+| Resource | URL | Use Case |
+|----------|-----|----------|
+| Claude Quickstarts | `github.com/anthropics/claude-quickstarts` | Reference for adding AI features to portal |
+| TypeScript SDK | `github.com/anthropics/anthropic-sdk-typescript` | If adding Claude API calls to portal |
+| Prompt Engineering Tutorial | `github.com/anthropics/prompt-eng-interactive-tutorial` | Improving Mike's prompting technique |
+
+### How to Reference These in Development
+
+When starting a Claude Code session for Eden work:
+
+1. **For UI components:** "Reference the Frontend-Design Skill adapted for Eden Calm aesthetic"
+2. **For debugging:** "Use Claude Code's codebase understanding to find related files"
+3. **For new features:** "Check Anthropic Quickstarts for implementation patterns"
+4. **For automations:** "Reference the Tool Use course for webhook patterns"
+
+---
+
 *This document consolidates Eden Portal Strategy v3, Design Specification v2.2, and Authentication Strategy v1.0*

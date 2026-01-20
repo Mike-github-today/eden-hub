@@ -217,4 +217,84 @@ If unclear about:
 
 ---
 
-*Last updated: January 2025*
+## Design System: Frontend-Design Skill Integration
+
+Eden Portal follows the **Frontend-Design Skill** principles adapted for our "Eden Calm" aesthetic.
+
+### Typography (MANDATORY)
+
+| Role | Font | Fallback | Usage |
+|------|------|----------|-------|
+| **Display** | Fraunces | Georgia, serif | Headings, titles, "Garden in Bloom" states |
+| **Body** | DM Sans | system-ui, sans-serif | All body text, labels, buttons |
+
+**NEVER use these fonts:**
+- Inter, Roboto, Arial, system-ui as primary
+- Any generic sans-serif without explicit approval
+
+**Why Fraunces + DM Sans?**
+- Fraunces has "soft serifs" that feel therapeutic and approachable
+- DM Sans is highly readable with more character than Inter
+- Together they create "premium wellness" not "corporate dashboard"
+
+### Google Fonts Import
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300&display=swap" rel="stylesheet">
+```
+
+### CSS Variables for Typography
+
+```css
+:root {
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+}
+```
+
+### Animation Standards
+
+Eden uses **intentional motion** — meaningful animations at key moments, not scattered micro-interactions.
+
+| Animation | When to Use | Timing |
+|-----------|-------------|--------|
+| **Staggered reveal** | Cards loading in Friction Feed | 100ms delay between cards |
+| **Pulse indicator** | Live status dots | 2s ease-in-out infinite |
+| **Slide in** | Side Panel (desktop) | 300ms ease-out |
+| **Slide up** | Bottom Sheet (mobile) | 300ms ease-out |
+| **Draw-in** | "Garden in Bloom" leaf SVG | 1.5s ease-out |
+
+**Animation Timing Variables:**
+
+```css
+:root {
+    --ease-out-soft: cubic-bezier(0.23, 1, 0.32, 1);
+    --duration-fast: 150ms;
+    --duration-normal: 300ms;
+    --duration-slow: 500ms;
+}
+```
+
+### The "Unforgettable Element"
+
+Every interface should have ONE memorable thing. For Eden Portal, this is:
+
+1. **The calm, un-dashboard-like feel** — Friction Feed shows only exceptions
+2. **Botanical warmth** — "Garden in Bloom" all-clear state with animated leaf
+3. **Absence of noise** — What's NOT there is as important as what IS
+
+### Frontend-Design Skill Reference
+
+When building new components, Claude Code should mentally reference these principles:
+
+- **Purpose:** What problem does this solve? Who uses it?
+- **Tone:** Eden = "refined minimalism with botanical warmth"
+- **Differentiation:** Does this feel like a therapy practice, not a SaaS dashboard?
+
+Full skill documentation: `/mnt/skills/public/frontend-design/SKILL.md`
+
+---
+
+*Last updated: January 2026*

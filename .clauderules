@@ -133,3 +133,50 @@ END:
 - Menu standardisation (detail views only)
 - Role-based access (Admin vs Associate)
 - Responsive design (side panel/bottom sheet)
+
+# ===================
+# TYPOGRAPHY RULES
+# ===================
+
+# Font requirements
+Always use Fraunces for display/heading text
+Always use DM Sans for body text
+Never use Inter, Roboto, Arial, or generic system fonts as primary
+Never use more than 2 font families in any component
+
+# Font imports
+Always include Google Fonts preconnect for performance
+Always specify fallback fonts (Georgia for Fraunces, system-ui for DM Sans)
+
+# ===================
+# ANIMATION RULES
+# ===================
+
+# Timing
+Always use --ease-out-soft: cubic-bezier(0.23, 1, 0.32, 1) for UI animations
+Always use staggered delays (100ms) when revealing multiple cards
+Never use animations longer than 500ms for UI transitions
+Never use bounce or elastic easing - Eden aesthetic is calm, not playful
+
+# Meaningful motion
+Always animate card reveals with fade + translateY
+Always use pulse animation (2s) for status indicators
+Never add animation just for decoration - every motion should have purpose
+
+# Mobile considerations
+Always test animations on mobile - reduce if performance suffers
+Always respect prefers-reduced-motion media query
+
+# ===================
+# FRONTEND-DESIGN SKILL INTEGRATION
+# ===================
+
+# Before building new components
+Always consider: What is the "unforgettable element" of this component?
+Always ask: Does this feel like a therapy practice or a SaaS dashboard?
+Never create generic UI - every component should feel distinctly "Eden"
+
+# Aesthetic direction
+Eden's tone is "refined minimalism with botanical warmth"
+Maximalism is NOT appropriate for Eden - restraint and calm are priorities
+The absence of clutter IS a feature, not a limitation
