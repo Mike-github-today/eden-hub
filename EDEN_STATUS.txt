@@ -6,69 +6,83 @@ Session: Admin Vitality Hero Enhancement
 Branch: claude/enhance-admin-vitality-uD5Si
 ================================================================================
 
-LATEST CHANGES: Enhanced Admin Vitality Hero - Chunk 1 [COMPLETE]
+LATEST CHANGES: Steward Actions Card - Chunk 2 [COMPLETE]
 ================================================================================
 
 ## Session Summary
 
-Added At-Risk metric and month-over-month sparkline comparison to the Admin
-Practice Overview header. The Cash Density Ring animation is preserved, with
-new visual elements that provide deeper insight into practice health.
+Added Steward Actions Card (Admin Debt) below the admin hero. This card surfaces
+admin-specific friction items: expired documents, unsigned contracts, payout due,
+new referrals, and pending allocations.
 
 --------------------------------------------------------------------------------
 FEATURES IMPLEMENTED
 --------------------------------------------------------------------------------
 
-### Sparkline Row
-- Two-line sparkline comparing current vs previous month revenue
-- Current month: solid green line (#4ADE80)
-- Previous month: dashed white line (30% opacity)
-- Trend badge showing percentage change (+12% up, etc.)
-- "vs last month" label
+### Steward Actions Card
+- Card with mint header showing "Steward Actions" title and badge count
+- "View all" link to navigate to Action Centre
+- List of up to 5 prioritised action items
+- Each item has: severity dot (urgent/warning/info), title, subtitle, meta text
+- Click handler navigates to relevant view
+- "Practice Thriving" all-clear state when no actions needed
 
-### At-Risk Alert Row
-- Displays count of clients without upcoming appointments
-- Warning state: amber icon and count
-- All-clear state: green checkmark with "All clients have upcoming appointments"
-- Clickable to navigate to clients view
-- Hover effect with slightly lighter background
+### Action Types Detected
+1. **Payout due** (urgent) - cleared sessions awaiting payment
+2. **DBS renewal** (warning) - associates with DBS expiring within 30 days
+3. **ICO registration missing** (warning) - GDPR compliance
+4. **New referrals** (info) - awaiting review and broadcast
+5. **Pending allocation** (warning) - broadcast ended, awaiting decision
+6. **Contracts pending** (info) - clients in onboarding
 
 --------------------------------------------------------------------------------
-CSS ADDED (~110 lines)
+CSS ADDED (~170 lines)
 --------------------------------------------------------------------------------
 
 | Class | Purpose |
 |-------|---------|
-| .admin-at-risk-row | Container for at-risk alert |
-| .admin-at-risk-icon | 20px warning/success icon |
-| .admin-at-risk-text | Alert text with count span |
-| .admin-at-risk-row.all-clear | Green state when no at-risk clients |
-| .admin-sparkline-row | Container for sparkline comparison |
-| .admin-sparkline-container | 120x32px SVG container |
-| .admin-sparkline-path | Line styling (current and .previous) |
-| .admin-trend-badge | Pill badge for percentage (.up/.down/.neutral) |
-| .admin-trend-label | "vs last month" text |
+| .steward-actions-card | Main container with border and rounded corners |
+| .steward-actions-header | Mint background header with title and badge |
+| .steward-actions-badge | Count badge (amber default, green when zero) |
+| .steward-actions-link | "View all" link with chevron |
+| .steward-action-item | Individual action row with hover effect |
+| .steward-action-dot | Severity indicator (urgent/warning/info) |
+| .steward-action-content | Title, subtitle, meta text container |
+| .steward-actions-clear | "Practice Thriving" empty state |
 
 --------------------------------------------------------------------------------
-JAVASCRIPT ADDED (~85 lines)
+JAVASCRIPT ADDED (~160 lines)
 --------------------------------------------------------------------------------
 
 | Function | Purpose |
 |----------|---------|
-| getClientsWithoutAppointments() | Returns count and list of at-risk clients |
-| updateAdminAtRiskRow() | Updates UI based on at-risk count |
-| showAtRiskClients() | Navigates to clients view with toast |
-| generateSparklinePath(data, w, h) | Generates SVG path string from data array |
-| updateAdminSparkline() | Renders both month sparklines and trend badge |
-| initEnhancedAdminHero() | Master init function called from updateAdminHomeData() |
+| getStewardActions() | Collects and prioritises all admin actions |
+| renderStewardActions() | Renders action items to the card |
+| handleStewardAction(id) | Click handler for action items |
+| initStewardActions() | Master init called from updateAdminHomeData() |
 
 --------------------------------------------------------------------------------
-HTML ADDED (~30 lines)
+HTML ADDED (~35 lines)
 --------------------------------------------------------------------------------
 
-Added inside admin-header div (after admin-header-stats):
-- admin-sparkline-row with SVG container and trend badge
-- admin-at-risk-row with icon, count text, and chevron
+Added between admin-header and admin-cards-row:
+- steward-actions-card container
+- Header with badge and "View all" link
+- UL for action items (dynamically populated)
+- "Practice Thriving" clear state (hidden by default)
+
+================================================================================
+
+PREVIOUS CHANGES: Enhanced Admin Vitality Hero - Chunk 1 [COMPLETE]
+================================================================================
+
+Added At-Risk metric and month-over-month sparkline comparison to the Admin
+Practice Overview header. The Cash Density Ring animation is preserved, with
+new visual elements that provide deeper insight into practice health.
+
+- Sparkline row with current vs previous month comparison
+- Trend badge showing percentage change
+- At-Risk alert for clients without upcoming appointments
 
 ================================================================================
 
