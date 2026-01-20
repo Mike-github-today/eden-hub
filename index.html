@@ -8823,6 +8823,238 @@
         }
 
         /* ============================================
+           ASSOCIATE SUPPORTING CARDS
+           Secondary info cards below hero
+           ============================================ */
+
+        .associate-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        /* Individual support card */
+        .support-card {
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 16px;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .support-card:hover {
+            border-color: var(--eden-green);
+            box-shadow: var(--shadow-lift);
+        }
+
+        .support-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .support-card-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--eden-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .support-card-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--eden-green);
+        }
+
+        .support-card-icon svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .support-card-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--eden-text);
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .support-card-subtext {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        /* Trend indicators */
+        .trend-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .trend-indicator.up {
+            color: var(--eden-green);
+        }
+
+        .trend-indicator.down {
+            color: var(--alert-rose);
+        }
+
+        .trend-indicator.neutral {
+            color: var(--eden-text-secondary);
+        }
+
+        .trend-indicator svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        /* Sessions This Week - Full width card */
+        .sessions-week-card {
+            grid-column: 1 / -1;
+            padding: 16px;
+        }
+
+        .sessions-week-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .session-preview-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            background: var(--eden-mint);
+            border-radius: var(--radius-standard);
+        }
+
+        .session-preview-day {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--eden-text-secondary);
+            text-transform: uppercase;
+            min-width: 40px;
+        }
+
+        .session-preview-time {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--eden-text);
+        }
+
+        .session-preview-client {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+            flex: 1;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .session-preview-type {
+            font-size: 11px;
+            color: var(--eden-text-muted);
+            padding: 2px 8px;
+            background: var(--pure-white);
+            border-radius: 10px;
+        }
+
+        /* Empty state for sessions */
+        .sessions-empty-state {
+            text-align: center;
+            padding: 20px;
+            color: var(--eden-text-secondary);
+            font-size: 13px;
+        }
+
+        .sessions-empty-state svg {
+            width: 32px;
+            height: 32px;
+            color: var(--eden-border);
+            margin-bottom: 8px;
+        }
+
+        /* Sparkline container (for earnings trajectory) */
+        .sparkline-container {
+            height: 40px;
+            margin-top: 8px;
+        }
+
+        .sparkline-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .sparkline-path {
+            fill: none;
+            stroke: var(--eden-green);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .sparkline-area {
+            fill: var(--eden-green-light);
+            opacity: 0.5;
+        }
+
+        /* Capacity pulse mini-bar */
+        .capacity-bar-container {
+            margin-top: 8px;
+        }
+
+        .capacity-bar {
+            height: 6px;
+            background: var(--eden-mint);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .capacity-bar-fill {
+            height: 100%;
+            background: var(--eden-green);
+            border-radius: 3px;
+            transition: width var(--transition-smooth);
+        }
+
+        .capacity-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 6px;
+            font-size: 11px;
+            color: var(--eden-text-secondary);
+        }
+
+        /* Mobile responsive for supporting cards */
+        @media (max-width: 768px) {
+            .associate-cards-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .sessions-week-card {
+                grid-column: 1;
+            }
+
+            .support-card-value {
+                font-size: 20px;
+            }
+        }
+
+        /* ============================================
            ADMIN HOME SCREEN
            ============================================ */
 
@@ -13030,6 +13262,97 @@
                                 <span class="stage-label">Active</span>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Supporting Cards Grid -->
+                    <div class="associate-cards-grid">
+
+                        <!-- Sessions This Week Card (full width) -->
+                        <div class="support-card sessions-week-card" onclick="navigateToAssociateView('schedule')">
+                            <div class="support-card-header">
+                                <span class="support-card-title">Sessions This Week</span>
+                                <div class="support-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                        <line x1="16" y1="2" x2="16" y2="6"/>
+                                        <line x1="8" y1="2" x2="8" y2="6"/>
+                                        <line x1="3" y1="10" x2="21" y2="10"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="sessions-week-list" id="sessionsWeekList">
+                                <!-- Populated by JavaScript -->
+                                <div class="session-preview-item">
+                                    <span class="session-preview-day">Mon</span>
+                                    <span class="session-preview-time">10:00</span>
+                                    <span class="session-preview-client">Emma T.</span>
+                                    <span class="session-preview-type">Individual</span>
+                                </div>
+                                <div class="session-preview-item">
+                                    <span class="session-preview-day">Tue</span>
+                                    <span class="session-preview-time">14:00</span>
+                                    <span class="session-preview-client">James & Sophie</span>
+                                    <span class="session-preview-type">Couple</span>
+                                </div>
+                                <div class="session-preview-item">
+                                    <span class="session-preview-day">Thu</span>
+                                    <span class="session-preview-time">16:30</span>
+                                    <span class="session-preview-client">Michael R.</span>
+                                    <span class="session-preview-type">Individual</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings Trajectory Card -->
+                        <div class="support-card" onclick="openAssociatePayoutDetail()">
+                            <div class="support-card-header">
+                                <span class="support-card-title">Earnings Trend</span>
+                                <div class="support-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                                        <polyline points="17 6 23 6 23 12"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="support-card-value" id="earningsTrendValue">
+                                £2,340
+                                <span class="trend-indicator up" id="earningsTrendIndicator">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="18 15 12 9 6 15"/>
+                                    </svg>
+                                    +12%
+                                </span>
+                            </div>
+                            <div class="support-card-subtext">vs last month</div>
+                            <div class="sparkline-container" id="earningsSparkline">
+                                <!-- SVG sparkline rendered by JavaScript -->
+                            </div>
+                        </div>
+
+                        <!-- Capacity Pulse Card -->
+                        <div class="support-card" onclick="navigateToAssociateView('schedule')">
+                            <div class="support-card-header">
+                                <span class="support-card-title">Capacity</span>
+                                <div class="support-card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="support-card-value" id="capacityValue">82%</div>
+                            <div class="support-card-subtext" id="capacitySubtext">16 of 20 slots filled</div>
+                            <div class="capacity-bar-container">
+                                <div class="capacity-bar">
+                                    <div class="capacity-bar-fill" id="capacityBarFill" style="width: 82%"></div>
+                                </div>
+                                <div class="capacity-labels">
+                                    <span>0%</span>
+                                    <span>Target: 80%</span>
+                                    <span>100%</span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
