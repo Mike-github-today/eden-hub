@@ -180,4 +180,67 @@ A year from now:
 
 ---
 
+## Design Philosophy
+
+### Eden Calm Aesthetic
+
+Eden Portal deliberately rejects the "SaaS dashboard" aesthetic. Our design choices create a calm, supportive environment for therapy practice management.
+
+**What Eden IS:**
+- Refined minimalism with botanical warmth
+- Supportive, not demanding
+- Calm, not clinical
+- Therapeutic, not corporate
+
+**What Eden is NOT:**
+- Maximalist or attention-grabbing
+- Cluttered with metrics and KPIs
+- Built on generic UI frameworks without customisation
+- Designed to create urgency or anxiety
+
+### The "Unforgettable Element"
+
+Every great interface has one thing people remember. For Eden:
+
+1. **Garden in Bloom** — When everything is healthy, associates see an animated botanical illustration and the message "Everything is tended. Your practice is flowing smoothly." This reward state makes people WANT to clear their friction items.
+
+2. **The Friction Feed** — Instead of dashboards showing everything, Eden shows ONLY what needs attention. The absence of noise is the feature.
+
+3. **Language** — "Your attention, gently" not "3 OVERDUE ITEMS". "A moment of care" not "ACTION REQUIRED".
+
+### Typography Philosophy
+
+We chose **Fraunces** (display) and **DM Sans** (body) deliberately:
+
+- **Fraunces** has "soft serifs" — approachable, warm, therapeutic. It says "wellness" not "corporate".
+- **DM Sans** is readable with personality — more character than Inter, less generic than system fonts.
+
+Together they create "premium wellness" — the feeling of a high-end therapy practice, not a startup dashboard.
+
+### Animation Philosophy
+
+Motion in Eden is **meaningful**, not decorative:
+
+- Cards reveal with a gentle stagger — this feels like information arriving calmly, not data being dumped
+- Status indicators pulse gently — they draw attention without creating anxiety
+- The "Garden in Bloom" leaf draws itself in — a small moment of delight as a reward
+
+We avoid:
+- Bounce effects (too playful for therapy context)
+- Rapid transitions (creates urgency)
+- Gratuitous animation (distracting, unprofessional)
+
+### Influence: Frontend-Design Skill
+
+Our design approach is informed by Anthropic's Frontend-Design Skill, which emphasises:
+
+1. **Bold aesthetic direction** — We interpret this as "refined minimalism" rather than maximalism
+2. **Distinctive typography** — Fraunces + DM Sans, never generic fonts
+3. **Meaningful motion** — Staggered reveals, purposeful transitions
+4. **The unforgettable element** — Garden in Bloom
+
+The skill warns against "AI slop" — generic purple gradients, Inter font everywhere, predictable layouts. Eden deliberately avoids all of these.
+
+---
+
 *This document explains WHY we're building what we're building. For HOW, see EDEN_MASTER.md.*

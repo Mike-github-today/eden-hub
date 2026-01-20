@@ -269,5 +269,61 @@ console.log('isInSubView:', isInSubView);
 
 ---
 
+## Design Standards
+
+### Typography
+
+Eden Portal uses a two-font system:
+
+| Role | Font | CSS Variable |
+|------|------|--------------|
+| Display (headings, titles) | Fraunces | `var(--font-display)` |
+| Body (text, labels, buttons) | DM Sans | `var(--font-body)` |
+
+**Do not use:**
+- Inter, Roboto, Arial as primary fonts
+- More than 2 font families
+- Generic system font stacks without fallbacks
+
+### Animation Timing
+
+Use these CSS custom properties for consistent animation:
+
+```css
+:root {
+    --ease-out-soft: cubic-bezier(0.23, 1, 0.32, 1);
+    --duration-fast: 150ms;    /* Hover states, button clicks */
+    --duration-normal: 300ms;  /* Panel slides, card reveals */
+    --duration-slow: 500ms;    /* Page transitions, complex animations */
+}
+```
+
+### Animation Patterns
+
+| Pattern | Use Case | Implementation |
+|---------|----------|----------------|
+| Staggered reveal | Multiple cards loading | `animation-delay: calc(0.1s * var(--index))` |
+| Pulse | Status indicators | `animation: pulse 2s ease-in-out infinite` |
+| Slide-in | Side panels | `transform: translateX(100%)` → `translateX(0)` |
+| Fade-up | Card appearance | `opacity: 0; translateY(12px)` → `opacity: 1; translateY(0)` |
+
+### Motion Principles
+
+1. **Purposeful** — Every animation should communicate something (loading, success, attention needed)
+2. **Calm** — No bounce, no elastic, no jarring transitions
+3. **Performant** — Test on mobile, respect `prefers-reduced-motion`
+4. **Consistent** — Use the timing variables, don't invent new timings
+
+### The "Unforgettable Element"
+
+When building a new feature, ask: "What will someone remember about this?"
+
+For Eden, memorable elements include:
+- The "Garden in Bloom" all-clear state (animated leaf drawing)
+- The absence of dashboard clutter (Friction Feed philosophy)
+- The warm, therapeutic colour palette (not clinical white/blue)
+
+---
+
 *For design specifications, see EDEN_MASTER.md*
 *For philosophy and context, see PROJECT_CONTEXT.md*
