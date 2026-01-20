@@ -2,11 +2,77 @@
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
 Last Updated: 20 January 2026
-Session: Associate Dashboard Animations
-Branch: claude/associate-dashboard-animations-MD3rZ
+Session: Admin Vitality Hero Enhancement
+Branch: claude/enhance-admin-vitality-uD5Si
 ================================================================================
 
-LATEST CHANGES: Associate Dashboard Animations [COMPLETE]
+LATEST CHANGES: Enhanced Admin Vitality Hero - Chunk 1 [COMPLETE]
+================================================================================
+
+## Session Summary
+
+Added At-Risk metric and month-over-month sparkline comparison to the Admin
+Practice Overview header. The Cash Density Ring animation is preserved, with
+new visual elements that provide deeper insight into practice health.
+
+--------------------------------------------------------------------------------
+FEATURES IMPLEMENTED
+--------------------------------------------------------------------------------
+
+### Sparkline Row
+- Two-line sparkline comparing current vs previous month revenue
+- Current month: solid green line (#4ADE80)
+- Previous month: dashed white line (30% opacity)
+- Trend badge showing percentage change (+12% up, etc.)
+- "vs last month" label
+
+### At-Risk Alert Row
+- Displays count of clients without upcoming appointments
+- Warning state: amber icon and count
+- All-clear state: green checkmark with "All clients have upcoming appointments"
+- Clickable to navigate to clients view
+- Hover effect with slightly lighter background
+
+--------------------------------------------------------------------------------
+CSS ADDED (~110 lines)
+--------------------------------------------------------------------------------
+
+| Class | Purpose |
+|-------|---------|
+| .admin-at-risk-row | Container for at-risk alert |
+| .admin-at-risk-icon | 20px warning/success icon |
+| .admin-at-risk-text | Alert text with count span |
+| .admin-at-risk-row.all-clear | Green state when no at-risk clients |
+| .admin-sparkline-row | Container for sparkline comparison |
+| .admin-sparkline-container | 120x32px SVG container |
+| .admin-sparkline-path | Line styling (current and .previous) |
+| .admin-trend-badge | Pill badge for percentage (.up/.down/.neutral) |
+| .admin-trend-label | "vs last month" text |
+
+--------------------------------------------------------------------------------
+JAVASCRIPT ADDED (~85 lines)
+--------------------------------------------------------------------------------
+
+| Function | Purpose |
+|----------|---------|
+| getClientsWithoutAppointments() | Returns count and list of at-risk clients |
+| updateAdminAtRiskRow() | Updates UI based on at-risk count |
+| showAtRiskClients() | Navigates to clients view with toast |
+| generateSparklinePath(data, w, h) | Generates SVG path string from data array |
+| updateAdminSparkline() | Renders both month sparklines and trend badge |
+| initEnhancedAdminHero() | Master init function called from updateAdminHomeData() |
+
+--------------------------------------------------------------------------------
+HTML ADDED (~30 lines)
+--------------------------------------------------------------------------------
+
+Added inside admin-header div (after admin-header-stats):
+- admin-sparkline-row with SVG container and trend badge
+- admin-at-risk-row with icon, count text, and chevron
+
+================================================================================
+
+PREVIOUS CHANGES: Associate Dashboard Animations [COMPLETE]
 ================================================================================
 
 ## Session Summary
