@@ -2,11 +2,81 @@
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
 Last Updated: 20 January 2026
-Session: Associate Action Centre Implementation
-Branch: claude/associate-action-centre-9lxml
+Session: Associate Dashboard Redesign - Hero Financial Card
+Branch: claude/eden-dashboard-redesign-7dzZK
 ================================================================================
 
-LATEST CHANGES: Associate Action Centre [COMPLETE]
+LATEST CHANGES: Associate Dashboard Redesign - Chunk 1 [COMPLETE]
+================================================================================
+
+## Session Summary
+
+Implemented the Hero Financial Card for the Associate Dashboard. Associates now
+see a prominent green financial panel at the top of their dashboard, showing
+earnings, payout status breakdown, and a "Ready for Payout" callout.
+
+--------------------------------------------------------------------------------
+WHAT WAS REQUESTED
+--------------------------------------------------------------------------------
+
+Transform the Associate view dashboard from a simple greeting + pipeline card
+into a first-class financial command centre with:
+1. Big green hero card matching admin's "Practice Overview" aesthetic
+2. Large earnings display showing 69% associate share
+3. Three-segment progress bar (Paid / Ready / Awaiting)
+4. "Ready for Payout" callout that navigates to earnings view
+
+--------------------------------------------------------------------------------
+WHAT WAS COMPLETED
+--------------------------------------------------------------------------------
+
+| Step | Change | Location |
+|------|--------|----------|
+| 1 | Created index_backup_20260120.html | Root directory |
+| 2 | Added .associate-hero-card CSS styles (~180 lines) | After .pipeline-connector |
+| 3 | Added mobile responsive styles for hero card | @media (max-width: 768px) |
+| 4 | Replaced associate home HTML with hero card structure | Lines ~12718-12876 |
+| 5 | Added updateAssociateHeroCard() function | After updateAssociateHomeData() |
+| 6 | Added openAssociatePayoutDetail() function | After updateAssociateHeroCard() |
+| 7 | Updated updateAssociateHomeData() to call hero card update | Line ~21760 |
+
+--------------------------------------------------------------------------------
+KEY FEATURES
+--------------------------------------------------------------------------------
+
+**Hero Financial Card Components:**
+- Big earnings number (42px font, white on green gradient)
+- "Your 69% share" subtitle with gross amount
+- Three-segment horizontal bar showing payout states
+- Legend with Paid/Ready/Awaiting amounts
+- "Ready for Payout" callout box with session count and arrow
+
+**Data Integration:**
+- Uses existing calculateAssociateEarnings() helper function
+- Formats currency using Intl.NumberFormat for consistency
+- Progress bar widths calculated from actual earnings data
+- Callout click navigates to 'earnings' view
+
+**Responsive Design:**
+- Desktop: 24px padding, 12px border-radius, 42px font
+- Mobile: Full-width (negative margins), 36px font, no border-radius
+
+--------------------------------------------------------------------------------
+FILES CHANGED
+--------------------------------------------------------------------------------
+
+1. index.html
+   - Added ~180 lines CSS for hero card styles
+   - Replaced associate home HTML (~60 lines → ~110 lines)
+   - Added 2 new JavaScript functions (~70 lines)
+   - Modified updateAssociateHomeData() to call hero card update
+
+2. index_backup_20260120.html (created)
+   - Pre-implementation backup
+
+================================================================================
+
+PREVIOUS SESSION: Associate Action Centre [COMPLETE]
 ================================================================================
 
 ## Session Summary
