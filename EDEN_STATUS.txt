@@ -111,6 +111,32 @@ FILES CHANGED
 2. index_backup_20260120.html (created)
    - Pre-implementation backup
 
+--------------------------------------------------------------------------------
+ARCHITECTURE DECISIONS
+--------------------------------------------------------------------------------
+
+### Associate Dashboard (Jan 2026)
+- Decision: Reuse existing helper functions (calculateAssociateEarnings, etc.)
+- Decision: Hero card mirrors admin "Practice Overview" aesthetic
+- Decision: Progress bar uses rgba white at different opacities (0.9/0.6/0.3)
+- Decision: Sparkline uses inline SVG, no external library
+- Decision: Client names shown as initials for privacy (Emma T. not Emma Thompson)
+- Decision: Action items limited to 3 on dashboard, full list via "View All"
+- Decision: "Garden in Bloom" state when no actions needed
+
+--------------------------------------------------------------------------------
+POST-IMPLEMENTATION TESTING CHECKLIST
+--------------------------------------------------------------------------------
+
+- [ ] Role toggle refreshes dashboard correctly
+- [ ] Earnings match between hero card and payout cockpit
+- [ ] Sparkline renders with real monthly data
+- [ ] Sessions show correct client initials
+- [ ] Action items filter to current associate only
+- [ ] Mobile responsive at 375px width
+- [ ] Admin dashboard still functions unchanged
+- [ ] Console shows no errors
+
 ================================================================================
 
 PREVIOUS SESSION: Associate Action Centre [COMPLETE]
