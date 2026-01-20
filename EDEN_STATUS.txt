@@ -6,70 +6,92 @@ Session: Admin Vitality Hero Enhancement
 Branch: claude/enhance-admin-vitality-uD5Si
 ================================================================================
 
-LATEST CHANGES: Steward Actions Card - Chunk 2 [COMPLETE]
+LATEST CHANGES: Team at a Glance Card - Chunk 3 [COMPLETE]
 ================================================================================
 
 ## Session Summary
 
-Added Steward Actions Card (Admin Debt) below the admin hero. This card surfaces
-admin-specific friction items: expired documents, unsigned contracts, payout due,
-new referrals, and pending allocations.
+Added Team at a Glance Card showing all 7 associates as avatar chips with
+animated capacity rings and referral status indicators. Gives stewards instant
+visibility into who's available and who's at capacity.
 
 --------------------------------------------------------------------------------
 FEATURES IMPLEMENTED
 --------------------------------------------------------------------------------
 
-### Steward Actions Card
-- Card with mint header showing "Steward Actions" title and badge count
-- "View all" link to navigate to Action Centre
-- List of up to 5 prioritised action items
-- Each item has: severity dot (urgent/warning/info), title, subtitle, meta text
-- Click handler navigates to relevant view
-- "Practice Thriving" all-clear state when no actions needed
+### Team at a Glance Card
+- Header with associate count and "View all" link
+- Avatar grid with all 7 associates
+- Each avatar has: initials, capacity ring, referral status dot
+- Summary footer: accepting count and overall practice capacity
 
-### Action Types Detected
-1. **Payout due** (urgent) - cleared sessions awaiting payment
-2. **DBS renewal** (warning) - associates with DBS expiring within 30 days
-3. **ICO registration missing** (warning) - GDPR compliance
-4. **New referrals** (info) - awaiting review and broadcast
-5. **Pending allocation** (warning) - broadcast ended, awaiting decision
-6. **Contracts pending** (info) - clients in onboarding
+### Avatar Chip Features
+- 48px ring with capacity progress (animated on load)
+- Ring colours: green (<70%), amber (70-84%), red (85-99%), grey (100%)
+- Status dot: green (accepting referrals), grey (not accepting)
+- First name and percentage displayed below
+
+### Animated Capacity Rings
+- SVG circles with stroke-dasharray/offset technique
+- Rings animate from 0 to actual capacity on render
+- 0.8s ease-out transition
 
 --------------------------------------------------------------------------------
-CSS ADDED (~170 lines)
+CSS ADDED (~200 lines)
 --------------------------------------------------------------------------------
 
 | Class | Purpose |
 |-------|---------|
-| .steward-actions-card | Main container with border and rounded corners |
-| .steward-actions-header | Mint background header with title and badge |
-| .steward-actions-badge | Count badge (amber default, green when zero) |
-| .steward-actions-link | "View all" link with chevron |
-| .steward-action-item | Individual action row with hover effect |
-| .steward-action-dot | Severity indicator (urgent/warning/info) |
-| .steward-action-content | Title, subtitle, meta text container |
-| .steward-actions-clear | "Practice Thriving" empty state |
+| .team-glance-card | Main container card |
+| .team-glance-header | Header with title and count |
+| .team-avatar-grid | Flexbox grid for avatar chips |
+| .team-avatar-chip | Individual associate chip |
+| .team-avatar-ring | 48px ring container |
+| .team-avatar-ring-progress | Animated capacity ring |
+| .team-avatar-circle | Initials circle inside ring |
+| .team-avatar-status | Referral status dot |
+| .team-glance-summary | Footer with stats |
 
 --------------------------------------------------------------------------------
-JAVASCRIPT ADDED (~160 lines)
+JAVASCRIPT ADDED (~120 lines)
 --------------------------------------------------------------------------------
 
 | Function | Purpose |
 |----------|---------|
-| getStewardActions() | Collects and prioritises all admin actions |
-| renderStewardActions() | Renders action items to the card |
-| handleStewardAction(id) | Click handler for action items |
-| initStewardActions() | Master init called from updateAdminHomeData() |
+| calculateAssociateCapacity() | Returns capacity % for associate |
+| getCapacityClass() | Returns CSS class based on capacity |
+| getAssociateReferralStatus() | Checks referral settings |
+| generateCapacityRing() | Creates SVG ring markup |
+| renderTeamAvatarGrid() | Renders all avatar chips |
+| animateTeamCapacityRings() | Triggers ring animations |
+| openAssociateFromTeamGlance() | Click handler for avatars |
+| initTeamGlance() | Master init called from updateAdminHomeData() |
 
 --------------------------------------------------------------------------------
-HTML ADDED (~35 lines)
+HTML ADDED (~30 lines)
 --------------------------------------------------------------------------------
 
-Added between admin-header and admin-cards-row:
-- steward-actions-card container
-- Header with badge and "View all" link
-- UL for action items (dynamically populated)
-- "Practice Thriving" clear state (hidden by default)
+Added between steward-actions-card and admin-cards-row:
+- team-glance-card container
+- Header with count and "View all" link
+- Empty avatar grid (populated by JS)
+- Summary footer with accepting count and capacity
+
+================================================================================
+
+PREVIOUS CHANGES: Steward Actions Card - Chunk 2 [COMPLETE]
+================================================================================
+
+Added Steward Actions Card (Admin Debt) below the admin hero. This card surfaces
+admin-specific friction items: expired documents, unsigned contracts, payout due,
+new referrals, and pending allocations.
+
+- Payout due (urgent) - cleared sessions awaiting payment
+- DBS renewal (warning) - expires within 30 days
+- ICO missing (warning) - GDPR compliance
+- New referrals (info) - awaiting review
+- Pending allocation (warning) - broadcast ended
+- Contracts pending (info) - onboarding clients
 
 ================================================================================
 
