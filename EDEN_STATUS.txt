@@ -2,11 +2,148 @@
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
 Last Updated: 20 January 2026
-Session: Security & GDPR Compliance Implementation
-Branch: claude/review-security-gdpr-C8cwT
+Session: UX & Micro-Interactions ("Swiss Clinic" Feel)
+Branch: claude/add-framer-motion-animations-YYs3Z
 ================================================================================
 
-LATEST CHANGES: Security & GDPR Compliance [COMPLETED]
+LATEST CHANGES: Swiss Clinic Micro-Interactions [COMPLETED]
+================================================================================
+
+## Session Summary
+
+Implemented premium micro-interactions, animations, and empty states following
+the "Swiss Clinic" aesthetic. This creates the "low friction feel" where elements
+arrive smoothly rather than appearing abruptly.
+
+--------------------------------------------------------------------------------
+WHAT WAS REQUESTED
+--------------------------------------------------------------------------------
+
+1. Implement "Swiss Clinic" animation tokens and easing curves
+2. Add enhanced panel animations (spring physics feel)
+3. Create "All Clear" empty state with pulsing circle animation
+4. Add card hover/tap interactions with lift effect
+5. Add staggered list animations for card grids
+6. Add success feedback toast with spring animation
+7. Add haptic feedback support for mobile
+8. Add reduced motion support
+
+--------------------------------------------------------------------------------
+WHAT WAS COMPLETED
+--------------------------------------------------------------------------------
+
+### 1. Animation CSS Tokens (index.html)
+- **Duration tokens**: --duration-fast (150ms), --duration-normal (250ms), etc.
+- **Easing curves**: --ease-out-soft, --ease-spring, --ease-bounce
+- **Shadow tokens**: --shadow-lift, --shadow-lift-hover
+
+### 2. EdenAnimations JavaScript Module (index.html)
+- **triggerHaptic()**: Vibration API patterns for success, warning, error, tap
+- **showSuccess()**: Centred toast with spring animation and checkmark
+- **staggerIn()**: Apply cascading entrance animations to lists
+- **enableCardAnimation()**: Add hover lift and tap scale effects
+- **createAllClearHTML()**: Generate "All Clear" empty state markup
+- **animatePanelOpen/Close()**: Web Animations API with spring timing
+- **animateBottomSheetOpen/Close()**: Enhanced mobile sheet animations
+- **animateBackdrop()**: Fade backdrop in/out
+- **prefersReducedMotion()**: Check user's motion preference
+
+### 3. Enhanced Empty State CSS
+- **.eden-all-clear**: New "All Clear" container
+- **.eden-all-clear-circle**: Centred circle with checkmark
+- **.eden-all-clear-pulse**: Expanding ring animation (3s loop)
+- **@keyframes eden-pulse-ring**: Ring expands and fades
+
+### 4. Card Interactions CSS
+- **.eden-card-animated**: Hover lift (-2px Y) with shadow
+- **.eden-card-animated:active**: Tap scale (0.98)
+- **@media (hover: none)**: Mobile-specific tap only
+
+### 5. Staggered Animations CSS
+- **.eden-stagger-item**: 50ms delays up to 10 items
+- **@keyframes eden-stagger-in**: Fade + slide up
+
+### 6. Success Toast CSS
+- **.eden-success-toast**: Centred pill with spring scale
+- **@keyframes eden-check-pop**: Checkmark bounce
+
+### 7. Panel Enhancements
+- Added panel backdrop (#panelBackdrop) for desktop
+- Updated openPanel() with spring animations + haptic
+- Updated closePanel() with smooth close animations
+
+### 8. Reduced Motion Support
+- Global @media (prefers-reduced-motion: reduce) rules
+- EdenAnimations.prefersReducedMotion() checks
+- Instant transitions when reduced motion enabled
+
+--------------------------------------------------------------------------------
+KEY OUTCOMES
+--------------------------------------------------------------------------------
+
+| Feature | Implementation |
+|---------|----------------|
+| Panel animation | Spring-like easing (350ms ease-out-soft) |
+| Card hover | -2px lift + shadow on hover |
+| Card tap | Scale to 0.97 on mobile |
+| List stagger | 50ms delay between items |
+| Success feedback | Centred toast with checkmark pop |
+| Empty state | Pulsing circle with "All Clear" text |
+| Haptic feedback | Vibration API for mobile |
+| Reduced motion | All animations respect user preference |
+
+--------------------------------------------------------------------------------
+FILES CREATED/UPDATED
+--------------------------------------------------------------------------------
+
+1. index.html
+   - Added animation CSS tokens (~20 lines in :root)
+   - Added Swiss Clinic micro-interaction CSS (~250 lines)
+   - Added EdenAnimations module (~270 lines)
+   - Updated openPanel/closePanel functions
+   - Added panel backdrop element
+   - Updated Action Centre empty state
+   - Updated applyCardAnimation() function
+   - Updated clinical governance confirmations
+
+2. index_v13_pre_framer_motion.html (backup)
+   - Created backup before animation changes
+
+3. EDEN_STATUS.txt
+   - This file - updated with implementation details
+
+--------------------------------------------------------------------------------
+EDENANIMATIONS PUBLIC API
+--------------------------------------------------------------------------------
+
+```javascript
+EdenAnimations.init()                    // Called on DOMContentLoaded
+EdenAnimations.triggerHaptic(type)       // 'success', 'warning', 'error', 'light', 'tap'
+EdenAnimations.showSuccess(message)      // Show success toast
+EdenAnimations.staggerIn(elements, opts) // Apply stagger animation
+EdenAnimations.enableCardAnimation(el)   // Add hover/tap effects
+EdenAnimations.createAllClearHTML(opts)  // Generate empty state HTML
+EdenAnimations.animatePanelOpen(panel)   // Spring open animation
+EdenAnimations.animatePanelClose(panel)  // Smooth close animation
+EdenAnimations.prefersReducedMotion()    // Check user preference
+```
+
+--------------------------------------------------------------------------------
+ANIMATION TIMING REFERENCE
+--------------------------------------------------------------------------------
+
+| Animation | Duration | Easing |
+|-----------|----------|--------|
+| Panel open | 350ms | cubic-bezier(0.23, 1, 0.32, 1) |
+| Panel close | 250ms | cubic-bezier(0.4, 0, 0.2, 1) |
+| Backdrop fade | 150ms | ease-out |
+| Card hover | 150ms | ease-out-soft |
+| Stagger delay | 50ms | per item |
+| Success toast | 400ms | spring |
+| Pulse ring | 3000ms | ease-in-out infinite |
+
+--------------------------------------------------------------------------------
+PREVIOUS SESSION: Security & GDPR Compliance [COMPLETED]
 ================================================================================
 
 ## Session Summary
@@ -36,252 +173,13 @@ WHAT WAS COMPLETED
 - **Storage Compliance**: Validates no PII in localStorage on init
 - **Error Sanitisation**: showError() displays user-friendly messages only
 
-### 2. Security CSS Styles (index.html)
-- Session timeout warning modal styles
-- User menu with logout option
-- Session activity indicator
-- Error toast (sanitised messages)
-- Masked data styling
-- GDPR notice badge
-
-### 3. GDPR Documentation (docs/GDPR_SECURITY.md)
-- Data minimisation principles
-- What Eden stores vs. doesn't store
-- Data responsibility matrix
-- Session management specs
-- Data masking patterns
-- Make.com security configuration
-- Airtable security guidelines
-- GDPR rights implementation (SAR, erasure, portability)
-- Data retention policy
-- Quarterly audit checklist
-
---------------------------------------------------------------------------------
-KEY OUTCOMES
---------------------------------------------------------------------------------
-
-| Feature | Implementation |
-|---------|----------------|
-| Session timeout | 30 min inactivity → auto-logout |
-| Warning before timeout | 5 min countdown modal |
-| Data clearing on logout | Memory + sessionStorage cleared |
-| Error messages | Sanitised (no internal details) |
-| Bank account masking | •••• •••• •••• XXXX pattern |
-| Certificate masking | ****XXXX pattern |
-| localStorage PII check | Automatic validation on init |
-
---------------------------------------------------------------------------------
-FILES CREATED/UPDATED
---------------------------------------------------------------------------------
-
-1. index.html
-   - Added EdenSecurity module (~250 lines)
-   - Added security CSS styles (~200 lines)
-
-2. index_v12_pre_security_gdpr.html (backup)
-   - Created backup before security changes
-
-3. docs/GDPR_SECURITY.md (new)
-   - Complete GDPR compliance documentation
-
-4. EDEN_STATUS.txt
-   - This file - updated with implementation details
-
---------------------------------------------------------------------------------
-SECURITY MODULE PUBLIC API
---------------------------------------------------------------------------------
-
-```javascript
-EdenSecurity.init()           // Auto-called on DOMContentLoaded
-EdenSecurity.extend()         // Extend session (stay logged in)
-EdenSecurity.logout()         // Manual logout
-EdenSecurity.showError(msg)   // Show sanitised error toast
-EdenSecurity.maskData(value)  // Mask sensitive data
-EdenSecurity.maskBankAccount(num)  // Mask bank account
-EdenSecurity.maskEmail(email) // Mask email address
-EdenSecurity.getTimeRemaining() // Get session time left
-EdenSecurity.clearData()      // Clear sensitive data
-```
-
---------------------------------------------------------------------------------
-COMPLIANCE CHECKLIST STATUS
---------------------------------------------------------------------------------
-
-[x] Session timeout implemented (30 min)
-[x] Warning modal before timeout
-[x] Secure logout with data clearing
-[x] No PII in localStorage
-[x] Bank details masked in display (existing maskNumber + new patterns)
-[x] Error messages sanitised
-[x] GDPR documentation created
-[x] Data retention policy documented
-[x] SAR process documented
-
---------------------------------------------------------------------------------
-PREVIOUS SESSION: Associate Detail View Fix [COMPLETED]
 ================================================================================
-
-## Session Summary
-
-Fixed the Associates tab to open the same full-page detail view as Practice Health,
-and fixed dropdown menu click handling.
-
---------------------------------------------------------------------------------
-WHAT WAS REQUESTED
---------------------------------------------------------------------------------
-
-1. Make Associates tab cards open full-page detail view (not side panel)
-2. Fix dropdown menu items not responding to clicks
-
---------------------------------------------------------------------------------
-WHAT WAS COMPLETED
---------------------------------------------------------------------------------
-
-Change 1: onClick Handler (line 22543)
-- Changed from: openAssociateDetailPanel('${associate.id}')
-- Changed to:   showAssociateDetail('${associate.id}')
-- Location: renderAssociateStatusCards() function
-
-Change 2: CSS Pointer Events (line 9712-9714)
-- Added: .associate-detail-dropdown-item > * { pointer-events: none; }
-- Allows clicks to pass through child elements to parent button handler
-
---------------------------------------------------------------------------------
-KEY OUTCOMES
---------------------------------------------------------------------------------
-
-| Before | After |
-|--------|-------|
-| Side panel/bottom sheet | Full-page view with back button |
-| Missing progress stepper | Onboarding stepper visible |
-| Wrong menu icons | Correct icons (Profile, Earnings, Message, Contract) |
-| Menu clicks not working | Menu items now clickable |
-
---------------------------------------------------------------------------------
-COMMITS
---------------------------------------------------------------------------------
-
-1. d48753a - fix: Update Associates tab to use full-page detail view
-2. 975ef28 - fix: Add pointer-events fix for associate dropdown menu items
-
---------------------------------------------------------------------------------
-PREVIOUS SESSION: Logo Update - Concept 11: Garden Abstract [COMPLETED]
-================================================================================
-
-## Session Summary
-
-Replaced all Eden leaf logos with new Concept 11: Garden Abstract design -
-three overlapping organic circles at different opacities (#2d5f4d), suggesting
-abundance, growth, and community.
-
---------------------------------------------------------------------------------
-LOCATIONS UPDATED
---------------------------------------------------------------------------------
-
-1. Mobile Header (.mobile-logo svg) - 32x32
-   - Replaced outlined leaf path SVG with three overlapping circles
-
-2. Sidebar Header (.logo-icon) - 32x32
-   - Replaced outlined leaf path SVG with three overlapping circles
-
-3. Action Centre Empty State (#actionEmptyState) - 80x80
-   - Replaced eden-leaf-breathing with eden-logo-breathing class
-   - Updated to 100x100 viewBox with scaled circles
-
-4. JavaScript getLeafSvg() Function - 64x64
-   - Updated return value with new circle-based logo
-   - Kept function name for backwards compatibility
-
-5. CSS Animation Classes
-   - Added .eden-logo-breathing as alias to .eden-leaf-breathing
-   - Updated reduced motion media query for both classes
-
---------------------------------------------------------------------------------
-PREVIOUS SESSION: Clinical Governance ("Silent Auditor") [COMPLETED]
-================================================================================
-
-## Session Summary
-
-Implementation of clinical governance features to support Eden's vicarious
-responsibility under BACP, UKCP, and HCPC guidelines. This enables tracking of
-supervision, DBS, and ICO registration compliance for associates.
-
---------------------------------------------------------------------------------
-FEATURES IMPLEMENTED
---------------------------------------------------------------------------------
-
-1. Supervision Tracker
-   - Added supervision fields to associates (supervisor name, accreditation,
-     frequency, last confirmed date)
-   - Status calculation: Current, Due Soon, Overdue
-   - Supervision Card in Associate Profile > Compliance Section
-   - "Confirm Supervision" button updates last confirmed date
-   - Friction Feed integration for Due Soon/Overdue items
-
-2. DBS Update Service
-   - Added DBS fields (certificate number, certificate date, Update Service ID,
-     enrolled status, last checked date)
-   - Support for both Update Service (annual) and legacy 3-year cycle
-   - Status calculation: Valid, Renewal Soon, Expired/Check Due
-   - DBS Card in Associate Profile > Compliance Section
-   - "Mark as Checked" button (Admin only)
-   - Friction Feed integration for renewal reminders
-
-3. ICO Registration
-   - Added ICO fields (registration number, verified status, expiry date)
-   - Status calculation: Valid, Renewal Due, Expired, Not Registered, Pending
-   - ICO Card in Associate Profile > Compliance Section
-   - Friction Feed integration for non-compliant states
-   - Stage 2 onboarding gate: ICO registration now required
-
---------------------------------------------------------------------------------
-FILES UPDATED
---------------------------------------------------------------------------------
-
-1. index.html
-   - Added clinical governance CSS styles (compliance cards)
-   - Extended associates data with governance fields
-   - Added helper functions for status calculations
-   - Added Compliance Section to Associate Profile page
-   - Added compliance card renderers (Supervision, DBS, ICO)
-   - Added panel handlers and confirmation functions
-   - Added 6 new friction items for compliance issues
-   - Updated onboarding stages to require ICO registration
-
-2. index_v11_pre_clinical_governance.html (backup)
-   - Created backup before changes
-
-3. EDEN_STATUS.txt
-   - This file - updated with implementation details
-
---------------------------------------------------------------------------------
-MOCK DATA SCENARIOS
---------------------------------------------------------------------------------
-
-Associates configured with different compliance states:
-- Sarah Johnson: All current/valid
-- David Okonkwo: Supervision due soon (weekly, 5 days ago)
-- Amara Williams: Supervision overdue (monthly, 35 days ago), no Update Service
-- Marcus Thompson: DBS renewal soon, ICO renewal due
-- Fatima Ahmed: ICO not registered (new associate)
-- Kofi Mensah: All current/valid
-- Zara Patel: ICO pending verification
-
-Friction Feed items added:
-- FRI-SUP-ASSOC-2403: Supervision Overdue (Amara Williams)
-- FRI-SUP-ASSOC-2402: Supervision Due Soon (David Okonkwo)
-- FRI-DBS-ASSOC-2404: DBS Check Due Soon (Marcus Thompson)
-- FRI-ICO-ASSOC-2501: ICO Not Registered (Fatima Ahmed)
-- FRI-ICO-ASSOC-2406: ICO Pending Verification (Zara Patel)
-- FRI-ICO-ASSOC-2404: ICO Renewal Due (Marcus Thompson)
-
-================================================================================
-CURRENT PROJECT STATE (v0.7.0)
+CURRENT PROJECT STATE (v0.8.0)
 ================================================================================
 
 PROTOTYPE STATUS
 ----------------
-File: index.html (~960KB)
+File: index.html (~985KB)
 Approach: Single-file HTML + CSS + JavaScript
 Data: Mock JavaScript arrays
 
@@ -293,6 +191,7 @@ Core System:
 - Responsive layout (768px breakpoint)
 - Role-based navigation (Admin vs Associate)
 - Role toggle for testing
+- Swiss Clinic micro-interactions [NEW]
 
 Modules:
 - Associates (ID cards, 7-tab detail panels)
@@ -304,15 +203,20 @@ Modules:
 - Contracts (grid, detail panel)
 - Messages/Inbox (list, viewer)
 - Support/CPD (help links, activities)
-- Clinical Governance (Supervision, DBS, ICO tracking) [NEW]
+- Clinical Governance (Supervision, DBS, ICO tracking)
 
 UX Enhancements:
-- Empty states ("Garden in Bloom")
+- Empty states ("All Clear" with pulsing circle) [ENHANCED]
 - Unified detail view pattern
 - Menu standardisation (detail views only)
 - Progress stepper component
-- Toast notifications
-- Compliance cards with status indicators [NEW]
+- Success feedback toasts [ENHANCED]
+- Compliance cards with status indicators
+- Card hover/tap animations [NEW]
+- Staggered list animations [NEW]
+- Panel spring animations [NEW]
+- Haptic feedback support [NEW]
+- Reduced motion support [NEW]
 
 MOCK DATA
 ---------
@@ -323,22 +227,6 @@ MOCK DATA
 - 10 friction items (4 original + 6 compliance)
 - Contracts
 - Messages
-
-================================================================================
-PREVIOUS CHANGES
-================================================================================
-
-- Clinical Governance Implementation [Jan 19, 2026]
-- Documentation Update [Jan 18, 2026]
-- Chunk 6: Three-Dots Menu Standardisation [Jan 18, 2026]
-- Chunk 5: Empty States (Garden in Bloom) [Jan 18, 2026]
-- Chunk 4: Action Centre Summary Grid [Jan 18, 2026]
-- Chunk 3: Unified Detail View Pattern [Jan 17, 2026]
-- Navigation Bug Fixes [Jan 17, 2026]
-- Progress Stepper Implementation [Jan 14, 2026]
-- Referral System Implementation [Jan 14, 2026]
-- Financial Vitality Hub [Jan 10, 2026]
-- Core Design System [Jan 6, 2026]
 
 ================================================================================
 NEXT PRIORITIES
