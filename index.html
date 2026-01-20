@@ -9575,6 +9575,194 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
+        /* ============================================
+           STEWARD ACTIONS CARD (Admin Debt)
+           ============================================ */
+
+        .steward-actions-card {
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .steward-actions-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--eden-border);
+            background: var(--eden-mint);
+        }
+
+        .steward-actions-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+        }
+
+        .steward-actions-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 22px;
+            height: 22px;
+            padding: 0 7px;
+            border-radius: 11px;
+            background: var(--alert-amber);
+            color: var(--pure-white);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .steward-actions-badge.zero {
+            background: var(--eden-green);
+        }
+
+        .steward-actions-link {
+            font-size: 13px;
+            color: var(--eden-green);
+            text-decoration: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .steward-actions-link:hover {
+            text-decoration: underline;
+        }
+
+        .steward-actions-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .steward-action-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--eden-border);
+            cursor: pointer;
+            transition: background-color var(--transition-smooth);
+        }
+
+        .steward-action-item:last-child {
+            border-bottom: none;
+        }
+
+        .steward-action-item:hover {
+            background-color: var(--eden-mint);
+        }
+
+        .steward-action-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-top: 5px;
+            flex-shrink: 0;
+        }
+
+        .steward-action-dot.urgent {
+            background-color: var(--alert-rose);
+            animation: pulse-animation 2s ease-in-out infinite;
+        }
+
+        .steward-action-dot.warning {
+            background-color: var(--alert-amber);
+        }
+
+        .steward-action-dot.info {
+            background-color: var(--alert-blue);
+        }
+
+        .steward-action-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .steward-action-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--eden-text);
+        }
+
+        .steward-action-subtitle {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        .steward-action-meta {
+            font-size: 11px;
+            color: var(--eden-text-muted);
+            margin-top: 4px;
+        }
+
+        .steward-action-arrow {
+            color: var(--eden-text-muted);
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .steward-action-arrow svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .steward-actions-clear {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 20px;
+            text-align: center;
+        }
+
+        .steward-clear-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            color: var(--eden-green);
+        }
+
+        .steward-clear-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .steward-clear-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--eden-green);
+            margin-bottom: 4px;
+        }
+
+        .steward-clear-subtitle {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .steward-actions-header {
+                padding: 14px 16px;
+            }
+
+            .steward-action-item {
+                padding: 12px 16px;
+            }
+        }
+
         /* Responsive adjustments for home screens */
         @media (max-width: 768px) {
             .quick-stat-row {
@@ -13868,6 +14056,36 @@
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: rgba(255,255,255,0.5);">
                                 <polyline points="9 18 15 12 9 6"/>
                             </svg>
+                        </div>
+                    </div>
+
+                    <!-- Steward Actions Card (Admin Debt) -->
+                    <div class="steward-actions-card" id="stewardActionsCard">
+                        <div class="steward-actions-header">
+                            <div class="steward-actions-title">
+                                <span>Steward Actions</span>
+                                <span class="steward-actions-badge" id="stewardActionsBadge">0</span>
+                            </div>
+                            <a class="steward-actions-link" onclick="showView('action-centre')">
+                                View all
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="9 18 15 12 9 6"/>
+                                </svg>
+                            </a>
+                        </div>
+
+                        <ul class="steward-actions-list" id="stewardActionsList">
+                        </ul>
+
+                        <div class="steward-actions-clear" id="stewardActionsClear" style="display: none;">
+                            <div class="steward-clear-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                            </div>
+                            <div class="steward-clear-title">Practice Thriving</div>
+                            <div class="steward-clear-subtitle">No steward actions needed right now</div>
                         </div>
                     </div>
 
@@ -23194,6 +23412,9 @@ Sarah
 
             // Initialize enhanced hero features
             initEnhancedAdminHero();
+
+            // Initialize steward actions
+            initStewardActions();
         }
 
         // ============================================
@@ -23295,6 +23516,177 @@ Sarah
         function initEnhancedAdminHero() {
             updateAdminAtRiskRow();
             updateAdminSparkline();
+        }
+
+        // ============================================
+        // STEWARD ACTIONS (ADMIN DEBT) FUNCTIONS
+        // ============================================
+
+        function getStewardActions() {
+            var actions = [];
+            var now = new Date();
+
+            // 1. Check for payout due
+            if (typeof getPayoutPipeline === 'function') {
+                var payoutPipeline = getPayoutPipeline();
+                if (payoutPipeline.length > 0) {
+                    var totalReady = payoutPipeline.reduce(function(sum, a) { return sum + a.totalAssociateShare; }, 0);
+                    actions.push({
+                        id: 'payout-due',
+                        type: 'urgent',
+                        title: 'Run payout',
+                        subtitle: '£' + totalReady.toFixed(0) + ' ready · ' + payoutPipeline.length + ' associates',
+                        meta: 'Cleared sessions awaiting payment',
+                        action: function() { showView('payout'); }
+                    });
+                }
+            }
+
+            // 2. Check DBS expiring within 30 days
+            associates.forEach(function(associate) {
+                if (associate.dbsCertificateDate) {
+                    var dbsDate = new Date(associate.dbsCertificateDate);
+                    var threeYearsLater = new Date(dbsDate);
+                    threeYearsLater.setFullYear(threeYearsLater.getFullYear() + 3);
+
+                    var daysUntilExpiry = Math.ceil((threeYearsLater - now) / (1000 * 60 * 60 * 24));
+
+                    if (daysUntilExpiry <= 30 && daysUntilExpiry > 0) {
+                        actions.push({
+                            id: 'dbs-' + associate.id,
+                            type: 'warning',
+                            title: 'DBS renewal due',
+                            subtitle: associate.name + "'s DBS expires in " + daysUntilExpiry + ' days',
+                            meta: 'Clinical governance',
+                            action: function() {
+                                if (typeof DetailView !== 'undefined' && DetailView.open) {
+                                    DetailView.open('associate', associate);
+                                } else {
+                                    showView('associates');
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+            // 3. Check ICO registration issues
+            associates.forEach(function(associate) {
+                if (!associate.icoRegistrationNumber) {
+                    actions.push({
+                        id: 'ico-missing-' + associate.id,
+                        type: 'warning',
+                        title: 'ICO registration missing',
+                        subtitle: associate.name + ' needs ICO registration',
+                        meta: 'GDPR compliance',
+                        action: function() { showView('associates'); }
+                    });
+                }
+            });
+
+            // 4. Check for new referrals
+            var newReferrals = referrals.filter(function(r) { return r.status === 'New'; });
+            if (newReferrals.length > 0) {
+                actions.push({
+                    id: 'new-referrals',
+                    type: 'info',
+                    title: newReferrals.length + ' new referral' + (newReferrals.length > 1 ? 's' : ''),
+                    subtitle: 'Awaiting review and broadcast',
+                    meta: 'Referral triage',
+                    action: function() { showView('referrals'); }
+                });
+            }
+
+            // 5. Check referrals pending allocation
+            var pendingAllocation = referrals.filter(function(r) { return r.status === 'Pending Allocation'; });
+            if (pendingAllocation.length > 0) {
+                actions.push({
+                    id: 'pending-allocation',
+                    type: 'warning',
+                    title: pendingAllocation.length + ' referral' + (pendingAllocation.length > 1 ? 's' : '') + ' need allocation',
+                    subtitle: 'Broadcast ended, awaiting decision',
+                    meta: 'Referral pipeline',
+                    action: function() { showView('referrals'); }
+                });
+            }
+
+            // 6. Check contracts pending
+            var stalledOnboarding = clients.filter(function(c) { return c.stage === 'Onboarding'; });
+            if (stalledOnboarding.length > 0) {
+                actions.push({
+                    id: 'contracts-pending',
+                    type: 'info',
+                    title: stalledOnboarding.length + ' contract' + (stalledOnboarding.length > 1 ? 's' : '') + ' pending',
+                    subtitle: 'Clients in onboarding awaiting signature',
+                    meta: 'Contract management',
+                    action: function() { showView('contracts'); }
+                });
+            }
+
+            // Sort by priority
+            var priorityOrder = { urgent: 0, warning: 1, info: 2 };
+            actions.sort(function(a, b) { return priorityOrder[a.type] - priorityOrder[b.type]; });
+
+            return actions;
+        }
+
+        function renderStewardActions() {
+            var list = document.getElementById('stewardActionsList');
+            var clearState = document.getElementById('stewardActionsClear');
+            var badge = document.getElementById('stewardActionsBadge');
+
+            if (!list || !badge) return;
+
+            var actions = getStewardActions();
+
+            badge.textContent = actions.length;
+            if (actions.length === 0) {
+                badge.classList.add('zero');
+            } else {
+                badge.classList.remove('zero');
+            }
+
+            if (actions.length === 0) {
+                list.style.display = 'none';
+                if (clearState) clearState.style.display = 'flex';
+                return;
+            }
+
+            list.style.display = 'block';
+            if (clearState) clearState.style.display = 'none';
+
+            var displayActions = actions.slice(0, 5);
+
+            list.innerHTML = displayActions.map(function(action) {
+                return '<li class="steward-action-item" onclick="handleStewardAction(\'' + action.id + '\')">' +
+                    '<span class="steward-action-dot ' + action.type + '"></span>' +
+                    '<div class="steward-action-content">' +
+                        '<div class="steward-action-title">' + action.title + '</div>' +
+                        '<div class="steward-action-subtitle">' + action.subtitle + '</div>' +
+                        '<div class="steward-action-meta">' + action.meta + '</div>' +
+                    '</div>' +
+                    '<span class="steward-action-arrow">' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                            '<polyline points="9 18 15 12 9 6"/>' +
+                        '</svg>' +
+                    '</span>' +
+                '</li>';
+            }).join('');
+
+            window._stewardActions = actions;
+        }
+
+        function handleStewardAction(actionId) {
+            var actions = window._stewardActions || [];
+            var action = actions.find(function(a) { return a.id === actionId; });
+
+            if (action && typeof action.action === 'function') {
+                action.action();
+            }
+        }
+
+        function initStewardActions() {
+            renderStewardActions();
         }
 
         // Animate Cash Density Ring
