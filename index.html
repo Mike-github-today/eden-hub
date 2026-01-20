@@ -16714,7 +16714,7 @@ Sarah
                 }
             },
             associate: {
-                allowedViews: ['dashboard', 'referrals', 'clients', 'earnings', 'schedule', 'cpd', 'support'],
+                allowedViews: ['dashboard', 'action-centre', 'referrals', 'clients', 'earnings', 'schedule', 'cpd', 'support'],
                 navLabels: {
                     'clients': 'My Clients',
                     'earnings': 'My Earnings',
@@ -19277,6 +19277,64 @@ Sarah
                 dueDate: '25 Jan 2026',
                 action: 'Update Details',
                 complianceType: 'ico'
+            },
+            // ============================================
+            // SAMPLE ITEMS FOR ASSOCIATE VIEW TESTING
+            // These items are for Sarah Johnson (ASSOC-2401)
+            // When logged in as Sarah, she should see these
+            // ============================================
+            {
+                id: 'FRI-ASSOC-INS-2401',
+                type: 'amber',
+                category: 'associates',
+                icon: 'file-text',
+                title: 'Insurance renewal required',
+                description: 'Sarah Johnson\'s professional indemnity insurance expires in 21 days',
+                entityName: 'Sarah Johnson',
+                associate: 'Sarah Johnson',
+                associateUcid: 'ASC-2401',
+                dueDate: '10 Feb 2026',
+                action: 'View Details'
+            },
+            {
+                id: 'FRI-ASSOC-SUP-2401',
+                type: 'blue',
+                category: 'associates',
+                icon: 'calendar',
+                title: 'Supervision confirmation needed',
+                description: 'Sarah Johnson has not confirmed this month\'s supervision session',
+                entityName: 'Sarah Johnson',
+                associate: 'Sarah Johnson',
+                associateUcid: 'ASC-2401',
+                dueDate: '25 Jan 2026',
+                action: 'Confirm Session'
+            },
+            {
+                id: 'FRI-CLI-SESS-2401',
+                type: 'amber',
+                category: 'clients',
+                icon: 'calendar',
+                title: 'Session reminder needed',
+                description: 'James & Emma Wilson have not confirmed their Thursday session',
+                entityName: 'James & Emma Wilson',
+                client: 'James & Emma Wilson',
+                associate: 'Sarah Johnson',
+                associateUcid: 'ASC-2401',
+                action: 'Send Reminder'
+            },
+            {
+                id: 'FRI-FIN-PAY-2401',
+                type: 'rose',
+                category: 'finance',
+                icon: 'alert-circle',
+                title: 'Payment overdue',
+                description: 'Payment from David Miller is 7 days overdue (£120)',
+                entityName: 'David Miller',
+                client: 'David Miller',
+                associate: 'Sarah Johnson',
+                associateUcid: 'ASC-2401',
+                amount: '£120',
+                action: 'Send Reminder'
             }
         ];
 
@@ -19303,29 +19361,153 @@ Sarah
                 return getRole() === 'admin';
             }
 
+            // Get the current user's ID (UCID)
+            function getCurrentUserId() {
+                return typeof currentUserId !== 'undefined' ? currentUserId : null;
+            }
+
+            // Filter and transform actions for associate view
+            // This takes practice-wide actions and returns only items relevant to this associate
+            function getAssociateActions(actions, associateId) {
+                if (!associateId) return [];
+
+                // Normalise the ID format for comparison
+                // Some items use 'ASC-2401', others use 'ASSOC-2401'
+                var normaliseId = function(id) {
+                    if (!id) return null;
+                    // Convert ASC-XXXX to ASSOC-XXXX for consistent comparison
+                    if (id.startsWith('ASC-')) {
+                        return 'ASSOC-' + id.substring(4);
+                    }
+                    return id;
+                };
+
+                var normalisedAssociateId = normaliseId(associateId);
+
+                return actions
+                    .filter(function(action) {
+                        // Check if this action relates to this associate
+                        var actionAssociateId = normaliseId(action.associateUcid) ||
+                                                normaliseId(action.associateId);
+
+                        // Include if the action is about THIS associate
+                        return actionAssociateId === normalisedAssociateId;
+                    })
+                    .map(function(action) {
+                        // Transform to associate perspective
+                        return transformToAssociatePerspective(action);
+                    });
+            }
+
+            // Transform action descriptions from admin view to associate view
+            // "Fatima's insurance expires" becomes "Your insurance expires"
+            function transformToAssociatePerspective(action) {
+                // Create a copy to avoid mutating original
+                var transformed = Object.assign({}, action);
+
+                // Remap 'associates' category to 'compliance' for associate view
+                // This makes sense because associates care about their OWN compliance
+                if (action.category === 'associates') {
+                    transformed.category = 'compliance';
+                }
+
+                // Transform description to first-person perspective
+                // Get the associate's name from the action to replace in descriptions
+                var associateName = action.associate || action.entityName || '';
+
+                if (associateName && transformed.description) {
+                    // Replace "[Name]'s" with "Your"
+                    var possessivePattern = new RegExp(associateName + "'s", 'gi');
+                    transformed.description = transformed.description.replace(possessivePattern, 'Your');
+
+                    // Replace "[Name] has not" with "You have not"
+                    var hasNotPattern = new RegExp(associateName + ' has not', 'gi');
+                    transformed.description = transformed.description.replace(hasNotPattern, 'You have not');
+
+                    // Replace "[Name] has" with "You have"
+                    var hasPattern = new RegExp(associateName + ' has', 'gi');
+                    transformed.description = transformed.description.replace(hasPattern, 'You have');
+                }
+
+                // Transform common admin-speak phrases to personal phrases
+                var phraseTransforms = {
+                    'insurance expires': 'Your professional indemnity insurance expires',
+                    'has not signed the updated': 'Please sign the updated',
+                    'has not confirmed supervision': 'Please confirm your supervision',
+                    'DBS check due': 'Your DBS check is due',
+                    'ICO registration': 'Your ICO registration',
+                    'supervision due': 'Your supervision is due',
+                    'supervision overdue': 'Your supervision is overdue'
+                };
+
+                // Only apply phrase transforms if not already transformed
+                if (transformed.description) {
+                    for (var phrase in phraseTransforms) {
+                        if (phraseTransforms.hasOwnProperty(phrase)) {
+                            // Only transform if we haven't already made it personal
+                            if (transformed.description.toLowerCase().indexOf('your') === -1 &&
+                                transformed.description.toLowerCase().indexOf('you ') === -1) {
+                                var regex = new RegExp(phrase, 'gi');
+                                if (regex.test(transformed.description)) {
+                                    transformed.description = transformed.description.replace(regex, phraseTransforms[phrase]);
+                                    break; // Only apply first matching transform
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Update entity name for associate view
+                // Instead of showing their own name, show "You" or context
+                if (transformed.entityName === associateName) {
+                    transformed.entityName = 'You';
+                }
+
+                return transformed;
+            }
+
             // Category definitions
+            // Admin sees: associates, clients, contracts, finance
+            // Associate sees: compliance (remapped from associates), clients, contracts, finance
             const categories = {
-                associates: { label: 'Associates', color: '#8b5cf6', adminOnly: true },
-                clients: { label: 'Clients', color: '#3b82f6', adminOnly: false },
-                contracts: { label: 'Contracts', color: '#f59e0b', adminOnly: false },
-                finance: { label: 'Finance', color: '#f43f5e', adminOnly: false }
+                associates: { label: 'Associates', color: '#8b5cf6', adminOnly: true, associateOnly: false },
+                clients: { label: 'Clients', color: '#3b82f6', adminOnly: false, associateOnly: false },
+                contracts: { label: 'Contracts', color: '#f59e0b', adminOnly: false, associateOnly: false },
+                finance: { label: 'Finance', color: '#f43f5e', adminOnly: false, associateOnly: false },
+                compliance: { label: 'Compliance', color: '#8b5cf6', adminOnly: false, associateOnly: true }
             };
 
             // Get categories for current role
+            // Admins see: associates, clients, contracts, finance
+            // Associates see: compliance, clients, contracts, finance
             function getCategoriesForRole() {
-                const role = getRole();
+                var role = getRole();
                 return Object.entries(categories)
                     .filter(function(entry) {
-                        return role === 'admin' || !entry[1].adminOnly;
+                        var cat = entry[1];
+                        if (role === 'admin') {
+                            // Admin sees everything except associate-only categories
+                            return !cat.associateOnly;
+                        } else {
+                            // Associate sees non-admin categories and associate-only categories
+                            return !cat.adminOnly;
+                        }
                     })
                     .map(function(entry) {
-                        return { id: entry[0], label: entry[1].label, color: entry[1].color, adminOnly: entry[1].adminOnly };
+                        return {
+                            id: entry[0],
+                            label: entry[1].label,
+                            color: entry[1].color,
+                            adminOnly: entry[1].adminOnly,
+                            associateOnly: entry[1].associateOnly
+                        };
                     });
             }
 
             // Count actions by category
+            // Includes 'compliance' category for associate view
             function countByCategory(actions) {
-                const counts = { associates: 0, clients: 0, contracts: 0, finance: 0 };
+                var counts = { associates: 0, clients: 0, contracts: 0, finance: 0, compliance: 0 };
                 actions.forEach(function(action) {
                     if (counts.hasOwnProperty(action.category)) {
                         counts[action.category]++;
@@ -19447,21 +19629,34 @@ Sarah
             }
 
             // Load actions data
+            // For admins: loads all actions as-is
+            // For associates: filters to only their items and transforms perspective
             function loadActions(actions) {
-                allActions = actions || [];
+                var inputActions = actions || [];
+
+                // Filter and transform based on role
+                if (!isAdmin()) {
+                    var associateId = getCurrentUserId();
+                    if (associateId) {
+                        // Get only this associate's actions, transformed to their perspective
+                        allActions = getAssociateActions(inputActions, associateId);
+                    } else {
+                        // No user ID set - show empty (shouldn't happen in production)
+                        allActions = [];
+                        console.warn('ActionCentre: Associate role but no currentUserId set');
+                    }
+                } else {
+                    // Admin sees all actions
+                    allActions = inputActions;
+                }
+
                 currentFilter = 'all';
                 render();
 
                 // Update badge on mobile nav if available
                 if (typeof updateActionsBadge === 'function') {
-                    // Count only actions visible to current role
-                    let visibleCount = allActions.length;
-                    if (!isAdmin()) {
-                        visibleCount = allActions.filter(function(a) {
-                            return a.category !== 'associates';
-                        }).length;
-                    }
-                    updateActionsBadge(visibleCount);
+                    // Badge now shows count of filtered actions (already filtered for associates)
+                    updateActionsBadge(allActions.length);
                 }
             }
 
@@ -19476,7 +19671,7 @@ Sarah
                     if (isAdmin()) {
                         subtitle.textContent = 'Items requiring your attention';
                     } else {
-                        subtitle.textContent = 'Items requiring your attention';
+                        subtitle.textContent = 'Items requiring your attention in your practice';
                     }
                 }
             }
