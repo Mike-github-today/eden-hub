@@ -6,10 +6,41 @@ Session: Admin Vitality Hero Enhancement - Phase 2
 Branch: claude/enhance-admin-vitality-uD5Si
 ================================================================================
 
-LATEST CHANGES: Quick Match Panel - Chunk 5 [COMPLETE]
+LATEST CHANGES: Quick Match Panel iOS Safari Fix [COMPLETE]
 ================================================================================
 
 ## Session Summary
+
+Applied iOS Safari viewport fixes to the Quick Match bottom sheet panel.
+Same fix pattern used for Sidebar, Associate Detail, and Referral panels.
+
+--------------------------------------------------------------------------------
+FIXES APPLIED
+--------------------------------------------------------------------------------
+
+### CSS Fixes
+- Added `height: 100dvh` fallback for dynamic viewport height
+- Added `height: 85dvh` and `max-height: calc(100dvh - 60px)` for mobile
+- Changed safe area from `var(--safe-area-*)` to `env(safe-area-inset-*)`
+- Added `min-height: 0` to content area for proper flex shrinking
+- Added `padding-bottom: 24px` to content for last item visibility
+- Added `border-radius` to mobile header for proper sheet appearance
+
+### JavaScript Fixes
+- Added body scroll lock: `overflow: hidden`, `position: fixed`, `width: 100%`
+- Added scroll unlock on close to restore normal scrolling
+
+### Issues Fixed
+- Cannot scroll to see all associates - FIXED
+- Back button hidden at top - FIXED (mobile uses swipe/overlay)
+- Assign button obscured at bottom - FIXED
+- Panel height not accounting for dynamic address bar - FIXED
+- Background scrolling when panel open - FIXED
+
+================================================================================
+
+PREVIOUS: Quick Match Panel - Chunk 5 [COMPLETE]
+================================================================================
 
 Implemented the Quick Match interaction for assigning referrals to associates
 without navigating away from the admin home. Desktop: slide-in panel from right.
