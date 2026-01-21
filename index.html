@@ -10232,6 +10232,357 @@
             }
         }
 
+        /* ============================================
+           QUICK MATCH PANEL/BOTTOM SHEET
+           ============================================ */
+
+        .quick-match-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(26, 51, 41, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-smooth);
+        }
+
+        .quick-match-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .quick-match-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 420px;
+            max-width: 100%;
+            height: 100vh;
+            background: var(--pure-white);
+            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+            z-index: 501;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: transform var(--duration-panel) var(--ease-out-soft);
+        }
+
+        .quick-match-panel.open {
+            transform: translateX(0);
+        }
+
+        .quick-match-header {
+            padding: 20px;
+            padding-top: calc(var(--safe-area-top, 0px) + 20px);
+            background: var(--eden-mint);
+            border-bottom: 1px solid var(--eden-border);
+            flex-shrink: 0;
+        }
+
+        .quick-match-back {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            margin: -8px -12px 12px;
+            border: none;
+            background: transparent;
+            color: var(--eden-text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: var(--radius-standard);
+            transition: all var(--transition-smooth);
+        }
+
+        .quick-match-back:hover {
+            background: var(--eden-green-light);
+            color: var(--eden-green);
+        }
+
+        .quick-match-back svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .quick-match-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 4px;
+        }
+
+        .quick-match-subtitle {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        .quick-match-referral {
+            padding: 16px 20px;
+            background: var(--pure-white);
+            border-bottom: 1px solid var(--eden-border);
+            flex-shrink: 0;
+        }
+
+        .quick-match-referral-id {
+            font-size: 11px;
+            font-family: monospace;
+            color: var(--eden-text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .quick-match-referral-issue {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 8px;
+        }
+
+        .quick-match-referral-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .quick-match-referral-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .quick-match-referral-meta svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .quick-match-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 20px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .quick-match-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--eden-text-secondary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quick-match-section-title svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .quick-match-associate {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px;
+            margin-bottom: 10px;
+            background: var(--pure-white);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-standard);
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+        }
+
+        .quick-match-associate:hover {
+            border-color: var(--eden-green);
+            background: var(--eden-green-light);
+        }
+
+        .quick-match-associate.selected {
+            border-color: var(--eden-green);
+            background: var(--eden-green-light);
+            box-shadow: 0 0 0 2px var(--eden-green);
+        }
+
+        .quick-match-associate.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .quick-match-associate.disabled:hover {
+            border-color: var(--eden-border);
+            background: var(--pure-white);
+        }
+
+        .quick-match-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--eden-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-green);
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .quick-match-avatar-status {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--pure-white);
+            background: var(--eden-green);
+        }
+
+        .quick-match-avatar-status.full {
+            background: #9CA3AF;
+        }
+
+        .quick-match-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .quick-match-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
+            margin-bottom: 2px;
+        }
+
+        .quick-match-capacity {
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .quick-match-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .quick-match-spec-tag {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: var(--eden-mint);
+            color: var(--eden-text-secondary);
+        }
+
+        .quick-match-spec-tag.match {
+            background: var(--eden-green-light);
+            color: var(--eden-green);
+            font-weight: 500;
+        }
+
+        .quick-match-check {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--eden-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all var(--transition-smooth);
+        }
+
+        .quick-match-associate.selected .quick-match-check {
+            background: var(--eden-green);
+            border-color: var(--eden-green);
+            color: var(--pure-white);
+        }
+
+        .quick-match-check svg {
+            width: 14px;
+            height: 14px;
+            opacity: 0;
+        }
+
+        .quick-match-associate.selected .quick-match-check svg {
+            opacity: 1;
+        }
+
+        .quick-match-footer {
+            padding: 16px 20px;
+            padding-bottom: calc(var(--safe-area-bottom, 0px) + 16px);
+            border-top: 1px solid var(--eden-border);
+            background: var(--pure-white);
+            flex-shrink: 0;
+        }
+
+        .quick-match-confirm-btn {
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: var(--radius-standard);
+            border: none;
+            background: var(--eden-green);
+            color: var(--pure-white);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-smooth);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .quick-match-confirm-btn:hover {
+            background: var(--eden-green-hover);
+        }
+
+        .quick-match-confirm-btn:disabled {
+            background: var(--eden-border);
+            cursor: not-allowed;
+        }
+
+        .quick-match-confirm-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Mobile: Bottom Sheet */
+        @media (max-width: 768px) {
+            .quick-match-panel {
+                top: auto;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                height: 85vh;
+                border-top-left-radius: 16px;
+                border-top-right-radius: 16px;
+                transform: translateY(100%);
+            }
+
+            .quick-match-panel.open {
+                transform: translateY(0);
+            }
+
+            .quick-match-header::before {
+                content: '';
+                display: block;
+                width: 40px;
+                height: 4px;
+                background: var(--eden-border);
+                border-radius: 2px;
+                margin: 0 auto 16px;
+            }
+
+            .quick-match-back {
+                display: none;
+            }
+        }
+
         /* Responsive adjustments for home screens */
         @media (max-width: 768px) {
             .quick-stat-row {
@@ -24492,18 +24843,192 @@ Sarah
         }
 
         function openQuickMatch(referralId) {
-            // Phase 2 implementation - for now navigate to referrals
-            showView('referrals');
-            setTimeout(function() {
-                if (typeof openReferralPanel === 'function') {
-                    openReferralPanel(referralId);
-                }
-            }, 100);
-            showToast('Quick Match for ' + referralId);
+            // Open the Quick Match panel
+            openQuickMatchPanel(referralId);
         }
 
         function initReferralsAttention() {
             renderReferralsNeedingAttention();
+        }
+
+        // ============================================
+        // QUICK MATCH PANEL FUNCTIONS
+        // ============================================
+
+        var quickMatchState = {
+            referralId: null,
+            selectedAssociateId: null,
+            referral: null
+        };
+
+        function openQuickMatchPanel(referralId) {
+            var referral = referrals.find(function(r) { return r.id === referralId; });
+            if (!referral) {
+                showToast('Referral not found');
+                return;
+            }
+
+            quickMatchState.referralId = referralId;
+            quickMatchState.referral = referral;
+            quickMatchState.selectedAssociateId = null;
+
+            renderQuickMatchReferralInfo(referral);
+            renderQuickMatchAssociates(referral);
+            updateQuickMatchConfirmButton();
+
+            document.getElementById('quickMatchOverlay').classList.add('open');
+            document.getElementById('quickMatchPanel').classList.add('open');
+            document.body.classList.add('panel-open');
+        }
+
+        function closeQuickMatchPanel() {
+            document.getElementById('quickMatchOverlay').classList.remove('open');
+            document.getElementById('quickMatchPanel').classList.remove('open');
+            document.body.classList.remove('panel-open');
+
+            quickMatchState.referralId = null;
+            quickMatchState.selectedAssociateId = null;
+            quickMatchState.referral = null;
+        }
+
+        function renderQuickMatchReferralInfo(referral) {
+            var container = document.getElementById('quickMatchReferralInfo');
+            if (!container) return;
+
+            var issue = referral.presentingIssue || 'General Enquiry';
+            var times = referral.preferredTimes ? referral.preferredTimes.join(', ') : 'Flexible';
+
+            container.innerHTML = '<div class="quick-match-referral-id">' + referral.id + '</div>' +
+                '<div class="quick-match-referral-issue">' + issue + '</div>' +
+                '<div class="quick-match-referral-meta">' +
+                    '<span>' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                            '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>' +
+                            '<line x1="16" y1="2" x2="16" y2="6"/>' +
+                            '<line x1="8" y1="2" x2="8" y2="6"/>' +
+                            '<line x1="3" y1="10" x2="21" y2="10"/>' +
+                        '</svg>' +
+                        times +
+                    '</span>' +
+                '</div>';
+        }
+
+        function renderQuickMatchAssociates(referral) {
+            var container = document.getElementById('quickMatchAssociatesList');
+            if (!container) return;
+
+            var neededSpecs = referral.specialisationsNeeded || [];
+
+            // Sort by capacity (most available first)
+            var sortedAssociates = associates.slice().sort(function(a, b) {
+                var capA = a.maxCapacity > 0 ? (a.clients / a.maxCapacity) : 1;
+                var capB = b.maxCapacity > 0 ? (b.clients / b.maxCapacity) : 1;
+                return capA - capB;
+            });
+
+            container.innerHTML = sortedAssociates.map(function(associate) {
+                var settings = associateReferralSettings[associate.id] || {};
+                var isAccepting = settings.acceptingReferrals && settings.capacitySlots > 0;
+                var capacity = associate.maxCapacity > 0
+                    ? Math.round((associate.clients / associate.maxCapacity) * 100)
+                    : 100;
+                var initials = associate.initials || associate.name.split(' ').map(function(n) { return n[0]; }).join('');
+
+                var specs = settings.specialisations || [];
+                var matchingSpecs = specs.filter(function(s) { return neededSpecs.indexOf(s) !== -1; });
+
+                var disabledClass = !isAccepting ? ' disabled' : '';
+                var capacityText = isAccepting
+                    ? capacity + '% capacity · ' + settings.capacitySlots + ' slot' + (settings.capacitySlots !== 1 ? 's' : '') + ' available'
+                    : 'Not accepting referrals';
+
+                var specsHtml = specs.slice(0, 3).map(function(spec) {
+                    var isMatch = matchingSpecs.indexOf(spec) !== -1;
+                    return '<span class="quick-match-spec-tag' + (isMatch ? ' match' : '') + '">' + spec + '</span>';
+                }).join('');
+
+                return '<div class="quick-match-associate' + disabledClass + '" ' +
+                    'data-associate-id="' + associate.id + '" ' +
+                    'onclick="selectQuickMatchAssociate(\'' + associate.id + '\', ' + !isAccepting + ')">' +
+                    '<div class="quick-match-avatar">' +
+                        initials +
+                        '<div class="quick-match-avatar-status' + (!isAccepting ? ' full' : '') + '"></div>' +
+                    '</div>' +
+                    '<div class="quick-match-info">' +
+                        '<div class="quick-match-name">' + associate.name + '</div>' +
+                        '<div class="quick-match-capacity">' + capacityText + '</div>' +
+                        '<div class="quick-match-specs">' + specsHtml + '</div>' +
+                    '</div>' +
+                    '<div class="quick-match-check">' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                            '<polyline points="20 6 9 17 4 12"/>' +
+                        '</svg>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+        }
+
+        function selectQuickMatchAssociate(associateId, isDisabled) {
+            if (isDisabled) return;
+
+            // Remove previous selection
+            var items = document.querySelectorAll('.quick-match-associate');
+            items.forEach(function(item) { item.classList.remove('selected'); });
+
+            // Add selection to clicked item
+            var selectedItem = document.querySelector('.quick-match-associate[data-associate-id="' + associateId + '"]');
+            if (selectedItem) {
+                selectedItem.classList.add('selected');
+            }
+
+            quickMatchState.selectedAssociateId = associateId;
+            updateQuickMatchConfirmButton();
+        }
+
+        function updateQuickMatchConfirmButton() {
+            var btn = document.getElementById('quickMatchConfirmBtn');
+            if (!btn) return;
+
+            var hasSelection = quickMatchState.selectedAssociateId !== null;
+            btn.disabled = !hasSelection;
+
+            if (hasSelection) {
+                var associate = associates.find(function(a) { return a.id === quickMatchState.selectedAssociateId; });
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                    '<polyline points="20 6 9 17 4 12"/>' +
+                '</svg>' +
+                'Assign to ' + (associate ? associate.name.split(' ')[0] : 'Associate');
+            } else {
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                    '<polyline points="20 6 9 17 4 12"/>' +
+                '</svg>' +
+                'Assign Referral';
+            }
+        }
+
+        function confirmQuickMatch() {
+            if (!quickMatchState.referralId || !quickMatchState.selectedAssociateId) return;
+
+            var referral = referrals.find(function(r) { return r.id === quickMatchState.referralId; });
+            var associate = associates.find(function(a) { return a.id === quickMatchState.selectedAssociateId; });
+
+            if (!referral || !associate) {
+                showToast('Error: Could not complete assignment');
+                return;
+            }
+
+            // Update referral status (in real app, this would be an API call)
+            referral.status = 'Accepted';
+            referral.allocatedTo = associate.id;
+            referral.allocatedDate = new Date();
+
+            closeQuickMatchPanel();
+
+            // Refresh admin home
+            initReferralsAttention();
+            initStewardActions();
+
+            showToast('Referral assigned to ' + associate.name);
         }
 
         // Animate Cash Density Ring
@@ -28918,5 +29443,50 @@ Eden Relationships
             <span class="bottom-nav-label">Earnings</span>
         </button>
     </nav>
+
+    <!-- Quick Match Overlay -->
+    <div class="quick-match-overlay" id="quickMatchOverlay" onclick="closeQuickMatchPanel()"></div>
+
+    <!-- Quick Match Panel -->
+    <div class="quick-match-panel" id="quickMatchPanel">
+        <div class="quick-match-header">
+            <button class="quick-match-back" onclick="closeQuickMatchPanel()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"/>
+                </svg>
+                Back
+            </button>
+            <div class="quick-match-title">Quick Match</div>
+            <div class="quick-match-subtitle">Select an associate to assign this referral</div>
+        </div>
+
+        <div class="quick-match-referral" id="quickMatchReferralInfo">
+            <!-- Populated by JavaScript -->
+        </div>
+
+        <div class="quick-match-content">
+            <div class="quick-match-section-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                Available Associates
+            </div>
+            <div id="quickMatchAssociatesList">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="quick-match-footer">
+            <button class="quick-match-confirm-btn" id="quickMatchConfirmBtn" disabled onclick="confirmQuickMatch()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                Assign Referral
+            </button>
+        </div>
+    </div>
 </body>
 </html>
