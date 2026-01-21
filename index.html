@@ -10494,6 +10494,92 @@
             }
         }
 
+        /* ============================================
+           WHO'S FREE ENHANCEMENTS
+           ============================================ */
+
+        .whos-free-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--eden-border);
+        }
+
+        .whos-free-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--eden-text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .whos-free-title svg {
+            width: 20px;
+            height: 20px;
+            color: var(--eden-green);
+        }
+
+        .whos-free-count {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        .whos-free-count strong {
+            color: var(--eden-green);
+        }
+
+        .quick-match-slots {
+            display: flex;
+            gap: 3px;
+            margin-top: 4px;
+        }
+
+        .slot-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 2px;
+            background: var(--eden-border);
+        }
+
+        .slot-indicator.available {
+            background: var(--eden-green);
+        }
+
+        .quick-match-time-match {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            color: var(--eden-green);
+            margin-top: 4px;
+        }
+
+        .quick-match-time-match svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        .quick-match-suggested {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            padding: 2px 8px;
+            border-radius: 8px;
+            background: var(--eden-green);
+            color: var(--pure-white);
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .quick-match-associate-card.suggested {
+            position: relative;
+            border-color: var(--eden-green);
+            background: var(--eden-green-light, #E8F5E9);
+        }
+
         /* Responsive adjustments for home screens */
         @media (max-width: 768px) {
             .quick-stat-row {
@@ -15058,11 +15144,19 @@
                         <!-- Populated by JavaScript -->
                     </div>
 
-                    <!-- Available Associates Section -->
+                    <!-- Who's Free? Associates Section -->
                     <div class="quick-match-associates-section">
-                        <div class="section-header">
-                            <h3 class="section-title">Available Associates</h3>
-                            <span class="section-count" id="quickMatchAssociatesCount">0 accepting</span>
+                        <div class="whos-free-header">
+                            <div class="whos-free-title">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                                Who's Free?
+                            </div>
+                            <div class="whos-free-count" id="whosFreeCount">
+                                <strong>0</strong> of 7 accepting
+                            </div>
                         </div>
                         <div id="quickMatchAssociatesContent">
                             <!-- Populated by JavaScript -->
@@ -24879,29 +24973,61 @@ Sarah
                 '</div>';
         }
 
-        // Populate associates list
+        // Populate associates list with "Who's Free?" enhancements
         function populateQuickMatchAssociates(referral) {
             var container = document.getElementById('quickMatchAssociatesContent');
-            var countEl = document.getElementById('quickMatchAssociatesCount');
+            var countEl = document.getElementById('whosFreeCount');
             if (!container) return;
 
             var neededSpecs = referral.specialisationsNeeded || [];
+            var neededTimes = referral.preferredTimes || [];
 
-            // Sort by capacity (most available first)
+            // Count accepting associates
+            var acceptingCount = 0;
+            associates.forEach(function(a) {
+                var settings = associateReferralSettings[a.id] || {};
+                if (settings.acceptingReferrals && settings.capacitySlots > 0) {
+                    acceptingCount++;
+                }
+            });
+
+            if (countEl) {
+                countEl.innerHTML = '<strong>' + acceptingCount + '</strong> of ' + associates.length + ' accepting';
+            }
+
+            // Sort by: accepting first, then matching specs, then capacity
             var sortedAssociates = associates.slice().sort(function(a, b) {
+                var settingsA = associateReferralSettings[a.id] || {};
+                var settingsB = associateReferralSettings[b.id] || {};
+
+                var acceptingA = settingsA.acceptingReferrals && settingsA.capacitySlots > 0;
+                var acceptingB = settingsB.acceptingReferrals && settingsB.capacitySlots > 0;
+                if (acceptingA && !acceptingB) return -1;
+                if (!acceptingA && acceptingB) return 1;
+
+                var specsA = settingsA.specialisations || [];
+                var specsB = settingsB.specialisations || [];
+                var matchesA = specsA.filter(function(s) { return neededSpecs.indexOf(s) !== -1; }).length;
+                var matchesB = specsB.filter(function(s) { return neededSpecs.indexOf(s) !== -1; }).length;
+                if (matchesA !== matchesB) return matchesB - matchesA;
+
                 var capA = a.maxCapacity > 0 ? (a.clients / a.maxCapacity) : 1;
                 var capB = b.maxCapacity > 0 ? (b.clients / b.maxCapacity) : 1;
                 return capA - capB;
             });
 
-            // Count accepting associates
-            var acceptingCount = sortedAssociates.filter(function(a) {
+            // Find suggested match (first accepting with matching spec)
+            var suggestedId = null;
+            for (var i = 0; i < sortedAssociates.length; i++) {
+                var a = sortedAssociates[i];
                 var settings = associateReferralSettings[a.id] || {};
-                return settings.acceptingReferrals && settings.capacitySlots > 0;
-            }).length;
-
-            if (countEl) {
-                countEl.textContent = acceptingCount + ' accepting';
+                if (settings.acceptingReferrals && settings.capacitySlots > 0) {
+                    var specs = settings.specialisations || [];
+                    if (specs.some(function(s) { return neededSpecs.indexOf(s) !== -1; })) {
+                        suggestedId = a.id;
+                        break;
+                    }
+                }
             }
 
             container.innerHTML = sortedAssociates.map(function(associate) {
@@ -24913,21 +25039,43 @@ Sarah
                 var initials = associate.initials || associate.name.split(' ').map(function(n) { return n[0]; }).join('');
 
                 var specs = settings.specialisations || [];
+                var times = settings.availableTimes || [];
                 var matchingSpecs = specs.filter(function(s) { return neededSpecs.indexOf(s) !== -1; });
+                var matchingTimes = times.filter(function(t) { return neededTimes.indexOf(t) !== -1; });
 
+                var isSuggested = associate.id === suggestedId;
                 var disabledClass = !isAccepting ? ' disabled' : '';
-                var capacityText = isAccepting
-                    ? capacity + '% capacity · ' + settings.capacitySlots + ' slot' + (settings.capacitySlots !== 1 ? 's' : '') + ' available'
-                    : 'Not accepting referrals';
+                var suggestedClass = isSuggested ? ' suggested' : '';
+
+                // Slot indicators (show up to 4 slots)
+                var slotsHtml = '';
+                var availableSlots = settings.capacitySlots || 0;
+                for (var s = 0; s < 4; s++) {
+                    slotsHtml += '<span class="slot-indicator' + (s < availableSlots ? ' available' : '') + '"></span>';
+                }
+
+                // Time match indicator
+                var timeMatchHtml = '';
+                if (matchingTimes.length > 0 && isAccepting) {
+                    timeMatchHtml = '<div class="quick-match-time-match">' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>' +
+                        'Available ' + matchingTimes.join(', ') +
+                    '</div>';
+                }
+
+                var capacityText = isAccepting ? capacity + '% booked' : 'Not accepting referrals';
 
                 var specsHtml = specs.slice(0, 3).map(function(spec) {
                     var isMatch = matchingSpecs.indexOf(spec) !== -1;
                     return '<span class="quick-match-spec-tag' + (isMatch ? ' match' : '') + '">' + spec + '</span>';
                 }).join('');
 
-                return '<div class="quick-match-associate-card' + disabledClass + '" ' +
+                var suggestedBadge = isSuggested ? '<span class="quick-match-suggested">Suggested</span>' : '';
+
+                return '<div class="quick-match-associate-card' + disabledClass + suggestedClass + '" ' +
                     'data-associate-id="' + associate.id + '" ' +
                     'onclick="selectQuickMatchAssociate(\'' + associate.id + '\', ' + !isAccepting + ')">' +
+                    suggestedBadge +
                     '<div class="quick-match-associate-avatar">' +
                         initials +
                         '<div class="status-dot' + (!isAccepting ? ' unavailable' : '') + '"></div>' +
@@ -24935,6 +25083,8 @@ Sarah
                     '<div class="quick-match-associate-info">' +
                         '<div class="quick-match-associate-name">' + associate.name + '</div>' +
                         '<div class="quick-match-associate-capacity">' + capacityText + '</div>' +
+                        '<div class="quick-match-slots">' + slotsHtml + '</div>' +
+                        timeMatchHtml +
                         '<div class="quick-match-associate-specs">' + specsHtml + '</div>' +
                     '</div>' +
                     '<div class="quick-match-associate-check">' +
