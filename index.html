@@ -10233,113 +10233,33 @@
         }
 
         /* ============================================
-           QUICK MATCH PANEL/BOTTOM SHEET
+           QUICK MATCH NAV-VIEW STYLES
            ============================================ */
 
-        .quick-match-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(26, 51, 41, 0.4);
-            backdrop-filter: blur(4px);
-            z-index: 500;
-            opacity: 0;
-            visibility: hidden;
-            transition: all var(--transition-smooth);
-        }
-
-        .quick-match-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .quick-match-panel {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 420px;
-            max-width: 100%;
-            height: 100vh;
-            height: 100dvh;
-            background: var(--pure-white);
-            box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
-            z-index: 501;
-            display: flex;
-            flex-direction: column;
-            transform: translateX(100%);
-            transition: transform 300ms ease-out;
-        }
-
-        .quick-match-panel.open {
-            transform: translateX(0);
-        }
-
-        .quick-match-header {
-            flex-shrink: 0;
-            padding: 20px;
-            padding-top: calc(env(safe-area-inset-top, 0px) + 20px);
+        /* Referral Summary Card */
+        .quick-match-referral-card {
             background: var(--eden-mint);
-            border-bottom: 1px solid var(--eden-border);
+            border: 1px solid var(--eden-border);
+            border-radius: var(--radius-card);
+            padding: 16px;
+            margin-bottom: 20px;
         }
 
-        .quick-match-back {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
-            margin: -8px -12px 12px;
-            border: none;
-            background: transparent;
-            color: var(--eden-text-secondary);
-            font-size: 14px;
-            cursor: pointer;
-            border-radius: var(--radius-standard);
-            transition: all var(--transition-smooth);
-        }
-
-        .quick-match-back:hover {
-            background: var(--eden-green-light);
-            color: var(--eden-green);
-        }
-
-        .quick-match-back svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        .quick-match-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: var(--eden-text);
-            margin-bottom: 4px;
-        }
-
-        .quick-match-subtitle {
-            font-size: 13px;
-            color: var(--eden-text-secondary);
-        }
-
-        .quick-match-referral {
-            padding: 16px 20px;
-            background: var(--pure-white);
-            border-bottom: 1px solid var(--eden-border);
-            flex-shrink: 0;
-        }
-
-        .quick-match-referral-id {
+        .quick-match-referral-card .quick-match-referral-id {
             font-size: 11px;
             font-family: monospace;
             color: var(--eden-text-secondary);
             margin-bottom: 4px;
         }
 
-        .quick-match-referral-issue {
-            font-size: 15px;
+        .quick-match-referral-card .quick-match-referral-issue {
+            font-size: 16px;
             font-weight: 600;
             color: var(--eden-text);
             margin-bottom: 8px;
         }
 
-        .quick-match-referral-meta {
+        .quick-match-referral-card .quick-match-referral-meta {
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
@@ -10347,44 +10267,42 @@
             color: var(--eden-text-secondary);
         }
 
-        .quick-match-referral-meta span {
+        .quick-match-referral-meta-item {
             display: flex;
             align-items: center;
             gap: 4px;
         }
 
-        .quick-match-referral-meta svg {
+        .quick-match-referral-meta-item svg {
             width: 14px;
             height: 14px;
         }
 
-        .quick-match-content {
-            flex: 1;
-            min-height: 0;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            padding: 16px 20px;
-            padding-bottom: 24px;
+        /* Associates Section */
+        .quick-match-associates-section {
+            margin-bottom: 100px;
         }
 
-        .quick-match-section-title {
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--eden-text-secondary);
-            margin-bottom: 12px;
+        .quick-match-associates-section .section-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 8px;
+            margin-bottom: 12px;
         }
 
-        .quick-match-section-title svg {
-            width: 14px;
-            height: 14px;
+        .quick-match-associates-section .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--eden-text);
         }
 
-        .quick-match-associate {
+        .quick-match-associates-section .section-count {
+            font-size: 13px;
+            color: var(--eden-text-secondary);
+        }
+
+        /* Associate Selection Card */
+        .quick-match-associate-card {
             display: flex;
             align-items: center;
             gap: 14px;
@@ -10397,28 +10315,28 @@
             transition: all var(--transition-smooth);
         }
 
-        .quick-match-associate:hover {
+        .quick-match-associate-card:hover {
             border-color: var(--eden-green);
             background: var(--eden-green-light);
         }
 
-        .quick-match-associate.selected {
+        .quick-match-associate-card.selected {
             border-color: var(--eden-green);
             background: var(--eden-green-light);
             box-shadow: 0 0 0 2px var(--eden-green);
         }
 
-        .quick-match-associate.disabled {
+        .quick-match-associate-card.disabled {
             opacity: 0.5;
             cursor: not-allowed;
         }
 
-        .quick-match-associate.disabled:hover {
+        .quick-match-associate-card.disabled:hover {
             border-color: var(--eden-border);
             background: var(--pure-white);
         }
 
-        .quick-match-avatar {
+        .quick-match-associate-avatar {
             width: 44px;
             height: 44px;
             border-radius: 50%;
@@ -10433,7 +10351,7 @@
             position: relative;
         }
 
-        .quick-match-avatar-status {
+        .quick-match-associate-avatar .status-dot {
             position: absolute;
             bottom: 0;
             right: 0;
@@ -10444,32 +10362,32 @@
             background: var(--eden-green);
         }
 
-        .quick-match-avatar-status.full {
+        .quick-match-associate-avatar .status-dot.unavailable {
             background: #9CA3AF;
         }
 
-        .quick-match-info {
+        .quick-match-associate-info {
             flex: 1;
             min-width: 0;
         }
 
-        .quick-match-name {
+        .quick-match-associate-name {
             font-size: 14px;
             font-weight: 600;
             color: var(--eden-text);
             margin-bottom: 2px;
         }
 
-        .quick-match-capacity {
+        .quick-match-associate-capacity {
             font-size: 12px;
             color: var(--eden-text-secondary);
+            margin-bottom: 4px;
         }
 
-        .quick-match-specs {
+        .quick-match-associate-specs {
             display: flex;
             flex-wrap: wrap;
             gap: 4px;
-            margin-top: 6px;
         }
 
         .quick-match-spec-tag {
@@ -10486,7 +10404,7 @@
             font-weight: 500;
         }
 
-        .quick-match-check {
+        .quick-match-associate-check {
             width: 24px;
             height: 24px;
             border-radius: 50%;
@@ -10498,98 +10416,48 @@
             transition: all var(--transition-smooth);
         }
 
-        .quick-match-associate.selected .quick-match-check {
+        .quick-match-associate-card.selected .quick-match-associate-check {
             background: var(--eden-green);
             border-color: var(--eden-green);
-            color: var(--pure-white);
         }
 
-        .quick-match-check svg {
+        .quick-match-associate-check svg {
             width: 14px;
             height: 14px;
+            color: var(--pure-white);
             opacity: 0;
         }
 
-        .quick-match-associate.selected .quick-match-check svg {
+        .quick-match-associate-card.selected .quick-match-associate-check svg {
             opacity: 1;
         }
 
-        .quick-match-footer {
-            flex-shrink: 0;
+        /* Fixed Action Bar at Bottom */
+        .quick-match-action-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
             padding: 16px 20px;
             padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
-            border-top: 1px solid var(--eden-border);
             background: var(--pure-white);
+            border-top: 1px solid var(--eden-border);
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+            display: none;
         }
 
-        .quick-match-confirm-btn {
+        #quickMatchNavView.active .quick-match-action-bar {
+            display: block;
+        }
+
+        .btn-full {
             width: 100%;
-            padding: 14px 20px;
-            border-radius: var(--radius-standard);
-            border: none;
-            background: var(--eden-green);
-            color: var(--pure-white);
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--transition-smooth);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
         }
 
-        .quick-match-confirm-btn:hover {
-            background: var(--eden-green-hover);
-        }
-
-        .quick-match-confirm-btn:disabled {
-            background: var(--eden-border);
-            cursor: not-allowed;
-        }
-
-        .quick-match-confirm-btn svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        /* Mobile: Bottom Sheet - iOS Safari Fix */
-        @media (max-width: 768px) {
-            .quick-match-panel {
-                top: auto;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                width: 100%;
-                height: 85vh;
-                height: 85dvh;
-                max-height: calc(100dvh - 60px);
-                border-top-left-radius: 16px;
-                border-top-right-radius: 16px;
-                transform: translateY(100%);
-            }
-
-            .quick-match-panel.open {
-                transform: translateY(0);
-            }
-
-            .quick-match-header {
-                padding-top: 16px;
-                border-radius: 16px 16px 0 0;
-            }
-
-            .quick-match-header::before {
-                content: '';
-                display: block;
-                width: 40px;
-                height: 4px;
-                background: var(--eden-border);
-                border-radius: 2px;
-                margin: 0 auto 16px;
-            }
-
-            .quick-match-back {
-                display: none;
+        @media (min-width: 1024px) {
+            .quick-match-action-bar {
+                left: var(--sidebar-width, 280px);
             }
         }
 
@@ -15138,6 +15006,41 @@
                     </div>
                     <div id="adminHealthContent">
                         <!-- Dynamically populated -->
+                    </div>
+                </div>
+
+                <!-- Quick Match View (Admin) -->
+                <div class="nav-view" id="quickMatchNavView">
+                    <div class="nav-view-header">
+                        <button class="nav-back-btn" onclick="navigateHomeBack()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="m15 18-6-6 6-6"/>
+                            </svg>
+                        </button>
+                        <h2 class="nav-view-title">Quick Match</h2>
+                    </div>
+
+                    <!-- Referral Summary Card -->
+                    <div class="quick-match-referral-card" id="quickMatchReferralCard">
+                        <!-- Populated by JavaScript -->
+                    </div>
+
+                    <!-- Available Associates Section -->
+                    <div class="quick-match-associates-section">
+                        <div class="section-header">
+                            <h3 class="section-title">Available Associates</h3>
+                            <span class="section-count" id="quickMatchAssociatesCount">0 accepting</span>
+                        </div>
+                        <div id="quickMatchAssociatesContent">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Fixed Assign Button at Bottom -->
+                    <div class="quick-match-action-bar" id="quickMatchActionBar">
+                        <button class="btn-primary btn-full" id="quickMatchAssignBtn" disabled onclick="confirmQuickMatchAssignment()">
+                            Select an associate
+                        </button>
                     </div>
                 </div>
             </div>
@@ -24852,17 +24755,12 @@ Sarah
             }, 100);
         }
 
-        function openQuickMatch(referralId) {
-            // Open the Quick Match panel
-            openQuickMatchPanel(referralId);
-        }
-
         function initReferralsAttention() {
             renderReferralsNeedingAttention();
         }
 
         // ============================================
-        // QUICK MATCH PANEL FUNCTIONS
+        // QUICK MATCH NAV-VIEW FUNCTIONS
         // ============================================
 
         var quickMatchState = {
@@ -24871,7 +24769,8 @@ Sarah
             referral: null
         };
 
-        function openQuickMatchPanel(referralId) {
+        // Open Quick Match as nav-view
+        function openQuickMatch(referralId) {
             var referral = referrals.find(function(r) { return r.id === referralId; });
             if (!referral) {
                 showToast('Referral not found');
@@ -24882,59 +24781,58 @@ Sarah
             quickMatchState.referral = referral;
             quickMatchState.selectedAssociateId = null;
 
-            renderQuickMatchReferralInfo(referral);
-            renderQuickMatchAssociates(referral);
-            updateQuickMatchConfirmButton();
+            // Populate the nav-view content
+            populateQuickMatchView(referral);
+            populateQuickMatchAssociates(referral);
+            updateQuickMatchAssignButton();
 
-            document.getElementById('quickMatchOverlay').classList.add('open');
-            document.getElementById('quickMatchPanel').classList.add('open');
-            document.body.classList.add('panel-open');
+            // Hide admin home content, show quick match nav-view
+            document.getElementById('adminHomeContent').classList.remove('active');
+            document.getElementById('adminHealthView').classList.remove('active');
+            document.getElementById('quickMatchNavView').classList.add('active');
 
-            // iOS Safari scroll lock
-            document.body.style.overflow = 'hidden';
-            document.body.style.position = 'fixed';
-            document.body.style.width = '100%';
+            // Scroll to top
+            window.scrollTo(0, 0);
         }
 
-        function closeQuickMatchPanel() {
-            document.getElementById('quickMatchOverlay').classList.remove('open');
-            document.getElementById('quickMatchPanel').classList.remove('open');
-            document.body.classList.remove('panel-open');
-
-            // iOS Safari scroll unlock
-            document.body.style.overflow = '';
-            document.body.style.position = '';
-            document.body.style.width = '';
-
-            quickMatchState.referralId = null;
-            quickMatchState.selectedAssociateId = null;
-            quickMatchState.referral = null;
-        }
-
-        function renderQuickMatchReferralInfo(referral) {
-            var container = document.getElementById('quickMatchReferralInfo');
-            if (!container) return;
+        // Populate referral info card
+        function populateQuickMatchView(referral) {
+            var card = document.getElementById('quickMatchReferralCard');
+            if (!card) return;
 
             var issue = referral.presentingIssue || 'General Enquiry';
             var times = referral.preferredTimes ? referral.preferredTimes.join(', ') : 'Flexible';
+            var daysSinceCreated = referral.createdDate
+                ? Math.floor((new Date() - new Date(referral.createdDate)) / (1000 * 60 * 60 * 24))
+                : 0;
 
-            container.innerHTML = '<div class="quick-match-referral-id">' + referral.id + '</div>' +
+            card.innerHTML =
+                '<div class="quick-match-referral-id">' + referral.id + '</div>' +
                 '<div class="quick-match-referral-issue">' + issue + '</div>' +
                 '<div class="quick-match-referral-meta">' +
-                    '<span>' +
-                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+                    '<div class="quick-match-referral-meta-item">' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">' +
                             '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>' +
                             '<line x1="16" y1="2" x2="16" y2="6"/>' +
                             '<line x1="8" y1="2" x2="8" y2="6"/>' +
                             '<line x1="3" y1="10" x2="21" y2="10"/>' +
                         '</svg>' +
-                        times +
-                    '</span>' +
+                        '<span>' + times + '</span>' +
+                    '</div>' +
+                    '<div class="quick-match-referral-meta-item">' +
+                        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">' +
+                            '<circle cx="12" cy="12" r="10"/>' +
+                            '<polyline points="12 6 12 12 16 14"/>' +
+                        '</svg>' +
+                        '<span>' + daysSinceCreated + ' days waiting</span>' +
+                    '</div>' +
                 '</div>';
         }
 
-        function renderQuickMatchAssociates(referral) {
-            var container = document.getElementById('quickMatchAssociatesList');
+        // Populate associates list
+        function populateQuickMatchAssociates(referral) {
+            var container = document.getElementById('quickMatchAssociatesContent');
+            var countEl = document.getElementById('quickMatchAssociatesCount');
             if (!container) return;
 
             var neededSpecs = referral.specialisationsNeeded || [];
@@ -24945,6 +24843,16 @@ Sarah
                 var capB = b.maxCapacity > 0 ? (b.clients / b.maxCapacity) : 1;
                 return capA - capB;
             });
+
+            // Count accepting associates
+            var acceptingCount = sortedAssociates.filter(function(a) {
+                var settings = associateReferralSettings[a.id] || {};
+                return settings.acceptingReferrals && settings.capacitySlots > 0;
+            }).length;
+
+            if (countEl) {
+                countEl.textContent = acceptingCount + ' accepting';
+            }
 
             container.innerHTML = sortedAssociates.map(function(associate) {
                 var settings = associateReferralSettings[associate.id] || {};
@@ -24967,19 +24875,19 @@ Sarah
                     return '<span class="quick-match-spec-tag' + (isMatch ? ' match' : '') + '">' + spec + '</span>';
                 }).join('');
 
-                return '<div class="quick-match-associate' + disabledClass + '" ' +
+                return '<div class="quick-match-associate-card' + disabledClass + '" ' +
                     'data-associate-id="' + associate.id + '" ' +
                     'onclick="selectQuickMatchAssociate(\'' + associate.id + '\', ' + !isAccepting + ')">' +
-                    '<div class="quick-match-avatar">' +
+                    '<div class="quick-match-associate-avatar">' +
                         initials +
-                        '<div class="quick-match-avatar-status' + (!isAccepting ? ' full' : '') + '"></div>' +
+                        '<div class="status-dot' + (!isAccepting ? ' unavailable' : '') + '"></div>' +
                     '</div>' +
-                    '<div class="quick-match-info">' +
-                        '<div class="quick-match-name">' + associate.name + '</div>' +
-                        '<div class="quick-match-capacity">' + capacityText + '</div>' +
-                        '<div class="quick-match-specs">' + specsHtml + '</div>' +
+                    '<div class="quick-match-associate-info">' +
+                        '<div class="quick-match-associate-name">' + associate.name + '</div>' +
+                        '<div class="quick-match-associate-capacity">' + capacityText + '</div>' +
+                        '<div class="quick-match-associate-specs">' + specsHtml + '</div>' +
                     '</div>' +
-                    '<div class="quick-match-check">' +
+                    '<div class="quick-match-associate-check">' +
                         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
                             '<polyline points="20 6 9 17 4 12"/>' +
                         '</svg>' +
@@ -24988,25 +24896,27 @@ Sarah
             }).join('');
         }
 
+        // Select an associate
         function selectQuickMatchAssociate(associateId, isDisabled) {
             if (isDisabled) return;
 
             // Remove previous selection
-            var items = document.querySelectorAll('.quick-match-associate');
+            var items = document.querySelectorAll('.quick-match-associate-card');
             items.forEach(function(item) { item.classList.remove('selected'); });
 
             // Add selection to clicked item
-            var selectedItem = document.querySelector('.quick-match-associate[data-associate-id="' + associateId + '"]');
+            var selectedItem = document.querySelector('.quick-match-associate-card[data-associate-id="' + associateId + '"]');
             if (selectedItem) {
                 selectedItem.classList.add('selected');
             }
 
             quickMatchState.selectedAssociateId = associateId;
-            updateQuickMatchConfirmButton();
+            updateQuickMatchAssignButton();
         }
 
-        function updateQuickMatchConfirmButton() {
-            var btn = document.getElementById('quickMatchConfirmBtn');
+        // Update assign button state
+        function updateQuickMatchAssignButton() {
+            var btn = document.getElementById('quickMatchAssignBtn');
             if (!btn) return;
 
             var hasSelection = quickMatchState.selectedAssociateId !== null;
@@ -25014,19 +24924,14 @@ Sarah
 
             if (hasSelection) {
                 var associate = associates.find(function(a) { return a.id === quickMatchState.selectedAssociateId; });
-                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
-                    '<polyline points="20 6 9 17 4 12"/>' +
-                '</svg>' +
-                'Assign to ' + (associate ? associate.name.split(' ')[0] : 'Associate');
+                btn.textContent = 'Assign to ' + (associate ? associate.name.split(' ')[0] : 'Associate');
             } else {
-                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
-                    '<polyline points="20 6 9 17 4 12"/>' +
-                '</svg>' +
-                'Assign Referral';
+                btn.textContent = 'Select an associate';
             }
         }
 
-        function confirmQuickMatch() {
+        // Confirm assignment
+        function confirmQuickMatchAssignment() {
             if (!quickMatchState.referralId || !quickMatchState.selectedAssociateId) return;
 
             var referral = referrals.find(function(r) { return r.id === quickMatchState.referralId; });
@@ -25042,9 +24947,10 @@ Sarah
             referral.allocatedTo = associate.id;
             referral.allocatedDate = new Date();
 
-            closeQuickMatchPanel();
+            // Navigate back to admin home
+            navigateHomeBack();
 
-            // Refresh admin home
+            // Refresh admin home data
             initReferralsAttention();
             initStewardActions();
 
@@ -25296,6 +25202,13 @@ Sarah
             }
 
             const currentView = homeNavStack[homeNavStack.length - 1];
+
+            // Clear Quick Match state when navigating away
+            if (quickMatchState.referralId) {
+                quickMatchState.referralId = null;
+                quickMatchState.selectedAssociateId = null;
+                quickMatchState.referral = null;
+            }
 
             if (currentView === 'home') {
                 // Hide all nav views
@@ -29463,50 +29376,5 @@ Eden Relationships
             <span class="bottom-nav-label">Earnings</span>
         </button>
     </nav>
-
-    <!-- Quick Match Overlay -->
-    <div class="quick-match-overlay" id="quickMatchOverlay" onclick="closeQuickMatchPanel()"></div>
-
-    <!-- Quick Match Panel -->
-    <div class="quick-match-panel" id="quickMatchPanel">
-        <div class="quick-match-header">
-            <button class="quick-match-back" onclick="closeQuickMatchPanel()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="15 18 9 12 15 6"/>
-                </svg>
-                Back
-            </button>
-            <div class="quick-match-title">Quick Match</div>
-            <div class="quick-match-subtitle">Select an associate to assign this referral</div>
-        </div>
-
-        <div class="quick-match-referral" id="quickMatchReferralInfo">
-            <!-- Populated by JavaScript -->
-        </div>
-
-        <div class="quick-match-content">
-            <div class="quick-match-section-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                    <circle cx="9" cy="7" r="4"/>
-                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-                Available Associates
-            </div>
-            <div id="quickMatchAssociatesList">
-                <!-- Populated by JavaScript -->
-            </div>
-        </div>
-
-        <div class="quick-match-footer">
-            <button class="quick-match-confirm-btn" id="quickMatchConfirmBtn" disabled onclick="confirmQuickMatch()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="20 6 9 17 4 12"/>
-                </svg>
-                Assign Referral
-            </button>
-        </div>
-    </div>
 </body>
 </html>
