@@ -10432,32 +10432,65 @@
             opacity: 1;
         }
 
-        /* Fixed Action Bar at Bottom */
+        /* Quick Match Action Bar - Fixed above bottom nav */
         .quick-match-action-bar {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 16px 20px;
-            padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
-            background: var(--pure-white);
-            border-top: 1px solid var(--eden-border);
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+            bottom: 80px; /* Push above the 64px bottom nav + breathing room */
+            left: 16px;
+            right: 16px;
+            padding: 0;
             z-index: 100;
             display: none;
         }
 
-        #quickMatchNavView.active .quick-match-action-bar {
-            display: block;
+        /* Account for safe areas on iPhone */
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .quick-match-action-bar {
+                bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+            }
         }
 
-        .btn-full {
+        /* The actual button inside the action bar */
+        .quick-match-action-bar .btn-primary,
+        #quickMatchAssignBtn {
             width: 100%;
+            padding: 16px 24px;
+            border-radius: var(--radius-standard, 8px);
+            border: none;
+            background: var(--eden-green, #2D5F4D);
+            color: var(--pure-white, #FFFFFF);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(45, 95, 77, 0.3);
         }
 
+        .quick-match-action-bar .btn-primary:hover,
+        #quickMatchAssignBtn:hover {
+            background: var(--eden-green-hover, #245040);
+            box-shadow: 0 6px 16px rgba(45, 95, 77, 0.4);
+        }
+
+        .quick-match-action-bar .btn-primary:disabled,
+        #quickMatchAssignBtn:disabled {
+            background: var(--eden-border, #D4E5DE);
+            color: var(--eden-text-secondary, #6B7280);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Ensure the associates list has enough bottom padding */
+        .quick-match-associates-section {
+            padding-bottom: 120px; /* Space for fixed button + bottom nav */
+        }
+
+        /* Desktop adjustment - if sidebar present */
         @media (min-width: 1024px) {
             .quick-match-action-bar {
-                left: var(--sidebar-width, 280px);
+                left: calc(var(--sidebar-width, 280px) + 16px);
+                right: 16px;
+                bottom: 24px; /* No bottom nav on desktop */
             }
         }
 
@@ -15035,13 +15068,13 @@
                             <!-- Populated by JavaScript -->
                         </div>
                     </div>
+                </div>
 
-                    <!-- Fixed Assign Button at Bottom -->
-                    <div class="quick-match-action-bar" id="quickMatchActionBar">
-                        <button class="btn-primary btn-full" id="quickMatchAssignBtn" disabled onclick="confirmQuickMatchAssignment()">
-                            Select an associate
-                        </button>
-                    </div>
+                <!-- Quick Match Action Bar - OUTSIDE nav-view for proper fixed positioning -->
+                <div class="quick-match-action-bar" id="quickMatchActionBar">
+                    <button class="btn-primary" id="quickMatchAssignBtn" disabled onclick="confirmQuickMatchAssignment()">
+                        Select an associate
+                    </button>
                 </div>
             </div>
 
@@ -24773,10 +24806,12 @@ Sarah
         function openQuickMatch(referralId) {
             var referral = referrals.find(function(r) { return r.id === referralId; });
             if (!referral) {
-                showToast('Referral not found');
+                showToast('Referral not found: ' + referralId);
+                console.error('Referral not found:', referralId);
                 return;
             }
 
+            // Store state
             quickMatchState.referralId = referralId;
             quickMatchState.referral = referral;
             quickMatchState.selectedAssociateId = null;
@@ -24786,13 +24821,28 @@ Sarah
             populateQuickMatchAssociates(referral);
             updateQuickMatchAssignButton();
 
-            // Hide admin home content, show quick match nav-view
+            // Hide home screens
+            document.getElementById('associateHome').classList.remove('active');
             document.getElementById('adminHome').classList.remove('active');
-            document.getElementById('adminHealthView').classList.remove('active');
+
+            // Hide all nav views first
+            document.querySelectorAll('.nav-view').forEach(function(v) {
+                v.classList.remove('active');
+            });
+
+            // Show Quick Match nav-view
             document.getElementById('quickMatchNavView').classList.add('active');
+
+            // IMPORTANT: Show the action bar
+            var actionBar = document.getElementById('quickMatchActionBar');
+            if (actionBar) {
+                actionBar.style.display = 'block';
+            }
 
             // Scroll to top
             window.scrollTo(0, 0);
+
+            console.log('Opened Quick Match for:', referralId);
         }
 
         // Populate referral info card
@@ -24932,7 +24982,10 @@ Sarah
 
         // Confirm assignment
         function confirmQuickMatchAssignment() {
-            if (!quickMatchState.referralId || !quickMatchState.selectedAssociateId) return;
+            if (!quickMatchState.referralId || !quickMatchState.selectedAssociateId) {
+                showToast('Please select an associate first');
+                return;
+            }
 
             var referral = referrals.find(function(r) { return r.id === quickMatchState.referralId; });
             var associate = associates.find(function(a) { return a.id === quickMatchState.selectedAssociateId; });
@@ -24947,6 +25000,12 @@ Sarah
             referral.allocatedTo = associate.id;
             referral.allocatedDate = new Date();
 
+            // Hide the action bar first
+            var actionBar = document.getElementById('quickMatchActionBar');
+            if (actionBar) {
+                actionBar.style.display = 'none';
+            }
+
             // Navigate back to admin home
             navigateHomeBack();
 
@@ -24954,7 +25013,13 @@ Sarah
             initReferralsAttention();
             initStewardActions();
 
-            showToast('Referral assigned to ' + associate.name);
+            // Show success toast
+            showToast('✓ ' + referral.id + ' assigned to ' + associate.name);
+
+            // Reset state
+            quickMatchState.referralId = null;
+            quickMatchState.referral = null;
+            quickMatchState.selectedAssociateId = null;
         }
 
         // Animate Cash Density Ring
@@ -25208,6 +25273,12 @@ Sarah
                 quickMatchState.referralId = null;
                 quickMatchState.selectedAssociateId = null;
                 quickMatchState.referral = null;
+            }
+
+            // IMPORTANT: Hide the Quick Match action bar
+            var actionBar = document.getElementById('quickMatchActionBar');
+            if (actionBar) {
+                actionBar.style.display = 'none';
             }
 
             if (currentView === 'home') {
