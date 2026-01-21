@@ -6,36 +6,52 @@ Session: Admin Vitality Hero Enhancement - Phase 2
 Branch: claude/enhance-admin-vitality-uD5Si
 ================================================================================
 
-LATEST CHANGES: Quick Match Panel iOS Safari Fix [COMPLETE]
+LATEST CHANGES: Quick Match Nav-View Refactor [COMPLETE]
 ================================================================================
 
 ## Session Summary
 
-Applied iOS Safari viewport fixes to the Quick Match bottom sheet panel.
-Same fix pattern used for Sidebar, Associate Detail, and Referral panels.
+Converted Quick Match from bottom sheet pattern to nav-view pattern due to
+persistent iOS Safari viewport issues. The nav-view pattern provides reliable
+scrolling and layout behaviour across all browsers.
 
 --------------------------------------------------------------------------------
-FIXES APPLIED
+CHANGES MADE
 --------------------------------------------------------------------------------
 
-### CSS Fixes
-- Added `height: 100dvh` fallback for dynamic viewport height
-- Added `height: 85dvh` and `max-height: calc(100dvh - 60px)` for mobile
-- Changed safe area from `var(--safe-area-*)` to `env(safe-area-inset-*)`
-- Added `min-height: 0` to content area for proper flex shrinking
-- Added `padding-bottom: 24px` to content for last item visibility
-- Added `border-radius` to mobile header for proper sheet appearance
+### Pattern Change
+- REMOVED: Bottom sheet with overlay, body scroll lock, position: fixed
+- ADDED: Nav-view pattern (same as Sessions, Pending, Admin Health views)
 
-### JavaScript Fixes
-- Added body scroll lock: `overflow: hidden`, `position: fixed`, `width: 100%`
-- Added scroll unlock on close to restore normal scrolling
+### HTML Changes
+- Added quickMatchNavView inside dashboardView (after adminHealthView)
+- Includes: referral summary card, associates list, fixed action bar
+- Removed old quick-match-overlay and quick-match-panel divs
 
-### Issues Fixed
-- Cannot scroll to see all associates - FIXED
-- Back button hidden at top - FIXED (mobile uses swipe/overlay)
-- Assign button obscured at bottom - FIXED
-- Panel height not accounting for dynamic address bar - FIXED
-- Background scrolling when panel open - FIXED
+### CSS Changes
+- Replaced bottom sheet styles with nav-view compatible styles
+- Action bar uses fixed positioning at bottom
+- Visibility controlled via #quickMatchNavView.active selector
+
+### JavaScript Changes
+- openQuickMatch() now shows nav-view instead of panel
+- New functions: populateQuickMatchView(), populateQuickMatchAssociates()
+- navigateHomeBack() clears Quick Match state
+- Removed old openQuickMatchPanel(), closeQuickMatchPanel()
+- Removed body scroll lock/unlock (no longer needed)
+
+### Benefits
+- Native scrolling works reliably on iOS Safari
+- No body scroll lock issues
+- Consistent with existing nav-view patterns
+- Action bar properly visible with safe area insets
+
+================================================================================
+
+PREVIOUS: Quick Match Panel iOS Safari Fix [SUPERSEDED]
+================================================================================
+
+(The bottom sheet approach was abandoned in favour of nav-view pattern)
 
 ================================================================================
 
