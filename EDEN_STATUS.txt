@@ -1,12 +1,61 @@
 ================================================================================
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
-Last Updated: 21 January 2026
-Session: Admin Vitality Hero Enhancement - Phase 2
-Branch: claude/enhance-admin-vitality-uD5Si
+Last Updated: 23 January 2026
+Session: Schedule-Linked Billing - Phase 1
+Branch: claude/schedule-linked-billing-9AxKv
 ================================================================================
 
-LATEST CHANGES: Quick Match Nav-View Refactor [COMPLETE]
+LATEST CHANGES: Schedule-Linked Billing [COMPLETE]
+================================================================================
+
+## Session Summary
+
+Added payment status indicators to calendar sessions so associates and stewards
+can see at a glance whether a session is Paid, Awaiting payment, or Overdue
+without navigating away from the Schedule view.
+
+--------------------------------------------------------------------------------
+CHUNKS COMPLETED
+--------------------------------------------------------------------------------
+
+### Chunk 1: Payment Status Data & Helper [COMPLETE]
+- Added paymentStatus field to calendar sessions array (past/today/future mix)
+- Created getPaymentStatusDisplay() helper with normalisation for both
+  calendar format ('paid','awaiting','overdue','upcoming') and sessionRecords
+  format ('Paid','Awaiting Payment')
+- Overdue detection based on session date (7+ days past)
+
+### Chunk 2: Payment Status CSS [COMPLETE]
+- Coloured dot indicators: green (paid), amber (awaiting), red pulsing (overdue)
+- Hidden for upcoming sessions (no noise)
+- Hover-reveal labels on desktop, always-visible on mobile
+- Session detail card payment row styles
+- Session preview compact dot styles
+
+### Chunk 3: Calendar Integration [COMPLETE]
+- renderTodaysSessions() shows payment dots on today's session list
+- openSessionDetail() shows payment status row in session detail cards
+- Payment row hidden for upcoming sessions (no clutter)
+
+### Chunk 4: Sessions This Week Card [COMPLETE]
+- populateAssociateSessions() shows compact payment dots
+- Uses sessionRecords data with format normalisation
+- Labels hidden in preview context (too cramped)
+
+--------------------------------------------------------------------------------
+KEY FEATURES
+--------------------------------------------------------------------------------
+
+| Indicator | Colour | Animation | When |
+|-----------|--------|-----------|------|
+| Paid | Eden Green #2d5f4d | None | Session paid |
+| Awaiting | Amber #f59e0b | None | Payment pending |
+| Overdue | Red #ef4444 | 2s pulse | 7+ days unpaid |
+| Upcoming | Transparent | Hidden | Session not yet happened |
+
+--------------------------------------------------------------------------------
+PREVIOUS: Quick Match Nav-View Refactor [COMPLETE]
 ================================================================================
 
 ## Session Summary

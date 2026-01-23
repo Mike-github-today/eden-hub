@@ -5953,6 +5953,135 @@
             }
         }
 
+        /* ========================================
+           PAYMENT STATUS INDICATORS (Schedule)
+           ======================================== */
+
+        .session-payment-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: auto;
+        }
+
+        .session-payment-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .session-payment-dot.payment-status-paid {
+            background-color: #2d5f4d;
+        }
+
+        .session-payment-dot.payment-status-awaiting {
+            background-color: #f59e0b;
+        }
+
+        .session-payment-dot.payment-status-overdue {
+            background-color: #ef4444;
+            animation: pulse-overdue 2s ease-in-out infinite;
+        }
+
+        .session-payment-dot.payment-status-upcoming {
+            background-color: transparent;
+            display: none;
+        }
+
+        @keyframes pulse-overdue {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .session-payment-label {
+            font-family: var(--font-body);
+            font-size: 10px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            opacity: 0;
+            transition: opacity var(--duration-fast, 150ms) ease;
+        }
+
+        .session-payment-indicator:hover .session-payment-label {
+            opacity: 1;
+        }
+
+        .session-payment-label.payment-status-paid {
+            color: #2d5f4d;
+        }
+
+        .session-payment-label.payment-status-awaiting {
+            color: #f59e0b;
+        }
+
+        .session-payment-label.payment-status-overdue {
+            color: #ef4444;
+        }
+
+        /* Payment status in session detail card */
+        .session-card-payment {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--eden-border);
+            font-size: 12px;
+            color: var(--eden-text-secondary);
+        }
+
+        .session-card-payment-label {
+            font-weight: 500;
+        }
+
+        .session-card-payment-value {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+        }
+
+        .session-card-payment-value.payment-status-paid {
+            color: #2d5f4d;
+        }
+
+        .session-card-payment-value.payment-status-awaiting {
+            color: #f59e0b;
+        }
+
+        .session-card-payment-value.payment-status-overdue {
+            color: #ef4444;
+        }
+
+        /* Payment indicator in session preview (smaller context) */
+        .session-preview-item .session-payment-indicator {
+            margin-left: 8px;
+        }
+
+        .session-preview-item .session-payment-dot {
+            width: 6px;
+            height: 6px;
+        }
+
+        .session-preview-item .session-payment-label {
+            display: none;
+        }
+
+        /* Mobile: Always show labels since hover doesn't work */
+        @media (max-width: 768px) {
+            .session-payment-label {
+                opacity: 1;
+            }
+
+            .session-payment-dot {
+                width: 6px;
+                height: 6px;
+            }
+        }
+
+
         /* Resolution Drawer */
         .resolution-drawer {
             position: fixed;
@@ -22931,19 +23060,75 @@ Sarah
         let currentCalendarDate = new Date(2026, 0, 8); // January 8, 2026
 
         const sessions = [
-            { time: '09:00', client: 'James Wilson', associate: 'Sarah Johnson', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 8) },
-            { time: '10:30', client: 'Sophie Taylor', associate: 'Sarah Johnson', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 8) },
-            { time: '11:00', client: 'Michael Chen', associate: 'David Okonkwo', type: 'Couples', status: 'pending', date: new Date(2026, 0, 8) },
-            { time: '14:00', client: 'Mark & Lisa Harris', associate: 'Sarah Johnson', type: 'Couples', status: 'confirmed', date: new Date(2026, 0, 8) },
-            { time: '15:30', client: 'Rachel Green', associate: 'Fatima Okafor', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 8) },
-            { time: '09:30', client: 'Emma Stone', associate: 'Amara Mensah', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 9) },
-            { time: '11:00', client: 'Robert Lee', associate: 'Kwame Asante', type: 'Individual', status: 'pending', date: new Date(2026, 0, 9) },
-            { time: '14:00', client: 'Julia Roberts', associate: 'Chioma Eze', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 10) },
-            { time: '16:00', client: 'Diana Prince', associate: 'Yemi Adebayo', type: 'Individual', status: 'cancelled', date: new Date(2026, 0, 12) },
-            { time: '10:00', client: 'Peter Parker', associate: 'Sarah Johnson', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 13) },
-            { time: '14:30', client: 'Mary Jane', associate: 'David Okonkwo', type: 'Individual', status: 'pending', date: new Date(2026, 0, 13) },
-            { time: '09:00', client: 'Bruce Wayne', associate: 'Fatima Okafor', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 15) }
+            // Past sessions (before mock "today" Jan 8) - to demonstrate overdue/paid
+            { time: '10:00', client: 'David Miller', associate: 'Sarah Johnson', type: 'Individual', status: 'confirmed', date: new Date(2025, 11, 30), paymentStatus: 'overdue' },
+            { time: '14:00', client: 'Nina Patel', associate: 'Sarah Johnson', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 2), paymentStatus: 'paid' },
+            { time: '11:00', client: 'Laura Martinez', associate: 'David Okonkwo', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 3), paymentStatus: 'paid' },
+            { time: '09:00', client: 'Kevin Moore', associate: 'Amara Mensah', type: 'Couples', status: 'confirmed', date: new Date(2026, 0, 6), paymentStatus: 'awaiting' },
+            { time: '15:00', client: 'Sophie Taylor', associate: 'Sarah Johnson', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 7), paymentStatus: 'awaiting' },
+            // Today's sessions (Jan 8 mock today)
+            { time: '09:00', client: 'James Wilson', associate: 'Sarah Johnson', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 8), paymentStatus: 'paid' },
+            { time: '10:30', client: 'Sophie Taylor', associate: 'Sarah Johnson', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 8), paymentStatus: 'paid' },
+            { time: '11:00', client: 'Michael Chen', associate: 'David Okonkwo', type: 'Couples', status: 'pending', date: new Date(2026, 0, 8), paymentStatus: 'awaiting' },
+            { time: '14:00', client: 'Mark & Lisa Harris', associate: 'Sarah Johnson', type: 'Couples', status: 'confirmed', date: new Date(2026, 0, 8), paymentStatus: 'paid' },
+            { time: '15:30', client: 'Rachel Green', associate: 'Fatima Okafor', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 8), paymentStatus: 'awaiting' },
+            // Future sessions
+            { time: '09:30', client: 'Emma Stone', associate: 'Amara Mensah', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 9), paymentStatus: 'upcoming' },
+            { time: '11:00', client: 'Robert Lee', associate: 'Kwame Asante', type: 'Individual', status: 'pending', date: new Date(2026, 0, 9), paymentStatus: 'upcoming' },
+            { time: '14:00', client: 'Julia Roberts', associate: 'Chioma Eze', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 10), paymentStatus: 'upcoming' },
+            { time: '16:00', client: 'Diana Prince', associate: 'Yemi Adebayo', type: 'Individual', status: 'cancelled', date: new Date(2026, 0, 12), paymentStatus: 'upcoming' },
+            { time: '10:00', client: 'Peter Parker', associate: 'Sarah Johnson', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 13), paymentStatus: 'upcoming' },
+            { time: '14:30', client: 'Mary Jane', associate: 'David Okonkwo', type: 'Individual', status: 'pending', date: new Date(2026, 0, 13), paymentStatus: 'upcoming' },
+            { time: '09:00', client: 'Bruce Wayne', associate: 'Fatima Okafor', type: 'Individual', status: 'confirmed', date: new Date(2026, 0, 15), paymentStatus: 'upcoming' }
         ];
+
+        /**
+         * Get payment status display properties for a session
+         * Handles both calendar format ('paid','awaiting','overdue','upcoming')
+         * and sessionRecords format ('Paid','Awaiting Payment')
+         * @param {string} status - The paymentStatus value
+         * @param {string} [sessionDate] - Optional date string for overdue detection
+         * @returns {Object} - { class, label, dotColor }
+         */
+        function getPaymentStatusDisplay(status, sessionDate) {
+            // Normalise sessionRecords format to calendar format
+            let normalised = (status || '').toLowerCase();
+            if (normalised === 'awaiting payment') normalised = 'awaiting';
+
+            // Detect overdue: awaiting + session date > 7 days ago
+            if (normalised === 'awaiting' && sessionDate) {
+                const sessionDateObj = new Date(sessionDate);
+                const sevenDaysAgo = new Date();
+                sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+                if (sessionDateObj < sevenDaysAgo) {
+                    normalised = 'overdue';
+                }
+            }
+
+            const statusMap = {
+                'paid': {
+                    class: 'payment-status-paid',
+                    label: 'Paid',
+                    dotColor: '#2d5f4d'
+                },
+                'awaiting': {
+                    class: 'payment-status-awaiting',
+                    label: 'Awaiting',
+                    dotColor: '#f59e0b'
+                },
+                'overdue': {
+                    class: 'payment-status-overdue',
+                    label: 'Overdue',
+                    dotColor: '#ef4444'
+                },
+                'upcoming': {
+                    class: 'payment-status-upcoming',
+                    label: '',
+                    dotColor: 'transparent'
+                }
+            };
+            return statusMap[normalised] || statusMap['upcoming'];
+        }
 
         function renderCalendar() {
             const grid = document.getElementById('calendarGrid');
@@ -23032,7 +23217,9 @@ Sarah
                 return;
             }
 
-            list.innerHTML = todaysSessions.map(session => `
+            list.innerHTML = todaysSessions.map(session => {
+                const paymentDisplay = getPaymentStatusDisplay(session.paymentStatus);
+                return `
                 <div class="session-item">
                     <div class="session-time">${session.time}</div>
                     <div class="session-info">
@@ -23040,8 +23227,13 @@ Sarah
                         <div class="session-associate">with ${session.associate}</div>
                     </div>
                     <div class="session-type">${session.type}</div>
+                    <span class="session-payment-indicator">
+                        <span class="session-payment-dot ${paymentDisplay.class}"></span>
+                        ${paymentDisplay.label ? `<span class="session-payment-label ${paymentDisplay.class}">${paymentDisplay.label}</span>` : ''}
+                    </span>
                 </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         function changeMonth(delta) {
@@ -23073,7 +23265,9 @@ Sarah
                 // Use Garden in Bloom empty state
                 content.innerHTML = EmptyState.createHtml('sessions');
             } else {
-                content.innerHTML = daySessions.map(session => `
+                content.innerHTML = daySessions.map(session => {
+                    const paymentDisplay = getPaymentStatusDisplay(session.paymentStatus);
+                    return `
                     <div class="session-detail-card ${session.status}">
                         <div class="session-card-header">
                             <div class="session-card-time">${session.time}</div>
@@ -23085,6 +23279,15 @@ Sarah
                             <span class="session-card-meta-dot"></span>
                             <span>${session.type}</span>
                         </div>
+                        ${session.paymentStatus !== 'upcoming' ? `
+                        <div class="session-card-payment">
+                            <span class="session-card-payment-label">Payment</span>
+                            <span class="session-card-payment-value ${paymentDisplay.class}">
+                                <span class="session-payment-dot ${paymentDisplay.class}"></span>
+                                ${paymentDisplay.label || 'Upcoming'}
+                            </span>
+                        </div>
+                        ` : ''}
                         <div class="session-card-actions">
                             ${session.status !== 'cancelled' ? `
                                 <button class="session-action-btn secondary" onclick="rescheduleSession('${session.client}')">
@@ -23121,7 +23324,8 @@ Sarah
                             </button>
                         </div>
                     </div>
-                `).join('');
+                `;
+                }).join('');
             }
 
             // Open panel
@@ -24322,6 +24526,7 @@ Sarah
                 const dayName = sessionDate.toLocaleDateString('en-GB', { weekday: 'short' });
                 const clientInitials = getClientInitials(session.clientName);
                 const sessionTypeShort = getSessionTypeShort(session.sessionType);
+                const paymentDisplay = getPaymentStatusDisplay(session.paymentStatus, session.sessionDate);
 
                 return `
                     <div class="session-preview-item">
@@ -24329,6 +24534,9 @@ Sarah
                         <span class="session-preview-time">${session.sessionTime || '—'}</span>
                         <span class="session-preview-client">${clientInitials}</span>
                         <span class="session-preview-type">${sessionTypeShort}</span>
+                        <span class="session-payment-indicator">
+                            <span class="session-payment-dot ${paymentDisplay.class}"></span>
+                        </span>
                     </div>
                 `;
             }).join('');
