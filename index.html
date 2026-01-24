@@ -1696,6 +1696,7 @@
             border-radius: var(--radius-standard);
             padding: 20px;
             transition: box-shadow var(--transition-fast);
+            overflow: visible;
         }
 
         .payout-pipeline-card:hover {
@@ -1764,9 +1765,11 @@
 
         .payout-pipeline-action {
             margin-top: 16px;
+            overflow: visible;
         }
 
         .payout-pipeline-btn {
+            position: static;
             width: 100%;
             background: var(--eden-green);
             color: white;
@@ -24269,10 +24272,18 @@ Sarah
             const totalSessions = pipeline.reduce((sum, a) => sum + a.sessions.length, 0);
             const edenShare = pipeline.reduce((sum, a) => sum + (a.totalGross - a.totalAssociateShare), 0);
 
-            // Calculate paid this month from payouts data
-            const paidThisMonth = payouts
+            // Calculate paid this month from historical payouts
+            const historicalPaid = payouts
                 .filter(p => p.status === 'Paid' && p.paidDate && p.paidDate.startsWith('2026-01'))
                 .reduce((sum, p) => sum + p.associateAmount, 0);
+
+            // Also include sessions processed this month (from current session)
+            const currentMonthPrefix = new Date().toISOString().slice(0, 7); // YYYY-MM
+            const processedThisMonth = sessionRecords
+                .filter(s => s.payoutStatus === 'Paid Out' && s.processedDate && s.processedDate.startsWith(currentMonthPrefix))
+                .reduce((sum, s) => sum + (s.rate * 0.69), 0);
+
+            const paidThisMonth = historicalPaid + processedThisMonth;
 
             document.getElementById('pipelineReadyCount').textContent = pipeline.length + ' associates';
             document.getElementById('pipelineTotalAmount').textContent = '£' + totalAmount.toFixed(2);
@@ -24463,13 +24474,42 @@ Sarah
 
             if (!associatePipeline) return;
 
-            // In a real app, this would create a payout record in Airtable
-            // and potentially send to QuickBooks
+            // Update session records - mark as Paid Out
+            const processedDate = new Date().toISOString().split('T')[0];
+            sessionRecords.forEach(session => {
+                if (session.associateId === selectedPipelineAssociate && session.payoutStatus === 'Ready for Payout') {
+                    session.payoutStatus = 'Paid Out';
+                    session.processedDate = processedDate;
+                }
+            });
+
             showToast(`Payout batch created for ${associatePipeline.associateName}: £${associatePipeline.totalAssociateShare.toFixed(2)}`);
 
-            // Close detail and refresh
+            // Close detail and refresh all displays
             closePayoutDetail();
+            refreshAllPayoutDisplays();
+        }
+
+        // ============================================
+        // PAYOUT DISPLAY REFRESH
+        // ============================================
+
+        /**
+         * Master refresh function - updates all payout-related UI after processing
+         */
+        function refreshAllPayoutDisplays() {
+            // 1. Re-render Payout Pipeline (summary + grid)
             initPayoutPipeline();
+
+            // 2. Update Admin Dashboard Payout Liability Card
+            if (typeof updatePayoutLiabilityCard === 'function') {
+                updatePayoutLiabilityCard();
+            }
+
+            // 3. Update Steward Actions if applicable
+            if (typeof initStewardActions === 'function') {
+                initStewardActions();
+            }
         }
 
         // Open Associate from Payout card (duplicate kept for backwards compatibility)
