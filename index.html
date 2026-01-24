@@ -5667,9 +5667,9 @@
             color: var(--eden-border);
         }
 
-        .calendar-day.today {
-            background-color: var(--eden-green);
-            color: var(--pure-white);
+        .calendar-day.today:not(.calendar-day-selected) {
+            background-color: var(--eden-green-light);
+            color: var(--eden-green);
             font-weight: 600;
         }
 
@@ -5945,6 +5945,118 @@
         .calendar-day.clickable:hover {
             background-color: var(--eden-green-light);
             border-color: var(--eden-green);
+        }
+
+        /* ========================================
+           CALENDAR DAY SELECTION STATES
+           ======================================== */
+
+        .calendar-day-selected {
+            background-color: var(--eden-green) !important;
+            color: var(--pure-white) !important;
+            border-radius: var(--radius-standard);
+            font-weight: 600;
+        }
+
+        .calendar-day-selected:hover {
+            background-color: #245544 !important;
+        }
+
+        /* Session dot inside calendar day (span element) */
+        .calendar-session-dot {
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background-color: var(--eden-green);
+            border-radius: 50%;
+        }
+
+        .calendar-day-selected .calendar-session-dot {
+            background-color: var(--pure-white);
+        }
+
+        /* Hide ::after dot on days with data-date (using span instead) */
+        .calendar-day[data-date].has-sessions::after {
+            display: none;
+        }
+
+        /* Focus state for keyboard navigation */
+        .calendar-day[data-date]:focus {
+            outline: 2px solid var(--eden-green);
+            outline-offset: 2px;
+        }
+
+        .calendar-day[data-date]:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        /* ========================================
+           SESSION LIST EMPTY STATE
+           ======================================== */
+
+        .session-empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 24px;
+            text-align: center;
+        }
+
+        .session-empty-icon {
+            margin-bottom: 16px;
+            opacity: 0.6;
+        }
+
+        .session-empty-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--eden-green);
+            margin-bottom: 4px;
+        }
+
+        .session-empty-subtitle {
+            font-size: 14px;
+            color: var(--eden-text-secondary);
+        }
+
+        @keyframes eden-breathe {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        .session-empty-icon svg {
+            animation: eden-breathe 3s ease-in-out infinite;
+        }
+
+        /* ========================================
+           SESSION CARD INTERACTIVITY
+           ======================================== */
+
+        .session-item-clickable {
+            cursor: pointer;
+            transition: transform 150ms ease, box-shadow 150ms ease;
+        }
+
+        .session-item-clickable:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .session-item-clickable:active {
+            transform: scale(0.98);
+        }
+
+        .session-item-clickable:focus {
+            outline: 2px solid var(--eden-green);
+            outline-offset: 2px;
+        }
+
+        .session-item-clickable:focus:not(:focus-visible) {
+            outline: none;
         }
 
         @media (max-width: 768px) {
@@ -16336,7 +16448,7 @@
 
                 <!-- Today's Sessions -->
                 <div class="today-sessions">
-                    <h3 class="section-title">Today's Sessions</h3>
+                    <h3 class="section-title" id="sessionListHeading">Today's Sessions</h3>
                     <div class="session-list" id="todaySessionsList">
                         <!-- Sessions will be rendered by JavaScript -->
                     </div>
@@ -23058,6 +23170,7 @@ Sarah
         // ============================================
 
         let currentCalendarDate = new Date(2026, 0, 8); // January 8, 2026
+        let selectedCalendarDate = '2026-01-08'; // Default to today (ISO format)
 
         const sessions = [
             // Past sessions (before mock "today" Jan 8) - to demonstrate overdue/paid
@@ -23176,17 +23289,20 @@ Sarah
                                         dayCounter === today.getDate();
 
                         const currentDate = new Date(year, month, dayCounter);
+                        const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(dayCounter).padStart(2, '0')}`;
                         const hasSessions = sessions.some(s =>
                             s.date.getFullYear() === currentDate.getFullYear() &&
                             s.date.getMonth() === currentDate.getMonth() &&
                             s.date.getDate() === currentDate.getDate()
                         );
+                        const isSelected = dateString === selectedCalendarDate;
 
                         const classes = ['calendar-day', 'clickable'];
                         if (isToday) classes.push('today');
                         if (hasSessions) classes.push('has-sessions');
+                        if (isSelected) classes.push('calendar-day-selected');
 
-                        html += `<div class="${classes.join(' ')}" onclick="openSessionDetail(${year}, ${month}, ${dayCounter})">${dayCounter}</div>`;
+                        html += `<div class="${classes.join(' ')}" data-date="${dateString}" data-has-sessions="${hasSessions}" role="button" tabindex="0" aria-label="${dayCounter}${hasSessions ? ' - has sessions' : ''}">${dayCounter}${hasSessions ? '<span class="calendar-session-dot"></span>' : ''}</div>`;
                         dayCounter++;
                     } else {
                         // Next month
@@ -23197,7 +23313,8 @@ Sarah
             }
 
             grid.innerHTML = html;
-            renderTodaysSessions();
+            initCalendarDayListeners();
+            renderSessionsForDate(selectedCalendarDate);
         }
 
         function renderTodaysSessions() {
@@ -23239,6 +23356,201 @@ Sarah
         function changeMonth(delta) {
             currentCalendarDate.setMonth(currentCalendarDate.getMonth() + delta);
             renderCalendar();
+        }
+
+        // ============================================
+        // CALENDAR DAY SELECTION & SESSION RENDERING
+        // ============================================
+
+        /**
+         * Handle calendar day selection
+         * @param {string} dateString - ISO date string (YYYY-MM-DD)
+         */
+        function selectCalendarDate(dateString) {
+            selectedCalendarDate = dateString;
+
+            // Update visual selection
+            document.querySelectorAll('.calendar-day').forEach(day => {
+                day.classList.remove('calendar-day-selected');
+                if (day.dataset.date === dateString) {
+                    day.classList.add('calendar-day-selected');
+                }
+            });
+
+            // Update session list
+            renderSessionsForDate(dateString);
+        }
+
+        /**
+         * Attach click listeners to all calendar day cells
+         * Call after renderCalendar() completes
+         */
+        function initCalendarDayListeners() {
+            const dayElements = document.querySelectorAll('.calendar-day[data-date]');
+
+            dayElements.forEach(day => {
+                day.addEventListener('click', () => {
+                    const dateString = day.dataset.date;
+                    if (dateString) {
+                        selectCalendarDate(dateString);
+                    }
+                });
+
+                day.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const dateString = day.dataset.date;
+                        if (dateString) {
+                            selectCalendarDate(dateString);
+                        }
+                    }
+                });
+            });
+        }
+
+        /**
+         * Render sessions for a specific date
+         * @param {string} dateString - ISO date string (YYYY-MM-DD)
+         */
+        function renderSessionsForDate(dateString) {
+            const sessionListContainer = document.getElementById('todaySessionsList');
+            const sessionHeading = document.getElementById('sessionListHeading');
+
+            if (!sessionListContainer) return;
+
+            // Parse date string to compare with session Date objects
+            const [year, monthStr, dayStr] = dateString.split('-').map(Number);
+            const targetDate = new Date(year, monthStr - 1, dayStr);
+
+            // Filter sessions for this date
+            const daySessions = sessions.filter(s =>
+                s.date.getFullYear() === targetDate.getFullYear() &&
+                s.date.getMonth() === targetDate.getMonth() &&
+                s.date.getDate() === targetDate.getDate()
+            ).sort((a, b) => a.time.localeCompare(b.time));
+
+            // Update heading
+            if (sessionHeading) {
+                const mockToday = new Date(2026, 0, 8);
+                const isToday = targetDate.getFullYear() === mockToday.getFullYear() &&
+                                targetDate.getMonth() === mockToday.getMonth() &&
+                                targetDate.getDate() === mockToday.getDate();
+
+                if (isToday) {
+                    sessionHeading.textContent = "Today's Sessions";
+                } else {
+                    const options = { weekday: 'short', day: 'numeric', month: 'short' };
+                    const formattedDate = targetDate.toLocaleDateString('en-GB', options);
+                    sessionHeading.textContent = `Sessions for ${formattedDate}`;
+                }
+            }
+
+            // Handle empty state
+            if (daySessions.length === 0) {
+                sessionListContainer.innerHTML = createEmptySessionsState(dateString);
+                return;
+            }
+
+            // Render sessions
+            sessionListContainer.innerHTML = daySessions.map(session => {
+                const paymentDisplay = getPaymentStatusDisplay(session.paymentStatus);
+                return `
+                <div class="session-item session-item-clickable"
+                     data-client-name="${session.client}"
+                     onclick="navigateToClientFromSession('${session.client}')"
+                     role="button"
+                     tabindex="0">
+                    <div class="session-time">${session.time}</div>
+                    <div class="session-info">
+                        <div class="session-client">${session.client}</div>
+                        <div class="session-associate">with ${session.associate}</div>
+                    </div>
+                    <div class="session-type">${session.type}</div>
+                    <span class="session-payment-indicator">
+                        <span class="session-payment-dot ${paymentDisplay.class}"></span>
+                        ${paymentDisplay.label ? `<span class="session-payment-label ${paymentDisplay.class}">${paymentDisplay.label}</span>` : ''}
+                    </span>
+                </div>
+                `;
+            }).join('');
+
+            // Add keyboard listeners for session cards
+            sessionListContainer.querySelectorAll('.session-item-clickable').forEach(card => {
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const clientName = card.dataset.clientName;
+                        if (clientName) {
+                            navigateToClientFromSession(clientName);
+                        }
+                    }
+                });
+            });
+        }
+
+        /**
+         * Create empty state HTML for days with no sessions
+         * @param {string} dateString - ISO date string
+         * @returns {string} HTML string
+         */
+        function createEmptySessionsState(dateString) {
+            const [year, monthStr, dayStr] = dateString.split('-').map(Number);
+            const dateObj = new Date(year, monthStr - 1, dayStr);
+            const mockToday = new Date(2026, 0, 8);
+            const isToday = dateObj.getFullYear() === mockToday.getFullYear() &&
+                            dateObj.getMonth() === mockToday.getMonth() &&
+                            dateObj.getDate() === mockToday.getDate();
+            const isFuture = dateObj > mockToday;
+
+            let message = 'No sessions recorded';
+            let submessage = 'Nothing was scheduled for this day';
+
+            if (isToday) {
+                message = 'No sessions today';
+                submessage = 'Your calendar is clear';
+            } else if (isFuture) {
+                message = 'No sessions scheduled';
+                submessage = 'This day is available';
+            }
+
+            // Use EmptyState if available
+            if (typeof EmptyState !== 'undefined' && EmptyState.createHtml) {
+                return EmptyState.createHtml('schedule');
+            }
+
+            return `
+                <div class="session-empty-state">
+                    <div class="session-empty-icon">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="24" r="20" stroke="var(--eden-green)" stroke-width="2" stroke-dasharray="4 4" opacity="0.3"/>
+                            <path d="M24 16v8M20 28c0 2.2 1.8 4 4 4s4-1.8 4-4" stroke="var(--eden-green)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="session-empty-title">${message}</div>
+                    <div class="session-empty-subtitle">${submessage}</div>
+                </div>
+            `;
+        }
+
+        /**
+         * Navigate to client detail view from a session card
+         * @param {string} clientName - The client's display name
+         */
+        function navigateToClientFromSession(clientName) {
+            if (!clientName) return;
+
+            // Find client by name match
+            const client = clients.find(c =>
+                c.name === clientName || c.name.includes(clientName)
+            );
+
+            if (client && typeof showClientDetail === 'function') {
+                showClientDetail(client.id, 'schedule');
+            } else {
+                // Fallback: show the session detail panel for the selected date
+                const [year, monthStr, dayStr] = selectedCalendarDate.split('-').map(Number);
+                openSessionDetail(year, monthStr - 1, dayStr);
+            }
         }
 
         function openSessionDetail(year, month, day) {
