@@ -15933,7 +15933,7 @@
             <div class="view-container" id="associateDetailView">
                 <div class="associate-detail-page">
                     <header class="associate-detail-header">
-                        <button class="associate-detail-back" onclick="closeAssociateDetail()">
+                        <button class="associate-detail-back" onclick="navigateBack()">
                             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
                                 <polyline points="15 18 9 12 15 6"/>
                             </svg>
@@ -15975,7 +15975,7 @@
             <div class="view-container" id="clientDetailView">
                 <div class="client-detail-page">
                     <header class="client-detail-header">
-                        <button class="client-detail-back" onclick="closeClientDetail()">
+                        <button class="client-detail-back" onclick="navigateBack()">
                             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
                                 <polyline points="15 18 9 12 15 6"/>
                             </svg>
@@ -18330,6 +18330,470 @@ Sarah
     </div>
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // ============================================
+        // NAVIGATION STACK MODULE
+        // Maintains context for Back button navigation
+        // ============================================
+
+        const NavigationStack = {
+            stack: [],
+            maxSize: 10,
+
+            push(context) {
+                const top = this.peek();
+                if (top && top.type === context.type && top.id === context.id) {
+                    top.tab = context.tab;
+                    return;
+                }
+
+                this.stack.push({
+                    type: context.type,
+                    id: context.id,
+                    tab: context.tab || 'overview',
+                    timestamp: Date.now()
+                });
+
+                if (this.stack.length > this.maxSize) {
+                    this.stack.shift();
+                }
+
+                console.log('[NavStack] Pushed:', context.type, context.id, '| Stack depth:', this.stack.length);
+            },
+
+            pop() {
+                const context = this.stack.pop();
+                console.log('[NavStack] Popped:', context?.type, context?.id, '| Stack depth:', this.stack.length);
+                return context;
+            },
+
+            peek() {
+                return this.stack[this.stack.length - 1] || null;
+            },
+
+            peekPrevious() {
+                return this.stack[this.stack.length - 2] || null;
+            },
+
+            clear() {
+                this.stack = [];
+                console.log('[NavStack] Cleared');
+            },
+
+            isEmpty() {
+                return this.stack.length === 0;
+            },
+
+            depth() {
+                return this.stack.length;
+            }
+        };
+
+        // ============================================
+        // PANEL MANAGER MODULE
+        // Single source of truth for panel states
+        // ============================================
+
+        const PanelManager = {
+            state: {
+                associatePanel: { open: false, id: null },
+                clientPanel: { open: false, id: null, stackedOnAssociate: false }
+            },
+
+            elements: {
+                sidePanel: null,
+                bottomSheet: null,
+                bottomSheetOverlay: null,
+                panelBackdrop: null
+            },
+
+            init() {
+                this.elements.sidePanel = document.getElementById('sidePanel');
+                this.elements.bottomSheet = document.getElementById('bottomSheet');
+                this.elements.bottomSheetOverlay = document.getElementById('bottomSheetOverlay');
+                this.elements.panelBackdrop = document.getElementById('panelBackdrop');
+                console.log('[PanelManager] Initialized');
+            },
+
+            isMobile() {
+                return window.innerWidth <= 768;
+            },
+
+            openAssociate(associateId, tab = 'overview') {
+                console.log('[PanelManager] Opening Associate:', associateId, 'Tab:', tab);
+
+                this.state.associatePanel = { open: true, id: associateId };
+
+                NavigationStack.push({ type: 'associate', id: associateId, tab: tab });
+
+                // Use existing showAssociateDetail for full-page view
+                if (typeof showAssociateDetail === 'function') {
+                    showAssociateDetail(associateId);
+                }
+
+                // Switch to requested tab if not overview
+                if (tab !== 'overview' && tab !== 'profile') {
+                    this.switchAssociateTab(tab);
+                }
+            },
+
+            openClient(clientId, tab = 'overview', stackOnAssociate = false) {
+                console.log('[PanelManager] Opening Client:', clientId, 'Tab:', tab, 'Stacked:', stackOnAssociate);
+
+                const returnTo = stackOnAssociate ? 'associateDetail' : 'clients';
+                this.state.clientPanel = {
+                    open: true,
+                    id: clientId,
+                    stackedOnAssociate: stackOnAssociate
+                };
+
+                NavigationStack.push({ type: 'client', id: clientId, tab: tab });
+
+                // Use existing showClientDetail for full-page view
+                if (typeof showClientDetail === 'function') {
+                    showClientDetail(clientId, returnTo);
+                }
+
+                // Switch to requested tab/section if not overview
+                if (tab !== 'overview') {
+                    this.switchClientTab(tab);
+                }
+            },
+
+            closeAssociate() {
+                console.log('[PanelManager] Closing Associate panel');
+                this.state.associatePanel = { open: false, id: null };
+
+                if (typeof closeAssociateDetail === 'function') {
+                    closeAssociateDetail();
+                }
+            },
+
+            closeClient() {
+                console.log('[PanelManager] Closing Client panel');
+                const wasStacked = this.state.clientPanel.stackedOnAssociate;
+                this.state.clientPanel = { open: false, id: null, stackedOnAssociate: false };
+
+                if (typeof closeClientDetail === 'function') {
+                    closeClientDetail();
+                }
+
+                return wasStacked;
+            },
+
+            closeAll() {
+                console.log('[PanelManager] Closing all panels');
+                this.state.associatePanel = { open: false, id: null };
+                this.state.clientPanel = { open: false, id: null, stackedOnAssociate: false };
+
+                NavigationStack.clear();
+
+                // Close side panel if open
+                if (this.elements.sidePanel) {
+                    this.elements.sidePanel.classList.remove('open');
+                }
+                if (this.elements.panelBackdrop) {
+                    this.elements.panelBackdrop.classList.remove('open');
+                }
+                if (this.elements.bottomSheet) {
+                    this.elements.bottomSheet.classList.remove('open');
+                }
+                if (this.elements.bottomSheetOverlay) {
+                    this.elements.bottomSheetOverlay.classList.remove('open');
+                }
+
+                // Return to appropriate main view
+                if (typeof showView === 'function') {
+                    showView('home');
+                }
+            },
+
+            goBack() {
+                const current = NavigationStack.pop();
+
+                if (!current) {
+                    this.closeAll();
+                    return;
+                }
+
+                const previous = NavigationStack.peek();
+
+                if (!previous) {
+                    // No previous context - return to appropriate view
+                    const wasStacked = this.state.clientPanel.stackedOnAssociate;
+                    this.state.associatePanel = { open: false, id: null };
+                    this.state.clientPanel = { open: false, id: null, stackedOnAssociate: false };
+
+                    if (current.type === 'client') {
+                        // Use existing closeClientDetail which handles returnTo
+                        if (typeof closeClientDetail === 'function') {
+                            closeClientDetail();
+                        }
+                    } else if (current.type === 'associate') {
+                        if (typeof closeAssociateDetail === 'function') {
+                            closeAssociateDetail();
+                        }
+                    } else {
+                        if (typeof showView === 'function') showView('home');
+                    }
+                    return;
+                }
+
+                // Navigate to previous context
+                if (previous.type === 'associate') {
+                    if (typeof showAssociateDetail === 'function') {
+                        showAssociateDetail(previous.id);
+                    }
+                    if (previous.tab && previous.tab !== 'overview') {
+                        this.switchAssociateTab(previous.tab);
+                    }
+                } else if (previous.type === 'client') {
+                    if (typeof showClientDetail === 'function') {
+                        showClientDetail(previous.id, 'clients');
+                    }
+                    if (previous.tab && previous.tab !== 'overview') {
+                        this.switchClientTab(previous.tab);
+                    }
+                }
+            },
+
+            switchAssociateTab(tab) {
+                // Map tab names to existing navigation functions
+                setTimeout(() => {
+                    if (typeof navigateFromAssociateDetail === 'function') {
+                        navigateFromAssociateDetail(tab);
+                    }
+                }, 100);
+            },
+
+            switchClientTab(tab) {
+                setTimeout(() => {
+                    if (typeof switchClientSection === 'function') {
+                        switchClientSection(tab);
+                    }
+                }, 100);
+            }
+        };
+
+        // Initialize PanelManager on DOM ready
+        document.addEventListener('DOMContentLoaded', () => {
+            PanelManager.init();
+        });
+
+        // ============================================
+        // UNIFIED PANEL ROUTER
+        // Single entry point for all panel navigation
+        // ============================================
+
+        function showUnifiedPanel(entityType, entityId, options = {}) {
+            const {
+                tab = 'overview',
+                fromContext = null,
+                action = null
+            } = options;
+
+            console.log('[Router] showUnifiedPanel:', entityType, entityId, options);
+
+            if (!entityType || !entityId) {
+                console.error('[Router] Missing entityType or entityId');
+                return;
+            }
+
+            const isStackedNavigation = fromContext === 'associate' && entityType === 'client';
+
+            switch (entityType) {
+                case 'associate':
+                    PanelManager.openAssociate(entityId, tab);
+                    break;
+
+                case 'client':
+                    PanelManager.openClient(entityId, tab, isStackedNavigation);
+                    break;
+
+                default:
+                    console.error('[Router] Unknown entityType:', entityType);
+            }
+
+            if (action) {
+                handlePanelAction(entityType, entityId, action);
+            }
+        }
+
+        function handlePanelAction(entityType, entityId, action) {
+            console.log('[Router] Handling action:', action, 'for', entityType, entityId);
+
+            switch (action) {
+                case 'message':
+                    setTimeout(() => {
+                        if (typeof navigateFromAssociateDetail === 'function') {
+                            navigateFromAssociateDetail('inbox');
+                        }
+                    }, 150);
+                    break;
+
+                case 'updateStage':
+                    if (entityType === 'client') {
+                        setTimeout(() => {
+                            const pipeline = document.getElementById('clientDetailPipeline');
+                            if (pipeline) pipeline.scrollIntoView({ behavior: 'smooth' });
+                        }, 150);
+                    }
+                    break;
+
+                case 'requestPayout':
+                    setTimeout(() => {
+                        if (typeof navigateFromAssociateDetail === 'function') {
+                            navigateFromAssociateDetail('finance');
+                        }
+                    }, 150);
+                    break;
+
+                case 'compose':
+                    setTimeout(() => {
+                        if (typeof navigateFromAssociateDetail === 'function') {
+                            navigateFromAssociateDetail('inbox');
+                        }
+                    }, 150);
+                    break;
+
+                default:
+                    console.log('[Router] Unknown action:', action);
+            }
+        }
+
+        function navigateBack() {
+            // If stack has context, use it
+            if (NavigationStack.depth() > 0) {
+                PanelManager.goBack();
+            } else {
+                // Fallback: determine where we are and navigate appropriately
+                const clientView = document.getElementById('clientDetailView');
+                const associateView = document.getElementById('associateDetailView');
+
+                if (clientView && clientView.classList.contains('active')) {
+                    // We're on client detail - use existing close which handles returnTo
+                    if (typeof closeClientDetail === 'function') {
+                        closeClientDetail();
+                    }
+                } else if (associateView && associateView.classList.contains('active')) {
+                    // We're on associate detail - go back to associates list
+                    if (typeof closeAssociateDetail === 'function') {
+                        closeAssociateDetail();
+                    }
+                } else {
+                    // Default: go home
+                    if (typeof showView === 'function') {
+                        showView('home');
+                    }
+                }
+            }
+        }
+
+        function closeAllPanels() {
+            PanelManager.closeAll();
+        }
+
+        // ============================================
+        // QUICK ACCESS MENU HANDLERS
+        // ============================================
+
+        function handleQuickAction(entityType, entityId, action, fromContext) {
+            console.log('[QuickAccess] Action:', action, 'Entity:', entityType, entityId);
+
+            // Close any open dropdown menus
+            closeAllDropdowns();
+
+            switch (action) {
+                case 'viewDetails':
+                case 'viewProfile':
+                    showUnifiedPanel(entityType, entityId, { tab: 'overview', fromContext: fromContext });
+                    break;
+
+                case 'viewSessions':
+                    showUnifiedPanel(entityType, entityId, { tab: 'sessions', fromContext: fromContext });
+                    break;
+
+                case 'viewFinance':
+                case 'viewEarnings':
+                    showUnifiedPanel(entityType, entityId, { tab: 'finance', fromContext: fromContext });
+                    break;
+
+                case 'viewContracts':
+                    showUnifiedPanel(entityType, entityId, { tab: 'contracts', fromContext: fromContext });
+                    break;
+
+                case 'viewClients':
+                    showUnifiedPanel('associate', entityId, { tab: 'clients', fromContext: fromContext });
+                    break;
+
+                case 'messageTherapist':
+                case 'messageAssociate':
+                    var therapistId = getTherapistForClient(entityId);
+                    if (therapistId) {
+                        showUnifiedPanel('associate', therapistId, {
+                            tab: 'inbox',
+                            action: 'compose',
+                            fromContext: fromContext
+                        });
+                    }
+                    break;
+
+                case 'sendMessage':
+                    showUnifiedPanel(entityType, entityId, {
+                        tab: 'inbox',
+                        action: 'compose',
+                        fromContext: fromContext
+                    });
+                    break;
+
+                case 'updateStage':
+                    showUnifiedPanel(entityType, entityId, {
+                        tab: 'overview',
+                        action: 'updateStage',
+                        fromContext: fromContext
+                    });
+                    break;
+
+                case 'reassign':
+                    openReassignModal(entityId);
+                    break;
+
+                case 'requestPayout':
+                    showUnifiedPanel('associate', entityId, {
+                        tab: 'finance',
+                        action: 'requestPayout',
+                        fromContext: fromContext
+                    });
+                    break;
+
+                default:
+                    console.warn('[QuickAccess] Unknown action:', action);
+            }
+        }
+
+        function closeAllDropdowns() {
+            document.querySelectorAll('.associate-detail-dropdown, .client-detail-dropdown').forEach(function(menu) {
+                menu.classList.remove('open');
+            });
+        }
+
+        function getTherapistForClient(clientId) {
+            // Lookup from clients data
+            if (typeof clients !== 'undefined') {
+                var client = clients.find(function(c) { return c.id === clientId; });
+                if (client && client.associateId) {
+                    return client.associateId;
+                }
+            }
+            return null;
+        }
+
+        function openReassignModal(clientId) {
+            console.log('[QuickAccess] Opening reassign modal for:', clientId);
+            if (typeof showToast === 'function') {
+                showToast('Reassign feature coming in Phase 3');
+            }
+        }
+
         // ============================================
         // EDEN ANIMATIONS MODULE
         // "Swiss Clinic" Micro-Interactions
@@ -20707,7 +21171,7 @@ Sarah
                     preview: `${associate.specialisation} • ${associate.clients}/${associate.maxCapacity} clients`,
                     meta: [associate.specialisation, associate.pendingPayout],
                     pulseColour: pulseColour,
-                    onClick: `showAssociateDetail('${associate.id}')`,
+                    onClick: `showUnifiedPanel('associate', '${associate.id}')`,
                     dataId: associate.id
                 });
             }).join('');
@@ -20831,8 +21295,8 @@ Sarah
         // ============================================
 
         function openClientPanel(clientId) {
-            // Use full page navigation instead of panel
-            showClientDetail(clientId, 'associateDetail');
+            // Route through unified panel system
+            showUnifiedPanel('client', clientId, { fromContext: 'associate' });
         }
 
         function closeClientPanel() {
@@ -21541,20 +22005,20 @@ Sarah
         function viewClientAssociate(associateId) {
             // Close client panel and show associate detail page
             closeClientPanelDirect();
-            showAssociateDetail(associateId);
+            showUnifiedPanel('associate', associateId, { fromContext: 'client' });
         }
 
         function openAssociatePanelFromClient(associateId) {
             // Navigate to associate detail page
             // Used when clicking therapist name in Clients Grid
-            showAssociateDetail(associateId);
+            showUnifiedPanel('associate', associateId, { fromContext: 'client' });
         }
 
         function openAssociateFromPayout(associateId) {
             // Close payout cockpit and show associate detail page
             // Used when clicking associate name in Payout Cockpit
             closeWealthModule();
-            showAssociateDetail(associateId);
+            showUnifiedPanel('associate', associateId, { fromContext: null });
         }
 
         function updateClientPipelineUI(currentStage) {
@@ -23357,13 +23821,13 @@ Sarah
         }
 
         function openClientFromGrid(clientId) {
-            // Use full page navigation instead of panel
-            showClientDetail(clientId, 'clients');
+            // Route through unified panel system
+            showUnifiedPanel('client', clientId, { fromContext: null });
         }
 
         function openClientPanelDirect(clientId) {
-            // Use full page navigation instead of panel
-            showClientDetail(clientId, 'clients');
+            // Route through unified panel system
+            showUnifiedPanel('client', clientId, { fromContext: null });
         }
 
         function closeClientPanelDirect() {
@@ -23750,8 +24214,8 @@ Sarah
                 c.name === clientName || c.name.includes(clientName)
             );
 
-            if (client && typeof showClientDetail === 'function') {
-                showClientDetail(client.id, 'schedule');
+            if (client) {
+                showUnifiedPanel('client', client.id, { fromContext: null });
             } else {
                 // Fallback: show the session detail panel for the selected date
                 const [year, monthStr, dayStr] = selectedCalendarDate.split('-').map(Number);
@@ -24215,7 +24679,7 @@ Sarah
         // Open associate from payment table
         function openAssociateFromPaymentTable(associateId) {
             closeWealthModule();
-            showAssociateDetail(associateId);
+            showUnifiedPanel('associate', associateId, { fromContext: null });
         }
 
         // ============================================
@@ -24461,7 +24925,7 @@ Sarah
             const associateId = selectedPipelineAssociate || document.getElementById('detailId').textContent;
             if (associateId) {
                 closeWealthModule();
-                showAssociateDetail(associateId);
+                showUnifiedPanel('associate', associateId, { fromContext: null });
             }
         }
 
@@ -24516,7 +24980,7 @@ Sarah
         // Note: Primary function is defined earlier in the file
         function openAssociateFromPayoutCard(associateId) {
             closeWealthModule();
-            showAssociateDetail(associateId);
+            showUnifiedPanel('associate', associateId, { fromContext: null });
         }
 
         function markAsPaid() {
@@ -27147,7 +27611,7 @@ Eden Relationships
             associates.forEach(associate => {
                 if (associate.pendingPayout && associate.pendingPayout !== '£0') {
                     html += `
-                        <div class="session-item" onclick="showAssociateDetail('${associate.id}')" style="cursor: pointer;">
+                        <div class="session-item" onclick="showUnifiedPanel('associate', '${associate.id}')" style="cursor: pointer;">
                             <div class="session-avatar">${associate.initials}</div>
                             <div class="session-info">
                                 <div class="session-client">${associate.name}</div>
@@ -27268,7 +27732,7 @@ Eden Relationships
                 const isHigh = capacity >= 80;
 
                 html += `
-                    <div class="session-item" onclick="showAssociateDetail('${associate.id}')" style="cursor: pointer;">
+                    <div class="session-item" onclick="showUnifiedPanel('associate', '${associate.id}')" style="cursor: pointer;">
                         <div class="session-avatar">${associate.initials}</div>
                         <div class="session-info" style="flex: 1;">
                             <div class="session-client">${associate.name}</div>
@@ -28200,10 +28664,7 @@ Eden Relationships
             if (!associate) return;
 
             // Open associate panel and navigate to inbox
-            showAssociateDetail(associateId);
-            setTimeout(() => {
-                navigatePanelTo('inbox');
-            }, 300);
+            showUnifiedPanel('associate', associateId, { tab: 'inbox', action: 'compose' });
         }
 
         // ============================================
@@ -29058,7 +29519,7 @@ Eden Relationships
                     preview: `${associate.specialisation} • ${associate.clients}/${associate.maxCapacity} clients`,
                     meta: [associate.specialisation],
                     pulseColour: pulseColour,
-                    onClick: `showAssociateDetail('${associate.id}')`,
+                    onClick: `showUnifiedPanel('associate', '${associate.id}')`,
                     dataId: associate.id
                 });
             });
@@ -29328,6 +29789,8 @@ Eden Relationships
             // Navigate back based on where we came from
             if (clientDetailReturnView === 'associateDetail' && currentAssociateDetailData) {
                 showAssociateDetail(currentAssociateDetailData.id);
+            } else if (clientDetailReturnView === 'schedule') {
+                showView('schedule');
             } else {
                 showView('clients');
             }
@@ -29391,30 +29854,42 @@ Eden Relationships
             const dropdown = document.getElementById('clientDetailDropdown');
             if (dropdown) dropdown.classList.remove('open');
 
+            const clientId = currentClientDetailData ? currentClientDetailData.id : null;
+
             switch (section) {
                 case 'details':
-                    // Already on detail view, switch to overview tab
                     switchClientSection('overview');
                     break;
                 case 'sessions':
                     switchClientSection('sessions');
                     break;
+                case 'finance':
+                    switchClientSection('finance');
+                    break;
                 case 'message-therapist':
+                    if (clientId) {
+                        handleQuickAction('client', clientId, 'messageTherapist', 'client');
+                    }
+                    break;
                 case 'send-message':
-                    // Would open messaging - placeholder for now
-                    console.log('Message action triggered');
+                    if (clientId) {
+                        handleQuickAction('client', clientId, 'sendMessage', 'client');
+                    }
                     break;
                 case 'update-stage':
-                    // Would open stage update UI - placeholder
-                    console.log('Update stage action triggered');
+                    // Scroll to pipeline indicator
+                    const pipeline = document.getElementById('clientDetailPipeline');
+                    if (pipeline) pipeline.scrollIntoView({ behavior: 'smooth' });
                     break;
                 case 'reassign':
-                    // Would open reassignment UI - placeholder
-                    console.log('Reassign action triggered');
+                    if (clientId) {
+                        openReassignModal(clientId);
+                    }
                     break;
                 case 'associate':
                     if (currentClientDetailData && currentClientDetailData.associateId) {
-                        showAssociateDetail(currentClientDetailData.associateId);
+                        NavigationStack.push({ type: 'client', id: clientId, tab: 'overview' });
+                        showUnifiedPanel('associate', currentClientDetailData.associateId, { fromContext: 'client' });
                     }
                     break;
             }
@@ -29488,6 +29963,9 @@ Eden Relationships
             // Close dropdown if open
             const dropdown = document.getElementById('associateDetailDropdown');
             if (dropdown) dropdown.classList.remove('open');
+
+            // Clear PanelManager state
+            PanelManager.state.associatePanel = { open: false, id: null };
 
             // Navigate back to associates view
             showView('associates');
