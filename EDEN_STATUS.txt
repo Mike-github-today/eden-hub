@@ -1,12 +1,92 @@
 ================================================================================
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
-Last Updated: 23 January 2026
-Session: Schedule-Linked Billing - Phase 1
-Branch: claude/schedule-linked-billing-9AxKv
+Last Updated: 24 January 2026
+Session: Eden Portal Refactor - Phase 1 Navigation Foundation
+Branch: claude/eden-portal-refactor-RrgJZ
 ================================================================================
 
-LATEST CHANGES: Schedule-Linked Billing [COMPLETE]
+LATEST CHANGES: Navigation Foundation - Phase 1 [COMPLETE]
+================================================================================
+
+## Session Summary
+
+Implemented the core navigation routing system that fixes broken Quick Access menus
+and establishes proper panel state management. This is the foundation for the
+unified panel architecture.
+
+--------------------------------------------------------------------------------
+CHUNKS COMPLETED
+--------------------------------------------------------------------------------
+
+### Chunk 1.1: NavigationStack Module [COMPLETE]
+- Stack-based navigation context tracking
+- Push/pop/peek operations with max size limit (10)
+- Duplicate detection to prevent redundant pushes
+- Console logging for debugging
+
+### Chunk 1.2: PanelManager Module [COMPLETE]
+- Single source of truth for panel states (associate, client)
+- openAssociate/openClient with tab switching
+- goBack() using NavigationStack for proper return navigation
+- closeAll() to reset everything
+- DOM element references initialised on DOMContentLoaded
+
+### Chunk 1.3: showUnifiedPanel Router [COMPLETE]
+- Single entry point: showUnifiedPanel(entityType, entityId, options)
+- Supports tab, fromContext, and action options
+- handlePanelAction for post-navigation actions (compose, updateStage, requestPayout)
+- navigateBack() with empty-stack fallback logic
+- closeAllPanels() convenience function
+
+### Chunk 1.4: Quick Access Menu Handlers [COMPLETE]
+- handleQuickAction() routes all menu actions through unified system
+- closeAllDropdowns() utility
+- getTherapistForClient() data lookup from clients array
+- openReassignModal() placeholder (Phase 3)
+- Updated navigateFromClientDetail() to use new routing
+- Updated all associate card onclicks to showUnifiedPanel
+- Updated all client card entry points (openClientFromGrid, openClientPanelDirect, openClientPanel)
+- Updated associate navigation from payout/wealth modules
+
+### Chunk 1.5: Back Button Navigation [COMPLETE]
+- Associate detail back button: navigateBack()
+- Client detail back button: navigateBack()
+- navigateBack() checks NavigationStack first, falls back to existing close functions
+- closeClientDetail() now handles 'schedule' returnTo
+- closeAssociateDetail() clears PanelManager state
+- PanelManager.goBack() properly handles empty previous context
+
+--------------------------------------------------------------------------------
+KEY ARCHITECTURE
+--------------------------------------------------------------------------------
+
+| Module | Purpose |
+|--------|---------|
+| NavigationStack | Stack-based context tracking for Back button |
+| PanelManager | State management for all panels |
+| showUnifiedPanel() | Single entry point for all entity navigation |
+| handleQuickAction() | Quick Access menu routing |
+| navigateBack() | Smart back navigation with fallback |
+
+--------------------------------------------------------------------------------
+ENTRY POINT ROUTING
+--------------------------------------------------------------------------------
+
+All user-initiated navigation now routes through showUnifiedPanel:
+- Associate cards (main list) → showUnifiedPanel('associate', id)
+- Client cards (from grid) → showUnifiedPanel('client', id)
+- Client cards (from associate) → showUnifiedPanel('client', id, {fromContext: 'associate'})
+- Quick Access menu items → handleQuickAction() → showUnifiedPanel()
+- Payout/Wealth modules → showUnifiedPanel('associate', id)
+- Schedule view → showUnifiedPanel('client', id)
+
+Internal navigation (PanelManager internals, subpage returns) still calls
+showAssociateDetail/showClientDetail directly as low-level functions.
+
+================================================================================
+
+PREVIOUS CHANGES: Schedule-Linked Billing [COMPLETE]
 ================================================================================
 
 ## Session Summary
