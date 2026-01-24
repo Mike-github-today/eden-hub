@@ -10234,6 +10234,170 @@
         }
 
         /* ============================================
+           PAYOUT LIABILITY CARD
+           ============================================ */
+
+        .payout-liability-card {
+            background: linear-gradient(135deg, #fff9f0 0%, #fff5e6 100%);
+            border: 1px solid #fde68a;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .liability-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .liability-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fef3c7;
+            border-radius: 10px;
+            color: #d97706;
+        }
+
+        .liability-title {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 600;
+            color: #92400e;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        .liability-info-btn {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #d97706;
+            cursor: pointer;
+            transition: background-color 150ms ease;
+        }
+
+        .liability-info-btn:hover {
+            background: rgba(217, 119, 6, 0.1);
+        }
+
+        .liability-amount {
+            font-family: var(--font-display, 'Fraunces', Georgia, serif);
+            font-size: 32px;
+            font-weight: 700;
+            color: #92400e;
+            line-height: 1.1;
+        }
+
+        .liability-subtext {
+            font-size: 13px;
+            color: #b45309;
+            margin-top: -4px;
+        }
+
+        .liability-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-top: 12px;
+            border-top: 1px solid #fde68a;
+        }
+
+        .liability-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .liability-label {
+            font-size: 13px;
+            color: #92400e;
+        }
+
+        .liability-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #78350f;
+        }
+
+        .liability-action {
+            margin-top: 8px;
+        }
+
+        .liability-process-btn {
+            width: 100%;
+            padding: 12px 16px;
+            background: #d97706;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 150ms ease, transform 150ms ease;
+        }
+
+        .liability-process-btn:hover {
+            background: #b45309;
+        }
+
+        .liability-process-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Zero liability - green clear state */
+        .payout-liability-card.liability-clear {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-color: #86efac;
+        }
+
+        .liability-clear .liability-icon {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .liability-clear .liability-title,
+        .liability-clear .liability-amount,
+        .liability-clear .liability-label {
+            color: #166534;
+        }
+
+        .liability-clear .liability-subtext {
+            color: #15803d;
+        }
+
+        .liability-clear .liability-value {
+            color: #14532d;
+        }
+
+        .liability-clear .liability-process-btn {
+            background: #16a34a;
+        }
+
+        .liability-clear .liability-process-btn:hover {
+            background: #15803d;
+        }
+
+        @media (max-width: 768px) {
+            .payout-liability-card {
+                padding: 16px;
+            }
+
+            .liability-amount {
+                font-size: 28px;
+            }
+        }
+
+        /* ============================================
            REFERRALS NEEDING ATTENTION
            ============================================ */
 
@@ -15436,6 +15600,45 @@
                             <div class="team-summary-stat">
                                 <span>Practice capacity: <strong id="teamCapacityPercent">78%</strong></span>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Payout Liability Card -->
+                    <div class="payout-liability-card" id="payoutLiabilityCard">
+                        <div class="liability-header">
+                            <div class="liability-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 6v6l4 2"/>
+                                </svg>
+                            </div>
+                            <div class="liability-title">Payout Liability</div>
+                            <div class="liability-info-btn" onclick="showLiabilityBreakdown()" role="button" tabindex="0" aria-label="View breakdown">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 16v-4M12 8h.01"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="liability-amount" id="liabilityAmount">£0</div>
+                        <div class="liability-subtext" id="liabilitySubtext">Owed to associates</div>
+
+                        <div class="liability-breakdown" id="liabilityBreakdownSection">
+                            <div class="liability-row">
+                                <span class="liability-label">Sessions ready</span>
+                                <span class="liability-value" id="liabilitySessionCount">0</span>
+                            </div>
+                            <div class="liability-row">
+                                <span class="liability-label">Associates owed</span>
+                                <span class="liability-value" id="liabilityAssociateCount">0</span>
+                            </div>
+                        </div>
+
+                        <div class="liability-action">
+                            <button class="liability-process-btn" onclick="navigateToPayoutProcessing()">
+                                Process Payouts
+                            </button>
                         </div>
                     </div>
 
@@ -25112,6 +25315,133 @@ Sarah
 
             // Initialize referrals needing attention
             initReferralsAttention();
+
+            // Update Payout Liability card
+            updatePayoutLiabilityCard();
+        }
+
+        // ============================================
+        // PAYOUT LIABILITY FUNCTIONS
+        // ============================================
+
+        /**
+         * Calculate total payout liability (69% of all "Ready for Payout" sessions)
+         * @returns {Object} - { total, byAssociate, sessionCount }
+         */
+        function calculatePayoutLiability() {
+            const ASSOCIATE_SHARE = 0.69;
+
+            // Filter sessions that are ready for payout
+            const readySessions = sessionRecords.filter(s =>
+                s.payoutStatus === 'Ready for Payout'
+            );
+
+            // Group by associate and calculate
+            const byAssociate = {};
+            let totalLiability = 0;
+
+            readySessions.forEach(session => {
+                const fee = session.rate || 0;
+                const associateShare = fee * ASSOCIATE_SHARE;
+
+                if (!byAssociate[session.associateId]) {
+                    byAssociate[session.associateId] = {
+                        associateId: session.associateId,
+                        associateName: session.associateName,
+                        sessionCount: 0,
+                        grossAmount: 0,
+                        associateShare: 0
+                    };
+                }
+
+                byAssociate[session.associateId].sessionCount++;
+                byAssociate[session.associateId].grossAmount += fee;
+                byAssociate[session.associateId].associateShare += associateShare;
+
+                totalLiability += associateShare;
+            });
+
+            return {
+                total: totalLiability,
+                byAssociate: Object.values(byAssociate),
+                sessionCount: readySessions.length
+            };
+        }
+
+        /**
+         * Update the Payout Liability card with current data
+         */
+        function updatePayoutLiabilityCard() {
+            const card = document.getElementById('payoutLiabilityCard');
+            if (!card) return;
+
+            const liability = calculatePayoutLiability();
+
+            // Update amount
+            const amountEl = document.getElementById('liabilityAmount');
+            if (amountEl) {
+                amountEl.textContent = '£' + liability.total.toFixed(2);
+            }
+
+            // Update session count
+            const sessionCountEl = document.getElementById('liabilitySessionCount');
+            if (sessionCountEl) {
+                sessionCountEl.textContent = liability.sessionCount;
+            }
+
+            // Update associate count
+            const associateCountEl = document.getElementById('liabilityAssociateCount');
+            if (associateCountEl) {
+                associateCountEl.textContent = liability.byAssociate.length;
+            }
+
+            // Update subtext
+            const subtextEl = document.getElementById('liabilitySubtext');
+            if (subtextEl) {
+                if (liability.total === 0) {
+                    subtextEl.textContent = 'All associates paid up';
+                } else {
+                    subtextEl.textContent = `Owed to ${liability.byAssociate.length} associate${liability.byAssociate.length !== 1 ? 's' : ''}`;
+                }
+            }
+
+            // Toggle clear state styling
+            if (liability.total === 0) {
+                card.classList.add('liability-clear');
+            } else {
+                card.classList.remove('liability-clear');
+            }
+        }
+
+        /**
+         * Navigate to payout processing (Earnings view)
+         */
+        function navigateToPayoutProcessing() {
+            if (typeof showView === 'function') {
+                showView('earnings');
+            }
+        }
+
+        /**
+         * Show liability breakdown details
+         */
+        function showLiabilityBreakdown() {
+            const liability = calculatePayoutLiability();
+
+            if (liability.byAssociate.length === 0) {
+                if (typeof showToast === 'function') {
+                    showToast('No outstanding payouts');
+                }
+                return;
+            }
+
+            let details = 'Payout Breakdown:\n\n';
+            liability.byAssociate.forEach(a => {
+                details += `${a.associateName}: ${a.sessionCount} sessions — £${a.associateShare.toFixed(2)}\n`;
+            });
+            details += `\nTotal: £${liability.total.toFixed(2)}`;
+
+            alert(details);
         }
 
         // ============================================
