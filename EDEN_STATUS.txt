@@ -1,12 +1,115 @@
 ================================================================================
 EDEN HUB PORTAL - STATUS REPORT
 ================================================================================
-Last Updated: 24 January 2026
-Session: Eden Portal Refactor - Phase 1 Navigation Foundation
-Branch: claude/eden-portal-refactor-RrgJZ
+Last Updated: 25 January 2026
+Session: Eden Finance Airtable Setup
 ================================================================================
 
-LATEST CHANGES: Navigation Foundation - Phase 1 [COMPLETE]
+LATEST CHANGES: Airtable Setup Complete [25 January 2026]
+================================================================================
+
+## Status Report - 25 January 2026, 11:55 PM
+
+### What Was Requested
+Set up Eden Finance tracking in Airtable with tables for Sessions, Associates,
+Products, and Expenses. Import historical data from Excel and establish
+relationships between tables to enable automated revenue tracking and the
+69/31 associate split calculations.
+
+### What Was Completed
+
+**Airtable Base: Eden Finance**
+URL: https://airtable.com/appfbswOTN0LYnQ15
+
+**Tables Created & Populated:**
+
+1. **Sessions** (483 records)
+   - Fields: UCID, Session_Date, Payroll_Period, Associate, Service_Name, SKU,
+     Category, Split_Rule, Gross_Amount, Associate_Share, Eden_Share,
+     Payment_Status, Order_ID, Stripe_Reference
+   - UCID format: SES-YYMM-XXX (e.g., SES-2501-001)
+   - Total Gross: £43,090
+
+2. **Associates** (8 records)
+   - Maryanne (Founder, 100% split)
+   - Letitia Daniel (Associate, 69% split)
+   - Vanetta Morrison (Associate, 69% split)
+   - Ebi Umoetuk (Associate, 69% split)
+   - Charité Nkusi (Associate, 69% split)
+   - Associate (Generic) - placeholder for legacy SKU routing
+
+3. **Products** (26 records)
+   - All products linked to Associate field
+   - 100% Eden products → Maryanne
+   - 69/31 Split products → Individual associates or Generic
+   - Fields: Product_Name, SKU, Price, Category, Split_Rule, Associate
+
+4. **Expenses** (428 records)
+   - Fields: Id, Category, Amount, Payee, Expense_Date
+   - Total: £45,235
+
+**Key Relationships Established:**
+- Products.Associate → Links to Associates table
+- Sessions.Associate → Shows associate name (needs Link to Record conversion)
+
+**"Generic Product" Problem Solved:**
+- Created "Associate (Generic)" placeholder in Associates table
+- Legacy SKUs without named associates route here for manual assignment
+- Future: Build Clients table for email-based secondary lookup
+
+### Current State
+- All 4 tables populated with historical data
+- Products fully linked to Associates (enables SKU → Associate lookup)
+- Sessions table has correct structure but Associate field may need conversion
+  to Link to Record type
+- Ready for Make.com automation build
+
+### Outstanding Items
+
+**Immediate (Next Session):**
+1. Verify Sessions.Associate is "Link to Record" type (not just text)
+2. Add formula fields to Sessions: Associate_Share, Eden_Share calculations
+3. Add rollup fields to Associates: Total_Sessions, Total_Revenue, Total_Owed
+4. Create filtered views: Pending Payouts, By Month, By Associate
+
+**Future:**
+1. Build Make.com scenario for Squarespace webhook → Airtable
+2. Create Clients table for client-associate matching
+3. Retire legacy "generic" products in Squarespace
+4. Build Eden Portal interface to surface this data
+
+### Files Created This Session
+Located in /mnt/user-data/outputs/:
+
+- airtable_sessions_import.csv (483 records)
+- airtable_associates_import.csv (6 records + 2 added manually)
+- airtable_products_import.csv (26 records)
+- airtable_expenses_import.csv (428 records)
+- EDEN_AIRTABLE_SCHEMA.md (full schema documentation)
+- EDEN_MAKE_SCENARIO.md (Make.com automation spec)
+- Eden_Finance_Master_v2.xlsx (source Excel backup)
+- PREPARE_REVIEW_WORKFLOW_SKILL.md (new skill created)
+- prepare-review-workflow.skill (installable skill package)
+
+### Workflow Pattern Established
+Created "Prepare-Review Workflow" skill for future builds:
+1. Claude prepares files/instructions
+2. User executes in external system
+3. Claude reviews via browser automation
+4. Iterate until complete
+
+### Session Notes
+- Airtable AI was effective for bulk operations but needed iterative prompts
+- Manual CSV import worked better than AI-directed import for large datasets
+- Browser automation review caught structural issues (wrong table schema) early
+- Total updates via Airtable AI: 12 + 7 + 17 = 36 product-associate links
+
+---
+Next session: Start with "Continue Airtable setup" and share this file
+
+================================================================================
+
+PREVIOUS CHANGES: Navigation Foundation - Phase 1 [COMPLETE]
 ================================================================================
 
 ## Session Summary
